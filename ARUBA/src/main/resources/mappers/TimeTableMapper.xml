@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.TimeTable">
+
+	<insert id = "insertTimeTable" parameterType = "TimeTable">
+		insert into time_table(company_code, member_id, working_date, working_start, working_end) 
+		values (#{companyCode}, #{memberId}, #{workingDate}, #{workingStart}, #{workingEnd})
+	</insert>
+	
+	<select id = "selectByCompanyCode" resultType="TimeTable" parameterType="Integer">
+		select * from time_table where company_code = #{companyCode}
+	</select>
+	
+	<select id = "selectByMemberId" resultType="TimeTable" parameterType="Integer">
+		select * from time_table where member_id = #{memberId}
+	</select>
+	
+	<select id="selectStatsByMemberId" resultType="Stats" parameterType="Integer">
+		select TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", 
+		SUM(TO_NUMBER(SUBSTR(working_end, 12, 2))-TO_NUMBER(SUBSTR(working_start, 12, 2))) as "count" 
+		from time_table where member_id = #{memberId} group by to_char(working_date, 'YYYY/MM'), member_id order by 1
+	</select>
+	
+	<select id="selectStatsBycompanyCode" resultType="Stats" parameterType="Integer">
+		select TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", 
+		SUM(TO_NUMBER(SUBSTR(working_end, 12, 2))-TO_NUMBER(SUBSTR(working_start, 12, 2))) as "count" 
+		from time_table where company_code = #{companyCode} group by to_char(working_date, 'YYYY/MM'), member_id order by 1
+	</select>
+	
+	<select id = "selectKeybyTime" resultType="Integer" parameterType="TimeTable">
+		select time_key from time_table where member_id = #{memberId} and working_start = #{workingStart}
+	</select>
+
+	<update id = "updateTimeTable" parameterType="TimeTable">
+		update time_table 
+		set working_start = #{workingStart}, working_end = #{workingEnd}
+		where time_key = #{timeKey}
+	</update>
+	
+	<!--
+	
+	<select id = "selectCompanyByCompanyCode" resultType="Company" parameterType="Integer">
+		select * from Company where company_code = #{companyCode}
+	</select> -->
+	
+	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
+	<!-- <insert id = "insertDept" parameterType = "Department">
+		insert into departments(department_id, department_name,manager_id,location_id) 
+		values (#{departmentId}, #{departmentName}, #{managerId}, #{locationId})
+	</insert>
+	
+	<update id = "updateDept" parameterType = "Department">
+		update departments set department_name=#{departmentName}, manager_id=#{managerId}, location_id=#{locationId} where department_id=#{departmentId}
+	</update>
+	
+	<delete id = "deleteDept" parameterType = "Integer">
+		delete from departments where department_id =#{departmentId}
+	</delete>
+	
+	<select id = "selectDeptCnt" resultType="Integer">
+		select count(*) from departments
+	</select>
+	
+	<select id = "selectDeptById" parameterType="Integer" resultType="Map">
+		select * from departments where department_id = #{departmentId}
+	</select>
+
+	<select id = "selectODeptById" parameterType="Integer" resultType="Department">
+		select * from departments where department_id = #{departmentId}
+	</select>
+	
+	<select id = "selectLocationByLId" parameterType="Integer" resultType="Integer">
+		select count(*) from departments where location_id = #{locationId}
+	</select>
+	
+	<select id = "selectAllByLid" parameterType="Integer" resultType="Department">
+		select * from departments where location_id = #{locationId}
+	</select>
+	
+	<select id = "selectAll" resultType = "Department">
+		select * from departments
+	</select>
+	
+	<select id = "selectByMId" resultType = "Department">
+		select * from departments where manager_id = #{managerId}
+	</select>
+	
+	<select id = "DepartmentByIdWithEmployees" parameterType="Integer" resultMap ="DepartmentMap">
+		select * from departments join employees using (department_id) where department_id=#{departmentId}
+	</select> 
+	
+	   <resultMap type = "Department" id = "DepartmentMap">
+		<id column = "department_id" jdbcType = "INTEGER" property = "departmentId"/>
+		<result column = "department_name" jdbcType = "VARCHAR" property = "departmentName"/>
+		<result column = "manager_id" jdbcType = "INTEGER" property = "managerId"/>
+		<result column = "location_id" jdbcType = "INTEGER" property = "locationId"/>
+		<collection property = "employees" ofType = "Employee">
+			<id column = "employee_id" property = "employeeId" />
+			region의 아이디 셋팅하기....보고싶다면..
+			<result column = "region_id" property = "regionId" />
+			<result column = "first_name" property = "firstName" />
+			<result column = "last_name" property = "lastName" />
+		</collection>
+	</resultMap>
+	 -->
+	
+
+	
+	
+</mapper>

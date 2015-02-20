@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.CompanyPerson">
+
+	<!-- 사장이 회사등록시 자신을 등록할 때 salary, hiredate없이 DB등록이 안되서 임시로 추가 -->
+	<insert id="insertCompanyOwner" parameterType="CompanyPerson">
+		insert into
+		Company_Person(company_code, user_id, salary, hire_date)
+		values
+		(#{companyCode}, #{userId}, #{salary}, #{hireDate})
+	</insert>
+	<!-- 사장이 메세지에서 승낙버튼 누르면 알바생을 추가하게됨 -->
+	<insert id="insertCompanyEmployee" parameterType="CompanyPerson">
+		insert into
+		Company_Person(company_code, user_id, hire_date)
+		values
+		(#{companyCode}, #{userId}, #{hireDate})
+	</insert>
+
+	<insert id="insertCompanyPerson" parameterType="CompanyPerson">
+		insert into
+		Company_Person(company_code, user_id, salary)
+		values (#{companyCode},
+		#{userId}, #{salary})
+	</insert>
+
+	<select id="selectUserIdbyMemberId" parameterType="Integer"
+		resultType="String">
+		select user_id from company_person where member_id =
+		#{memberId}
+	</select>
+
+
+	<!-- selectCompanyCodeByUserId 이름 바꿈 selectCompanyPersonByUserId controller도 
+		다 바꿈 -->
+	<select id="selectCompanyPersonByUserId" parameterType="String"
+		resultType="CompanyPerson">
+		select * from company_person where user_id=#{userId}
+	</select>
+
+	<select id="selectComCodeByUserId" parameterType="String"
+		resultType="Integer">
+		select company_code from company_person where
+		user_id=#{userId}
+	</select>
+
+	<select id="selectbyChairman" parameterType="String" resultType="Integer">
+		select company_code from company_person where user_id = #{userId}
+	</select>
+
+	<select id="selectByCompanyCode" parameterType="Integer"
+		resultType="CompanyPerson">
+		select * from company_person where company_code =
+		#{companyCode}
+	</select>
+
+	<update id="updateSalary" parameterType="CompanyPerson">
+		update company_person
+		set
+		salary=#{salary}
+		where user_id=#{userId} and company_code=#{companyCode}
+	</update>
+
+	<select id="selectMemberIdbyUserId" parameterType="String"
+		resultType="Integer">
+		select member_id from company_person where user_id =
+		#{userId}
+	</select>
+
+	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
+	<!-- <insert id = "insertDept" parameterType = "Department"> insert into 
+		departments(department_id, department_name,manager_id,location_id) values 
+		(#{departmentId}, #{departmentName}, #{managerId}, #{locationId}) </insert> 
+		<update id = "updateDept" parameterType = "Department"> update departments 
+		set department_name=#{departmentName}, manager_id=#{managerId}, location_id=#{locationId} 
+		where department_id=#{departmentId} </update> <delete id = "deleteDept" parameterType 
+		= "Integer"> delete from departments where department_id =#{departmentId} 
+		</delete> <select id = "selectDeptCnt" resultType="Integer"> select count(*) 
+		from departments </select> <select id = "selectDeptById" parameterType="Integer" 
+		resultType="Map"> select * from departments where department_id = #{departmentId} 
+		</select> <select id = "selectODeptById" parameterType="Integer" resultType="Department"> 
+		select * from departments where department_id = #{departmentId} </select> 
+		<select id = "selectLocationByLId" parameterType="Integer" resultType="Integer"> 
+		select count(*) from departments where location_id = #{locationId} </select> 
+		<select id = "selectAllByLid" parameterType="Integer" resultType="Department"> 
+		select * from departments where location_id = #{locationId} </select> <select 
+		id = "selectAll" resultType = "Department"> select * from departments </select> 
+		<select id = "selectByMId" resultType = "Department"> select * from departments 
+		where manager_id = #{managerId} </select> <select id = "DepartmentByIdWithEmployees" 
+		parameterType="Integer" resultMap ="DepartmentMap"> select * from departments 
+		join employees using (department_id) where department_id=#{departmentId} 
+		</select> <resultMap type = "Department" id = "DepartmentMap"> <id column 
+		= "department_id" jdbcType = "INTEGER" property = "departmentId"/> <result 
+		column = "department_name" jdbcType = "VARCHAR" property = "departmentName"/> 
+		<result column = "manager_id" jdbcType = "INTEGER" property = "managerId"/> 
+		<result column = "location_id" jdbcType = "INTEGER" property = "locationId"/> 
+		<collection property = "employees" ofType = "Employee"> <id column = "employee_id" 
+		property = "employeeId" /> region의 아이디 셋팅하기....보고싶다면.. <result column = "region_id" 
+		property = "regionId" /> <result column = "first_name" property = "firstName" 
+		/> <result column = "last_name" property = "lastName" /> </collection> </resultMap> -->
+
+
+
+
+</mapper>

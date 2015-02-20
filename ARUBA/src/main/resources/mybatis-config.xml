@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type = "com.bmj.entity.Users" alias = "Users"/>
+		<typeAlias type = "com.bmj.entity.Company" alias = "Company"/>
+		<typeAlias type = "com.bmj.entity.CompanyPerson" alias = "CompanyPerson"/>
+		<typeAlias type = "com.bmj.entity.TimeTable" alias = "TimeTable"/>
+		<typeAlias type = "com.bmj.entity.Stats" alias = "Stats"/>
+		
+		<typeAlias type = "com.bmj.entity.Message" alias = "Message"/>
+	</typeAliases>
+	  <mappers>
+	  	<mapper resource="mappers/UsersMapper.xml"/>
+	  	<mapper resource="mappers/CompanyMapper.xml"/>
+  	  	<mapper resource="mappers/CompanyPersonMapper.xml"/>
+  	  	<mapper resource="mappers/TimeTableMapper.xml"/>
+  	  	<mapper resource="mappers/MessageMapper.xml"/>
+	  </mappers>
+</configuration>
