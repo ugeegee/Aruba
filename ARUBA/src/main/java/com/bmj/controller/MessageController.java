@@ -62,7 +62,7 @@ public class MessageController {
 
 		mService.insertMessage(message);
 		
-		return "redirect:/alerts_employee";
+		return "redirect:/alert_employee";
 	}
 
 	@RequestMapping(value = "/alert_employer")
