@@ -43,7 +43,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html"><img
+				<a class="navbar-brand animated tada" href="index.html"><img
 					src="images/logo.png" alt="logo"></a>
 			</div>
 			<div class="collapse navbar-collapse">
@@ -73,13 +73,11 @@
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="<%=request.getContextPath()%>/myInfo">Modify
-										Account</a></li>
-								<li><a href="<%=request.getContextPath()%>/modifyPass">Change
-										Password</a></li>
-								<li><a href="<%=request.getContextPath()%>/leaveAruba">Delete
-										Account</a></li>
-							</ul></li>
+								<li><a href="<%=request.getContextPath()%>/myInfo">Modify Account</a></li>
+								<li><a href="<%=request.getContextPath()%>/modifyPass">Change Password</a></li>
+								<li><a href="<%=request.getContextPath()%>/leaveAruba">Delete Account</a></li>
+							</ul>
+						</li>
 
 						<!-- 사장인 경우 -->
 						<c:if test="${addUser.grade=='사장' }">
@@ -91,28 +89,22 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="<%=request.getContextPath()%>/myCompany">Store
-											Control</a></li>
-									<li><a href="<%=request.getContextPath()%>/staff">Staff
-											Control</a></li>
-									<li><a href="<%=request.getContextPath()%>/wage">Wage
-											Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/myCompany">Store Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/staff">Staff Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/wage">Wage Control</a></li>
 									<li><a href="<%=request.getContextPath()%>/alert_employer">Alert</a></li>
-								</ul></li>
+								</ul>
+							</li>
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a
-										href="<%=request.getContextPath()%>/registerSchedule">Register
-											Shift</a></li>
-									<li><a href="<%=request.getContextPath()%>/modifySchedule">Modify
-											Shift</a></li>
-									<li><a href="<%=request.getContextPath()%>/allSchedule">Show
-											Shift</a></li>
-								</ul></li>
-
+									<li><a href="<%=request.getContextPath()%>/registerSchedule">Register Shift</a></li>
+									<li><a href="<%=request.getContextPath()%>/modifySchedule">Modify Shift</a></li>
+									<li><a href="<%=request.getContextPath()%>/allSchedule">Show Shift</a></li>
+								</ul>
+							</li>
 						</c:if>
 
 						<!-- 직원인 경우 -->
@@ -125,17 +117,19 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="<%=request.getContextPath()%>/myJob">My
-											Job</a></li>
-									<li><a href="<%=request.getContextPath()%>/salary">My
-											Wage</a></li>
+									<li><a href="<%=request.getContextPath()%>/myJob">My Job</a></li>
+									<li><a href="<%=request.getContextPath()%>/salary">My Wage</a></li>
 									<li><a href="<%=request.getContextPath()%>/alert_employee">Alert</a></li>
 								</ul></li>
 
 							<!-- 근무표 버튼 -->
-							<c:url value="/mySchedule" var="url" />
-							<li><a href="${url }">My Table</a></li>
-
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 						</c:if>
 
 						<!-- 게시판 버튼 -->
@@ -196,7 +190,7 @@
 										habitant morbi tristique senectus et netus et malesuada fames
 										ac turpis egestas.</p>
 									<br> <a class="btn btn-md animation animated-item-3"
-										href="#">Learn More</a>
+										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>
 						</div>
@@ -249,7 +243,7 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="media">
 						<div class="pull-left">
-							<i class="icon-twitter icon-md"></i>
+							<i class="icon-user icon-md"></i>
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Twitter Marketing</h3>
@@ -263,7 +257,7 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="media">
 						<div class="pull-left">
-							<i class="icon-facebook icon-md"></i>
+							<i class="icon-calendar icon-md"></i>
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Facebook Marketing</h3>
@@ -277,7 +271,7 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="media">
 						<div class="pull-left">
-							<i class="icon-google-plus icon-md"></i>
+							<i class="icon-edit-sign icon-md"></i>
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Google Plus Marketing</h3>
