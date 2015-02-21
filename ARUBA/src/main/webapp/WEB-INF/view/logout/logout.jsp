@@ -78,12 +78,12 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>Logout</h1>
-					<p>Please input your login information</p>
+					<p>로그아웃</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li>Home</li>
+						<li class="active">Logout</li>
 					</ul>
 				</div>
 			</div>
