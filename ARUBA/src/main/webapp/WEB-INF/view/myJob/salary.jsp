@@ -36,7 +36,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Services | Flat Theme</title>
+<title>Aruba</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -331,7 +331,7 @@ $(document).ready(function() {
 	<!--/#title-->
 
  	<section id="MyJob" class="container">
- 		직원의 월급관리<br>
+ 		<!-- 직원의 월급관리<br> -->
  		<!-- 그래프 -->
 	<br>
 	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>

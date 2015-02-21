@@ -7,13 +7,13 @@ public class TimeTable {
 	private int companyCode;
 	private int memberId;
 	private Date workingDate;
-	private String workingStart;
-	private String workingEnd;
+	private Date workingStart;
+	private Date workingEnd;
 	
 	public TimeTable() {}
 	
 	public TimeTable(int timeKey, int companyCode, int memberId,
-			Date workingDate, String workingStart, String workingEnd) {
+			Date workingDate, Date workingStart, Date workingEnd) {
 		this.timeKey = timeKey;
 		this.companyCode = companyCode;
 		this.memberId = memberId;
@@ -45,16 +45,16 @@ public class TimeTable {
 	public void setWorkingDate(Date workingDate) {
 		this.workingDate = workingDate;
 	}
-	public String getWorkingStart() {
+	public Date getWorkingStart() {
 		return workingStart;
 	}
-	public void setWorkingStart(String workingStart) {
+	public void setWorkingStart(Date workingStart) {
 		this.workingStart = workingStart;
 	}
-	public String getWorkingEnd() {
+	public Date getWorkingEnd() {
 		return workingEnd;
 	}
-	public void setWorkingEnd(String workingEnd) {
+	public void setWorkingEnd(Date workingEnd) {
 		this.workingEnd = workingEnd;
 	}
 
