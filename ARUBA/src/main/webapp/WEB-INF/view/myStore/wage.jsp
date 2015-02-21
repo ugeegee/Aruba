@@ -99,9 +99,37 @@ $(document).ready(function() {
                 for(var j in nameArr) {
                 	console.log(j + " , " + nameArr[j]);
                 }
+                
+                console.log("------------중복제거nameArr-------------");
+                for(var q  = 0; q < nameArr.length; q++) {
+					var name = nameArr[q];
+					//console.log(q + " , " + name);
+					for(var idx = q; idx < nameArr.length; idx++){
+						//idx = idx + 1;	
+						console.log(idx + ", " + name);
+						if(nameArr[idx]==name&&idx!=q) {
+							//console.log("zzzzzzzzzzzzzzzzz : " + idx);								
+							nameArr.splice(idx, 1);	
+						}
+					}
+                }
+				console.log(nameArr);   
+				
+				for(var k in nameArr) {
+					tempArr = new Array();
+					for(var l in outArr) {
+						if(nameArr[k] == outArr[l][2]) {
+							tempArr.push(outArr[l][1]);						
+						}
+					}
+					console.log("ssssssssssssssss : " + tempArr);
+					dataArr.push(tempArr);
+            		seriesData.push({name:nameArr[k], data:dataArr[k]});
+            		console.log(k + " : " + seriesData);
+				}
 
                 /* series 만들기....  */
-				name.push(nameArr[0]);			// 첫 이름 저장.
+				/* name.push(nameArr[0]);			// 첫 이름 저장.
 				//alert(name);
                 for (var a in outArr) {
                 	// 이름 저장...!
@@ -121,15 +149,25 @@ $(document).ready(function() {
                 dataArr.push(tempArr);
         		seriesData.push({name:name[count], data:dataArr[count]});
 				console.log("------------seriesData-------------");
-				console.log(seriesData);
+				console.log(seriesData); */
                 
 				/* categories의 x축 설정. */
 				Xcategorie.push(outArr[0][0]);		// 초기값 설정.
+				console.log(Xcategorie[0]);
+				var chkCount = 0;
 				for (var idx in outArr) {
-					if(Xcategorie != outArr[idx][0]) {
+					if(Xcategorie[chkCount] != outArr[idx][0]) {
 						Xcategorie.push(outArr[idx][0]);							
+						console.log(Xcategorie);
+						chkCount++;
 					}
 				}
+				//console.log(chkCount)
+				
+				console.log("------------X축Data-------------");
+				//for(var s in Xcategorie) {
+				console.log(Xcategorie);
+				//}
 				
 		//$('#container').highcharts({
 	$(function () {

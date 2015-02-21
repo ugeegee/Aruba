@@ -3,11 +3,11 @@ package com.bmj.entity;
 public class Stats {
 	private String month;
 	private int memberId;
-	private int count;
+	private double count;
 	
 	public Stats() {}
 	
-	public Stats(String month, int memberId, int count) {
+	public Stats(String month, int memberId, double count) {
 		super();
 		this.month = month;
 		this.memberId = memberId;
@@ -30,11 +30,11 @@ public class Stats {
 		this.memberId = memberId;
 	}
 
-	public int getCount() {
+	public double getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(double count) {
 		this.count = count;
 	}
 

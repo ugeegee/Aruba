@@ -92,8 +92,8 @@ public class hello {
 			logger.trace("수업 idx : " + idx);
 			savetime = new SaveTime();
 			savetime.setTitle(String.valueOf(lists.get(idx).getMemberId()));
-			savetime.setStart(settingTime(lists.get(idx).getWorkingStart()));
-			savetime.setEnd(settingTime(lists.get(idx).getWorkingEnd()));
+			//savetime.setStart(settingTime(lists.get(idx).getWorkingStart()));
+			//savetime.setEnd(settingTime(lists.get(idx).getWorkingEnd()));
 			/*if(idx > 6) {
 				int length = idx;
 				savetime.setColor(color[length%6]);
@@ -162,7 +162,7 @@ public class hello {
 			int memberId = Integer.parseInt(map.get("title").toString());
 			String workingStart = map.get("start").toString();
 			timetable.setMemberId(memberId);
-			timetable.setWorkingStart(workingStart);
+			//timetable.setWorkingStart(workingStart);
 			logger.trace("수업 TimeTable : " + timetable);
 			int timeKey = service.selectKeybyTime(timetable);
 			logger.trace("수업 ㅠㅠ : " + timeKey);
@@ -178,8 +178,8 @@ public class hello {
 			updateTable.setTimeKey(timeKey);
 			updateTable.setMemberId(memberId);
 			updateTable.setWorkingDate(date);
-			updateTable.setWorkingStart(map2.get("start").toString());
-			updateTable.setWorkingEnd(map2.get("end").toString());
+			//updateTable.setWorkingStart(map2.get("start").toString());
+			//updateTable.setWorkingEnd(map2.get("end").toString());
 			logger.trace("수업 Update : " + updateTable);
 			service.updateTimeTable(updateTable);
 		}
@@ -233,8 +233,8 @@ public class hello {
 //			timetable.setMemberId(memberId);
 			timetable.setMemberId(1);
 			timetable.setWorkingDate(date);
-			timetable.setWorkingStart(st1.getStart());
-			timetable.setWorkingEnd(st1.getEnd());
+			//timetable.setWorkingStart(st1.getStart());
+			//timetable.setWorkingEnd(st1.getEnd());
 			logger.trace("수업 111111111 : " + timetable);
 			int result = service.insertTimeTable(timetable);
 		}
