@@ -286,7 +286,8 @@ body > section {
   background-color: #bdc3c7;
 }
 .wet-asphalt {
-  background-color: #34495e;
+	/* background-color: transparent; */
+	background-color: #000000;
 }
 .wet-asphalt a:not(.btn) {
   color: #bdc3c7;
@@ -324,7 +325,7 @@ body > section {
   height: 100%;
 }
 #main-slider {
-  position: relative;
+ /*  position: relative; */
 }
 #main-slider .carousel h2 {
   font-size: 36px;
