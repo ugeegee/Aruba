@@ -56,10 +56,10 @@ CREATE TABLE bComment
 CREATE TABLE company
 (
 	company_code number NOT NULL,
-	company_name varchar2(20) NOT NULL,
+	company_name varchar2(100) NOT NULL,
 	company_tel varchar2(20) NOT NULL,
-	holiday_comm float,
-	night_comm float,
+	holiday_comm number,
+	night_comm number,
 	PRIMARY KEY (company_code)
 );
 
@@ -275,7 +275,7 @@ values ('Yoo', '123', '123', '유지연', '010-', 'y@naver.com', '06/08/1987', '
 
 
 insert into Company(company_name, company_tel, holiday_comm, night_comm) 
-values ('GS25시', '02-000-0000', 0.8, 0.8);
+values ('GS25시', '02-000-0000', 80, 80);
 
 insert into company_person(company_code, user_id, hire_date) 
 values(1, 'park', '2010-01-01');

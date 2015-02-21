@@ -59,7 +59,7 @@ public class CompanyPersonController {
 		companyperson.setUserId(userId);
 		companyperson.setHireDate("오늘");
 		cpService.insertCompanyEmployee(companyperson);			//알바생추가
-		return "redirect:/alerts_employer";
+		return "redirect:/alert_employer";
 	}
 	
 	
@@ -69,18 +69,32 @@ public class CompanyPersonController {
 		
 		Users loginUser = (Users)session.getAttribute("addUser");
 		List<Integer> code = cpService.selectComCodeByUserId(loginUser.getUserId());
-		
+		logger.trace("수업 code " + code);
 		//찾은companycode로 등록된 사람다찾기(사장도포함되있음)
-		List<CompanyPerson> comPersonList = cpService.selectByCompanyCode(code.get(0).intValue());
+		List<CompanyPerson> comPersonList = null;
+		for(int i = 0; i < code.size(); i++) {
+			comPersonList = cpService.selectByCompanyCode(code.get(i).intValue());
+		}
+		logger.trace("수업 compersonList : " + comPersonList);
+		// 사장 삭제.
+		for(int i = 0; i < comPersonList.size(); i++) {
+			if(loginUser.getUserId().equals(comPersonList.get(i).getUserId())) {
+				comPersonList.remove(i);
+			}
+		}
+		logger.trace("수업 사장 삭제 , compersonList : " + comPersonList);
+		
 		List<Users> usersList = new ArrayList<Users>();
 		//회사에 등록된 사람들의 정보 가져오기 
-		for(int i = 0 ; i<comPersonList.size()-1 ; i++){	//0번째는 사장이니 사장제외하고 넣기
-			usersList.add(i, uService.selectUserByUserId(comPersonList.get(i+1).getUserId()) );
+		
+		
+		for(int i = 0 ; i < comPersonList.size() ; i++){	//0번째는 사장이니 사장제외하고 넣기
+			usersList.add(i, uService.selectUserByUserId(comPersonList.get(i).getUserId()) );
 		}
 
-		
+		logger.trace("수업 usersList" + usersList);
 		List<StaffInfo> staffList = new ArrayList<StaffInfo>();
-		for(int i = 0; i<usersList.size(); i++){				
+		for(int i = 0; i < usersList.size(); i++){				
 			StaffInfo sf = new StaffInfo( usersList.get(i).getUserName(), usersList.get(i).getUserId(), 
 										usersList.get(i).getTel(), usersList.get(i).getEmail(),
 										comPersonList.get(i).getSalary(), comPersonList.get(i).getHireDate(),
@@ -88,6 +102,7 @@ public class CompanyPersonController {
 			
 			staffList.add(i, sf);
 		}
+		logger.trace("수업 : " + staffList.toString());
 		
 		model.addAttribute("staffList", staffList);
 		

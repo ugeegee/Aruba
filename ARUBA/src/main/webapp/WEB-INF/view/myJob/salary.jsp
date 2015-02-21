@@ -331,7 +331,7 @@ $(document).ready(function() {
 	<!--/#title-->
 
  	<section id="MyJob" class="container">
- 		직원의 월급관리<br>
+ 		<!-- 직원의 월급관리<br> -->
  		<!-- 그래프 -->
 	<br>
 	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>

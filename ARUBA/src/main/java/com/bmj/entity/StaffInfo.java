@@ -81,5 +81,12 @@ public class StaffInfo {
 		this.companyCode = companyCode;
 	}
 
+	@Override
+	public String toString() {
+		return "StaffInfo [userName=" + userName + ", userId=" + userId
+				+ ", tel=" + tel + ", email=" + email + ", salary=" + salary
+				+ ", hireDate=" + hireDate + ", companyCode=" + companyCode
+				+ "]";
+	}
 	
 }
