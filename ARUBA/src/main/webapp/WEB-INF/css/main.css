@@ -286,8 +286,8 @@ body > section {
   background-color: #bdc3c7;
 }
 .wet-asphalt {
-	background-color: transparent;
-	/* background-color: #02142F; */
+	/* background-color: transparent; */
+	background-color: #000000;
 }
 .wet-asphalt a:not(.btn) {
   color: #bdc3c7;
