@@ -56,41 +56,18 @@ public class ChartController {
 	
 	@RequestMapping(value = "/ajaxChart")
 	public @ResponseBody String ajaxReceive(Model model, HttpSession session) {
-		// 1. session에서 내 정보를 가져오겠지...?
-		//Calendar workingStart = Calendar.getInstance();
-		//Calendar workingEnd = Calendar.getInstance();
 		Calendar workingDate = Calendar.getInstance();
-		//Date workingStart = new Date();
-		//Date workingEnd = new Date();
 		Users user = (Users)session.getAttribute("addUser");
 		logger.trace("수업 user : " + user);
 		String userId = user.getUserId();
 		CompanyPerson companyperson= cpservice.selectCompanyPersonByUserId(userId);
 		logger.trace("수업 companyperson : " + companyperson);
-		//
-		// 나의 그동안 일한 시간 다 뽑아보기....
-		/*List<TimeTable> myTime = service.selectByMemberId(companyperson.getMemberId());
-		logger.trace("수업 myTime < 나의 모든 일한 타임 저장 > " + myTime);
-		for(int index = 0; index < myTime.size(); index++){
-			workingDate.setTime(myTime.get(index).getWorkingDate());
-			int year = workingDate.get(Calendar.YEAR);
-			int month = (workingDate.get(Calendar.MONTH)+1);
-			
-			//if()
-			//workingStart.setTime(myTime.get(index).getWorkingStart());
-			//workingEnd.setTime(myTime.get(index).getWorkingEnd());
-			long workingTime = myTime.get(index).getWorkingEnd().getTime()-myTime.get(index).getWorkingStart().getTime();
-			double count =  (((double)(workingTime))/1000/60/60);
-			logger.trace("수업 < 일한 시간 >  : " + count);
-		}*/
-		//
 				
 		List<Stats> myTimes = new ArrayList<Stats>();
 		myTimes = service.selectStatsByMemberId(companyperson.getMemberId());
 		logger.trace("수업 ::::::::::::::::" + myTimes);
 		int salary = companyperson.getSalary();
 		for (int i = 0; i < myTimes.size(); i++) {
-			// 월급 계산.....! 시간 * 시급
 			int count = (int)(myTimes.get(i).getCount()* 24 * salary);
 			myTimes.get(i).setCount(count);
 		}
