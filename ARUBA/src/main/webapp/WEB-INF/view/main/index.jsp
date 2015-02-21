@@ -187,11 +187,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="carousel-content center centered">
-									<h2 class="boxed animation animated-item-1">Clean, Crisp,
-										Powerful and Responsive Web Design</h2>
-									<p class="boxed animation animated-item-2">Pellentesque
-										habitant morbi tristique senectus et netus et malesuada fames
-										ac turpis egestas.</p>
+									<h2 class="boxed animation animated-item-1">Easy Catched-up Wage Chart with Visual Effects</h2>
+									<h4 class="boxed animation animated-item-2">It helps you visualize monthly staffs' wage on illustrated charts and graphs at a glance.</h4>
 									<br><br><a class="btn btn-md animation animated-item-3"
 										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
@@ -206,10 +203,8 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="carousel-content centered">
-									<h2 class="animation animated-item-1">Powerful and
-										Responsive Web Design Theme</h2>
-									<p class="animation animated-item-2">Pellentesque habitant
-										morbi tristique senectus et netus et malesuada fames</p>
+									<h2 class="boxed animation animated-item-1">Communication via Aruba</h2>
+									<h4 class="boxed animation animated-item-2">Share information and your difficulties with others by posting and commenting.</h4>
 									<br> <a class="btn btn-md animation animated-item-3"
 										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
