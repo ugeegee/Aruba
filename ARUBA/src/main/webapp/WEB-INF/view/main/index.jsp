@@ -167,11 +167,14 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="carousel-content centered">
-									<h2 class="animation animated-item-1">Powerful and
-										Responsive Web Design</h2>
-									<p class="animation animated-item-2">Pellentesque habitant
-										morbi tristique senectus et netus et malesuada fames ac turpis
-										egestas.</p>
+									<h2 class="animation animated-item-1">Convenient and Easy Shift Table</h2>
+									<h4 class="animation animated-item-2">
+									We manage high quality of shift table when you provide shifts to your employees. 
+									You can register/log-in and enjoy our service.
+									</h4>
+										
+									<br> <a class="btn btn-md animation animated-item-3"
+										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>
 						</div>
@@ -189,7 +192,7 @@
 									<p class="boxed animation animated-item-2">Pellentesque
 										habitant morbi tristique senectus et netus et malesuada fames
 										ac turpis egestas.</p>
-									<br> <a class="btn btn-md animation animated-item-3"
+									<br><br><a class="btn btn-md animation animated-item-3"
 										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>
@@ -207,18 +210,8 @@
 										Responsive Web Design Theme</h2>
 									<p class="animation animated-item-2">Pellentesque habitant
 										morbi tristique senectus et netus et malesuada fames</p>
-									<a class="btn btn-md animation animated-item-3" href="#">Learn
-										More</a>
-								</div>
-							</div>
-							<div class="col-sm-6 hidden-xs animation animated-item-4">
-								<div class="centered">
-									<div class="embed-container">
-										<iframe
-											src="//player.vimeo.com/video/69421653?title=0&amp;byline=0&amp;portrait=0&amp;color=a22c2f"
-											frameborder="0" webkitallowfullscreen mozallowfullscreen
-											allowfullscreen></iframe>
-									</div>
+									<br> <a class="btn btn-md animation animated-item-3"
+										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>
 						</div>
@@ -246,7 +239,7 @@
 							<i class="icon-user icon-md"></i>
 						</div>
 						<div class="media-body">
-							<h3 class="media-heading">Twitter Marketing</h3>
+							<h3 class="media-heading">My Store and Job</h3>
 							<p>Pellentesque habitant morbi tristique senectus et netus et
 								malesuada fames ac turpis egestas. Vestibulum tortor quam,
 								feugiat vitae.</p>
@@ -260,7 +253,7 @@
 							<i class="icon-calendar icon-md"></i>
 						</div>
 						<div class="media-body">
-							<h3 class="media-heading">Facebook Marketing</h3>
+							<h3 class="media-heading">Shift Table</h3>
 							<p>Pellentesque habitant morbi tristique senectus et netus et
 								malesuada fames ac turpis egestas. Vestibulum tortor quam,
 								feugiat vitae.</p>
@@ -274,7 +267,7 @@
 							<i class="icon-edit-sign icon-md"></i>
 						</div>
 						<div class="media-body">
-							<h3 class="media-heading">Google Plus Marketing</h3>
+							<h3 class="media-heading">Board</h3>
 							<p>Pellentesque habitant morbi tristique senectus et netus et
 								malesuada fames ac turpis egestas. Vestibulum tortor quam,
 								feugiat vitae.</p>
