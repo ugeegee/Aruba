@@ -43,7 +43,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html"><img
+				<a class="navbar-brand animated tada" href="index.html"><img
 					src="images/logo.png" alt="logo"></a>
 			</div>
 			<div class="collapse navbar-collapse">
@@ -73,13 +73,11 @@
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="<%=request.getContextPath()%>/myInfo">Modify
-										Account</a></li>
-								<li><a href="<%=request.getContextPath()%>/modifyPass">Change
-										Password</a></li>
-								<li><a href="<%=request.getContextPath()%>/leaveAruba">Delete
-										Account</a></li>
-							</ul></li>
+								<li><a href="<%=request.getContextPath()%>/myInfo">Modify Account</a></li>
+								<li><a href="<%=request.getContextPath()%>/modifyPass">Change Password</a></li>
+								<li><a href="<%=request.getContextPath()%>/leaveAruba">Delete Account</a></li>
+							</ul>
+						</li>
 
 						<!-- 사장인 경우 -->
 						<c:if test="${addUser.grade=='사장' }">
@@ -91,28 +89,22 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="<%=request.getContextPath()%>/myCompany">Store
-											Control</a></li>
-									<li><a href="<%=request.getContextPath()%>/staff">Staff
-											Control</a></li>
-									<li><a href="<%=request.getContextPath()%>/wage">Wage
-											Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/myCompany">Store Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/staff">Staff Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/wage">Wage Control</a></li>
 									<li><a href="<%=request.getContextPath()%>/alert_employer">Alert</a></li>
-								</ul></li>
+								</ul>
+							</li>
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a
-										href="<%=request.getContextPath()%>/registerSchedule">Register
-											Shift</a></li>
-									<li><a href="<%=request.getContextPath()%>/modifySchedule">Modify
-											Shift</a></li>
-									<li><a href="<%=request.getContextPath()%>/allSchedule">Show
-											Shift</a></li>
-								</ul></li>
-
+									<li><a href="<%=request.getContextPath()%>/registerSchedule">Register Shift</a></li>
+									<li><a href="<%=request.getContextPath()%>/modifySchedule">Modify Shift</a></li>
+									<li><a href="<%=request.getContextPath()%>/allSchedule">Show Shift</a></li>
+								</ul>
+							</li>
 						</c:if>
 
 						<!-- 직원인 경우 -->
@@ -125,17 +117,19 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="<%=request.getContextPath()%>/myJob">My
-											Job</a></li>
-									<li><a href="<%=request.getContextPath()%>/salary">My
-											Wage</a></li>
+									<li><a href="<%=request.getContextPath()%>/myJob">My Job</a></li>
+									<li><a href="<%=request.getContextPath()%>/salary">My Wage</a></li>
 									<li><a href="<%=request.getContextPath()%>/alert_employee">Alert</a></li>
 								</ul></li>
 
 							<!-- 근무표 버튼 -->
-							<c:url value="/mySchedule" var="url" />
-							<li><a href="${url }">My Table</a></li>
-
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 						</c:if>
 
 						<!-- 게시판 버튼 -->
@@ -173,11 +167,14 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="carousel-content centered">
-									<h2 class="animation animated-item-1">Powerful and
-										Responsive Web Design</h2>
-									<p class="animation animated-item-2">Pellentesque habitant
-										morbi tristique senectus et netus et malesuada fames ac turpis
-										egestas.</p>
+									<h1 class="animation animated-item-1">Convenient and Easy Shift Table</h1>
+									<h4 class="animation animated-item-2">
+									We manage high quality of shift table when you provide shifts to your employees. 
+									You can register/log-in and enjoy our service.
+									</h4>
+										
+									<br> <a class="btn btn-md animation animated-item-3"
+										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>
 						</div>
@@ -190,13 +187,10 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="carousel-content center centered">
-									<h2 class="boxed animation animated-item-1">Clean, Crisp,
-										Powerful and Responsive Web Design</h2>
-									<p class="boxed animation animated-item-2">Pellentesque
-										habitant morbi tristique senectus et netus et malesuada fames
-										ac turpis egestas.</p>
-									<br> <a class="btn btn-md animation animated-item-3"
-										href="#">Learn More</a>
+									<h1 class="boxed animation animated-item-1">Easy Catched-up Wage Chart with Visual Effects</h1>
+									<h4 class="boxed animation animated-item-2">It helps you visualize monthly staffs' wage on illustrated charts and graphs at a glance.</h4>
+									<br><br><a class="btn btn-md animation animated-item-3"
+										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>
 						</div>
@@ -209,22 +203,10 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="carousel-content centered">
-									<h2 class="animation animated-item-1">Powerful and
-										Responsive Web Design Theme</h2>
-									<p class="animation animated-item-2">Pellentesque habitant
-										morbi tristique senectus et netus et malesuada fames</p>
-									<a class="btn btn-md animation animated-item-3" href="#">Learn
-										More</a>
-								</div>
-							</div>
-							<div class="col-sm-6 hidden-xs animation animated-item-4">
-								<div class="centered">
-									<div class="embed-container">
-										<iframe
-											src="//player.vimeo.com/video/69421653?title=0&amp;byline=0&amp;portrait=0&amp;color=a22c2f"
-											frameborder="0" webkitallowfullscreen mozallowfullscreen
-											allowfullscreen></iframe>
-									</div>
+									<h1 class="boxed animation animated-item-1">Communication via Aruba</h1>
+									<h4 class="boxed animation animated-item-2">Share information and your difficulties with others by posting and commenting.</h4>
+									<br> <a class="btn btn-md animation animated-item-3"
+										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>
 						</div>
@@ -249,10 +231,10 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="media">
 						<div class="pull-left">
-							<i class="icon-twitter icon-md"></i>
+							<i class="icon-user icon-md"></i>
 						</div>
 						<div class="media-body">
-							<h3 class="media-heading">Twitter Marketing</h3>
+							<h3 class="media-heading">My Store and Job</h3>
 							<p>Pellentesque habitant morbi tristique senectus et netus et
 								malesuada fames ac turpis egestas. Vestibulum tortor quam,
 								feugiat vitae.</p>
@@ -263,10 +245,10 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="media">
 						<div class="pull-left">
-							<i class="icon-facebook icon-md"></i>
+							<i class="icon-calendar icon-md"></i>
 						</div>
 						<div class="media-body">
-							<h3 class="media-heading">Facebook Marketing</h3>
+							<h3 class="media-heading">Shift Table</h3>
 							<p>Pellentesque habitant morbi tristique senectus et netus et
 								malesuada fames ac turpis egestas. Vestibulum tortor quam,
 								feugiat vitae.</p>
@@ -277,10 +259,10 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="media">
 						<div class="pull-left">
-							<i class="icon-google-plus icon-md"></i>
+							<i class="icon-edit-sign icon-md"></i>
 						</div>
 						<div class="media-body">
-							<h3 class="media-heading">Google Plus Marketing</h3>
+							<h3 class="media-heading">Board</h3>
 							<p>Pellentesque habitant morbi tristique senectus et netus et
 								malesuada fames ac turpis egestas. Vestibulum tortor quam,
 								feugiat vitae.</p>
@@ -562,15 +544,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
+					&copy; 2015 <a target="_blank" href="#">MALSIKIZIMARAZO</a>
 				</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
 						<li><a href="#">Home</a></li>
 						<li><a href="#">About Us</a></li>
-						<li><a href="#">Faq</a></li>
 						<li><a href="#">Contact Us</a></li>
 						<li><a id="gototop" class="gototop" href="#"><i
 								class="icon-chevron-up"></i></a></li>
