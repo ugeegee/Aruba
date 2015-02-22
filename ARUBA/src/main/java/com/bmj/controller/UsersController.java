@@ -261,14 +261,19 @@ public class UsersController {
 
 			
 		//////직원탈퇴시-삭제 (댓글>게시글)>시간표>companyPerson>메세지>users
-		int memberId= cpService.selectMemberIdbyUserId(leaveUser.getUserId());
+		List<Integer> memberId= cpService.selectMemberIdListbyUserId(leaveUser.getUserId());
 		logger.trace("가져온 멤버아이디!!!!! "+memberId);
-		//시간표지우고
-		tService.deleteTimeTableByMemberId(memberId);
+		//시간표지우고(최대 3개인 직장 시간표 다지우기)
+		for(int i = 0; i<memberId.size(); i++){
+			tService.deleteTimeTableByMemberId(memberId.get(i).intValue());
+			logger.trace("시간표지움~~~!!!!");
+		}
 		//CP지우고
 		cpService.deleteCompanyPersonByUserId(leaveUser.getUserId());
+		logger.trace("CP지움~~~!!!!");
 		//메세지지우고
 		mService.deleteMessageByUserId(leaveUser.getUserId());
+		logger.trace("메세지지움~~~!!!!");
 		//USER지우고
 		service.deleteUser(leaveUser);
 		

@@ -78,7 +78,11 @@
 		select member_id from company_person where user_id =
 		#{userId} and company_code = #{companyCode}
 	</select>	
-
+	
+	<select id="selectMemberIdListbyUserId" parameterType="String" resultType="Integer">
+		select member_id from company_person where user_id =
+		#{userId}
+	</select>
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
 	<!-- <insert id = "insertDept" parameterType = "Department"> insert into 
 		departments(department_id, department_name,manager_id,location_id) values 

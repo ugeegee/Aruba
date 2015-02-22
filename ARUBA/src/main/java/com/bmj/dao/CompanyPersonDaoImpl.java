@@ -94,4 +94,10 @@ public class CompanyPersonDaoImpl implements CompanyPersonDao {
 		String stmt = namespace + "selectMemberIdbyCompanyPerson";
 		return sqlSession.selectOne(stmt, companyperson);
 	}
+
+	@Override
+	public List<Integer> selectMemberIdListbyUserId(String userId) {
+		String stmt = namespace + "selectMemberIdListbyUserId";
+		return sqlSession.selectList(stmt, userId);
+	}
 }

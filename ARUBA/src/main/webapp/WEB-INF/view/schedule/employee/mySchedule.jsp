@@ -163,8 +163,9 @@ $(document).ready(function() {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Register Schedule</li>
+						<li><a href="#">Job1</a></li>
+						<li><a href="#">Job2</a></li>
+						<li><a href="#">Job3</a></li>
 					</ul>
 				</div>
 			</div>

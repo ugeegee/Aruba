@@ -96,4 +96,10 @@ public class CompanyPersonServiceImpl implements CompanyPersonService {
 		return memberId;
 	}
 
+	@Override
+	public List<Integer> selectMemberIdListbyUserId(String userId) {
+		List<Integer> result = dao.selectMemberIdListbyUserId(userId);
+		return result;
+	}
+
 }

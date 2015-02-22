@@ -18,4 +18,5 @@ public interface CompanyPersonService {
 	int selectMemberIdbyUserId(String userId);
 	String selectUserIdbyMemberId(int memberId);
 	int selectMemberIdbyCompanyPerson(CompanyPerson companyperson);
+	List<Integer> selectMemberIdListbyUserId(String userId);
 }
