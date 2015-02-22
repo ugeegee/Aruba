@@ -23,6 +23,10 @@
 		where message_number= #{messageNumber}
 	</update>
 	
+	<delete id="deleteMessageByUserId" parameterType="String">
+		delete from message where user_id =#{userId}
+	</delete>
+	
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
 	<!-- <insert id = "insertDept" parameterType = "Department">
 		insert into departments(department_id, department_name,manager_id,location_id) 

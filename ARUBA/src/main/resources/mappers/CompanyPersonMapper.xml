@@ -68,16 +68,23 @@
 		select member_id from company_person where user_id =
 		#{userId}
 	</select>
+	
+	<delete id="deleteCompanyPersonByUserId" parameterType="String">
+		delete from company_person where user_id =#{userId} 
+	</delete>
 
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
 	<!-- <insert id = "insertDept" parameterType = "Department"> insert into 
 		departments(department_id, department_name,manager_id,location_id) values 
 		(#{departmentId}, #{departmentName}, #{managerId}, #{locationId}) </insert> 
+		
 		<update id = "updateDept" parameterType = "Department"> update departments 
 		set department_name=#{departmentName}, manager_id=#{managerId}, location_id=#{locationId} 
-		where department_id=#{departmentId} </update> <delete id = "deleteDept" parameterType 
-		= "Integer"> delete from departments where department_id =#{departmentId} 
-		</delete> <select id = "selectDeptCnt" resultType="Integer"> select count(*) 
+		where department_id=#{departmentId} </update> 
+		<delete id = "deleteDept" parameterType = "Integer"> 
+		delete from departments where department_id =#{departmentId} 
+		</delete> 
+		<select id = "selectDeptCnt" resultType="Integer"> select count(*) 
 		from departments </select> <select id = "selectDeptById" parameterType="Integer" 
 		resultType="Map"> select * from departments where department_id = #{departmentId} 
 		</select> <select id = "selectODeptById" parameterType="Integer" resultType="Department"> 

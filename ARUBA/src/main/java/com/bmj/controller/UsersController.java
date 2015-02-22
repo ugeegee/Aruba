@@ -28,6 +28,8 @@ import com.bmj.entity.CompanyPerson;
 import com.bmj.entity.Users;
 import com.bmj.exception.LoginFailException;
 import com.bmj.service.CompanyPersonService;
+import com.bmj.service.MessageService;
+import com.bmj.service.TimeTableService;
 import com.bmj.service.UsersService;
 
 @Controller
@@ -50,6 +52,10 @@ public class UsersController {
 	UsersService service;
 	@Autowired
 	CompanyPersonService cpService;
+	@Autowired
+	MessageService mService;
+	@Autowired
+	TimeTableService tService;
 
 	@RequestMapping(value = "/count", method = RequestMethod.GET)
 	public String getAllDeptList(Model model) {
@@ -253,9 +259,23 @@ public class UsersController {
 		leaveUser.setUserId(loginUser.getUserId()); // 아이디만 현재 로그인한 회원으로 가져오기
 		leaveUser.setPassword(nowPassword);
 
-		sessionStatus.setComplete();
+			
+		//////직원탈퇴시-삭제 (댓글>게시글)>시간표>companyPerson>메세지>users
+		int memberId= cpService.selectMemberIdbyUserId(leaveUser.getUserId());
+		logger.trace("가져온 멤버아이디!!!!! "+memberId);
+		//시간표지우고
+		tService.deleteTimeTableByMemberId(memberId);
+		//CP지우고
+		cpService.deleteCompanyPersonByUserId(leaveUser.getUserId());
+		//메세지지우고
+		mService.deleteMessageByUserId(leaveUser.getUserId());
+		//USER지우고
 		service.deleteUser(leaveUser);
-
+		
+		
+		
+		sessionStatus.setComplete();
+		
 		return "/mypage/goodBye";
 	}
 

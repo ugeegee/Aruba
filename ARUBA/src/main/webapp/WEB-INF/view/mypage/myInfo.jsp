@@ -86,7 +86,11 @@ label.error {
 						minlength : 1,
 						maxlength : 3
 					},
-
+					tel : {
+						minlength: 10, 
+						maxlength: 12, 
+						digits : true 
+					},
 					email : {
 						required : true,
 						minlength : 2,
@@ -127,7 +131,11 @@ label.error {
 						minlength : "최소 {0}글자이상이어야 합니다",
 						maxlength : "최대 {0}글자이하이어야 합니다"
 					},
-					
+					tel : {
+						minlength: "최소 {0}글자이상이어야 합니다", 
+						maxlength: "최대 {0}글자이하이어야 합니다", 
+						digits : "핸드폰 번호는 숫자만 입력해주세요."
+					},
 					email : {
 						required : "필수 입력사항 입니다.",
 						minlength : "최소 {0}글자이상이어야 합니다",

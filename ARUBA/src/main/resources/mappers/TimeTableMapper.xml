@@ -50,6 +50,10 @@
 		where time_key = #{timeKey}
 	</update>
 	
+	<delete id="deleteTimeTableByMemberId" parameterType="Integer">
+		delete from time_table where member_id =#{memberId} 
+	</delete>
+	
 	<!--
 	
 	<select id = "selectCompanyByCompanyCode" resultType="Company" parameterType="Integer">

@@ -66,4 +66,10 @@ public class TimeTableDaoImpl implements TimeTableDao {
 		String stmt = namespace + "updateTimeTable";
 		return sqlSession.update(stmt, updateTable);
 	}
+
+	@Override
+	public int deleteTimeTableByMemberId(int memberId) {
+		String stmt = namespace +"deleteTimeTableByMemberId";
+		return sqlSession.delete(stmt, memberId);
+	}
 }

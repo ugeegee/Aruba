@@ -72,7 +72,9 @@ public class TimeTableController {
 			/*StringTokenizer st1 = new StringTokenizer(map.get("title").toString(), "@@");
 			int id = Integer.parseInt(st1.nextToken());*/
 			
+			
 			int memberId = service2.selectMemberIdbyUserId(map.get("title").toString());
+			
 			
 			// 일한일자 저장. Date 타입으로 변환.
 			try {

@@ -39,6 +39,11 @@ public class MessageserviceImpl implements MessageService {
 		List<Message> result = dao.selectMessageByComCode(companyCode);
 		return result;
 	}
+	@Override
+	public int deleteMessageByUserId(String userId) {
+		int result = dao.deleteMessageByUserId(userId);
+		return result;
+	}
 
 
 }

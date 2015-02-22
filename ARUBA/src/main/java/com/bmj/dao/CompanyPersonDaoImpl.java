@@ -84,4 +84,10 @@ public class CompanyPersonDaoImpl implements CompanyPersonDao {
 		return sqlSession.selectOne(stmt, memberId);
 	}
 
+	@Override
+	public int deleteCompanyPersonByUserId(String userId) {
+		String stmt = namespace + "deleteCompanyPersonByUserId";
+		return sqlSession.delete(stmt, userId);
+	}
+
 }
