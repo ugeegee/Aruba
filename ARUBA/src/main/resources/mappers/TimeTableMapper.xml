@@ -46,7 +46,7 @@
 
 	<update id = "updateTimeTable" parameterType="TimeTable">
 		update time_table 
-		set working_start = #{workingStart}, working_end = #{workingEnd}
+		set working_date = #{workingDate}, working_start = #{workingStart}, working_end = #{workingEnd}
 		where time_key = #{timeKey}
 	</update>
 	

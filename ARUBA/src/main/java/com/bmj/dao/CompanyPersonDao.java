@@ -16,4 +16,5 @@ public interface CompanyPersonDao {
 	int updateSalary(CompanyPerson companyperson);
 	int selectMemberIdbyUserId(String userId);
 	String selectUserIdbyMemberId(int memberId);
+	int selectMemberIdbyCompanyPerson(CompanyPerson companyperson);
 }

@@ -72,6 +72,12 @@
 	<delete id="deleteCompanyPersonByUserId" parameterType="String">
 		delete from company_person where user_id =#{userId} 
 	</delete>
+	
+	<select id="selectMemberIdbyCompanyPerson" parameterType="CompanyPerson"
+		resultType="Integer">
+		select member_id from company_person where user_id =
+		#{userId} and company_code = #{companyCode}
+	</select>	
 
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
 	<!-- <insert id = "insertDept" parameterType = "Department"> insert into 
