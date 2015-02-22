@@ -379,7 +379,7 @@ public class UsersController {
 
 	// =============================================================== 게시판
 
-	@RequestMapping(value = "/notice")
+	/*@RequestMapping(value = "/notice")
 	public String noticeBoardGo() { // 공지게시판
 		return "/board/noticeBoard";
 	}
@@ -392,7 +392,7 @@ public class UsersController {
 	@RequestMapping(value = "/qna")
 	public String qnaBoardGo() { // Q&A게시판
 		return "/board/qnaBoard";
-	}
+	}*/
 
 	@ExceptionHandler
 	public String LoginFail(LoginFailException e) {

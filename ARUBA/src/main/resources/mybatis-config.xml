@@ -14,6 +14,8 @@
 		<typeAlias type = "com.bmj.entity.Stats" alias = "Stats"/>
 		
 		<typeAlias type = "com.bmj.entity.Message" alias = "Message"/>
+		<typeAlias type = "com.bmj.entity.Comment" alias = "Comment"/>
+		<typeAlias type = "com.bmj.entity.Reply" alias = "Reply"/>
 	</typeAliases>
 	  <mappers>
 	  	<mapper resource="mappers/UsersMapper.xml"/>
@@ -21,5 +23,7 @@
   	  	<mapper resource="mappers/CompanyPersonMapper.xml"/>
   	  	<mapper resource="mappers/TimeTableMapper.xml"/>
   	  	<mapper resource="mappers/MessageMapper.xml"/>
+  	  	<mapper resource="mappers/CommentMapper.xml"/>
+  	  	<mapper resource="mappers/ReplyMapper.xml"/>
 	  </mappers>
 </configuration>

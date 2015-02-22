@@ -5,6 +5,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 
 <html>
 <head>
@@ -157,7 +159,7 @@
 										Board</a></li>
 								<li><a href="<%=request.getContextPath()%>/free">Free
 										Board</a></li>
-								<li><a href="<%=request.getContextPath()%>/qna">Q&A
+								<li><a href="<%=request.getContextPath()%>/qna">QnA
 										Board</a></li>
 							</ul></li>
 					</c:if>
@@ -190,7 +192,61 @@
 	<!--/#title-->
 
  	<section id="freeBoard" class="container">
- 		자유게시판!!
+ 		
+ 		
+ 		
+ 		
+ 		자유게실판!
+ 		<div class="mainmenubg">
+		<div class="main zerogrid">
+			<table class="temp">
+				<tr>
+					<th width = "175">게시글번호</th>
+					<th width = "175">아이디</th>
+					<th width = "375">게시판내용</th>
+					<th>작성날짜</th>
+				</tr>
+
+			<c:forEach items="${commentList }" var="commentList">
+					<tr> 
+						<td align = "center">${commentList.commentNumber}</td>
+						<td align = "center">${commentList.userId}</td>
+						<td align = "center">
+						<c:url value="/showReplyList" var="url"></c:url>
+						<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
+						</td>
+						<td align = "center">${commentList.regDate}</td>
+					<%-- 	<td><c:url value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url"/>
+						<a href="${url }"><button>승낙</button></a></td> --%>
+					</tr>
+			</c:forEach>
+		</table>
+		
+	 	<c:url value="/registerComment" var="action"></c:url>
+			<form:form modelAttribute="addComment" method="post" action="${action}">
+				<hr>
+				<table>
+					<tr>
+						<td><label>게시글 종류</label></td>
+						<td>
+							<input type="radio" id="flag" value="1" name="flag" required>공지게시판
+							<input type="radio" id="flag" value="2" name="flag">자유게시판
+							<input type="radio" id="flag" value="3" name="flag">신고게시판
+							<label for="flag" class="error"></label>
+						</td>
+					</tr>
+				</table><br>
+ 					<form:textarea path="commentContent" rows="10" cols="130"></form:textarea>
+ 					<button type="submit" name="proceed">글쓰기</button>
+					<input type="reset" value="다시쓰기"/>
+					</form:form> 
+				</div>
+			</div>
+ 		
+ 		
+ 		
+ 		
+ 		
     </section>
 
 	<section id="bottom" class="wet-asphalt">

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.Comment">
+
+	<resultMap type="Comment" id="CommentMap">
+		<id column = "comment_number" jdbcType = "INTEGER" property = "commentNumber"/>
+		<result column = "user_id" jdbcType="VARCHAR" property= "userId"/>
+		<result column = "comment_content" jdbcType="VARCHAR" property= "commentContent"/>
+		<result column = "reg_date" jdbcType="DATE" property="regDate"/>
+		<result column = "flag" jdbcType="INTEGER" property="flag"/>
+	</resultMap> 
+	
+	<insert id = "insertComment" parameterType = "Comment">
+		insert into bComment(user_id, comment_content, reg_date, flag) 
+		values (#{userId}, #{commentContent}, #{regDate}, #{flag})
+	</insert>
+	
+	<update id="updateComment" parameterType="Comment">
+		update bComment set 
+			user_id=#{userId}, 
+			comment_content=#{commentContent}, 
+			reg_date=#{regDate}, 
+			flag=#{flag}
+		where comment_number=#{commentNumber}
+	</update>
+
+	<delete id="deleteComment" parameterType="string">
+		delete from bComment where
+		user_id=#{userId}
+	</delete>
+	
+	<select id="selectAllNoticeComment" resultMap="CommentMap">
+		select * from bComment where flag= 1
+	</select>
+
+	<select id="selectAllFreeComment" resultMap="CommentMap">
+		select * from bComment where flag = 2
+	</select>
+
+	<select id="selectAllQnAComment" resultMap="CommentMap">
+		select * from bComment where flag = 3
+	</select>
+	
+	<select id="selectComment" parameterType="INTEGER" resultType="Comment">
+		select * from bComment where comment_number=(#{commentNumber})
+	</select>
+	
+	<select id="CountByUserId" parameterType="String" resultType="INTEGER">
+		select count(*) from bComment where user_id=(#{userId})
+	</select>
+
+</mapper>
