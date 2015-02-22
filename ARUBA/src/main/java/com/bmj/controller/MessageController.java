@@ -23,6 +23,7 @@ import com.bmj.exception.RegisterJobException;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.CompanyService;
 import com.bmj.service.MessageService;
+import com.bmj.service.UsersService;
 
 @Controller
 public class MessageController {
@@ -38,6 +39,8 @@ public class MessageController {
 	CompanyPersonService cpService;
 	@Autowired
 	MessageService mService;
+	@Autowired
+	UsersService uService;
 
 	// 알바생 회사코드 등록하면
 	// 사장에게 메세지보내고 자신에게도 메세지 남고
@@ -57,6 +60,16 @@ public class MessageController {
 
 		message.setCompanyCode(companyCode);
 		message.setUserId(loginUser.getUserId());
+		List<CompanyPerson> cpList = cpService.selectByCompanyCode(companyCode);
+		String ownerId = "";
+		for(int i = 0; i<cpList.size(); i++){
+			Users temp = uService.selectUserByUserId(cpList.get(i).getUserId());
+			if( (temp.getGrade().equals("사장")) ){
+				ownerId = temp.getUserId();
+				break;
+			}
+		}
+		message.setReceiverId(ownerId);
 		message.setMessageContent("아르바이트 등록");
 		message.setFlag(0); // 보지 않은 메세지=0, 본 메세지=1
 

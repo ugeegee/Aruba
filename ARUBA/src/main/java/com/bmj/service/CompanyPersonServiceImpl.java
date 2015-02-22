@@ -108,4 +108,10 @@ public class CompanyPersonServiceImpl implements CompanyPersonService {
 		return result;
 	}
 
+	@Override
+	public String selectOwnerIdByComCode(int companyCode) {
+		String result = dao.selectOwnerIdByComCode(companyCode);
+		return result;
+	}
+
 }

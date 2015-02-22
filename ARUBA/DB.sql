@@ -234,6 +234,7 @@ CREATE TABLE message
 	message_number number NOT NULL,
 	company_code number NOT NULL,
 	user_id varchar2(20),
+	receiver_id varchar2(20),
 	message_content varchar2(100) NOT NULL,
 	reg_date date DEFAULT sysdate,
 	flag number DEFAULT 1,
@@ -281,7 +282,7 @@ values ('Im', '123', '123', '최서임', '010-', 'y@naver.com', '06/08/1987', '�
 
 
 insert into Company(company_name, company_tel, holiday_comm, night_comm) 
-values ('GS25시', '02-000-0000', 80, 80);
+values ('GS25시', '020000000', 80, 80);
 
 insert into company_person(company_code, user_id, hire_date) 
 values(1, 'park', '2010-01-01');

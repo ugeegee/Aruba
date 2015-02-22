@@ -146,6 +146,7 @@ public class CompanyPersonController {
 		
 		message.setCompanyCode(companyCode);
 		message.setUserId(loginUser.getUserId());
+		message.setReceiverId(userId);
 		message.setMessageContent("아르바이트 삭제");
 		message.setFlag(-1); 
 		

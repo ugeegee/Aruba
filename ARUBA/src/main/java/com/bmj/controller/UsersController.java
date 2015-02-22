@@ -220,7 +220,6 @@ public class UsersController {
 		
 		modifyUser = service.loginUser(modifyUser); // 수정한 애로 로그인시켜서
 		model.addAttribute("addUser", modifyUser); // addUser도 수정된 애로 바꾸고
-		
 
 		return "redirect:/myInfo"; // 수정완료하면 다시 My Info로 가기
 	}

@@ -160,7 +160,8 @@
 			<tr>
 				<th>쪽지번호</th>
 				<th>회사코드</th>
-				<th>아이디(보낸사람)</th>
+				<th>보낸사람</th>
+				<th>받는사람</th>
 				<th>쪽지내용</th>
 				<th>보낸날짜</th>
 				<th>읽음여부</th>
@@ -173,6 +174,7 @@
 					<td>${myComMessages.messageNumber}</td>
 					<td>${myComMessages.companyCode}</td>
 					<td>${myComMessages.userId}</td>
+					<td>${myComMessages.receiverId}</td>
 					<td>${myComMessages.messageContent}</td>
 					<td>${myComMessages.regDate}</td>
 					<td>

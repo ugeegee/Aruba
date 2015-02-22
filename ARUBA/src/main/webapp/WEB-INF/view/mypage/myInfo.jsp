@@ -56,6 +56,7 @@ label.error {
 
 <script>
 	$(document).ready(function() {
+		
 		var dp = {
 				changeMonth : true,
 				changeYear : true,

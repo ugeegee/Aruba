@@ -47,6 +47,5 @@ public class MessageDaoImpl implements MessageDao {
 		return sqlSession.delete(stmt, userId);
 	}
 	
-	
 
 }

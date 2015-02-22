@@ -5,12 +5,12 @@
 <mapper namespace="mybatis.mapper.Message">
 
 	<insert id="insertMessage" parameterType = "Message">
-		insert into message(company_code, user_id, message_content, flag) 
-		values (#{companyCode}, #{userId}, #{messageContent}, #{flag})
+		insert into message(company_code, user_id, receiver_id, message_content, flag) 
+		values (#{companyCode}, #{userId}, #{receiverId}, #{messageContent}, #{flag})
 	</insert>
 	
 	<select id = "selectMessageByUserId" parameterType="String" resultType="Message">
-		select * from message where user_id = #{userId}
+		select * from message where user_id = #{userId} or receiver_id = #{userId}
 	</select>
 	
 	<select id = "selectMessageByComCode" parameterType="Integer" resultType="Message">
@@ -24,8 +24,9 @@
 	</update>
 	
 	<delete id="deleteMessageByUserId" parameterType="String">
-		delete from message where user_id =#{userId}
+		delete from message where user_id = #{userId}
 	</delete>
+	
 	
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
 	<!-- <insert id = "insertDept" parameterType = "Department">
