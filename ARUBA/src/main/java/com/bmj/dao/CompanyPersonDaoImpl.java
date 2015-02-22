@@ -84,4 +84,9 @@ public class CompanyPersonDaoImpl implements CompanyPersonDao {
 		return sqlSession.selectOne(stmt, memberId);
 	}
 
+	@Override
+	public int selectMemberIdbyCompanyPerson(CompanyPerson companyperson) {
+		String stmt = namespace + "selectMemberIdbyCompanyPerson";
+		return sqlSession.selectOne(stmt, companyperson);
+	}
 }

@@ -68,13 +68,14 @@ public class TimeTableController {
 			com.google.gson.internal.LinkedTreeMap map = (com.google.gson.internal.LinkedTreeMap)templ.get(i);
 			logger.trace("수업 Map : " + map);
 			logger.trace("수업 확인 Id : " +map.get("title"));
-			// token 분리.
-			/*StringTokenizer st1 = new StringTokenizer(map.get("title").toString(), "@@");
-			int id = Integer.parseInt(st1.nextToken());*/
 			
-			int memberId = service2.selectMemberIdbyUserId(map.get("title").toString());
+			CompanyPerson tempPerson = new CompanyPerson();
+			tempPerson.setUserId(map.get("title").toString());
+			tempPerson.setCompanyCode(companyCode);
+			int memberId = service2.selectMemberIdbyCompanyPerson(tempPerson);
+			logger.trace("수업 멤버 ID " + memberId);
+			//int memberId = service2.selectMemberIdbyUserId(map.get("title").toString());
 			
-			// 일한일자 저장. Date 타입으로 변환.
 			try {
 				date = formatter.parse(map.get("start").toString());
 				start = formatter.parse(map.get("start").toString());
@@ -86,9 +87,7 @@ public class TimeTableController {
 			
 			logger.trace("수업 확인 Data : " + date);
 			logger.trace("수업 확인 Start : " + map.get("start"));
-			//String start = map.get("start").toString();
 			logger.trace("수업 확인 End : " + map.get("end"));
-			//String end = map.get("end").toString();
 			timetable.setCompanyCode(companyCode);
 			timetable.setMemberId(memberId);
 			timetable.setWorkingDate(date);
@@ -98,8 +97,6 @@ public class TimeTableController {
 		
 			int result = service.insertTimeTable(timetable);
 		}
-		// 여기 나중에 수정...!
-		/*return "calendar/register";*/
 		return "schedule/employer/allSchedule";
 	}
 	
