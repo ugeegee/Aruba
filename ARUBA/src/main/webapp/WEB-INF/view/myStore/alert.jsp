@@ -175,14 +175,22 @@
 					<td>${myComMessages.userId}</td>
 					<td>${myComMessages.messageContent}</td>
 					<td>${myComMessages.regDate}</td>
-					<td>${myComMessages.flag }</td>
-					<td><c:url
-							value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }"
-							var="url" /> <a href="${url }"><button>승낙</button></a></td>
+					<td>
+						${myComMessages.flag }
+					</td>
+					<td>
+						<c:if test="${myComMessages.flag =='0' }">					
+							<c:url value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url" /> 
+							<a href="${url }"><button>확인</button></a>
+						</c:if>
+						<c:if test="${myComMessages.flag =='1' }">	
+							<button disabled>확인</button>
+						</c:if>
+					
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
-		</div>
 	</section>
 
 	<section id="bottom" class="wet-asphalt">

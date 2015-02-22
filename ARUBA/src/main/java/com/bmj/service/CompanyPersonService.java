@@ -10,6 +10,7 @@ public interface CompanyPersonService {
 	int insertCompanyEmployee(CompanyPerson companyperson);
 	int insertCompanyPerson(CompanyPerson companyperson);
 	int deleteCompanyPersonByUserId(String userId);
+	int deleteCompanyPersonByComCodeAndUserId(CompanyPerson companyperson);
 	CompanyPerson selectCompanyPersonByUserId(String userId);
 	/*int selectComCodeByUserId(String userId);*/
 	List<Integer> selectComCodeByUserId(String userId);

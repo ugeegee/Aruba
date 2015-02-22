@@ -160,7 +160,14 @@
 					<td>${myMessages.userId}</td>
 					<td>${myMessages.messageContent}</td>
 					<td>${myMessages.regDate}</td>
-					<td>${myMessages.flag }</td>
+					<td>
+						<c:if test="${myMessages.flag =='0' }">
+							대기
+						</c:if>
+						<c:if test="${myMessages.flag =='1' }">
+							승인
+						</c:if>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

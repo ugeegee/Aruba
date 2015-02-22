@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bmj.entity.CompanyPerson;
+import com.bmj.entity.Message;
 import com.bmj.entity.StaffInfo;
 import com.bmj.entity.Users;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.CompanyService;
 import com.bmj.service.MessageService;
+import com.bmj.service.TimeTableService;
 import com.bmj.service.UsersService;
 
 @Controller
@@ -38,6 +40,8 @@ public class CompanyPersonController {
 	MessageService mService;
 	@Autowired
 	UsersService uService;
+	@Autowired
+	TimeTableService tService;
 
 	@RequestMapping(value = "/webProject/...?")
 	public String addPerson(Model model) {
@@ -75,7 +79,7 @@ public class CompanyPersonController {
 		for(int i = 0; i < code.size(); i++) {
 			comPersonList = cpService.selectByCompanyCode(code.get(i).intValue());
 		}
-		logger.trace("수업 compersonList : " + comPersonList);
+		logger.trace("수업 com personList : " + comPersonList);
 		// 사장 삭제.
 		for(int i = 0; i < comPersonList.size(); i++) {
 			if(loginUser.getUserId().equals(comPersonList.get(i).getUserId())) {
@@ -119,6 +123,33 @@ public class CompanyPersonController {
 		
 		cpService.updateSalary(companyperson);
 		
+		return "redirect:/staff";
+	}
+	
+	@RequestMapping(value="/deleteStaff", method = RequestMethod.GET)
+	public String deleteStaffSuccess(@RequestParam int companyCode, @RequestParam String userId,
+									HttpSession session){
+		
+		//사장이 직원삭제시 시간표>companyPerson 삭제, 메세지남기기
+		CompanyPerson companyperson = new CompanyPerson();
+		companyperson.setCompanyCode(companyCode);
+		companyperson.setUserId(userId);
+		
+		//시간표삭제
+		int memberId = cpService.selectMemberIdbyCompanyPerson(companyperson);
+		tService.deleteTimeTableByMemberId(memberId);
+		//CP삭제
+		cpService.deleteCompanyPersonByComCodeAndUserId(companyperson);
+		//메세지
+		Message message = new Message();
+		Users loginUser = (Users) session.getAttribute("addUser");
+		
+		message.setCompanyCode(companyCode);
+		message.setUserId(loginUser.getUserId());
+		message.setMessageContent("아르바이트 삭제");
+		message.setFlag(-1); 
+		
+		mService.insertMessage(message);
 		return "redirect:/staff";
 	}
 

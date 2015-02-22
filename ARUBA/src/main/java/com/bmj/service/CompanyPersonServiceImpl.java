@@ -102,4 +102,10 @@ public class CompanyPersonServiceImpl implements CompanyPersonService {
 		return result;
 	}
 
+	@Override
+	public int deleteCompanyPersonByComCodeAndUserId(CompanyPerson companyperson) {
+		int result = dao.deleteCompanyPersonByComCodeAndUserId(companyperson);
+		return result;
+	}
+
 }

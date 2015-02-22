@@ -9,6 +9,9 @@ public class Message {
 	private String messageContent;
 	private Date regDate;
 	private int flag;
+	//확인여부가 불필요한 메세지 -1
+	//미확인 0
+	//확인 1
 	
 	public Message() {}
 

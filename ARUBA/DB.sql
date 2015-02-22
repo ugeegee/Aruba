@@ -274,6 +274,12 @@ insert into users(user_id, password, password2, user_name, tel, email, birth, gr
 values ('Yoo', '123', '123', '유지연', '010-', 'y@naver.com', '06/08/1987', '직원', '몇살?', '20살');
 
 
+insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
+values ('Jung', '123', '123', '정유은', '010-', 'y@naver.com', '06/08/1987', '직원', '몇살?', '20살');
+insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
+values ('Im', '123', '123', '최서임', '010-', 'y@naver.com', '06/08/1987', '직원', '몇살?', '20살');
+
+
 insert into Company(company_name, company_tel, holiday_comm, night_comm) 
 values ('GS25시', '02-000-0000', 80, 80);
 
@@ -285,3 +291,5 @@ insert into company_person(company_code, user_id, salary, hire_date)
 values (1, 'Choi', 5000, '2015-02-12');
 insert into company_person(company_code, user_id, salary, hire_date) 
 values (1, 'Yoo', 6000, '2015-02-12');
+
+
