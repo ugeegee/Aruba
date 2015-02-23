@@ -71,10 +71,6 @@ $(document).ready(function() {
 		}else c2 = <%=request.getAttribute("code2")%>;
 
 	
-<%-- 	var c0 = <%=request.getAttribute("code0")%>;
-	var c1 = <%=request.getAttribute("code1")%>;
-	var c2 = <%=request.getAttribute("code2")%>; --%>
-	
 	$('#Job1').click(function(){
 		alert("Job1누름");
 		alert("c0 = "+c0);

@@ -224,7 +224,6 @@ public class UsersController {
 		
 		model.addAttribute("PopUp", 1);
 
-		//return "redirect:/myInfo"; // 수정완료하면 다시 My Info로 가기
 		return "mypage/myInfo";
 	}
 
@@ -248,8 +247,10 @@ public class UsersController {
 		 * "redirect:/modifyEmployerPass"; } else { viewPath =
 		 * "redirect:/modifyEmployeePass"; }
 		 */
-
-		return "redirect:/modifyPass";
+		
+		model.addAttribute("PopUp", 1);
+		
+		return "/mypage/modifyPass";
 	}
 
 	@RequestMapping(value = "/leaveAruba", method = RequestMethod.POST)
@@ -298,7 +299,8 @@ public class UsersController {
 
 	@RequestMapping(value = "/modifyPass")
 	// mypage 비밀번호변경 메뉴 눌렀을 때
-	public String mypageModifyEmployerPassGo() {
+	public String mypageModifyEmployerPassGo(Model model) {
+		model.addAttribute("PopUp", 0);
 		return "/mypage/modifyPass";
 	}
 
@@ -411,8 +413,9 @@ public class UsersController {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@ExceptionHandler
-	public String LoginFail(LoginFailException e) {
+	public String LoginFail(LoginFailException e, Model model) {
 		logger.trace("로그인실패했으니 로그인페이지 못벗어남!!!!");
+		model.addAttribute("PopUp", 1);
 		return "/login/login";
 	}
 

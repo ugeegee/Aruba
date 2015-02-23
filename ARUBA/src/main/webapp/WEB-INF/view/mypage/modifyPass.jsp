@@ -55,6 +55,10 @@ label.error {
 <script>
 	$(document).ready(function() {
 		
+		if(<%=request.getAttribute("PopUp")%> == 1){
+			alert("비밀번호가 수정되었습니다.");
+		}
+		
 		$("#passForm").validate({
 			//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 			/* submitHandler : function() {
