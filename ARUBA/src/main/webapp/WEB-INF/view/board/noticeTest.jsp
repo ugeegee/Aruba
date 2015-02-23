@@ -14,7 +14,7 @@
 <!--------------------- DataTable --------------------->
 
 <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
-<link href="board/dataTables.css" rel="stylesheet">
+<link href="css/dataTables.css" rel="stylesheet">
 
 <!--------------------- Homepage --------------------->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

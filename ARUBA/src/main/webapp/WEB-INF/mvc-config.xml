@@ -25,6 +25,5 @@
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
 	<mvc:resources location="/WEB-INF/lib/" mapping="/lib/**"/>
 	<mvc:resources location="/WEB-INF/chartlib/" mapping="/chartlib/**"/>
-	
-	<mvc:resources location="/WEB-INF/board/" mapping="/board/**"/>		
+		
 </beans>
