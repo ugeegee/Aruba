@@ -49,7 +49,20 @@ label.error {
 
 <script>
 $(document).ready(function() {
-
+	
+	$('#modify').click(function(){
+		alert("MODIFY누름");
+		
+		var url = "<%=request.getContextPath()%>/modifyMyCom"
+		$(location).attr('href',url); 
+	});
+	$('#delete').click(function(){
+		alert("DELETE누름");
+		<%-- alert("c0 = "+c0);
+		companyCode = c0;
+		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c0;
+		$(location).attr('href',url); --%>
+	});
 	$("#modifyComForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 		/* submitHandler : function() {
@@ -236,7 +249,7 @@ $(document).ready(function() {
 	<!--/#title-->
 
  	<section id="StoreControl" class="container">
- 		<c:url value="/modifyMyCom" var="action" />
+ 		<%-- <c:url value="/modifyMyCom" var="action" /> --%>
 			<form:form modelAttribute="myCom" mehtod="post" action="${action }" id="modifyComForm">
 			<table>
 			<tr>
@@ -269,7 +282,9 @@ $(document).ready(function() {
 				<td><input type="text" name="nowPass" id="nowPass" /></td>
 			</tr>
 				</table>
-					<input type="submit" value="수정"/>
+					<!-- <input type="submit" value="수정"/> -->
+					<button id="modify">수정</button>
+					<button id="delete">삭제</button>
 			
 			</form:form>
     </section>
