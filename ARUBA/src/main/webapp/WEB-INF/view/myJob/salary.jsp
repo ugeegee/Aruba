@@ -58,6 +58,48 @@
 <script>
 
 $(document).ready(function() {
+	alert("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+
+	var c = <%=request.getAttribute("nowCode")%>;
+	var c0;
+	var c1;
+	var c2;
+	var companyCode = c0;
+
+	if( <%=request.getAttribute("code0")%> == null){
+		c0 = -1;
+	}else c0 = <%=request.getAttribute("code0")%>;
+	if( <%=request.getAttribute("code1")%> == null){
+		c1 = -1;
+	}else c1 = <%=request.getAttribute("code1")%>;
+	if( <%=request.getAttribute("code2")%> == null){
+		c2 = -1;
+	}else c2 = <%=request.getAttribute("code2")%>;
+
+	$('#Job1').click(function(){
+		alert("Job1누름");
+		alert("c0 = "+c0);
+		companyCode = c0;
+		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c0;
+		$(location).attr('href',url);
+	});
+	$('#Job2').click(function(){
+		alert("Job2누름");
+		alert("c1 = "+c1);
+		companyCode = c1;
+		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c1;
+		$(location).attr('href',url);
+	});
+	$('#Job3').click(function(){
+		alert("Job3누름");
+		alert("c2 = "+c2);
+		companyCode = c2;
+		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c2;
+		$(location).attr('href',url);
+	});
+	
+	
+	
 	var seriesData = new Array();			// Series에 저장할 내용 name, data
 	var tempArr = new Array();				// 직원별 저장할 임시 Data 배열.
 	var dataArr = new Array();				// series에 저장할 Data 배열.
@@ -68,7 +110,7 @@ $(document).ready(function() {
 	var Xcategorie = new Array();			// categorie의 x축 이름.
 	//$('#chartBtn').on('click',function(){
 		$.ajax({
-			url:"<%=request.getContextPath()%>/ajaxChart",   
+			url:"<%=request.getContextPath()%>/ajaxChart?companyCode=<%=request.getAttribute("nowCode")%>",   
            type:'POST',
            success:function(data){
               //alert("확인 데이터 : " + data);
@@ -323,6 +365,9 @@ $(document).ready(function() {
 					<ul class="breadcrumb pull-right">
 						<li><a href="index.html">Home</a></li>
 						<li class="active">Login</li>
+						<li><a id="Job1">Job1</a></li>
+						<li><a id="Job2">Job2</a></li>
+						<li><a id="Job3">Job3</a></li>
 					</ul>
 				</div>
 			</div>

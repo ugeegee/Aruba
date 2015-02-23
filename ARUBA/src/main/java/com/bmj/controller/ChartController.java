@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bmj.entity.Company;
@@ -54,12 +55,25 @@ public class ChartController {
 	/*개인  월급 보기*/
 	/*실시간 월급 조회 기능 추가*/
 	@RequestMapping(value = "/ajaxChart")
-	public @ResponseBody String ajaxReceive(Model model, HttpSession session) {
+	public @ResponseBody String ajaxReceive(@RequestParam String companyCode, Model model, HttpSession session) {
 		//Calendar workingDate = Calendar.getInstance();
 		Users user = (Users)session.getAttribute("addUser");
-		logger.trace("수업 user : " + user);
+		logger.trace("수업 user : " + user + ", " + companyCode);
 		String userId = user.getUserId();
-		CompanyPerson companyperson= cpservice.selectCompanyPersonByUserId(userId);
+		// 수정 이젠 나의 회사에 따라 나의 멤버 ID 찾기.
+		CompanyPerson companyperson = new CompanyPerson();
+		List<CompanyPerson> result = cpservice.selectByCompanyCode(Integer.parseInt(companyCode));
+		for(int i = 0; i < result.size(); i++) {
+			if(user.getUserId().equals(result.get(i).getUserId())) {
+				companyperson.setCompanyCode(Integer.parseInt(companyCode));
+				companyperson.setHireDate(result.get(i).getHireDate());
+				companyperson.setMemberId(result.get(i).getMemberId());
+				companyperson.setSalary(result.get(i).getSalary());
+				companyperson.setUserId(result.get(i).getUserId());
+			}
+		}
+		//
+		//CompanyPerson companyperson= cpservice.selectCompanyPersonByUserId(userId);
 		logger.trace("수업 companyperson : " + companyperson);
 				
 		List<Stats> myTimes = new ArrayList<Stats>();
@@ -137,7 +151,6 @@ public class ChartController {
 			}
 			myTimes.get(i).setCount(count);
 		}
-		
 		logger.trace("수업, 기본 셋팅 완료 : " + myTimes);
 		
 		JSONObject objJson = new JSONObject();

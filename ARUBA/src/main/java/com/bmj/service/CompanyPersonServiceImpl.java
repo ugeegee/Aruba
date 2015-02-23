@@ -114,4 +114,10 @@ public class CompanyPersonServiceImpl implements CompanyPersonService {
 		return result;
 	}
 
+	/*@Override
+	public CompanyPerson selectCompanyPersonByPerson(CompanyPerson person) {
+		CompanyPerson companyperson = dao.selectCompanyPersonByPerson(person);
+		return companyperson;
+	}*/
+
 }

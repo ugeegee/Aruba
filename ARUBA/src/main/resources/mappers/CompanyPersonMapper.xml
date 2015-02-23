@@ -32,6 +32,9 @@
 		#{memberId}
 	</select>
 
+	<!-- <select id = "selectCompanyPersonByPerson" parameterType = "CompanyPerson" resultType = "CompanyPerson">
+		select * from company_person where user_id = #{userId} and company_code = {#companyCode}
+	</select> -->
 
 	<!-- selectCompanyCodeByUserId 이름 바꿈 selectCompanyPersonByUserId controller도 
 		다 바꿈 -->

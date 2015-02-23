@@ -48,29 +48,22 @@
 <script>
 <!--------------------- fullCalendar --------------------->
 $(document).ready(function() {
-	
-	<%-- alert("회사코드는?!!!" + <%=request.getAttribute("nowCode")%>);
-	alert("출력1" + <%=request.getAttribute("code0")%>);
-	alert("출력2" + <%=request.getAttribute("code1")%>);
-	alert("출력3" + <%=request.getAttribute("code2")%>); --%>
-	
 	var c = <%=request.getAttribute("nowCode")%>;
 	var c0;
 	var c1;
 	var c2;
 	var companyCode = c0;
 
-	var oneTime = <%=request.getAttribute("oneTime")%> ;
 
-		if( <%=request.getAttribute("code0")%> == null){
-			c0 = -1;
-		}else c0 = <%=request.getAttribute("code0")%>;
-		if( <%=request.getAttribute("code1")%> == null){
-			c1 = -1;
-		}else c1 = <%=request.getAttribute("code1")%>;
-		if( <%=request.getAttribute("code2")%> == null){
-			c2 = -1;
-		}else c2 = <%=request.getAttribute("code2")%>;
+	if( <%=request.getAttribute("code0")%> == null){
+		c0 = -1;
+	}else c0 = <%=request.getAttribute("code0")%>;
+	if( <%=request.getAttribute("code1")%> == null){
+		c1 = -1;
+	}else c1 = <%=request.getAttribute("code1")%>;
+	if( <%=request.getAttribute("code2")%> == null){
+		c2 = -1;
+	}else c2 = <%=request.getAttribute("code2")%>;
 
 	
 	$('#Job1').click(function(){
@@ -78,7 +71,6 @@ $(document).ready(function() {
 		alert("c0 = "+c0);
 		companyCode = c0;
 		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c0;
-		c0 =  <%=request.getAttribute("nowCode")%>;
 		$(location).attr('href',url);
 	});
 	$('#Job2').click(function(){
@@ -108,7 +100,7 @@ $(document).ready(function() {
 		eventLimit: true, // allow "more" link when too many events
 		events: function(start, end, timezone, callback) {
 			$.ajax({
-				url: "<%=request.getContextPath()%>/display?companyCode="+companyCode,
+				url: "<%=request.getContextPath()%>/display?companyCode=<%=request.getAttribute("nowCode")%>",
 				success: function(result) {
 					var jobj = JSON.parse(result);
 					var e = jobj["event"];
@@ -117,6 +109,7 @@ $(document).ready(function() {
 			});
 		}
 	});
+});
 
 </script>
 <style>
