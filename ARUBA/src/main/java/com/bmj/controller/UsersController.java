@@ -2,6 +2,7 @@ package com.bmj.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -220,8 +221,11 @@ public class UsersController {
 		
 		modifyUser = service.loginUser(modifyUser); // 수정한 애로 로그인시켜서
 		model.addAttribute("addUser", modifyUser); // addUser도 수정된 애로 바꾸고
+		
+		model.addAttribute("PopUp", 1);
 
-		return "redirect:/myInfo"; // 수정완료하면 다시 My Info로 가기
+		//return "redirect:/myInfo"; // 수정완료하면 다시 My Info로 가기
+		return "mypage/myInfo";
 	}
 
 	@RequestMapping(value = "/modifyPass", method = RequestMethod.POST)
@@ -287,8 +291,8 @@ public class UsersController {
 
 	@RequestMapping(value = "/myInfo")
 	// mypage 메뉴 눌렀을 때 - 개인정보 수정페이지로
-	public String mypageGo() {
-		/* return "/mypage/employer/mypage"; */
+	public String mypageGo(Model model) {
+		model.addAttribute("PopUp", 0);
 		return "/mypage/myInfo";
 	}
 
@@ -372,26 +376,31 @@ public class UsersController {
 
 	// ////////////알바 시간표 메뉴
 	@RequestMapping(value = "/mySchedule")
-	public String myScheduleGo() { // 시간표 - 내시간표 조회(직장별) --- > 일단 직장 1개...!
+	public String myScheduleGo(HttpSession session, Model model) { // 시간표 - 내시간표 조회(직장별) --- > 일단 직장 1개...!
+		Users loginUser = (Users)session.getAttribute("addUser");
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
+		int first = -1;
+		
+		for(int i = 0; i < codeList.size(); i++){
+			model.addAttribute("code"+i, codeList.get(i).intValue());
+			first = codeList.get(0).intValue();
+		}
+
+		//myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
+		model.addAttribute("nowCode", first);
+		
+		return "/schedule/employee/mySchedule";
+	}
+	
+	@RequestMapping(value = "/selectSchedule", method = RequestMethod.GET)
+	public String selectScheduleGo(@RequestParam int companyCode) {
+		
+		logger.trace("최대3개회사중 어떤거!!!!" + companyCode);
+		
 		return "/schedule/employee/mySchedule";
 	}
 
-	// =============================================================== 게시판
-
-	/*@RequestMapping(value = "/notice")
-	public String noticeBoardGo() { // 공지게시판
-		return "/board/noticeBoard";
-	}
-
-	@RequestMapping(value = "/free")
-	public String freeBoardGo() { // 자유게시판
-		return "/board/freeBoard";
-	}
-
-	@RequestMapping(value = "/qna")
-	public String qnaBoardGo() { // Q&A게시판
-		return "/board/qnaBoard";
-	}*/
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@ExceptionHandler
 	public String LoginFail(LoginFailException e) {

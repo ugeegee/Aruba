@@ -48,6 +48,36 @@
 <script>
 <!--------------------- fullCalendar --------------------->
 $(document).ready(function() {
+	
+	alert("회사코드는?!!!" + <%=request.getAttribute("nowCode")%>);
+	alert("출력1" + <%=request.getAttribute("code0")%>);
+	alert("출력2" + <%=request.getAttribute("code1")%>);
+	alert("출력3" + <%=request.getAttribute("code2")%>);
+	
+	var c = <%=request.getAttribute("nowCode")%>;
+	var c0 = <%=request.getAttribute("code0")%>;
+	var c1 = <%=request.getAttribute("code1")%>;
+	var c2 = <%=request.getAttribute("code2")%>;
+	
+	$('#Job1').click(function(){
+		alert("Job1누름");
+		alert("c0 = "+c0);
+		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c0;
+		$(location).attr('href',url);
+	});
+	$('#Job2').click(function(){
+		alert("Job2누름");
+		alert("c1 = "+c1);
+		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c1;
+		$(location).attr('href',url);
+	});
+	$('#Job3').click(function(){
+		alert("Job3누름");
+		alert("c2 = "+c2);
+		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c2;
+		$(location).attr('href',url);
+	});
+	
 	$('#calendar').fullCalendar({	
 		// alert("확인");
 		header: {
@@ -163,9 +193,9 @@ $(document).ready(function() {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="#">Job1</a></li>
-						<li><a href="#">Job2</a></li>
-						<li><a href="#">Job3</a></li>
+						<li><a id="Job1">Job1</a></li>
+						<li><a id="Job2">Job2</a></li>
+						<li><a id="Job3">Job3</a></li>
 					</ul>
 				</div>
 			</div>
@@ -175,9 +205,14 @@ $(document).ready(function() {
 
 	<section id="ShowSchedule" class="container">
 		
-
+		
+		<c:if test="${nowCode < 0 }">
+			직장정보가 없습니다.
+		</c:if>
+		<c:if test="${nowCode > 0 }">
 			<div id='calendar'></div>
-			
+		</c:if>
+
 	</section>
 
 	<section id="bottom" class="wet-asphalt">

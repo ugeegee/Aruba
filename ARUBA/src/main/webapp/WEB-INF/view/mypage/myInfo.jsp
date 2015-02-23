@@ -56,6 +56,10 @@ label.error {
 
 <script>
 	$(document).ready(function() {
+		alert("출력!!!" + <%=request.getAttribute("PopUp")%>);
+		if(<%=request.getAttribute("PopUp")%> == 1){
+			alert("1입니다~");
+		}
 		
 		var dp = {
 				changeMonth : true,

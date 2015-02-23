@@ -49,7 +49,7 @@ label.error {
 
 <script>
 $(document).ready(function() {
-
+	
 	$("#addJobForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 		/* submitHandler : function() {
