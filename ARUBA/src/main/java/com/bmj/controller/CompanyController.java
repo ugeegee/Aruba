@@ -84,7 +84,7 @@ public class CompanyController {
 
 		return viewPath;
 	}
-	@RequestMapping(value = "/modifyMyCom", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/modifyMyCom", method = RequestMethod.POST)
 	// 사장 - 회사정보수정
 	public String mypageModifyMyComSuccessGo(@ModelAttribute("myCom") Company myCom,
 			Model model) {
@@ -92,7 +92,23 @@ public class CompanyController {
 		int result = service.updateCompany(myCom);
 		logger.trace("회사정보 업데이트 결과!!  "+result);
 		return "redirect:/myCompany"; 			//업데이트끝나고 회사보는 페이지로
+	}*/
+	@RequestMapping(value = "/modifyMyCom", method = RequestMethod.GET)
+	// 사장 - 회사정보수정
+	public String mypageModifyMyComSuccessGo(@RequestParam int companyCode, @RequestParam String companyName, @RequestParam String companyTel, 
+											@RequestParam int holidayComm, @RequestParam int nightComm, Model model) {
+		
+		/*Company company = new Company();
+		company.setCompanyCode(companyCode);
+		company.setCompanyName(companyName);
+		company.setCompanyTel(companyTel);
+		company.setHolidayComm(holidayComm);
+		company.setNightComm(nightComm);
+		int result = service.updateCompany(myCom);
+		logger.trace("회사정보 업데이트 결과!!  "+result);*/
+		return "redirect:/myCompany"; 			//업데이트끝나고 회사보는 페이지로
 	}
+	
 	/* 회사 등록과 동시에 자신 등록(사장입장) */
 	@RequestMapping(value="/registerCompany", method = RequestMethod.POST)
 	public String registerCompanySuccess(@RequestParam String companyName, @RequestParam String companyTel,
