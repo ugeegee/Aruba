@@ -1,7 +1,9 @@
 package com.bmj.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -47,24 +49,25 @@ public class MessageController {
 	@RequestMapping(value = "/sendMsgToOwner", method = RequestMethod.POST)
 	public String registerJobSuccess(@RequestParam int companyCode,
 			@RequestParam String companyTel, HttpSession session) {
-		
+
 		// 입력받은 code,tel 회사존재여부 확인
 		Company searchCom = new Company();
 		searchCom.setCompanyCode(companyCode);
 		searchCom.setCompanyTel(companyTel);
 		searchCom = cService.selectCompanyByCodeAndTel(searchCom);
 
-		
 		Message message = new Message();
-		Users loginUser = (Users) session.getAttribute("addUser"); // 현재로그인한  사람=메세지 보내는사람
+		Users loginUser = (Users) session.getAttribute("addUser"); // 현재로그인한
+																	// 사람=메세지
+																	// 보내는사람
 
 		message.setCompanyCode(companyCode);
 		message.setUserId(loginUser.getUserId());
 		List<CompanyPerson> cpList = cpService.selectByCompanyCode(companyCode);
 		String ownerId = "";
-		for(int i = 0; i<cpList.size(); i++){
+		for (int i = 0; i < cpList.size(); i++) {
 			Users temp = uService.selectUserByUserId(cpList.get(i).getUserId());
-			if( (temp.getGrade().equals("사장")) ){
+			if ((temp.getGrade().equals("사장"))) {
 				ownerId = temp.getUserId();
 				break;
 			}
@@ -74,7 +77,7 @@ public class MessageController {
 		message.setFlag(0); // 보지 않은 메세지=0, 본 메세지=1
 
 		mService.insertMessage(message);
-		
+
 		return "redirect:/alert_employee";
 	}
 
@@ -82,9 +85,10 @@ public class MessageController {
 	// 사장 mypage 메뉴에서 Alerts(쪽지관리)
 	public String mypagAlertsEmployerGo(HttpSession session, Model model) {
 		Users loginUser = (Users) session.getAttribute("addUser"); // 로그인한 사장정보
-		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
-		
-		int ComCode = codeList.get(0).intValue(); 
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
+				.getUserId());
+
+		int ComCode = codeList.get(0).intValue();
 
 		List<Message> myComMessages = mService.selectMessageByComCode(ComCode);
 		logger.trace("가져온 나의 회사 메세지들!! " + myComMessages);
@@ -106,8 +110,30 @@ public class MessageController {
 	}
 
 	@ExceptionHandler
-	public String RegisterJobFail(RegisterJobException e) {
+	public String RegisterJobFail(RegisterJobException e,
+			HttpServletRequest request, HttpSession session) {
 		logger.trace("직원이 직장등록하려했으나 없는회사임!!!!!");
-		return "redirect:/myJob";
+		request.setAttribute("PopUp", 1);
+
+		Users loginUser = (Users) session.getAttribute("addUser"); 
+		String viewPath = "";
+
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
+				.getUserId());
+		List<Company> comList = new ArrayList<Company>();
+		for (int i = 0; i < codeList.size(); i++) {
+			comList.add(i, cService.selectCompanyByCompanyCode(codeList.get(i)
+					.intValue()));
+		}
+
+		if (codeList.size() > 2) {
+			request.setAttribute("emptyCompany", "NO");
+		} else {
+			request.setAttribute("emptyCompany", "YES");
+		}
+		logger.trace("가져온 나의 회사 정보!! " + comList);
+		request.setAttribute("myCompanies", comList);
+
+		return "myJob/myJob";
 	}
 }

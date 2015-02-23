@@ -50,6 +50,10 @@ label.error {
 <script>
 $(document).ready(function() {
 	
+	if(<%=request.getAttribute("PopUp")%> == 1){
+		alert("없는 회사정보 입니다.");
+	}
+	
 	$("#addJobForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 		/* submitHandler : function() {
