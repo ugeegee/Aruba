@@ -59,16 +59,19 @@ $(document).ready(function() {
 	var c1;
 	var c2;
 	var companyCode = c0;
-	
-	if( <%=request.getAttribute("code0")%> == null){
-		c0 = -1;
-	}else c0 = <%=request.getAttribute("code0")%>;
-	if( <%=request.getAttribute("code1")%> == null){
-		c1 = -1;
-	}else c1 = <%=request.getAttribute("code1")%>;
-	if( <%=request.getAttribute("code2")%> == null){
-		c2 = -1;
-	}else c2 = <%=request.getAttribute("code2")%>;
+
+	var oneTime = <%=request.getAttribute("oneTime")%> ;
+
+		if( <%=request.getAttribute("code0")%> == null){
+			c0 = -1;
+		}else c0 = <%=request.getAttribute("code0")%>;
+		if( <%=request.getAttribute("code1")%> == null){
+			c1 = -1;
+		}else c1 = <%=request.getAttribute("code1")%>;
+		if( <%=request.getAttribute("code2")%> == null){
+			c2 = -1;
+		}else c2 = <%=request.getAttribute("code2")%>;
+
 	
 <%-- 	var c0 = <%=request.getAttribute("code0")%>;
 	var c1 = <%=request.getAttribute("code1")%>;
@@ -118,15 +121,13 @@ $(document).ready(function() {
 			});
 		}
 	});
-});
+
 </script>
 <style>
-
 #calendar {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-	
+	max-width: 900px;
+	margin: 0 auto;
+}
 </style>
 </head>
 <body>
@@ -163,24 +164,23 @@ $(document).ready(function() {
 									Account</a></li>
 						</ul></li>
 
-						<!-- 로그아웃 버튼 -->
-						<c:url value="/logout" var="url" />
-						<li><a href="${url }">Log Out</a></li>
+					<!-- 로그아웃 버튼 -->
+					<c:url value="/logout" var="url" />
+					<li><a href="${url }">Log Out</a></li>
 
-						<!-- MY JOB 버튼 -->
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="<%=request.getContextPath()%>/myJob">My
-										Job</a></li>
-								<li><a href="<%=request.getContextPath()%>/salary">My
-										Wage</a></li>
-								<li><a href="<%=request.getContextPath()%>/alert_employee">Alert</a></li>
-							</ul></li>
+					<!-- MY JOB 버튼 -->
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
+						<ul class="dropdown-menu">
+							<li><a href="<%=request.getContextPath()%>/myJob">My Job</a></li>
+							<li><a href="<%=request.getContextPath()%>/salary">My
+									Wage</a></li>
+							<li><a href="<%=request.getContextPath()%>/alert_employee">Alert</a></li>
+						</ul></li>
 
-						<!-- 근무표 버튼 -->
-						<c:url value="/mySchedule" var="url" />
-						<li><a href="${url }">My Table</a></li>
+					<!-- 근무표 버튼 -->
+					<c:url value="/mySchedule" var="url" />
+					<li><a href="${url }">My Table</a></li>
 
 					<!-- 게시판 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -223,8 +223,8 @@ $(document).ready(function() {
 	<!--/#title-->
 
 	<section id="ShowSchedule" class="container">
-		
-		
+
+
 		<c:if test="${nowCode < 0 }">
 			직장정보가 없습니다.
 		</c:if>
