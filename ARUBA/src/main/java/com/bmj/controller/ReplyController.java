@@ -33,7 +33,7 @@ public class ReplyController {
 	@Autowired
 	CommentService cservice;
 	
-	@RequestMapping(value = "/registerReply", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerReply", method = RequestMethod.GET)
 	// 댓글 작성 성공시
 	public String registerReply(@RequestParam int commentNumber,
 			@RequestParam String replyContent, Model model, HttpSession session) {

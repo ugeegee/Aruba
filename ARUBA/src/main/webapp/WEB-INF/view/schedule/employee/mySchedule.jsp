@@ -168,8 +168,13 @@ $(document).ready(function() {
 						</ul></li>
 
 					<!-- 근무표 버튼 -->
-					<c:url value="/mySchedule" var="url" />
-					<li><a href="${url }">My Table</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 
 					<!-- 게시판 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -196,8 +201,8 @@ $(document).ready(function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>My Schedule</h1>
-					<p>Please input your login information</p>
+					<h1>My Shift</h1>
+					<p>나의 근무시간표 조회</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">

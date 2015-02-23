@@ -33,6 +33,7 @@
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <body>
+
 	<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
 		role="banner">
 		<div class="container">
@@ -43,7 +44,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand animated tada" href="index.html"><img
+				<a class="navbar-brand" href="index.html"><img
 					src="images/logo.png" alt="logo"></a>
 			</div>
 			<div class="collapse navbar-collapse">
@@ -523,16 +524,6 @@
 						San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr>
 						(123) 456-7890
 					</address>
-					<h4>Newsletter</h4>
-					<form role="form">
-						<div class="input-group">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Enter your email"> <span
-								class="input-group-btn">
-								<button class="btn btn-danger" type="button">Go!</button>
-							</span>
-						</div>
-					</form>
 				</div>
 				<!--/.col-md-3-->
 			</div>
@@ -540,7 +531,7 @@
 	</section>
 	<!--/#bottom-->
 
-	<footer id="footer" class="midnight-blue">
+	<footer id="footer" class="wet-asphalt">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">

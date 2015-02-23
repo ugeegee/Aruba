@@ -146,8 +146,13 @@
 								</ul></li>
 
 							<!-- 근무표 버튼 -->
-							<c:url value="/mySchedule" var="url" />
-							<li><a href="${url }">My Table</a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 
 						</c:if>
 
@@ -190,21 +195,12 @@
 		</div>
 	</section>
 	<!--/#title-->
-
  	<section id="freeBoard" class="container">
- 		
- 		success
- 		
- 	<div class="mainmenubg">
-		<div class="main zerogrid">
-			<h1>등록 성공</h1><br>
-			<%-- <c:url value="/index" var="url"></c:url>
-			<a href="${url }">작성한 글 보기</a> --%>
+ 		<div class="mainmenubg">
+			<div class="main zerogrid">
+				<h1>등록 성공</h1><br>
+			</div>
 		</div>
-	</div>
- 		
- 		
- 		
     </section>
 
 	<section id="bottom" class="wet-asphalt">

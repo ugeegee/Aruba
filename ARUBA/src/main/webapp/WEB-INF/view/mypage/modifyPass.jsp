@@ -213,8 +213,13 @@ label.error {
 								</ul></li>
 
 							<!-- 근무표 버튼 -->
-							<c:url value="/mySchedule" var="url" />
-							<li><a href="${url }">My Table</a></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 
 						</c:if>
 
@@ -269,13 +274,13 @@ label.error {
                     <form:hidden path="password" id="password" name="password" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="nowPassword" name="nowPassword" placeholder="your password" class="form-control">
+                    <input type="password" id="nowPassword" name="nowPassword" placeholder="current password" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="modifyPass1" name="modifyPass1" placeholder="modify password" class="form-control">
+                    <input type="password" id="modifyPass1" name="modifyPass1" placeholder="new password" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="modifyPass2" name="modifyPass2" placeholder="cpassword" class="form-control">
+                    <input type="password" id="modifyPass2" name="modifyPass2" placeholder="new password(again)" class="form-control">
                 </div>
                
                 <div class="form-group">

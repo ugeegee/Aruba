@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
 <html>
 <head>
-
 <meta charset="utf-8">
 
 <!--------------------- Validate --------------------->
@@ -40,9 +36,19 @@
 	href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
-
-<script>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#proceed").click(function(){
+		if($("#commentContent").val()==""){
+			alert("게시글 내용을 입력해주세요.");
+		}else{
+			<c:url value="/registerComment" var="comment"></c:url>
+			var url = "${comment}?flag=1&commentContent="+$("#commentContent").val();
+			location.href = url;
+		}
+	});
+});
 </script>
 </head>
 <body>
@@ -146,9 +152,13 @@
 								</ul></li>
 
 							<!-- 근무표 버튼 -->
-							<c:url value="/mySchedule" var="url" />
-							<li><a href="${url }">My Table</a></li>
-
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 						</c:if>
 
 						<!-- 게시판 버튼 -->
@@ -191,64 +201,49 @@
 	</section>
 	<!--/#title-->
 
- 	<section id="freeBoard" class="container">
- 	
-
-
-공지게시판
-
-<div class="mainmenubg">
-		<div class="main zerogrid">
-			<table class="temp">
+<section id="freeBoard" class="container">
+	<div class="white">
+			<table class="table table-striped table-hover">
+				<thead>
 				<tr>
 					<th width = "175">게시글번호</th>
 					<th width = "175">아이디</th>
 					<th width = "375">게시판내용</th>
 					<th>작성날짜</th>
 				</tr>
-
+				</thead>
 			<c:forEach items="${commentList }" var="commentList">
+					<tbody>
 					<tr> 
-						<td align = "center">${commentList.commentNumber}</td>
-						<td align = "center">${commentList.userId}</td>
-						<td align = "center">
-						<c:url value="/showReplyList" var="url"></c:url>
-						<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
-						</td>
-						<td align = "center">${commentList.regDate}</td>
-					<%-- 	<td><c:url value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url"/>
-						<a href="${url }"><button>승낙</button></a></td> --%>
+						<td align = "left">${commentList.commentNumber}</td>
+						<td align = "left">${commentList.userId}</td>
+						<td align = "left">
+							<c:url value="/showReplyList" var="url"></c:url>
+							<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
+					</td>
+						<td align = "left">${commentList.regDate}</td>
 					</tr>
+					</tbody>
 			</c:forEach>
 		</table>
-		
+	</div>
+	<br>
+	<br>
+	<div id="comment-form">
 	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" method="post" action="${action}">
-				<hr>
-				<table>
-					<tr>
-						<td><label>게시글 종류</label></td>
-						<td>
-							<input type="radio" id="flag" value="1" name="flag" required>공지게시판
-							<input type="radio" id="flag" value="2" name="flag">자유게시판
-							<input type="radio" id="flag" value="3" name="flag">신고게시판
-							<label for="flag" class="error"></label>
-						</td>
-					</tr>
-				</table><br>
- 					<form:textarea path="commentContent" rows="10" cols="130"></form:textarea>
- 					<button type="submit" name="proceed">글쓰기</button>
-					<input type="reset" value="다시쓰기"/>
-					</form:form> 
-				</div>
-			</div>
-
-
-
-
-
-
-
+			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
+				<h3>게시글 작성</h3>	
+				<br>
+				<div class="form-group">
+                 	<div class="col-sm-12">
+                    	<form:textarea path="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
+                    </div>
+                </div>
+					<input type="reset" value="다시쓰기" class="btn btn-success btn-md write"/>
+					<input type="button" id="proceed" name="proceed" value="글쓰기" class="btn btn-success btn-md write"/>
+					
+			</form:form> 
+	</div>
     </section>
 
 	<section id="bottom" class="wet-asphalt">
