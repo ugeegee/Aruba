@@ -388,14 +388,22 @@ public class UsersController {
 
 		//myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
 		model.addAttribute("nowCode", first);
+		model.addAttribute("oneTime", true);
 		
 		return "/schedule/employee/mySchedule";
 	}
 	
 	@RequestMapping(value = "/selectSchedule", method = RequestMethod.GET)
-	public String selectScheduleGo(@RequestParam int companyCode, Model model) {
+	public String selectScheduleGo(@RequestParam int companyCode, HttpSession session, Model model) {
 		
 		logger.trace("최대3개회사중 어떤거!!!!" + companyCode);
+		
+		Users loginUser = (Users)session.getAttribute("addUser");
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
+		for(int i = 0; i < codeList.size(); i++){
+			model.addAttribute("code"+i, codeList.get(i).intValue());
+		}
+		
 		model.addAttribute("nowCode",companyCode);
 		return "/schedule/employee/mySchedule";
 	}
