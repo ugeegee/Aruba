@@ -24,6 +24,8 @@ import com.bmj.entity.Users;
 import com.bmj.exception.RegisterJobException;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.CompanyService;
+import com.bmj.service.MessageService;
+import com.bmj.service.TimeTableService;
 
 @Controller
 // 컴패니는 session 남길 필요없음....
@@ -38,6 +40,10 @@ public class CompanyController {
 	CompanyService service;
 	@Autowired
 	CompanyPersonService cpService;
+	@Autowired
+	TimeTableService tService;
+	@Autowired
+	MessageService mService;
 
 	@RequestMapping(value= "/webProject/addCompany")
 	public String addCompany(Model model) {
@@ -84,29 +90,50 @@ public class CompanyController {
 
 		return viewPath;
 	}
-	/*@RequestMapping(value = "/modifyMyCom", method = RequestMethod.POST)
+	@RequestMapping(value = "/modifyMyCom", params="modify", method = RequestMethod.POST)
 	// 사장 - 회사정보수정
 	public String mypageModifyMyComSuccessGo(@ModelAttribute("myCom") Company myCom,
 			Model model) {
 		
 		int result = service.updateCompany(myCom);
 		logger.trace("회사정보 업데이트 결과!!  "+result);
-		return "redirect:/myCompany"; 			//업데이트끝나고 회사보는 페이지로
-	}*/
-	@RequestMapping(value = "/modifyMyCom", method = RequestMethod.GET)
-	// 사장 - 회사정보수정
-	public String mypageModifyMyComSuccessGo(@RequestParam int companyCode, @RequestParam String companyName, @RequestParam String companyTel, 
-											@RequestParam int holidayComm, @RequestParam int nightComm, Model model) {
+		model.addAttribute("PopUp", 1);
+		return "/myStore/myCompany"; 			//업데이트끝나고 회사보는 페이지로
+	}
+	
+	@RequestMapping(value = "/modifyMyCom", params="delete", method = RequestMethod.POST)
+	// 사장 - 회사정보삭제
+	public String mypageDeleteMyComSuccessGo(@ModelAttribute("myCom") Company myCom,
+			Model model, HttpSession session) {
+		logger.trace("삭제버튼눌럿어!!!!!!");
+		//시간표>companyPerson 삭제> 메세지남기기>회사삭제
+		//회사지울꺼니깐 회사코드에걸린 시간표 다지우고
+		tService.deleteTimeTableByCompanyCode(myCom.getCompanyCode());
+		logger.trace("시간표지움!!!!!!!!!!!!!");
+		//회사코드에걸린 회사원가져오고
+		List<CompanyPerson> cpList = cpService.selectByCompanyCode(myCom.getCompanyCode());
+		logger.trace("회사원들은????!!!!"+cpList);
+		Message message = new Message();
+		Users loginUser = (Users) session.getAttribute("addUser");
+		message.setCompanyCode(1);					//messageControl회사 넣어야함!!
+		message.setUserId(loginUser.getUserId());
+		message.setMessageContent("회사 삭제알림");
+		message.setFlag(-1); 
+		//회사삭제 메세지날리고 회사원지우고
+		for(int i = 0; i<cpList.size(); i++){
+			message.setReceiverId(cpList.get(i).getUserId());
+			mService.insertMessage(message); 
+			
+			cpService.deleteCompanyPersonByUserId(cpList.get(i).getUserId());
+		}
+		//회사코드에걸린 메세지도지우고
+		mService.deleteMessageByCompanyCode(myCom.getCompanyCode());
+		//회사지우기
+		int result = service.deleteCompanyByCompanyCode(myCom.getCompanyCode());
 		
-		/*Company company = new Company();
-		company.setCompanyCode(companyCode);
-		company.setCompanyName(companyName);
-		company.setCompanyTel(companyTel);
-		company.setHolidayComm(holidayComm);
-		company.setNightComm(nightComm);
-		int result = service.updateCompany(myCom);
-		logger.trace("회사정보 업데이트 결과!!  "+result);*/
-		return "redirect:/myCompany"; 			//업데이트끝나고 회사보는 페이지로
+		logger.trace("회사지우기끝~~~!!!!"+result);
+		
+		return "/myStore/deleteCompany"; 		
 	}
 	
 	/* 회사 등록과 동시에 자신 등록(사장입장) */

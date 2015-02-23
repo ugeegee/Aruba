@@ -60,5 +60,10 @@ public class CompanyDaoImpl implements CompanyDao {
 		}
 		return result;
 	}
+	@Override
+	public int deleteCompanyByCompanyCode(int companyCode) {
+		String stmt = namespace + "deleteCompanyByCompanyCode";
+		return sqlSession.delete(stmt, companyCode);
+	}
 	
 }

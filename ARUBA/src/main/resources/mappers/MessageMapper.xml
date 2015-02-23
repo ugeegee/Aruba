@@ -27,6 +27,10 @@
 		delete from message where user_id = #{userId}
 	</delete>
 	
+	<delete id="deleteMessageByCompanyCode" parameterType="Integer">
+		delete from message where company_code = #{companyCode}
+	</delete>
+	
 	
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
 	<!-- <insert id = "insertDept" parameterType = "Department">

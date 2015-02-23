@@ -66,6 +66,10 @@
 		delete from time_table where member_id =#{memberId} 
 	</delete>
 	
+	<delete id="deleteTimeTableByCompanyCode" parameterType="Integer">
+		delete from time_table where company_code =#{companyCode} 
+	</delete>
+	
 	<!--
 	
 	<select id = "selectCompanyByCompanyCode" resultType="Company" parameterType="Integer">

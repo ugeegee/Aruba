@@ -78,4 +78,10 @@ public class TimeTableDaoImpl implements TimeTableDao {
 		String stmt = namespace + "selectCountByRuntime";
 		return sqlSession.selectOne(stmt, runtimesalary);
 	}
+
+	@Override
+	public int deleteTimeTableByCompanyCode(int companyCode) {
+		String stmt = namespace + "deleteTimeTableByCompanyCode";
+		return sqlSession.delete(stmt, companyCode);
+	}
 }
