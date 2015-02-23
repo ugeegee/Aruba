@@ -9,12 +9,6 @@
 <html>
 <head>
 
-<style>
-label.error {
-	color: red;
-	/* font-style: italic */
-}
-</style>
 
 <meta charset="utf-8">
 
@@ -87,32 +81,34 @@ label.error {
 	color: red;
 	/* font-style: italic */
 }
+
+.checkid{
+	padding-top:0px;
+	text-align: center;
+}
+
+.emerald2{
+	background-color: #272B30;
+	padding: 20px 0;
+	color: #fff;
+}
+
 </style>
 </head>
-<body>
-	
-
-	<section id="title" class="emerald">
+<body class="checkid">
+	<section id="title" class="emerald2">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Login</h1>
-					<p>로그인</p>
-				</div>
-				<div class="col-sm-6">
-					<ul class="breadcrumb pull-right">
-						<li>Home</li>
-						<li class="active">Login</li>
-					</ul>
+					<h2>아이디 중복 확인</h2>
+					<p>아이디를 사용하시려면 아래에 사용하실 아이디를 입력하고 중복확인을 누르세요.</p>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!--/#title-->
 	
-	<h3>아이디중복확인</h3>
-	
-	
+	<br>
+	<br>
 	<c:if test="${result =='First' }">
 		<c:url value="/checkId" var="url" />
 		<form class="center" role="form" id="inputUserId" action="${url }">
@@ -130,13 +126,26 @@ label.error {
 	
 	
 	<c:if test="${result =='OK' }">
-		${availableId} 사용가능합니다<br><br><br>
-		사용하시겠습니까? <button id="useIdBtn" class="btn btn-success btn-md btn-block">사용</button><br><br>
+		<fieldset class="registration-form">
+			<div class="center">
+			<div class="form-group">
+				사용가능한 아이디입니다.<br>
+				${availableId}로 하시겠습니까?
+			</div>
+			<div class="form-group">
+				<button id="useIdBtn" class="btn btn-success btn-md btn-block">사용</button>
+			</div>
+			</div>
+		</fieldset>
 		
-		다시 검색하기<br>
+		<hr>
+		
 		<c:url value="/checkId" var="url" />
 		<form class="center" role="form" id="inputUserId" action="${url }">
 			<fieldset class="registration-form">
+				<div class="form-group">
+					다른 아이디 검색하기
+				</div>
 				<div class="form-group">
 					<input type="text" id="userId" name="userId" placeholder="ID"
 						class="form-control">
@@ -150,12 +159,20 @@ label.error {
 
 
 	<c:if test="${result =='NO' }">
-		${availableId} 사용불가능합니다<br>
-
-		다시 검색하기<br>
+		<div class="center">
+		<fieldset class="registration-form">
+			<div class="form-group">
+				${availableId}은 이미 존재하는 아이디입니다.<br>
+			</div>
+		</fieldset>
+		</div>
+		<hr>
 		<c:url value="/checkId" var="url" />
 		<form class="center" role="form" id="inputUserId" action="${url }">
 			<fieldset class="registration-form">
+				<div class="form-group">
+					다른 아이디 검색하기
+				</div>
 				<div class="form-group">
 					<input type="text" id="userId" name="userId" placeholder="ID"
 						class="form-control">

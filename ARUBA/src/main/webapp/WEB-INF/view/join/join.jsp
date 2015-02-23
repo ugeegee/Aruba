@@ -70,7 +70,7 @@ label.error {
 			alert("팝업창이 나올 것!!");
 					var url = "<%=request.getContextPath()%>/checkIdPopUp"; 
 					<%-- var url = "<%=request.getContextPath() %>/checkId?userId="+$("#userId").val(); --%>
-					window.open(url, "_blank", "width=450, height=600, toolbar=no, menubar=no, resizable=no");
+					window.open(url, "_blank", "width=500, height=550, toolbar=no, menubar=no, resizable=no");
 		});
 
 		$("#joinForm").validate({
