@@ -11,9 +11,8 @@
 <head>
 
 <style>
-label.error {
-	color: red;
-	/* font-style: italic */
+.temp td {
+	border: 1px solid black;
 }
 </style>
 
@@ -48,92 +47,7 @@ label.error {
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 
 <script>
-$(document).ready(function() {
 	
-	if(<%=request.getAttribute("PopUp")%> == 1){
-		alert("회사정보가 수정됬습니다.");
-	}
-	
-	$("#modifyComForm").validate({
-		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
-		/* submitHandler : function() {
-			var f = confirm("글을 등록하시겠습니까?");
-			if (f) {
-				return true;
-			} else {
-				return false;
-			}
-		}, */
-		//규칙
-		rules : {
-			companyName : {
-				required : true,
-				minlength : 1,
-				maxlength : 6
-			},
-			companyTel : {
-				required : true,
-				minlength: 9, 
-				maxlength: 12, 
-				digits : true 
-			},
-
-			holidayComm : {
-				required : true,
-				minlength: 1, 
-				maxlength: 3, 
-				digits : true 
-			},
-			nightComm : {
-				required : true,
-				minlength: 1, 
-				maxlength: 3, 
-				digits : true 
-			},
-			nowPass : {
-				required : true,
-				equalTo : "#ownerPass"
-			}
-		},
-		//규칙체크 실패시 출력될 메시지
-		messages : {
-			companyName : {
-				required : "필수 입력사항 입니다.",
-				minlength : "최소 {0}글자이상이어야 합니다",
-				maxlength : "최대 {0}글자이하이어야 합니다"
-			},
-			companyTel : {
-				required : "필수 입력사항 입니다.",
-				minlength : "최소 {0}글자이상이어야 합니다",
-				maxlength : "최대 {0}글자이하이어야 합니다",
-				digits : "전화번호는 숫자만 입력해주세요."
-			},
-			
-			holidayComm : {
-				required : "필수 입력사항 입니다.",
-				minlength : "최소 {0}글자이상이어야 합니다",
-				maxlength : "최대 {0}글자이하이어야 합니다",
-				digits : "휴일수당은 숫자만 입력해주세요."
-			},
-			nightComm : {
-				required : "필수 입력사항 입니다.",
-				minlength : "최소 {0}글자이상이어야 합니다",
-				maxlength : "최대 {0}글자이하이어야 합니다",
-				digits : "야근수당은 숫자만 입력해주세요."
-			},
-			nowPass : {
-				required : "필수 입력사항 입니다.",
-				equalTo : "비밀번호가 불일치합니다"
-			}
-		}
-	});
-
-	var modifyComForm = $("#modifyComForm");
-	for ( var item in modifyComForm) {
-		console.log(item + " : " + modifyComForm[item]);
-	}
-	
-});
 </script>
 </head>
 <body>
@@ -225,7 +139,7 @@ $(document).ready(function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Store Control</h1>
+					<h1>Delete your company</h1>
 					<p>Please input your login information</p>
 				</div>
 				<div class="col-sm-6">
@@ -239,45 +153,16 @@ $(document).ready(function() {
 	</section>
 	<!--/#title-->
 
- 	<section id="StoreControl" class="container">
- 		 <c:url value="/modifyMyCom" var="action" />
-			<form:form modelAttribute="myCom" mehtod="post" action="${action }" id="modifyComForm">
-			<table>
-			<tr>
-				<td><label>Code</label></td>
-				<td><form:hidden path="companyCode" name="companyCode" id="companyCode"/></td>
-			</tr>
-			<tr>
-				<td><label>OwnerPass</label></td>
-				<td><input type="hidden" name="ownerPass" id="ownerPass" value=${ownerPass} /></td>
-			</tr>
-			<tr>
-			<tr>
-				<td><label>회사명</label></td>
-				<td><form:input path="companyName" name="companyName" id="companyName"/></td>
-			</tr>		
-			<tr>
-				<td><label>회사전화번호</label></td>
-				<td><form:input path="companyTel" name="companyTel" id="companyTel" /></td>
-			</tr>
-			<tr>
-				<td><label>주말수당(%)</label></td>
-				<td><form:input path="holidayComm" name="holidayComm" id="holidayComm"/></td>
-			</tr>			
-			<tr>
-				<td><label>야근수당(%)</label></td>
-				<td> <form:input path="nightComm" name="nightComm" id="nightComm"/></td>
-			</tr>		
-			<tr>
-				<td><label>비밀번호</label></td>
-				<td><input type="text" name="nowPass" id="nowPass" /></td>
-			</tr>
-				</table>
-					<input type="submit" name="modify" value="수정"/>
-					<input type="submit" name="delete" value="삭제"/>
-			</form:form>
-				
-    </section>
+	<section id="deleteCompanySuccess" class="container">
+		<div align="center" style="margin-bottom: 50px; margin-top:30px;">
+		<h2><c:out value="${addUser.userName }" />님.<br>
+		회사에 대한 정보는 모두 삭제되었으며<br>
+		직원이 존재했을시 회사 삭제메세제가 보내졌습니다.<br>
+		Store Control에서 새로 회사추가가 가능합니다. 또 이용하세여~~</h2>
+		<c:url value="/index" var="url"></c:url>
+		<a href="${url }">메인으로</a>
+		</div>
+	</section>
 
 	<section id="bottom" class="wet-asphalt">
 		<div class="container">

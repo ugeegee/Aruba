@@ -7,6 +7,7 @@ import com.bmj.entity.TimeTable;
 public interface TimeTableService {
 	int insertTimeTable(TimeTable timetable);
 	int deleteTimeTableByMemberId(int memberId);
+	int deleteTimeTableByCompanyCode(int companyCode);
 	List<TimeTable> selectByCompanyCode(int CompanyCode);
 	List<TimeTable> selectByMemberId(int memberId);
 	List<Stats> selectStatsByMemberId(int memberId);

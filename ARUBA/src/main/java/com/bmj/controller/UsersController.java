@@ -109,6 +109,11 @@ public class UsersController {
 		return "/join/checkId";
 	}
 
+	@RequestMapping(value = "/checkDeleteComPopUp", method = RequestMethod.GET)
+	public String checkDeleteComPopUpGo(Model model) {
+		return "/myStore/checkDeleteCom";
+	}
+
 	@RequestMapping(value = "/checkId", method = RequestMethod.GET)
 	public String checkIdGo(@RequestParam String userId, Model model) {
 		int result = -1;
@@ -217,12 +222,12 @@ public class UsersController {
 		modifyUser.setAnswer(answer);
 
 		logger.trace("수정하기로한 정보!!!" + modifyUser);
-	
+
 		service.updateUser(modifyUser); // 디비 수정!!
-		
+
 		modifyUser = service.loginUser(modifyUser); // 수정한 애로 로그인시켜서
 		model.addAttribute("addUser", modifyUser); // addUser도 수정된 애로 바꾸고
-		
+
 		model.addAttribute("PopUp", 1);
 
 		return "mypage/myInfo";
@@ -248,9 +253,9 @@ public class UsersController {
 		 * "redirect:/modifyEmployerPass"; } else { viewPath =
 		 * "redirect:/modifyEmployeePass"; }
 		 */
-		
+
 		model.addAttribute("PopUp", 1);
-		
+
 		return "/mypage/modifyPass";
 	}
 
@@ -264,28 +269,26 @@ public class UsersController {
 		leaveUser.setUserId(loginUser.getUserId()); // 아이디만 현재 로그인한 회원으로 가져오기
 		leaveUser.setPassword(nowPassword);
 
-			
-		//////직원탈퇴시-삭제 (댓글>게시글)>시간표>companyPerson>메세지>users
-		List<Integer> memberId= cpService.selectMemberIdListbyUserId(leaveUser.getUserId());
-		logger.trace("가져온 멤버아이디!!!!! "+memberId);
-		//시간표지우고(최대 3개인 직장 시간표 다지우기)
-		for(int i = 0; i<memberId.size(); i++){
+		// ////직원탈퇴시-삭제 (댓글>게시글)>시간표>companyPerson>메세지>users
+		List<Integer> memberId = cpService.selectMemberIdListbyUserId(leaveUser
+				.getUserId());
+		logger.trace("가져온 멤버아이디!!!!! " + memberId);
+		// 시간표지우고(최대 3개인 직장 시간표 다지우기)
+		for (int i = 0; i < memberId.size(); i++) {
 			tService.deleteTimeTableByMemberId(memberId.get(i).intValue());
 			logger.trace("시간표지움~~~!!!!");
 		}
-		//CP지우고
+		// CP지우고
 		cpService.deleteCompanyPersonByUserId(leaveUser.getUserId());
 		logger.trace("CP지움~~~!!!!");
-		//메세지지우고
+		// 메세지지우고
 		mService.deleteMessageByUserId(leaveUser.getUserId());
 		logger.trace("메세지지움~~~!!!!");
-		//USER지우고
+		// USER지우고
 		service.deleteUser(leaveUser);
-		
-		
-		
+
 		sessionStatus.setComplete();
-		
+
 		return "/mypage/goodBye";
 	}
 
@@ -324,35 +327,38 @@ public class UsersController {
 	@RequestMapping(value = "/salary")
 	// 알바 mypage 메뉴에서 Salary(월급관리)
 	public String mypageSalaryGo(Model model, HttpSession session) {
-		Users loginUser = (Users)session.getAttribute("addUser");
+		Users loginUser = (Users) session.getAttribute("addUser");
 		logger.trace("수업ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" + loginUser);
-		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
+				.getUserId());
 		int first = -1;
 		logger.trace("수업 CodeList : " + codeList);
-		for(int i = 0; i < codeList.size(); i++){
-			model.addAttribute("code"+i, codeList.get(i).intValue());
+		for (int i = 0; i < codeList.size(); i++) {
+			model.addAttribute("code" + i, codeList.get(i).intValue());
 			first = codeList.get(0).intValue();
 		}
 
-		//myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
+		// myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
 		model.addAttribute("nowCode", first);
 		model.addAttribute("oneTime", true);
-		
+
 		return "/myJob/salary";
 	}
-	
+
 	@RequestMapping(value = "/selectChart", method = RequestMethod.GET)
-	public String selectChartGo(@RequestParam int companyCode, HttpSession session, Model model) {
-		
+	public String selectChartGo(@RequestParam int companyCode,
+			HttpSession session, Model model) {
+
 		logger.trace("최대3개회사중 어떤거!!!!" + companyCode);
-		
-		Users loginUser = (Users)session.getAttribute("addUser");
-		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
-		for(int i = 0; i < codeList.size(); i++){
-			model.addAttribute("code"+i, codeList.get(i).intValue());
+
+		Users loginUser = (Users) session.getAttribute("addUser");
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
+				.getUserId());
+		for (int i = 0; i < codeList.size(); i++) {
+			model.addAttribute("code" + i, codeList.get(i).intValue());
 		}
-		
-		model.addAttribute("nowCode",companyCode);
+
+		model.addAttribute("nowCode", companyCode);
 		return "/myJob/salary";
 	}
 
@@ -397,7 +403,9 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/modifySchedule")
-	public String modifyScheduleGo(Model model, HttpSession session) { // 시간표 - 시간표 수정
+	public String modifyScheduleGo(Model model, HttpSession session) { // 시간표 -
+																		// 시간표
+																		// 수정
 		Users user = (Users) session.getAttribute("addUser");
 		String userId = user.getUserId();
 		logger.trace("수업 UserId : " + user);
@@ -430,55 +438,64 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/allSchedule")
-	public String allScheduleGo(Model model, HttpSession session) { // 시간표 - 전체시간표 조회로 이동
-		Users loginUser = (Users)session.getAttribute("addUser");
-		CompanyPerson companyperson = cpService.selectCompanyPersonByUserId(loginUser.getUserId());
+	public String allScheduleGo(Model model, HttpSession session) { // 시간표 -
+																	// 전체시간표 조회로
+																	// 이동
+		Users loginUser = (Users) session.getAttribute("addUser");
+		CompanyPerson companyperson = cpService
+				.selectCompanyPersonByUserId(loginUser.getUserId());
 		model.addAttribute("code", companyperson.getCompanyCode());
 		return "/schedule/employer/allSchedule";
 	}
 
 	// ////////////알바 시간표 메뉴
 	@RequestMapping(value = "/mySchedule")
-	public String myScheduleGo(HttpSession session, Model model) { // 시간표 - 내시간표 조회(직장별) --- > 일단 직장 1개...!
-		Users loginUser = (Users)session.getAttribute("addUser");
+	public String myScheduleGo(HttpSession session, Model model) { // 시간표 - 내시간표
+																	// 조회(직장별)
+																	// --- > 일단
+																	// 직장 1개...!
+		Users loginUser = (Users) session.getAttribute("addUser");
 		logger.trace("수업ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" + loginUser);
-		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
+				.getUserId());
 		int first = -1;
 		logger.trace("수업 CodeList : " + codeList);
-		for(int i = 0; i < codeList.size(); i++){
-			model.addAttribute("code"+i, codeList.get(i).intValue());
+		for (int i = 0; i < codeList.size(); i++) {
+			model.addAttribute("code" + i, codeList.get(i).intValue());
 			first = codeList.get(0).intValue();
 		}
 
-		//myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
+		// myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
 		model.addAttribute("nowCode", first);
 		model.addAttribute("oneTime", true);
-		
-		return "/schedule/employee/mySchedule";
-	}
-	
-	@RequestMapping(value = "/selectSchedule", method = RequestMethod.GET)
-	public String selectScheduleGo(@RequestParam int companyCode, HttpSession session, Model model) {
-		
-		logger.trace("최대3개회사중 어떤거!!!!" + companyCode);
-		
-		Users loginUser = (Users)session.getAttribute("addUser");
-		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
-		for(int i = 0; i < codeList.size(); i++){
-			model.addAttribute("code"+i, codeList.get(i).intValue());
-		}
-		
-		model.addAttribute("nowCode",companyCode);
+
 		return "/schedule/employee/mySchedule";
 	}
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	@RequestMapping(value = "/selectSchedule", method = RequestMethod.GET)
+	public String selectScheduleGo(@RequestParam int companyCode,
+			HttpSession session, Model model) {
+
+		logger.trace("최대3개회사중 어떤거!!!!" + companyCode);
+
+		Users loginUser = (Users) session.getAttribute("addUser");
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
+				.getUserId());
+		for (int i = 0; i < codeList.size(); i++) {
+			model.addAttribute("code" + i, codeList.get(i).intValue());
+		}
+
+		model.addAttribute("nowCode", companyCode);
+		return "/schedule/employee/mySchedule";
+	}
+
+	// ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@ExceptionHandler
 	public String LoginFail(LoginFailException e, HttpServletRequest request) {
 		logger.trace("로그인실패했으니 로그인페이지 못벗어남!!!!");
 		request.setAttribute("PopUp", 1);
-		
+
 		return "/login/login";
 	}
 

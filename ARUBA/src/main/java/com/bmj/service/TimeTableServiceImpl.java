@@ -83,4 +83,10 @@ public class TimeTableServiceImpl implements TimeTableService {
 		return result;
 	}
 
+	@Override
+	public int deleteTimeTableByCompanyCode(int companyCode) {
+		int result = dao.deleteTimeTableByCompanyCode(companyCode);
+		return result;
+	}
+
 }

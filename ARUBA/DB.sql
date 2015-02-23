@@ -264,6 +264,11 @@ END;
 
 /
 
+/*첫회사로 추가해줘야함-삭제메세지 관리*/
+insert into Company(company_name, company_tel, holiday_comm, night_comm) 
+values ('messageControl', '123456789', -100, -100)
+
+/*********************************************************************************/
 
 insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
 values ('park', '123', '123', '박광욱', '010-', 'p@naver.com', '06/08/1987', '사장', '몇살?', '20살');
@@ -292,5 +297,7 @@ insert into company_person(company_code, user_id, salary, hire_date)
 values (1, 'Choi', 5000, '2015-02-12');
 insert into company_person(company_code, user_id, salary, hire_date) 
 values (1, 'Yoo', 6000, '2015-02-12');
+
+
 
 

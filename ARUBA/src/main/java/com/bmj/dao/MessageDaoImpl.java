@@ -46,6 +46,11 @@ public class MessageDaoImpl implements MessageDao {
 		String stmt = namespace + "deleteMessageByUserId";
 		return sqlSession.delete(stmt, userId);
 	}
+	@Override
+	public int deleteMessageByCompanyCode(int companyCode) {
+		String stmt = namespace + "deleteMessageByCompanyCode";
+		return sqlSession.delete(stmt, companyCode);
+	}
 	
 
 }

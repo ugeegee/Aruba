@@ -85,12 +85,15 @@ public class MessageController {
 	// 사장 mypage 메뉴에서 Alerts(쪽지관리)
 	public String mypagAlertsEmployerGo(HttpSession session, Model model) {
 		Users loginUser = (Users) session.getAttribute("addUser"); // 로그인한 사장정보
-		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
+		/*List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
 				.getUserId());
 
 		int ComCode = codeList.get(0).intValue();
 
-		List<Message> myComMessages = mService.selectMessageByComCode(ComCode);
+		List<Message> myComMessages = mService.selectMessageByComCode(ComCode);*/
+		List<Message> myComMessages = mService.selectMessageByUserId(loginUser
+				.getUserId());
+
 		logger.trace("가져온 나의 회사 메세지들!! " + myComMessages);
 		model.addAttribute("myComMessages", myComMessages);
 
