@@ -4,13 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.Reply">
 
-	<resultMap type="Reply" id="ReplyMap">
+<!-- 	<resultMap type="Reply" id="ReplyMap">
 		<id column = "reply_number" jdbcType = "INTEGER" property = "replyNumber"/>
 		<result column = "user_id" jdbcType="VARCHAR" property= "userId"/>
 		<result column = "comment_number" jdbcType="INTEGER" property= "commentNumber"/>
 		<result column = "reply_content" jdbcType="VARCHAR" property= "replyContent"/>
 		<result column = "reg_date" jdbcType="DATE" property="regDate"/>
-	</resultMap> 
+	</resultMap>  -->
 	
 	<insert id="insertReply" parameterType="Reply">
 		insert into Reply(user_id, comment_number, reply_content)
@@ -31,7 +31,7 @@
 		user_id=#{userId}
 	</delete>
 	
-	<select id="selectAllReply" parameterType="INTEGER" resultMap="ReplyMap">
+	<select id="selectAllReply" parameterType="INTEGER" resultType="Reply">
 		select * from Reply where comment_number=(#{commentNumber})
 	</select>
 </mapper>
