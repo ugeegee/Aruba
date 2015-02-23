@@ -112,7 +112,7 @@ public class CompanyController {
 	/* 회사 등록과 동시에 자신 등록(사장입장) */
 	@RequestMapping(value="/registerCompany", method = RequestMethod.POST)
 	public String registerCompanySuccess(@RequestParam String companyName, @RequestParam String companyTel,
-										@RequestParam Float holidayComm, @RequestParam Float nightComm,
+										@RequestParam int holidayComm, @RequestParam int nightComm,
 										HttpSession session) {
 		logger.trace("입력받은 회사정보!!!"+companyName+" "+companyTel+" "+holidayComm+" "+nightComm);
 		Company newCompany = new Company();

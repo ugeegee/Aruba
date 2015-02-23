@@ -25,12 +25,12 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public int insert(Company company) {
 		logger.trace("수업 : 여기는 DaoImpl......!" + company);
-		if(company.getHolidayComm() == null) {
-			company.setHolidayComm(0.0f);
+		if(company.getHolidayComm() == 0) {
+			company.setHolidayComm(0);
 			
 		} 
-		if (company.getNightComm() == null) {
-			company.setNightComm(0.0f);
+		if (company.getNightComm() == 0) {
+			company.setNightComm(0);
 		}
 		logger.trace("수업 : ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ" + company);
 		String stmt = namespace + "insertCompany";

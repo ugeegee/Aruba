@@ -99,7 +99,8 @@ public class TimeTableController {
 		
 			int result = service.insertTimeTable(timetable);
 		}
-		return "schedule/employer/allSchedule";
+		return "redirect:/allSchedule";
+		//return "schedule/employer/allSchedule";
 	}
 	
 	/*모든 스케쥴 조회하기*/
@@ -278,7 +279,12 @@ public class TimeTableController {
 	}
 	
 	@RequestMapping(value="/updateTimeTable")
-	public String updateCalendar(@RequestParam String updateStart, @RequestParam String updateEnd) {
+	public String updateCalendar(@RequestParam String updateStart, @RequestParam String updateEnd, Model model, HttpSession session) {
+		Users loginUser = (Users)session.getAttribute("addUser");
+		CompanyPerson companyperson = service2.selectCompanyPersonByUserId(loginUser.getUserId());
+		model.addAttribute("code", companyperson.getCompanyCode());
+		
+		Calendar operationTime = Calendar.getInstance();
 		// 수정 시작 시간.
 		logger.trace("수업 Start : " + updateStart);
 		// 수정 끝난 시간.
@@ -300,13 +306,23 @@ public class TimeTableController {
 		TimeTable timetable = new TimeTable();
 		com.google.gson.internal.LinkedTreeMap map = (com.google.gson.internal.LinkedTreeMap)start.get(i);
 		com.google.gson.internal.LinkedTreeMap map2 = (com.google.gson.internal.LinkedTreeMap)end.get(i);
+		logger.trace("수업 MAP" + map);
+		logger.trace("수업 MAP2" + map2);
 		int memberId = Integer.parseInt(map.get("title").toString());
 		try {
 			compareStart = formatter.parse(map.get("start").toString());
+			logger.trace("수업 :::::::::: compareStart" + compareStart);
 		} catch (java.text.ParseException e1) {
 		// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		// 비교 시간 저장....
+		operationTime.setTime(compareStart);
+		int year = operationTime.get(Calendar.YEAR);
+		int month = operationTime.get(Calendar.MONTH)+1;
+		int day = operationTime.get(Calendar.DATE);
+		int hour = operationTime.get(Calendar.HOUR_OF_DAY);
 		timetable.setMemberId(memberId);
 		timetable.setWorkingStart(compareStart);
 		logger.trace("수업 TimeTable : " + timetable);
@@ -316,7 +332,10 @@ public class TimeTableController {
 		int timekey = 0;
 		// TimeKey 추출. 
 		for(int k = 0; k < time.size(); k++) {
-			if(time.get(k).getWorkingStart().compareTo(compareStart) == 1) {
+			operationTime.setTime(time.get(k).getWorkingStart());
+			//if(time.get(k).getWorkingStart().compareTo(compareStart) == 1) {
+			if(operationTime.get(Calendar.YEAR) == year && operationTime.get(Calendar.MONTH)+1 == month 
+					&& operationTime.get(Calendar.DATE) == day && operationTime.get(Calendar.HOUR_OF_DAY) == hour){
 				timekey = time.get(k).getTimeKey();
 			}
 		}

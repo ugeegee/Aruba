@@ -66,6 +66,9 @@ $(document).ready(function() {
 	var outArr = new Array();
 	var inArr = new Array();
 	var e = new Array();
+	
+
+	
 	$.ajax({
 		url: "<%=request.getContextPath()%>/updateAjax",
 		success: function(result) {
@@ -77,6 +80,28 @@ $(document).ready(function() {
 		for (var a in e) {
 			outArr.push({title:e[a].title, start:e[a].start, end: e[a].end,color:e[a].color});				
 		}
+		/* initialize the external events
+		-----------------------------------------------------------------*/
+
+		$('#external-events .fc-event').each(function() {
+
+			// store data so the calendar knows to render an event upon drop
+			$(this).data('event', {
+				title : $.trim($(this).text()), // use the element's text as the event title
+				stick : true
+			// maintain when user navigates (see docs on the renderEvent method)
+			});
+
+			// make the event draggable using jQuery UI
+			$(this).draggable({
+				zIndex : 999,
+				revert : true, // will cause the event to go back to its
+				revertDuration : 0
+			//  original position after the drag
+			});
+
+		});
+		
 		$('#calendar').fullCalendar({
 			//defaultDate: '2015-02-12',
 			header: {
@@ -223,8 +248,47 @@ $(document).ready(function() {
 
 </script>
 <style>
+#wrap {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+#external-events {
+	float: left;
+	width: 150px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	background: #eee;
+	text-align: left;
+}
+
+#external-events h4 {
+	font-size: 16px;
+	margin-top: 0;
+	padding-top: 1em;
+}
+
+#external-events .fc-event {
+	margin: 10px 0;
+	cursor: pointer;
+	background-color: navy;
+	border: 1px solid white;
+	/* color: yellow; event의 글씨 */
+}
+
+#external-events p {
+	margin: 1.5em 0;
+	font-size: 11px;
+	color: red;
+}
+
+#external-events p input {
+	margin: 0;
+	vertical-align: middle;
+}
 
 #calendar {
+	float: right;
 	max-width: 900px;
 	margin: 0 auto;
 }
@@ -335,8 +399,28 @@ $(document).ready(function() {
 	<!--/#title-->
 
 	<section id="modifySchedule" class="container">
-		<br>
+		<div id='wrap'>
+				<div id='external-events'>
+				<h4>Company!</h4>
+				<!-- <table border = "1"> -->
+				<c:forEach items="${employees}" var="employee">
+					<!-- <tr> -->
+					<!-- <td> -->
+					<div class='fc-event'>${employee.userId}</div>
+					<!-- </td> -->
+					<!-- </tr> -->
+				</c:forEach>
+				<!-- </table> -->
+				<p>
+					<input type='checkbox' id='drop-remove' /> <label
+						for='drop-remove'>remove after drop</label>
+				</p>
+			</div>
 	<div id='calendar'></div>
+	<br>
+			<div style='clear: both'></div>
+
+		</div>
 	<div id = 'update'><button id = "updatebutton">수정</button></div>
 	</section>
 

@@ -224,6 +224,8 @@
 #external-events .fc-event {
 	margin: 10px 0;
 	cursor: pointer;
+	background-color: navy;
+	/* border: 1px solid white; */
 }
 
 #external-events p {
