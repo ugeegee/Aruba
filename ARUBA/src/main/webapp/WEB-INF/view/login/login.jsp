@@ -48,7 +48,11 @@ label.error {
 
 <script>
 	$(document).ready(function() {
-
+		
+		if(<%=request.getAttribute("PopUp")%> == 1){
+			alert("아이디 혹은 비밀번호가 틀렸습니다.");
+		}
+		
 		$("#loginForm").validate({
 			//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 			/* submitHandler : function() {

@@ -56,9 +56,9 @@ label.error {
 
 <script>
 	$(document).ready(function() {
-		alert("출력!!!" + <%=request.getAttribute("PopUp")%>);
+	
 		if(<%=request.getAttribute("PopUp")%> == 1){
-			alert("1입니다~");
+			alert("회원정보가 수정되었습니다.");
 		}
 		
 		var dp = {
