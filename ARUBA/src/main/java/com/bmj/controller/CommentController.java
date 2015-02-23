@@ -52,7 +52,8 @@ public class CommentController {
 		model.addAttribute("addComment", new Comment());
 		List<Comment> commentList = cservice.selectAllNoticeComment();
 		model.addAttribute("commentList", commentList);
-		return "/board/noticeBoard";
+		/*return "/board/noticeBoard";*/
+		return "/board/noticeTest";
 	}
 	
 	@RequestMapping(value = "/free")
