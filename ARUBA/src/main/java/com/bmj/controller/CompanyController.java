@@ -3,6 +3,7 @@ package com.bmj.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,7 @@ import com.bmj.entity.Company;
 import com.bmj.entity.CompanyPerson;
 import com.bmj.entity.Message;
 import com.bmj.entity.Users;
+import com.bmj.exception.RegisterJobException;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.CompanyService;
 
@@ -143,6 +146,8 @@ public class CompanyController {
 		}
 		logger.trace("가져온 나의 회사 정보!! " + comList);
 		model.addAttribute("myCompanies", comList);
+		
+		model.addAttribute("PopUp", 0);
 		
 		return "/myJob/myJob";
 	}

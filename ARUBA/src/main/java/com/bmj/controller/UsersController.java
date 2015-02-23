@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -469,15 +470,15 @@ public class UsersController {
 		
 		model.addAttribute("nowCode",companyCode);
 		return "/schedule/employee/mySchedule";
-		// return "redirect:/display";
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@ExceptionHandler
-	public String LoginFail(LoginFailException e, Model model) {
+	public String LoginFail(LoginFailException e, HttpServletRequest request) {
 		logger.trace("로그인실패했으니 로그인페이지 못벗어남!!!!");
-		model.addAttribute("PopUp", 1);
+		request.setAttribute("PopUp", 1);
+		
 		return "/login/login";
 	}
 
