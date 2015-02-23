@@ -272,7 +272,7 @@ label.error {
                     <input type="password" id="password" name="password" placeholder="Password" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password2" name="password2" placeholder="Password Check" class="form-control">
+                    <input type="password" id="password2" name="password2" placeholder="Password(again)" class="form-control">
                 </div>
                 <div class="form-group">
                     <input type="text" id="userName" name="userName" placeholder="Name" class="form-control">
