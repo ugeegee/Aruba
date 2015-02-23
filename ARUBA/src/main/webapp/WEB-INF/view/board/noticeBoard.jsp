@@ -227,25 +227,23 @@ $(document).ready(function() {
 			</c:forEach>
 		</table>
 	</div>
-	
+	<br>
+	<br>
+	<div id="comment-form">
 	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}">
-				<hr>
-				<table>
-					<tr>
-						<td>게시글 작성</td>
-				<!-- 	<td>
-							<input type="radio" id="flag" value="1" name="flag">공지게시판
-							<input type="radio" id="flag" value="2" name="flag">자유게시판
-							<input type="radio" id="flag" value="3" name="flag">신고게시판
-							<label for="flag" class="error"></label>
-						</td>  -->
-					</tr>
-				</table><br>
- 					<form:textarea path="commentContent" rows="10" cols="130"></form:textarea><br><br>
-	 					<input type="button" id="proceed" name="proceed" value="글쓰기"/>
-						<input type="reset" value="다시쓰기"/>
-					</form:form> 
+			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
+				<h3>게시글 작성</h3>	
+				<br>
+				<div class="form-group">
+                 	<div class="col-sm-12">
+                    	<form:textarea path="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
+                    </div>
+                </div>
+					<input type="reset" value="다시쓰기" class="btn btn-success btn-md write"/>
+					<input type="button" id="proceed" name="proceed" value="글쓰기" class="btn btn-success btn-md write"/>
+					
+			</form:form> 
+	</div>
     </section>
 
 	<section id="bottom" class="wet-asphalt">
