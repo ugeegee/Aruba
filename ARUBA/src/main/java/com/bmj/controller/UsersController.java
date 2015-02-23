@@ -398,6 +398,7 @@ public class UsersController {
 		logger.trace("최대3개회사중 어떤거!!!!" + companyCode);
 		model.addAttribute("nowCode",companyCode);
 		return "/schedule/employee/mySchedule";
+		// return "redirect:/display";
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -13,4 +13,5 @@ public interface TimeTableService {
 	List<Stats> selectStatsByCompanyCode(int companyCode);
 	int selectKeybyTime(TimeTable timetable);
 	int updateTimeTable(TimeTable updateTable);
+	double selectCountByRuntime(TimeTable runtimesalary);
 }

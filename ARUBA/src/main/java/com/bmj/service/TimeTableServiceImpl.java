@@ -1,6 +1,5 @@
 package com.bmj.service;
 
-
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -75,6 +74,12 @@ public class TimeTableServiceImpl implements TimeTableService {
 	@Override
 	public int deleteTimeTableByMemberId(int memberId) {
 		int result = dao.deleteTimeTableByMemberId(memberId);
+		return result;
+	}
+
+	@Override
+	public double selectCountByRuntime(TimeTable runtimesalary) {
+		double result = dao.selectCountByRuntime(runtimesalary);
 		return result;
 	}
 

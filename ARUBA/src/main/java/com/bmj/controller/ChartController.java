@@ -1,7 +1,6 @@
 package com.bmj.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -41,7 +40,6 @@ public class ChartController {
 	// 개인 급여 조회~~
 	@RequestMapping(value = "/mychart")
 	public String goChartAlba() {
-		Calendar c1 = Calendar.getInstance();
 		logger.trace("수업 : Chart~~~~~~~~~~~~~~!");
 		return "chart/myChart";
 	}
@@ -49,14 +47,15 @@ public class ChartController {
 	// 직원 급여 조회~~
 	@RequestMapping(value = "/companychart")
 	public String goChartcompany() {
-		Calendar c1 = Calendar.getInstance();
 		logger.trace("수업 : CompanyChart~~~~~~~~~~~~~~!");
 		return "chart/CompanyChart";
 	}
 	
+	/*개인  월급 보기*/
+	/*실시간 월급 조회 기능 추가*/
 	@RequestMapping(value = "/ajaxChart")
 	public @ResponseBody String ajaxReceive(Model model, HttpSession session) {
-		Calendar workingDate = Calendar.getInstance();
+		//Calendar workingDate = Calendar.getInstance();
 		Users user = (Users)session.getAttribute("addUser");
 		logger.trace("수업 user : " + user);
 		String userId = user.getUserId();

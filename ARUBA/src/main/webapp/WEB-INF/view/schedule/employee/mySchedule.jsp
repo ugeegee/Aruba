@@ -49,15 +49,16 @@
 <!--------------------- fullCalendar --------------------->
 $(document).ready(function() {
 	
-	alert("회사코드는?!!!" + <%=request.getAttribute("nowCode")%>);
+	<%-- alert("회사코드는?!!!" + <%=request.getAttribute("nowCode")%>);
 	alert("출력1" + <%=request.getAttribute("code0")%>);
 	alert("출력2" + <%=request.getAttribute("code1")%>);
-	alert("출력3" + <%=request.getAttribute("code2")%>);
+	alert("출력3" + <%=request.getAttribute("code2")%>); --%>
 	
 	var c = <%=request.getAttribute("nowCode")%>;
 	var c0;
 	var c1;
 	var c2;
+	var companyCode = c0;
 	
 	if( <%=request.getAttribute("code0")%> == null){
 		c0 = -1;
@@ -76,18 +77,22 @@ $(document).ready(function() {
 	$('#Job1').click(function(){
 		alert("Job1누름");
 		alert("c0 = "+c0);
+		companyCode = c0;
 		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c0;
+		c0 =  <%=request.getAttribute("nowCode")%>;
 		$(location).attr('href',url);
 	});
 	$('#Job2').click(function(){
 		alert("Job2누름");
 		alert("c1 = "+c1);
+		companyCode = c1;
 		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c1;
 		$(location).attr('href',url);
 	});
 	$('#Job3').click(function(){
 		alert("Job3누름");
 		alert("c2 = "+c2);
+		companyCode = c2;
 		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c2;
 		$(location).attr('href',url);
 	});
@@ -104,7 +109,7 @@ $(document).ready(function() {
 		eventLimit: true, // allow "more" link when too many events
 		events: function(start, end, timezone, callback) {
 			$.ajax({
-				url: "<%=request.getContextPath()%>/display",
+				url: "<%=request.getContextPath()%>/display?companyCode="+companyCode,
 				success: function(result) {
 					var jobj = JSON.parse(result);
 					var e = jobj["event"];
