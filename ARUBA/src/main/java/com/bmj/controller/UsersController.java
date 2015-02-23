@@ -396,7 +396,35 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/modifySchedule")
-	public String modifyScheduleGo() { // 시간표 - 시간표 수정
+	public String modifyScheduleGo(Model model, HttpSession session) { // 시간표 - 시간표 수정
+		Users user = (Users) session.getAttribute("addUser");
+		String userId = user.getUserId();
+		logger.trace("수업 UserId : " + user);
+		// 나의 회사 코드 가져오기...!
+		CompanyPerson companyperson = cpService
+				.selectCompanyPersonByUserId(userId);
+		int companyCode = companyperson.getCompanyCode();
+		logger.trace("수업 CompanyCode : " + companyperson.getCompanyCode());
+		// company_person에 가서 직원 아이디 갖고오기!!
+		List<CompanyPerson> result = cpService.selectByCompanyCode(companyCode);
+		logger.trace("수업 List : " + result);
+		// memberId -> userId 찾기
+		/*
+		 * List<String> userIds = new ArrayList<String>(); for(int i = 0; i <
+		 * result.size(); i++) { userIds.add(); }
+		 */
+		// logger.trace("수업 userIds : " + userIds);
+		// userIds.add();
+		for (int i = 0; i < result.size(); i++) {
+			// logger.trace("수업....??" + result.get(i).getUserId());
+			if (result.get(i).getUserId().equals(userId)) {
+				// logger.trace("수업 : 안들어감...?");
+				result.remove(i);
+			}
+		}
+
+		logger.trace("수업 List : " + result);
+		model.addAttribute("employees", result);
 		return "/schedule/employer/modifySchedule";
 	}
 
