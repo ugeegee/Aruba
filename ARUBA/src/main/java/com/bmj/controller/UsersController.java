@@ -320,7 +320,36 @@ public class UsersController {
 
 	@RequestMapping(value = "/salary")
 	// 알바 mypage 메뉴에서 Salary(월급관리)
-	public String mypageSalaryGo() {
+	public String mypageSalaryGo(Model model, HttpSession session) {
+		Users loginUser = (Users)session.getAttribute("addUser");
+		logger.trace("수업ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" + loginUser);
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
+		int first = -1;
+		logger.trace("수업 CodeList : " + codeList);
+		for(int i = 0; i < codeList.size(); i++){
+			model.addAttribute("code"+i, codeList.get(i).intValue());
+			first = codeList.get(0).intValue();
+		}
+
+		//myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
+		model.addAttribute("nowCode", first);
+		model.addAttribute("oneTime", true);
+		
+		return "/myJob/salary";
+	}
+	
+	@RequestMapping(value = "/selectChart", method = RequestMethod.GET)
+	public String selectChartGo(@RequestParam int companyCode, HttpSession session, Model model) {
+		
+		logger.trace("최대3개회사중 어떤거!!!!" + companyCode);
+		
+		Users loginUser = (Users)session.getAttribute("addUser");
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
+		for(int i = 0; i < codeList.size(); i++){
+			model.addAttribute("code"+i, codeList.get(i).intValue());
+		}
+		
+		model.addAttribute("nowCode",companyCode);
 		return "/myJob/salary";
 	}
 
@@ -370,7 +399,10 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/allSchedule")
-	public String allScheduleGo() { // 시간표 - 전체시간표 조회로 이동
+	public String allScheduleGo(Model model, HttpSession session) { // 시간표 - 전체시간표 조회로 이동
+		Users loginUser = (Users)session.getAttribute("addUser");
+		CompanyPerson companyperson = cpService.selectCompanyPersonByUserId(loginUser.getUserId());
+		model.addAttribute("code", companyperson.getCompanyCode());
 		return "/schedule/employer/allSchedule";
 	}
 
@@ -378,9 +410,10 @@ public class UsersController {
 	@RequestMapping(value = "/mySchedule")
 	public String myScheduleGo(HttpSession session, Model model) { // 시간표 - 내시간표 조회(직장별) --- > 일단 직장 1개...!
 		Users loginUser = (Users)session.getAttribute("addUser");
+		logger.trace("수업ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" + loginUser);
 		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
 		int first = -1;
-		
+		logger.trace("수업 CodeList : " + codeList);
 		for(int i = 0; i < codeList.size(); i++){
 			model.addAttribute("code"+i, codeList.get(i).intValue());
 			first = codeList.get(0).intValue();

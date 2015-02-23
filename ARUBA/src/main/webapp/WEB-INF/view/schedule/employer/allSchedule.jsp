@@ -52,7 +52,7 @@ $(document).ready(function() {
 	var inArr = new Array();
 	var e = new Array();
 	$.ajax({
-		url: "<%=request.getContextPath()%>/display",
+		url: "<%=request.getContextPath()%>/display?companyCode=<%=request.getAttribute("code")%>",
 		success: function(result) {
 			var jobj = JSON.parse(result);
 			var e = jobj["event"];

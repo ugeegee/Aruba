@@ -156,10 +156,29 @@ public class TimeTableController {
 	
 	// ajax.....
 	@RequestMapping(value = "/display")
-	public @ResponseBody String ajaxReceive(Model model, HttpSession session) {
+	public @ResponseBody String ajaxReceive(Model model, @RequestParam String companyCode, HttpSession session) {
 		Users user = (Users)session.getAttribute("addUser");
-		CompanyPerson companyperson = service2.selectCompanyPersonByUserId(user.getUserId());
-		logger.trace("수업 : " + companyperson);
+		// 
+		CompanyPerson person = new CompanyPerson();
+		List<CompanyPerson> tempPerson = service2.selectByCompanyCode(Integer.parseInt(companyCode));
+		logger.trace("수업 tempPerson" + tempPerson);
+		CompanyPerson companyperson = new CompanyPerson();
+		for(int i = 0; i < tempPerson.size(); i++) {
+			if(user.getUserId().equals(tempPerson.get(i).getUserId())){
+				companyperson.setCompanyCode(Integer.parseInt(companyCode));
+				companyperson.setHireDate(tempPerson.get(i).getHireDate());
+				companyperson.setMemberId(tempPerson.get(i).getMemberId());
+				companyperson.setSalary(tempPerson.get(i).getSalary());
+				companyperson.setUserId(tempPerson.get(i).getUserId());
+			}
+		}
+		/*person.setUserId(user.getUserId());
+		person.setCompanyCode(Integer.parseInt(companyCode));
+		CompanyPerson companyperson = service2.selectCompanyPersonByPerson(person);*/
+		
+		//
+		//CompanyPerson companyperson = service2.selectCompanyPersonByUserId(user.getUserId());
+		logger.trace("수업 : " + companyperson + ", " + companyCode);
 		TimeTable timetable = new TimeTable();
 		List<TimeTable> lists = null;	// DB에서 Get.!
 		List<SaveTime> list2 = new ArrayList<SaveTime>();	// Server에 보내기!
@@ -167,7 +186,7 @@ public class TimeTableController {
 		// 그리고 우리 회사 코드로 작성된 달력 정보 갖고 오기...!
 		if (user.getGrade().equals("사장")) {
 			// companyCode로 조회해서 직원 모두 시간 가져오기.
-			lists = service.selectByCompanyCode(companyperson.getCompanyCode());
+			lists = service.selectByCompanyCode(Integer.parseInt(companyCode));
 		} else if(user.getGrade().equals("직원")) {
 			// memberId로 조회해서 자신의 모든 시간 가져오기.
 			lists = service.selectByMemberId(companyperson.getMemberId());
