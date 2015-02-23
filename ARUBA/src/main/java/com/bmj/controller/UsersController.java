@@ -408,6 +408,7 @@ public class UsersController {
 		
 		model.addAttribute("nowCode",companyCode);
 		return "/schedule/employee/mySchedule";
+		// return "redirect:/display";
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////

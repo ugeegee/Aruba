@@ -17,6 +17,18 @@
 		select * from time_table where member_id = #{memberId}
 	</select>
 	
+	<!-- <select id = "RuntimeSalary" resultType = "Double" parameterType = "RuntimeSalary">
+		select SUM(working_end-working_start) FROM time_table
+		WHERE to_char(working_date, 'YYYY/MM') >= #{Firstday} and working_date <= #{today}
+		and member_id = {#memberId}
+	</select> -->
+	
+	<!-- <select id = "selectCountByRuntime" resultType = "Double" parameterType = "TimeTable">
+		select SUM(working_end-working_start) as "counts" FROM time_table
+		WHERE to_char(working_date, 'YYYY/MM') = #{to_char(workingDate, 'YYYY/MM')}
+		and member_id = {#memberId}
+	</select> -->
+	
 	<!-- <select id="selectStatsByMemberId" resultType="Stats" parameterType="Integer">
 		select TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", 
 		SUM(TO_NUMBER(SUBSTR(working_end, 12, 2))-TO_NUMBER(SUBSTR(working_start, 12, 2))) as "count" 
