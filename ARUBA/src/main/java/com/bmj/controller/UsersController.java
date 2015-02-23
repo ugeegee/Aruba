@@ -393,10 +393,10 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = "/selectSchedule", method = RequestMethod.GET)
-	public String selectScheduleGo(@RequestParam int companyCode) {
+	public String selectScheduleGo(@RequestParam int companyCode, Model model) {
 		
 		logger.trace("최대3개회사중 어떤거!!!!" + companyCode);
-		
+		model.addAttribute("nowCode",companyCode);
 		return "/schedule/employee/mySchedule";
 	}
 

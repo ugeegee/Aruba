@@ -55,9 +55,23 @@ $(document).ready(function() {
 	alert("출력3" + <%=request.getAttribute("code2")%>);
 	
 	var c = <%=request.getAttribute("nowCode")%>;
-	var c0 = <%=request.getAttribute("code0")%>;
+	var c0;
+	var c1;
+	var c2;
+	
+	if( <%=request.getAttribute("code0")%> == null){
+		c0 = -1;
+	}else c0 = <%=request.getAttribute("code0")%>;
+	if( <%=request.getAttribute("code1")%> == null){
+		c1 = -1;
+	}else c1 = <%=request.getAttribute("code1")%>;
+	if( <%=request.getAttribute("code2")%> == null){
+		c2 = -1;
+	}else c2 = <%=request.getAttribute("code2")%>;
+	
+<%-- 	var c0 = <%=request.getAttribute("code0")%>;
 	var c1 = <%=request.getAttribute("code1")%>;
-	var c2 = <%=request.getAttribute("code2")%>;
+	var c2 = <%=request.getAttribute("code2")%>; --%>
 	
 	$('#Job1').click(function(){
 		alert("Job1누름");
