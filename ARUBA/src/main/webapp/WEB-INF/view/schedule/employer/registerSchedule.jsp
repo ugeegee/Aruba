@@ -243,6 +243,12 @@
 	float: right;
 	width: 900px;
 }
+
+
+.savee{
+	float: right;
+	width: 16.666666666666664%;
+}
 </style>
 </head>
 <body>
@@ -373,9 +379,12 @@
 			<div style='clear: both'></div>
 
 		</div>
-		<div id="save1">
-			<button id="save">save</button>
-			</div>
+		
+		<br>
+		<br>
+		<div id="save1" class="savee">
+			<button id="save" class="btn btn-danger btn-md btn-block">저장</button>
+		</div>
 	</section>
 
 	<section id="bottom" class="wet-asphalt">

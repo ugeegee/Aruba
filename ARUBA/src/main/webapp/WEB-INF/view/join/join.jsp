@@ -67,7 +67,7 @@ label.error {
 			$("#datepicker").datepicker(dp);
 		
 		$("#popUpBtn").click(function(){
-			alert("팝업창이 나올 것!!");
+			/* alert("팝업창이 나올 것!!"); */
 					var url = "<%=request.getContextPath()%>/checkIdPopUp"; 
 					<%-- var url = "<%=request.getContextPath() %>/checkId?userId="+$("#userId").val(); --%>
 					window.open(url, "_blank", "width=500, height=550, toolbar=no, menubar=no, resizable=no");
@@ -265,7 +265,7 @@ label.error {
                 <div class="form-group">
                     <input type="text" id="formId" name="formId" disabled class="form-control">
                     <input type="hidden" name="userId" id="userId" value="" />
-                    <input type="button" id="popUpBtn" value="중복확인" /><br>
+                    <input type="button" id="popUpBtn" value="중복확인" class="btn btn-success btn-md btn-block"/><br>
                     <input type="hidden" name="buttonCheck" id="buttonCheck" value="" />
                 </div>
                 <div class="form-group">

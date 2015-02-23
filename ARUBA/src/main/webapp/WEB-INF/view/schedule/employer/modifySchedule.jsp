@@ -293,6 +293,10 @@ $(document).ready(function() {
 	margin: 0 auto;
 }
 
+.savee{
+	float: right;
+	width: 16.666666666666664%;
+}
 </style>
 </head>
 <body>
@@ -420,8 +424,13 @@ $(document).ready(function() {
 	<br>
 			<div style='clear: both'></div>
 
-		</div>
-	<div id = 'update'><button id = "updatebutton">수정</button></div>
+	</div>
+	
+	<br>
+	<br>
+	<div id = 'update'  class="savee">
+		<button id = "updatebutton" class="btn btn-danger btn-md btn-block">수정</button>
+	</div>
 	</section>
 
 	<section id="bottom" class="wet-asphalt">
