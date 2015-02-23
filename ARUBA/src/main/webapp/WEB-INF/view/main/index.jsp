@@ -70,6 +70,7 @@
 
 					<!-- 로그인 경우 -->
 					<c:if test="${!empty addUser }">
+		<%-- 				<i class="icon-user"></i><c:out value="${addUser.userName }" />접속중 --%>
 						<!-- MY PAGE 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
@@ -454,7 +455,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<h4>About Us</h4>
+					<h4><i class="icon-food"></i> About Us</h4>
 					<p>Pellentesque habitant morbi tristique senectus et netus et
 						malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
 						vitae, ultricies eget, tempor sit amet, ante.</p>
@@ -463,25 +464,18 @@
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Company</h4>
+					<h4><i class="icon-globe"></i> Project Aruba</h4>
 					<div>
-						<ul class="arrow">
-							<li><a href="#">Company Overview</a></li>
-							<li><a href="#">Meet The Team</a></li>
-							<li><a href="#">Our Awesome Partners</a></li>
-							<li><a href="#">Our Services</a></li>
-							<li><a href="#">Frequently Asked Questions</a></li>
-							<li><a href="#">Conatct Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Copyright</a></li>
-						</ul>
+						<p>Pellentesque habitant morbi tristique senectus et netus et
+						malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
+						vitae, ultricies eget, tempor sit amet, ante.</p>
+					<p>Pellentesque habitant morbi tristique senectus.</p>
 					</div>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Latest Blog</h4>
+					<h4><i class="icon-lightbulb"></i> Our Service</h4>
 					<div>
 						<div class="media">
 							<div class="pull-left">
@@ -518,11 +512,12 @@
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Address</h4>
+					<h4><i class="icon-building"></i> Address</h4>
 					<address>
-						<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr>
-						(123) 456-7890
+						<strong>MALSIKIZIMARAZO</strong><br> 
+						Sejoing Univ <br>
+						Gwangjin-gu, Seoul, South Korea<br> 
+						Phone : 010-5096-3002
 					</address>
 				</div>
 				<!--/.col-md-3-->

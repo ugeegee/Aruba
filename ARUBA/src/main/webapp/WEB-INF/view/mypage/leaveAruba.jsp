@@ -129,7 +129,7 @@ label.error {
 					<c:if test="${!empty addUser }">
 						<!-- MY PAGE 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 										Account</a></li>
@@ -147,7 +147,7 @@ label.error {
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Store<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myCompany">Store
 											Control</a></li>
@@ -181,7 +181,7 @@ label.error {
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myJob">My
 											Job</a></li>
@@ -203,7 +203,7 @@ label.error {
 
 						<!-- 게시판 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/notice">Notice
 										Board</a></li>
