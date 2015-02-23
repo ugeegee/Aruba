@@ -153,7 +153,7 @@ $(document).ready(function() {
 
 							<!-- 근무표 버튼 -->
 							<c:url value="/mySchedule" var="url" />
-							<li><a href="${url }">My Table</a></li>
+							<li><a href="${url }">My Shift</a></li>
 
 						</c:if>
 
@@ -198,28 +198,32 @@ $(document).ready(function() {
 	<!--/#title-->
 
 <section id="freeBoard" class="container">
-	 <div class="mainmenubg">
-		<div class="main zerogrid"> 
-			<table class="temp">
+	<div class="white">
+			<table class="table table-striped table-hover">
+				<thead>
 				<tr>
 					<th width = "175">게시글번호</th>
 					<th width = "175">아이디</th>
 					<th width = "375">게시판내용</th>
 					<th>작성날짜</th>
 				</tr>
+				</thead>
 			<c:forEach items="${commentList }" var="commentList">
+					<tbody>
 					<tr> 
-						<td align = "center">${commentList.commentNumber}</td>
-						<td align = "center">${commentList.userId}</td>
-						<td align = "center">
+						<td align = "left">${commentList.commentNumber}</td>
+						<td align = "left">${commentList.userId}</td>
+						<td align = "left">
 							<c:url value="/showReplyList" var="url"></c:url>
 							<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
 					</td>
-						<td align = "center">${commentList.regDate}</td>
+						<td align = "left">${commentList.regDate}</td>
 					</tr>
+					</tbody>
 			</c:forEach>
 		</table>
-		
+	</div>
+	
 	 	<c:url value="/registerComment" var="action"></c:url>
 			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}">
 				<hr>
@@ -238,8 +242,6 @@ $(document).ready(function() {
 	 					<input type="button" id="proceed" name="proceed" value="글쓰기"/>
 						<input type="reset" value="다시쓰기"/>
 					</form:form> 
-				</div>
-			</div> 
     </section>
 
 	<section id="bottom" class="wet-asphalt">

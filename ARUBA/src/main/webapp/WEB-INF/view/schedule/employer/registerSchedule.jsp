@@ -340,13 +340,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Register Schedule</h1>
-					<p>Please input your login information</p>
+					<h1>Register Shift</h1>
+					<p>직원 근무시간표 등록</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Register Schedule</li>
+						<li class="active">Shift Table</a></li>
+						<li>Register Shift</li>
 					</ul>
 				</div>
 			</div>
@@ -383,7 +383,7 @@
 		<br>
 		<br>
 		<div id="save1" class="savee">
-			<button id="save" class="btn btn-danger btn-md btn-block">저장</button>
+			<button id="save" class="btn btn-danger btn-md btn-block">Save</button>
 		</div>
 	</section>
 

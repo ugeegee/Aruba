@@ -153,7 +153,7 @@ $(document).ready(function() {
 
 						<!-- 근무표 버튼 -->
 						<c:url value="/mySchedule" var="url" />
-						<li><a href="${url }">My Table</a></li>
+						<li><a href="${url }">My Shift</a></li>
 
 					<!-- 게시판 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"

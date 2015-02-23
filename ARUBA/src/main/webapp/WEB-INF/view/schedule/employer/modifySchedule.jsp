@@ -388,13 +388,13 @@ $(document).ready(function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Modify Schedule</h1>
-					<p>Please input your login information</p>
+					<h1>Modify Shift</h1>
+					<p>직원 근무시간표 수정</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Register Schedule</li>
+						<li class="active">Shift Table</li>
+						<li>Modify Shift</li>
 					</ul>
 				</div>
 			</div>
@@ -429,7 +429,7 @@ $(document).ready(function() {
 	<br>
 	<br>
 	<div id = 'update'  class="savee">
-		<button id = "updatebutton" class="btn btn-danger btn-md btn-block">수정</button>
+		<button id = "updatebutton" class="btn btn-danger btn-md btn-block">Modify</button>
 	</div>
 	</section>
 
