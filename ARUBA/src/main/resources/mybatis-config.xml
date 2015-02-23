@@ -12,6 +12,7 @@
 		<typeAlias type = "com.bmj.entity.CompanyPerson" alias = "CompanyPerson"/>
 		<typeAlias type = "com.bmj.entity.TimeTable" alias = "TimeTable"/>
 		<typeAlias type = "com.bmj.entity.Stats" alias = "Stats"/>
+		
 		<typeAlias type = "com.bmj.entity.Message" alias = "Message"/>
 		<typeAlias type = "com.bmj.entity.Comment" alias = "Comment"/>
 		<typeAlias type = "com.bmj.entity.Reply" alias = "Reply"/>
