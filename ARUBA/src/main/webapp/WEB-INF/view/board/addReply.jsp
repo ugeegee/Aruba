@@ -1,18 +1,12 @@
 <!DOCTYPE html>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-
 <html>
 <head>
-
 <meta charset="utf-8">
-
 <!--------------------- Validate --------------------->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="lib/jquery.validate.min.js"></script>
@@ -40,9 +34,19 @@
 	href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
-
-<script>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#proceed").click(function(){
+		 if($("#replyContent").val()==""){
+			alert("댓글 내용을 입력해주세요.");
+		}else{
+			<c:url value="/registerReply" var="reply"></c:url>
+			var url = "${reply}?commentNumber="+$("#commentNumber").val()+"&replyContent="+$("#replyContent").val();
+			location.href = url;
+		} 
+	});
+});
 </script>
 </head>
 <body>
@@ -188,14 +192,10 @@
 				</div>
 			</div>
 		</div>
+	
 	</section>
 	<!--/#title-->
-
  	<section id="freeBoard" class="container">
- 		
- 		
- 		
- 		
  		addReply
  		<div class="mainmenubg">
 		<div class="main zerogrid">
@@ -209,15 +209,14 @@
  				<c:url value="/deleteComment" var="url"></c:url>
 				<a href="${url}?userId=${commentList.commentNumber}"><button>내게시글 삭제</button></a></th> --%>
 				</tr>
-				
 				<tr> 
 					<td align = "center">${selectedComment.commentNumber}</td>
 					<td align = "center">${selectedComment.userId}</td>
 					<td align = "center">${selectedComment.commentContent}</td>
 					<td align = "center">${selectedComment.regDate}</td>
 				</tr>
-			</table><br><br><br>
-				<hr>
+			</table>
+			<br><br><br><hr>
 		 	<table class="temp">
 					<tr>
 						<th width = "175">댓글번호</th>
@@ -236,25 +235,21 @@
 			</table>
 			<hr>
 		<c:url value="/registerReply" var="action"></c:url>
-			<form:form modelAttribute="addReply" method="post" action="${action}">
+			<form:form modelAttribute="addReply" id="replyForm" method="post" action="${action}">
 				<table>
 					<tr>
 						<td><label></label></td>
 						<td><form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" /></td>
 					</tr>
-				</table>
-			<form:textarea path="replyContent" rows="3" cols="130"></form:textarea>
- 				<button type="submit" name="proceed">댓글등록</button>
+				</table><br>
+			<form:textarea path="replyContent" id="replyContent" rows="3" cols="130"></form:textarea>
+ 				<input type="button" name="proceed" id="proceed" value="댓글등록"/>
 				<input type="reset" value="다시쓰기"/>
 			</form:form>
 		</div>
 	</div>
-   
-   
-   
-   
-   
     </section>
+	
 	<section id="bottom" class="wet-asphalt">
 		<div class="container">
 			<div class="row">

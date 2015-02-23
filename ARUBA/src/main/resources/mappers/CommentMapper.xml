@@ -4,13 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.Comment">
 
-	<resultMap type="Comment" id="CommentMap">
+	<!-- <resultMap type="Comment" id="CommentMap">
 		<id column = "comment_number" jdbcType = "INTEGER" property = "commentNumber"/>
 		<result column = "user_id" jdbcType="VARCHAR" property= "userId"/>
 		<result column = "comment_content" jdbcType="VARCHAR" property= "commentContent"/>
 		<result column = "reg_date" jdbcType="DATE" property="regDate"/>
 		<result column = "flag" jdbcType="INTEGER" property="flag"/>
-	</resultMap> 
+	</resultMap>  -->
 	
 	<insert id = "insertComment" parameterType = "Comment">
 		insert into bComment(user_id, comment_content, reg_date, flag) 
@@ -31,15 +31,15 @@
 		user_id=#{userId}
 	</delete>
 	
-	<select id="selectAllNoticeComment" resultMap="CommentMap">
+	<select id="selectAllNoticeComment" resultType="Comment">
 		select * from bComment where flag= 1
 	</select>
 
-	<select id="selectAllFreeComment" resultMap="CommentMap">
+	<select id="selectAllFreeComment" resultType="Comment">
 		select * from bComment where flag = 2
 	</select>
 
-	<select id="selectAllQnAComment" resultMap="CommentMap">
+	<select id="selectAllQnAComment" resultType="Comment">
 		select * from bComment where flag = 3
 	</select>
 	

@@ -40,9 +40,19 @@
 	href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
-
-<script>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#proceed").click(function(){
+		if($("#commentContent").val()==""){
+			alert("게시글 내용을 입력해주세요.");
+		}else{
+			<c:url value="/registerComment" var="comment"></c:url>
+			var url = "${comment}?flag=3&commentContent="+$("#commentContent").val();
+			location.href = url;
+		}
+	});
+});
 </script>
 </head>
 <body>
@@ -172,7 +182,6 @@
 		</div>
 	</header>
 	<!--/header-->
-
 	<section id="title" class="emerald">
 		<div class="container">
 			<div class="row">
@@ -192,69 +201,47 @@
 	<!--/#title-->
 
  	<section id="freeBoard" class="container">
- 		QA게시판!!
- 		
  		<div class="mainmenubg">
-		<div class="main zerogrid">
-			<table class="temp">
-				<tr>
-					<th width = "175">게시글번호</th>
-					<th width = "175">아이디</th>
-					<th width = "375">게시판내용</th>
-					<th>작성날짜</th>
-				</tr>
-
+			<div class="main zerogrid"> 
+				<table class="temp">
+					<tr>
+						<th width = "175">게시글번호</th>
+						<th width = "175">아이디</th>
+						<th width = "375">게시판내용</th>
+						<th>작성날짜</th>
+					</tr>
 			<c:forEach items="${commentList }" var="commentList">
 					<tr> 
 						<td align = "center">${commentList.commentNumber}</td>
 						<td align = "center">${commentList.userId}</td>
 						<td align = "center">
-						<c:url value="/showReplyList" var="url"></c:url>
-						<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
+							<c:url value="/showReplyList" var="url"></c:url>
+							<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
 						</td>
 						<td align = "center">${commentList.regDate}</td>
-					<%-- 	<td><c:url value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url"/>
-						<a href="${url }"><button>승낙</button></a></td> --%>
 					</tr>
 			</c:forEach>
 		</table>
-		
 	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" method="post" action="${action}">
+			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}">
 				<hr>
 				<table>
 					<tr>
-						<td><label>게시글 종류</label></td>
-						<td>
-							<input type="radio" id="flag" value="1" name="flag" required>공지게시판
+						<td>게시글 작성</td>
+					<!-- 	<td>
+							<input type="radio" id="flag" value="1" name="flag">공지게시판
 							<input type="radio" id="flag" value="2" name="flag">자유게시판
 							<input type="radio" id="flag" value="3" name="flag">신고게시판
 							<label for="flag" class="error"></label>
-						</td>
+						</td>  -->
 					</tr>
 				</table><br>
- 					<form:textarea path="commentContent" rows="10" cols="130"></form:textarea>
- 					<button type="submit" name="proceed">글쓰기</button>
-					<input type="reset" value="다시쓰기"/>
+ 					<form:textarea path="commentContent" rows="10" cols="130"></form:textarea><br><br>
+	 					<input type="button" id="proceed" name="proceed" value="글쓰기"/>
+						<input type="reset" value="다시쓰기"/>
 					</form:form> 
 				</div>
 			</div>
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
     </section>
 
 	<section id="bottom" class="wet-asphalt">

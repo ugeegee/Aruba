@@ -30,7 +30,7 @@ public class CommentController {
 	@Autowired
 	CommentService cservice;
 
-	@RequestMapping(value = "/registerComment", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerComment", method = RequestMethod.GET)
 	// 게시글 작성 성공시
 	public String registerComment(@RequestParam String commentContent, 
 			@RequestParam int flag, Model model, HttpSession session) {
