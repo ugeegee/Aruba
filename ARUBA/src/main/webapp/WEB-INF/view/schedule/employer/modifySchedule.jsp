@@ -415,10 +415,10 @@ $(document).ready(function() {
 					<!-- </tr> -->
 				</c:forEach>
 				<!-- </table> -->
-				<p>
+				<!-- <p>
 					<input type='checkbox' id='drop-remove' /> <label
 						for='drop-remove'>remove after drop</label>
-				</p>
+				</p> -->
 			</div>
 	<div id='calendar'></div>
 	<br>

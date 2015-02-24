@@ -91,8 +91,7 @@
 				/* initialize the calendar
 				-----------------------------------------------------------------*/
 
-				$('#calendar').fullCalendar(
-						{
+				$('#calendar').fullCalendar({
 							header : {
 								left : 'prev,next today',
 								center : 'title',
@@ -106,28 +105,23 @@
 							editable : true,
 							droppable : true, // this allows things to be dropped onto the calendar
 							eventDrop : function(event) {
-								/* for(items in event) {
-									console.log(items);
-								} */
 								id = event._id;
 								title = event.title;
-								start = event.start
-										.format('YYYY-MM-DD HH:mm:ss');
+								start = event.start.format('YYYY-MM-DD HH:mm:ss');
 								console.log("Drop_id : " + id);
 								console.log('Drop_title : ', title);
 								console.log('Drop_start : ', start);
 								//console.log('end111', event.end.toString());	
 
 								if (event.end == null) {
+									//alert("뭐지?")
 									event.end = event.start.clone();
-									event.end.set("hours", event.end
-											.get("hours") + 1);
-									end = event.end
-											.format('YYYY-MM-DD HH:mm:ss');
+									event.end.set("hours", event.end.get("hours")+2);
+									end = event.end.format('YYYY-MM-DD HH:mm:ss');
 									console.log('Drop_end : ', end);
 								} else {
-									end = event.end
-											.format('YYYY-MM-DD HH:mm:ss');
+									/* event.end.set("hours", event.end.get("hours") + 2); */
+									end = event.end.format('YYYY-MM-DD HH:mm:ss');
 									console.log('Drop_end : ', end);
 								}
 								for ( var i in result) {
@@ -144,12 +138,12 @@
 								result.push(newTemp);
 								console.log(result);
 							},
-							eventDragStop : function(event, ui) {
-							},
-							eventResize : function(event, delta, revertFunc) {
+							/* eventDragStop : function(event, ui) {
+							}, */
+							eventResize : function(event/* , delta, revertFunc */) {
 								title = event.title;
-								start = event.start
-										.format('YYYY-MM-DD HH:mm:ss');
+								start = event.start.format('YYYY-MM-DD HH:mm:ss');
+								
 								end = event.end.format('YYYY-MM-DD HH:mm:ss');
 								id = event._id;
 
@@ -175,8 +169,8 @@
 								result.push(newTemp);
 								console.log(result);
 							},
-							eventResizeStop : function(event) {
-							},
+							/* eventResizeStop : function(event) {
+							}, */
 							drop : function(date, ui, jsEvent) {
 								console.log(date._d);
 							}
@@ -224,7 +218,7 @@
 #external-events .fc-event {
 	margin: 10px 0;
 	cursor: pointer;
-	background-color: navy;
+	/* background-color: navy; */
 	/* border: 1px solid white; */
 }
 
@@ -368,10 +362,10 @@
 					<!-- </tr> -->
 				</c:forEach>
 				<!-- </table> -->
-				<p>
+				<!-- <p>
 					<input type='checkbox' id='drop-remove' /> <label
 						for='drop-remove'>remove after drop</label>
-				</p>
+				</p> -->
 			</div>
 
 			<div id='calendar'></div>
