@@ -3,7 +3,6 @@ package com.bmj.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -172,8 +171,7 @@ public class CompanyController {
 	// 알바 mypage 메뉴에서 직업관리
 	public String mypageMyJobGo(Model model, HttpSession session) {
 		Users loginUser = (Users) session.getAttribute("addUser"); // 로그인하고 있는 알바생 정보 가져오고
-		String viewPath = "";
-		
+
 		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
 		List<Company> comList = new ArrayList<Company>();
 		for(int i = 0; i < codeList.size(); i++){

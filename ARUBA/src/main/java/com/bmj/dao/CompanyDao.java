@@ -1,6 +1,5 @@
 package com.bmj.dao;
 
-import java.util.List;
 
 import com.bmj.entity.Company;
 
