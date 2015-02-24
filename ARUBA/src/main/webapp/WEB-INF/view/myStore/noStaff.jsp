@@ -92,7 +92,7 @@ $(function() {
 
 					<!-- MY PAGE 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 									Account</a></li>
@@ -108,7 +108,7 @@ $(function() {
 
 					<!-- MY STORE 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">My Store<i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/myCompany">Store
 									Control</a></li>
@@ -121,7 +121,7 @@ $(function() {
 
 					<!-- 근무표 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">Shift Table<i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/registerSchedule">Register
 									Shift</a></li>
@@ -134,7 +134,7 @@ $(function() {
 
 					<!-- 게시판 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/notice">Notice
 									Board</a></li>
@@ -172,38 +172,16 @@ $(function() {
 
  	<section id="StaffControl" class="container">
  	
- 		사장의 직원관리<br><br>
-			
-			<table class="temp">
-				<tr>
-					<th>status</th>
-					<th>회사코드</th>
-					<th>이름</th>
-					<th>아이디</th>
-					<th>전화번호</th>
-					<th>이메일</th>
-					<th>시급</th>
-					<th>고용일</th>
-				</tr>
-
-				<c:forEach items="${staffList }" var="staffList" varStatus="status">
-
-					<tr> 
-						<td>${status.index }</td>
-						<td id="codebtn${status.index }">${staffList.companyCode}</td>
-						<td>${staffList.userName}</td>
-						<td id="idbtn${status.index }">${staffList.userId}</td>
-						<td>${staffList.tel}</td>
-						<td>${staffList.email}</td>
-						<td><input type="text" name="salary${status.index }" id="salarybtn${status.index }" value="${staffList.salary}">
-						<br><button id="btn${status.index }" class="btn">시급수정</button></td>
-						<td>${staffList.hireDate}</td>
-						<td><c:url value="/deleteStaff?companyCode=${staffList.companyCode}&userId=${staffList.userId}" var="url"/>
-						<a href="${url }"><button>삭제</button></a></td>
-					</tr>
-				</c:forEach>
-			</table>
-			
+ 		<c:if test="${staffList == -1 }">
+ 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
+ 			회사를 등록한 후 직원조회가 가능합니다.
+ 		</c:if>
+ 		<c:if test="${staffList == 0 }">
+ 			<c:out value="${addUser.userName }" />님<br>
+ 			등록된 아르바이트생이 없습니다.<br>
+ 			아르바이트생에게 회사코드, 전화번호를 알려줘서 회사를 등록하게 만드세요~
+ 		</c:if>
+ 		
     </section>
 
 	<section id="bottom" class="wet-asphalt">

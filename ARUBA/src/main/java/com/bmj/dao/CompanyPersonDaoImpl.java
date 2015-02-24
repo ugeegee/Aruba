@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bmj.entity.CompanyPerson;
-
 @Repository
 public class CompanyPersonDaoImpl implements CompanyPersonDao {
 	private static final Logger logger;
@@ -46,15 +46,9 @@ public class CompanyPersonDaoImpl implements CompanyPersonDao {
 		String stmt = namespace + "insertCompanyOwner";
 		return sqlSession.insert(stmt, companyperson);
 	}
-
-	/*@Override
-	public int selectComCodeByUserId(String userId) {
-		String stmt = namespace + "selectComCodeByUserId";
-		return sqlSession.selectOne(stmt, userId);
-	}*/
 	
 	@Override
-	public List<Integer> selectComCodeByUserId(String userId) {
+	public List<Integer> selectComCodeByUserId(String userId){
 		String stmt = namespace + "selectComCodeByUserId";
 		List<Integer> result = sqlSession.selectList(stmt, userId);
 		return result;
