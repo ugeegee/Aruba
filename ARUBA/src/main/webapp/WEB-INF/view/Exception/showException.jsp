@@ -68,7 +68,7 @@ $(function() {
 </script>
 </head>
 <body>
-	<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
+		<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
 		role="banner">
 		<div class="container">
 			<div class="navbar-header">
@@ -88,61 +88,110 @@ $(function() {
 					<li><a class="active" class="active"
 						href="<%=request.getContextPath()%>/index">Home</a></li>
 
+					<!-- 비로그인 경우 -->
+					<c:if test="${empty addUser }">
+
+						<!-- 로그인 버튼 -->
+						<c:url value="/login" var="url"></c:url>
+						<li><a href="${url }">Log In</a></li>
+
+						<!-- 회원가입 버튼 -->
+						<c:url value="/join" var="url"></c:url>
+						<li><a href="${url }">Sign Up</a></li>
+
+					</c:if>
 
 
-					<!-- MY PAGE 버튼 -->
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="<%=request.getContextPath()%>/myInfo">Modify
-									Account</a></li>
-							<li><a href="<%=request.getContextPath()%>/modifyPass">Change
-									Password</a></li>
-							<li><a href="<%=request.getContextPath()%>/leaveAruba">Delete
-									Account</a></li>
-						</ul></li>
+					<!-- 로그인 경우 -->
+					<c:if test="${!empty addUser }">
+						<!-- MY PAGE 버튼 -->
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="<%=request.getContextPath()%>/myInfo">Modify
+										Account</a></li>
+								<li><a href="<%=request.getContextPath()%>/modifyPass">Change
+										Password</a></li>
+								<li><a href="<%=request.getContextPath()%>/leaveAruba">Delete
+										Account</a></li>
+							</ul></li>
 
-					<!-- 로그아웃 버튼 -->
-					<c:url value="/logout" var="url" />
-					<li><a href="${url }">Log Out</a></li>
+						<!-- 사장인 경우 -->
+						<c:if test="${addUser.grade=='사장' }">
+							<!-- 로그아웃 버튼 -->
+							<c:url value="/logout" var="url" />
+							<li><a href="${url }">Log Out</a></li>
 
-					<!-- MY STORE 버튼 -->
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="<%=request.getContextPath()%>/myCompany">Store
-									Control</a></li>
-							<li><a href="<%=request.getContextPath()%>/staff">Staff
-									Control</a></li>
-							<li><a href="<%=request.getContextPath()%>/wage">Wage
-									Control</a></li>
-							<li><a href="<%=request.getContextPath()%>/alert_employer">Alert</a></li>
-						</ul></li>
+							<!-- MY PAGE 버튼 -->
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="<%=request.getContextPath()%>/myCompany">Store
+											Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/staff">Staff
+											Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/wage">Wage
+											Control</a></li>
+									<li><a href="<%=request.getContextPath()%>/alert_employer">Alert</a></li>
+								</ul></li>
 
-					<!-- 근무표 버튼 -->
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="<%=request.getContextPath()%>/registerSchedule">Register
-									Shift</a></li>
-							<li><a href="<%=request.getContextPath()%>/modifySchedule">Modify
-									Shift</a></li>
-							<li><a href="<%=request.getContextPath()%>/allSchedule">Show
-									Shift</a></li>
-						</ul></li>
+							<!-- 근무표 버튼 -->
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i
+									class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a
+										href="<%=request.getContextPath()%>/registerSchedule">Register
+											Shift</a></li>
+									<li><a href="<%=request.getContextPath()%>/modifySchedule">Modify
+											Shift</a></li>
+									<li><a href="<%=request.getContextPath()%>/allSchedule">Show
+											Shift</a></li>
+								</ul></li>
 
+						</c:if>
 
-					<!-- 게시판 버튼 -->
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="<%=request.getContextPath()%>/notice">Notice
-									Board</a></li>
-							<li><a href="<%=request.getContextPath()%>/free">Free
-									Board</a></li>
-							<li><a href="<%=request.getContextPath()%>/qna">Q&A
-									Board</a></li>
-						</ul></li>
+						<!-- 직원인 경우 -->
+						<c:if test="${addUser.grade=='직원' }">
+							<!-- 로그아웃 버튼 -->
+							<c:url value="/logout" var="url" />
+							<li><a href="${url }">Log Out</a></li>
+
+							<!-- MY PAGE 버튼 -->
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="<%=request.getContextPath()%>/myJob">My
+											Job</a></li>
+									<li><a href="<%=request.getContextPath()%>/salary">My
+											Wage</a></li>
+									<li><a href="<%=request.getContextPath()%>/alert_employee">Alert</a></li>
+								</ul></li>
+
+							<!-- 근무표 버튼 -->
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i
+									class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul></li>
+
+						</c:if>
+
+						<!-- 게시판 버튼 -->
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="<%=request.getContextPath()%>/notice">Notice
+										Board</a></li>
+								<li><a href="<%=request.getContextPath()%>/free">Free
+										Board</a></li>
+								<li><a href="<%=request.getContextPath()%>/qna">QnA
+										Board</a></li>
+							</ul></li>
+					</c:if>
+
 
 					<c:url value="/contact" var="url"></c:url>
 					<li><a href="${url }">Contact</a></li>
@@ -154,51 +203,99 @@ $(function() {
 
 	<section id="title" class="emerald">
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
+				<!-- 사장이 회사를 등록하지 않고 staff control 누른 경우 없는경우 회사등록촉구-->
 					<c:if test="${staffList == -1 }">
-						<!-- 회사가 아예없는경우 -->
-		 				<h1>Staff Control Fail</h1>
-						<p>Please ~~~~~</p>
+		 				<div class="row">
+						<div class="col-sm-6">
+		 					<h1>Staff Control</h1>
+							<p>직원 관리</p>
+						</div>
+						<div class="col-sm-6">
+							<ul class="breadcrumb pull-right">
+								<li class="active">My Store</li>
+								<li>Staff Control</li>
+							</ul>
+						</div>
+						</div>
  					</c:if>
+				
+
+				<!-- 사장이 회사 등록 후 사장만 있는 경우 직원등록 촉구-->			 					
  					<c:if test="${staffList == 0 }">
- 						<!-- 회사 등록 후 사장만 있는 경우 -->
-		 				<h1>Staff Control Fail</h1>
-						<p>Please ~~~~~</p>
+ 						<div class="row">
+						<div class="col-sm-6">
+		 					<h1>Staff Control</h1>
+							<p>직원 관리</p>
+						</div>
+						<div class="col-sm-6">
+							<ul class="breadcrumb pull-right">
+								<li class="active">My Store</li>
+								<li>Staff Control</li>
+							</ul>
+						</div>
+						</div>
  					</c:if>
+ 					
+ 					
  					<c:if test="${ScheduleFail == 1 }">
  						<!-- 회사가 없어서 스케쥴 메뉴를 불가능하게 -->
  						<h1>Schedule Fail</h1>
 						<p>Please ~~~~~</p>
  					</c:if>
+ 					
+ 				<!-- 사장이 회사 등록을 하지 않고 월급 관리를 보는 경우 회사등록 촉구-->
  					<c:if test="${ChartFail == 1 }">
- 						<!-- 회사가 없어서 차트 메뉴를 불가능하게 -->
- 						<h1>Wage Fail</h1>
-						<p>Please ~~~~~</p>
+ 						<div class="row">
+						<div class="col-sm-6">
+		 					<h1>Wage Control</h1>
+							<p>급여 관리</p>
+						</div>
+						<div class="col-sm-6">
+							<ul class="breadcrumb pull-right">
+								<li class="active">My Store</li>
+								<li>Wage Control</li>
+							</ul>
+						</div>
+						</div>
  					</c:if>
-					
-				</div>
-				<div class="col-sm-6">
-					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+ 		</div>
 	</section>
 	<!--/#title-->
 
  	<section id="ExceptionControl" class="container">
- 	
+ 		
+ 		<!-- 사장이 회사를 등록하지 않고 staff control 누른 경우 없는경우 회사등록촉구-->
  		<c:if test="${staffList == -1 }">
- 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
- 			회사를 등록한 후 직원조회가 가능합니다.
- 		</c:if>
+ 			<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.</h5>
+ 								<h5>회사를 등록한 후 직원조회가 가능합니다.</h5><br>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
+  		</c:if>
+ 		
+ 		
+ 		<!-- 사장이 회사 등록 후 사장만 있는 경우 직원등록 촉구-->
  		<c:if test="${staffList == 0 }">
- 			<c:out value="${addUser.userName }" />님<br>
- 			등록된 아르바이트생이 없습니다.<br>
- 			아르바이트생에게 회사코드, 전화번호를 알려줘서 회사를 등록하게 만드세요~
+ 			<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 현재 회사에
+						 			등록된 직원이 없습니다.<br></h5>
+ 								<h5>아르바이트생에서 회사코드, 전화번호를 이용해 회사를 등록할 수 있게 하십시오.</h5>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
  		</c:if>
  		
  		<c:if test="${ScheduleFail == 1 }">
@@ -206,9 +303,20 @@ $(function() {
  			회사를 등록한 후 스케쥴메뉴가 사용가능합니다.
  		</c:if>
  		
+ 		<!-- 사장이 회사 등록을 하지 않고 월급 관리를 보는 경우 회사등록 촉구-->	
  		<c:if test="${ChartFail == 1 }">
- 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
- 			회사를 등록한 후 급여메뉴가 사용가능합니다.
+ 				<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br></h5>
+ 								<h5>회사를 등록한 후 급여메뉴가 사용가능합니다.</h5>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
  		</c:if>
     </section>
 

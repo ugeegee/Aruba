@@ -226,12 +226,12 @@ $(document).ready(function() {
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>Store Control</h1>
-					<p>Please input your login information</p>
+					<p>회사 관리</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Store</li>
+						<li>Store Control</li>
 					</ul>
 				</div>
 			</div>
@@ -240,8 +240,115 @@ $(document).ready(function() {
 	<!--/#title-->
 
  	<section id="StoreControl" class="container">
- 		 <c:url value="/modifyMyCom" var="action" />
-			<form:form modelAttribute="myCom" mehtod="post" action="${action }" id="modifyComForm">
+
+	<!-- 버전1-원래내가했던거 -->
+<%--  		<div class="pad">
+		<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h4>현재 등록된 회사</h4>
+            	                <br>
+                	        </li>
+                    	    <li>
+         <c:url value="/modifyMyCom" var="action" />
+		<form:form modelAttribute="myCom" mehtod="post" action="${action }" id="modifyComForm">
+			<table class="table" style="border-collapse: seperate;">
+				<tbody>
+					<tr>
+						<td><label>회사코드</label></td>
+						<td><form:input path="companyCode" name="companyCode" id="companyCode" class="form-control"/></td>
+						<td><input type="hidden" name="ownerPass" id="ownerPass" value=${ownerPass} /></td>					
+					</tr>
+						
+					<tr>
+						<th class="center"><label>회사명</label></th>
+						<td><form:input path="companyName" name="companyName" id="companyName" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>회사전화번호</label></th>
+						<td><form:input path="companyTel" name="companyTel" id="companyTel" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>주말수당(%)</label></th>
+						<td><form:input path="holidayComm" name="holidayComm" id="holidayComm" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>야근수당(%)</label></th>
+						<td> <form:input path="nightComm" name="nightComm" id="nightComm" class="form-control"/></td>
+					</tr>
+				</tbody>			
+			</table>
+		</form:form> 
+			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+				<input type="submit" class="btn btn-success btn-md" name="modify" value="Modify"/>
+				<input type="submit" class="btn btn-success btn-md" name="delete" value="Delete"/>
+			</div>
+                   	     
+        </li>
+        </ul>
+        </div>
+        </div>
+    </div>
+ 	 --%>
+ 	
+ 	
+ 	
+ 	<!-- 버전2-지연이가수정해준부분반영 -->
+ <%-- 	<div class="pad">
+		<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h4>현재 등록된 회사</h4>
+            	                <br>
+                	        </li>
+                    	    <li>
+         <c:url value="/modifyMyCom" var="action" />
+		<form:form modelAttribute="myCom" mehtod="post" action="${action }" id="modifyComForm">
+			<table class="table" style="border-collapse: seperate;">
+				<tbody>
+					<tr>
+						<td><label>회사코드</label></td>
+						<td><c:out value="${myCom.companyCode }" />
+         			    <form:hidden path="companyCode" name="companyCode" id="companyCode"/>
+            			<input type="password" name="ownerPass" id="ownerPass" value=${ownerPass} /></td>					
+					</tr>
+						
+					<tr>
+						<th class="center"><label>회사명</label></th>
+						<td><form:input path="companyName" name="companyName" id="companyName" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>회사전화번호</label></th>
+						<td><form:input path="companyTel" name="companyTel" id="companyTel" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>주말수당(%)</label></th>
+						<td><form:input path="holidayComm" name="holidayComm" id="holidayComm" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>야근수당(%)</label></th>
+						<td> <form:input path="nightComm" name="nightComm" id="nightComm" class="form-control"/></td>
+					</tr>
+				</tbody>			
+			</table>
+		</form:form> 
+			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+				<input type="submit" class="btn btn-success btn-md" name="modify" value="Modify"/>
+				<input type="submit" class="btn btn-success btn-md" name="delete" value="Delete"/>
+			</div>
+                   	     
+        </li>
+        </ul>
+        </div>
+        </div>
+    </div>
+ --%> 	
+ 	
+ 	
+ 	<!-- 버전3-오리지날 -->
+		<form:form modelAttribute="myCom" mehtod="post" action="${action }" id="modifyComForm"> 		
 			<table>
 			<tr>
 				<td><label>Code</label></td>

@@ -203,21 +203,21 @@
 	 				<div class="smallbox">
     	                <ul class="plan featured">
         	                <li class="plan-name">
-            	                <h4><c:out value="${addUser.userId }" />님 회원가입을 축하드립니다.</h4>
+            	                <h4><c:out value="${addUser.userId }" />님, 회원가입을 축하드립니다.</h4>
                 	        </li>
         	             	<li class="plan-action">
         	             		<c:if test="${addUser.grade=='사장' }">
  								<h5>자신이 운영하는 회사를 등록해주세요. 지금하지 않아도 나중에 Store Control에서 가능합니다.</h5> 					
 		 						<br>
 		 						<c:url value="/registerCompany" var="url"></c:url>
-								<a href="${url }" class="btn btn-primary btn-md">Register Store</a>
+								<a href="${url }" class="btn btn-success btn-md">Register Store</a>
 								</c:if>
 		
 								<c:if test="${addUser.grade=='직원' }">
 								<h5>자신이 근무하는 직장을 등록해주세요. 지금하지 않아도 나중에 My Job에서 가능합니다.</h5>
 								<br>
 								<c:url value="/myJob" var="url"></c:url>
-								<a href="${url }" class="btn btn-primary btn-md">Register Job</a>
+								<a href="${url }" class="btn btn-success btn-md">Register Job</a>
 							</c:if>
         	             	</li>
                     	</ul>

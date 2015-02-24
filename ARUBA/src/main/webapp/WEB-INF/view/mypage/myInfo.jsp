@@ -334,7 +334,7 @@ label.error {
         <form:form modelAttribute="addUser" class="center" role="form" id="modifyForm" method="post" action="${url }">
             <fieldset class="registration-form">
             	<div class="form-group">
-                    	정보 수정과 현재 비밀번호 입력 후 버튼을 누르면 정보가 변경됩니다.
+                    	* 정보 수정과 현재 비밀번호 입력 후 버튼을 누르면 정보가 변경됩니다.
                 </div>
                 <div class="form-group">
                     <form:hidden path="userId" id="userId" name="userId" class="form-control"/>
@@ -343,7 +343,7 @@ label.error {
                     <form:hidden path="password" id="password" name="password" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="nowPassword" name="nowPassword" placeholder="your password" class="form-control">
+                    <input type="password" id="nowPassword" name="nowPassword" placeholder="password" class="form-control">
                 </div>
                 <div class="form-group">
                     <form:input path="userName" id="userName" name="userName" class="form-control"/>

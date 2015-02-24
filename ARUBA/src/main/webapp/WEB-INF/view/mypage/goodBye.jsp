@@ -92,15 +92,22 @@
 	<!--/#title-->
 
 	<section id="GoodBye" class="container">
-		<div align="center" style="margin-bottom: 50px; margin-top: 30px;">
-			<h2>
-				정상적으로 탈퇴되었습니다.<br>
-				<c:out value="${addUser.userName }" />
-				님<br> 안녕히 가세요.
-			</h2>
-			<c:url value="/index" var="url"></c:url>
-			<a href="${url }">메인으로</a>
-		</div>
+		<div class="pad">
+				<div id="pricing-table">
+	 				<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h4><c:out value="${addUser.userName }" />님의 계정이 정상적으로 탈퇴되었습니다.</h4><br>
+            	                <h5>더 나은 서비스로 보답하겠습니다.</h5>
+                	        </li>
+        	             	<li class="plan-action">
+        	             		<c:url value="/index" var="url"></c:url>
+                       	     	<a href="${url }" class="btn btn-success btn-md">Home</a>
+        	             	</li>
+                    	</ul>
+           			</div>
+        		</div>
+        	</div>
 	</section>
 
 	<section id="bottom" class="wet-asp">
