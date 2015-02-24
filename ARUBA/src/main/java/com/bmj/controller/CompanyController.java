@@ -90,11 +90,14 @@ public class CompanyController {
 	@RequestMapping(value = "/modifyMyCom", params="modify", method = RequestMethod.POST)
 	// 사장 - 회사정보수정
 	public String mypageModifyMyComSuccessGo(@ModelAttribute("myCom") Company myCom,
-			Model model) {
+			HttpSession session, Model model) {
 		
 		int result = service.updateCompany(myCom);
+		Users owner = (Users) session.getAttribute("addUser");
+		
 		logger.trace("회사정보 업데이트 결과!!  "+result);
 		model.addAttribute("PopUp", 1);
+		model.addAttribute("ownerPass", owner.getPassword());
 		return "/myStore/myCompany"; 			//업데이트끝나고 회사보는 페이지로
 	}
 	
