@@ -5,6 +5,13 @@
 	float:right;
 }
 
+.boxstyle{
+	float:center;
+}
+
+.pad{
+	margin:30px 100px;	
+}
 
 table {
   background-color: transparent;
@@ -527,6 +534,10 @@ body > section {
 }
 .silver {
   background-color: #bdc3c7;
+}
+.wet-asp{
+	background-color: #000000;
+	padding-bottom:0px
 }
 .wet-asphalt {
 	/* background-color: transparent; */

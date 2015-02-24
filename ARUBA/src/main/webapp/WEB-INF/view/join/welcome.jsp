@@ -193,30 +193,38 @@
 						<li>Welcome</li>
 					</ul>
 				</div>
-				<br>
-				<br>
-				<hr>
-				<br>
-				<br>
-				
-				<div class="welcome">
+			</div>
+		</div>	
+	</section>			
 					
-					<h3><c:out value="${addUser.userId }" />님 회원가입을 축하드립니다.</h3><br>
-						
-			 		<c:if test="${addUser.grade=='사장' }">
- 					<h4>자신이 운영하는 회사를 등록해주세요. 지금하지 않아도 나중에 Store Control에서 가능합니다.</h4> 					
-		 			<c:url value="/registerCompany" var="url"></c:url>
-					<a href="${url }"><button class="btn btn-danger btn-md btn-block">Register Store</button></a>
-					</c:if>
+		<section id="Logout" class="container ">
+			<div class="pad">
+				<div id="pricing-table">
+	 				<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h4><c:out value="${addUser.userId }" />님 회원가입을 축하드립니다.</h4>
+                	        </li>
+        	             	<li class="plan-action">
+        	             		<c:if test="${addUser.grade=='사장' }">
+ 								<h5>자신이 운영하는 회사를 등록해주세요. 지금하지 않아도 나중에 Store Control에서 가능합니다.</h5> 					
+		 						<br>
+		 						<c:url value="/registerCompany" var="url"></c:url>
+								<a href="${url }" class="btn btn-primary btn-md">Register Store</a>
+								</c:if>
 		
-					<c:if test="${addUser.grade=='직원' }">
-					<h4>자신이 근무하는 직장을 등록해주세요. 지금하지 않아도 나중에 My Job에서 가능합니다.</h4>
-					<c:url value="/myJob" var="url"></c:url>
-					<a href="${url }"><button class="btn btn-danger btn-md btn-block">직원-회사등록</button></a>
-					</c:if>
-				</div>
-		</div>
-	</section>
+								<c:if test="${addUser.grade=='직원' }">
+								<h5>자신이 근무하는 직장을 등록해주세요. 지금하지 않아도 나중에 My Job에서 가능합니다.</h5>
+								<br>
+								<c:url value="/myJob" var="url"></c:url>
+								<a href="${url }" class="btn btn-primary btn-md">Register Job</a>
+							</c:if>
+        	             	</li>
+                    	</ul>
+           			</div>
+        		</div>
+        	</div>
+ 	</section>
 	<!--/#title-->
 
 	<%-- <section id="Welcome" class="container">

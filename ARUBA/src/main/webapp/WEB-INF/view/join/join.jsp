@@ -268,7 +268,8 @@ label.error {
                 <div class="form-group">
                     <input type="text" id="formId" name="formId" disabled class="form-control">
                     <input type="hidden" name="userId" id="userId" value="" />
-                    <input type="button" id="popUpBtn" value="중복확인" class="btn btn-success btn-md btn-block"/><br>
+                    <br>
+                    <input type="button" id="popUpBtn" value="중복 확인" class="btn btn-success btn-md"/><br>
                     <input type="hidden" name="buttonCheck" id="buttonCheck" value="" />
                 </div>
                 <div class="form-group">
@@ -304,7 +305,8 @@ label.error {
                     <input type="text" id="answer" name="answer" placeholder="your answer" class="form-control">
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-success btn-md btn-block">Sign Up</button>
+                	<br>
+                    <button class="btn btn-success btn-md  btn-block">Sign Up</button>
                 </div>
             </fieldset>
         </form>

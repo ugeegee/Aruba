@@ -162,6 +162,7 @@ label.error {
 						placeholder="password" class="form-control">
 				</div>
 				<div class="form-group">
+					<br>
 					<button class="btn btn-success btn-md btn-block">Log In</button>
 				</div>
 			</fieldset>

@@ -95,21 +95,21 @@
 
 	<!-- 로그아웃 내용 -->
 	<section id="Logout" class="container ">
-	<div class="ccenter">
+	<div class="pad">
 		<div id="pricing-table">
-	 		<div class="col-md-3 col-xs-6">
+	 		<div class="smallbox">
     	                <ul class="plan featured">
         	                <li class="plan-name">
-            	                <h5>로그아웃 되셨습니다.</h5>
+            	                <h5>로그아웃 되었습니다.</h5>
                 	        </li>
                     	    <li class="plan-action">
                     	     <c:url value="/index" var="url"></c:url>
-                       	     <a href="#" class="btn btn-primary btn-md">Home</a>
+                       	     <a href="${url }" class="btn btn-primary btn-md">Home</a>
                       	  </li>
                     	</ul>
            </div>
         </div>
-      </div>
+    </div>
  	</section>
  		<%--
 					<c:out value="${addUser.userName }" />님, 안녕히 가세요.

@@ -118,7 +118,7 @@ label.error {
 						class="form-control">
 				</div>
 				<div class="form-group">
-					<input type="submit" value="중복확인" class="btn btn-success btn-md btn-block"/>
+					<input type="submit" value="중복확인" class="btn btn-success btn-md"/>
 				</div>
 			</fieldset>
 		</form>
@@ -133,7 +133,7 @@ label.error {
 				${availableId}로 하시겠습니까?
 			</div>
 			<div class="form-group">
-				<button id="useIdBtn" class="btn btn-success btn-md btn-block">사용</button>
+				<button id="useIdBtn" class="btn btn-success btn-md">사용</button>
 			</div>
 			</div>
 		</fieldset>
@@ -151,7 +151,7 @@ label.error {
 						class="form-control">
 				</div>
 				<div class="form-group">
-					<input type="submit" value="중복확인" class="btn btn-success btn-md btn-block"/>
+					<input type="submit" value="중복확인" class="btn btn-success btn-md"/>
 				</div>
 			</fieldset>
 		</form>
