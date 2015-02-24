@@ -156,8 +156,23 @@ $(function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>inaccessible</h1>
-					<p>접근불가~~~~~~~~처리</p>
+					<c:if test="${staffList == -1 }">
+		 				<h1>Staff Control Fail</h1>
+						<p>Please ~~~~~</p>
+ 					</c:if>
+ 					<c:if test="${staffList == 0 }">
+		 				<h1>Staff Control Fail</h1>
+						<p>Please ~~~~~</p>
+ 					</c:if>
+ 					<c:if test="${ScheduleFail == 1 }">
+ 						<h1>Schedule Fail</h1>
+						<p>Please ~~~~~</p>
+ 					</c:if>
+ 					<c:if test="${ChartFail == 1 }">
+ 						<h1>Wage Fail</h1>
+						<p>Please ~~~~~</p>
+ 					</c:if>
+					
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
@@ -187,6 +202,10 @@ $(function() {
  			회사를 등록한 후 스케쥴메뉴가 사용가능합니다.
  		</c:if>
  		
+ 		<c:if test="${ChartFail == 1 }">
+ 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
+ 			회사를 등록한 후 급여메뉴가 사용가능합니다.
+ 		</c:if>
     </section>
 
 	<section id="bottom" class="wet-asphalt">

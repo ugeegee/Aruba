@@ -28,6 +28,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.bmj.entity.Company;
 import com.bmj.entity.CompanyPerson;
 import com.bmj.entity.Users;
+import com.bmj.exception.ChartMenuFailException;
 import com.bmj.exception.LoginFailException;
 import com.bmj.exception.ScheduleMenuFailException;
 import com.bmj.service.CompanyPersonService;
@@ -319,7 +320,14 @@ public class UsersController {
 
 	@RequestMapping(value = "/wage")
 	// 사장 mypage 메뉴에서 Wage(알바생들 줄 급여관리)
-	public String mypageWageGo() {
+	public String mypageWageGo(HttpSession session) {
+		Users loginUser = (Users) session.getAttribute("addUser");
+		CompanyPerson cp = cpService.selectCompanyPersonByUserId(loginUser.getUserId());
+		try{
+			int companyCode = cp.getCompanyCode();
+		}catch(NullPointerException e){
+			throw new ChartMenuFailException("!!사장이 등록한 회사가 없음!!");
+		}
 		return "/myStore/wage";
 	}
 
@@ -516,6 +524,14 @@ public class UsersController {
 	public String ScheduleMenuFail(ScheduleMenuFailException e, HttpServletRequest request) {
 		logger.trace("등록한 회사가 없으므로 시간표메뉴사용불가");
 		request.setAttribute("ScheduleFail", 1);
+		
+		return "/Exception/showException";
+	}
+	
+	@ExceptionHandler
+	public String ChartMenuFail(ChartMenuFailException e, HttpServletRequest request) {
+		logger.trace("등록한 회사가 없으므로 차트메뉴사용불가");
+		request.setAttribute("ChartFail", 1);
 		
 		return "/Exception/showException";
 	}
