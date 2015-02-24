@@ -33,7 +33,7 @@ public class ReplyController {
 	@Autowired
 	CommentService cservice;
 	
-	@RequestMapping(value = "/registerReply", method = RequestMethod.GET)
+	@RequestMapping(value = "/registerReply", method = RequestMethod.POST)
 	// 댓글 작성 성공시
 	public String registerReply(@RequestParam int commentNumber,
 			@RequestParam String replyContent, Model model, HttpSession session) {
@@ -44,7 +44,11 @@ public class ReplyController {
 		reply.setReplyContent(replyContent);
 		rservice.insertReply(reply);
 		model.addAttribute("addReply", reply);
-		return "/board/success";
+		
+		int trunbackFlag = cservice.selectFlagByCommentNo(commentNumber);
+		model.addAttribute("turnbackFlag", trunbackFlag);
+		
+		return "redirect:/showReplyList?no="+commentNumber;
 	}
 
 	@RequestMapping(value = "/showReplyList", method = RequestMethod.GET)

@@ -74,26 +74,15 @@ $(document).ready(function() {
 		ignore: "",
 		//규칙
 		rules : {
-			commentTitle : {
+			replyContent: {
 				required : true,
 				minlength : 1,
-				maxlength : 50
-			},
-			commentContent : {
-				required : true,
-				minlength : 1,
-				maxlength : 200
+				maxlength : 30
 			}
 		},
 		//규칙체크 실패시 출력될 메시지
 		messages : {
-			
-			commentTitle : {
-				required : "필수 입력사항 입니다.",
-				minlength : "최소 {0}글자이상이어야 합니다",
-				maxlength : "최대 {0}글자이하이어야 합니다"
-			},
-			commentContent : {
+			replyContent : {
 				required : "필수 입력사항 입니다.",
 				minlength : "최소 {0}글자이상이어야 합니다",
 				maxlength : "최대 {0}글자이하이어야 합니다"
@@ -110,6 +99,10 @@ $(document).ready(function() {
 <style>
 table th{
 	text-align : center;
+}
+label.error {
+	color: red;
+	/* font-style: italic */
 }
 </style>
 </head>
@@ -307,18 +300,18 @@ table th{
 				</tr>
 			</table>
 			<br><br><br><hr>
-		 	<table class="temp">
+		 	<table class="temp" width="100%">
 					<tr>
-						<th width = "175">댓글번호</th>
-						<th width = "175">아이디</th>
-						<th width = "375">댓글내용</th>
-						<th>작성날짜</th>
+						<th width = "10%">댓글번호</th>
+						<th>댓글내용</th>
+						<th width = "15%">아이디</th>
+						<th width = "20%">작성날짜</th>
 					</tr>
 				<c:forEach items="${replyList }" var="replyList">
 					<tr> 
 						<td align = "center">${replyList.replyNumber}</td>
-						<td align = "center">${replyList.userId}</td>
 						<td align = "center">${replyList.replyContent}</td>
+						<td align = "center">${replyList.userId}</td>
 						<td align = "center">${replyList.regDate }</td>
 					</tr>
 				</c:forEach>
@@ -331,8 +324,9 @@ table th{
 						<form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" />
 					</tr>
 				</table><br>
-			<form:textarea path="replyContent" id="replyContent" rows="3" cols="130"></form:textarea>
- 				<input type="button" name="proceed" id="proceed" value="댓글등록"/>
+				<form:input path="replyContent" name="replyContent" class="form-control" placeholder="댓글 쓰기"/>
+ 				<br>
+ 				<input type="submit" value="댓글등록"/>
 				<input type="reset" value="다시쓰기"/>
 			</form:form>
     </section>
