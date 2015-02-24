@@ -13,9 +13,12 @@
 
 <meta charset="utf-8">
 
-<!--------------------- Validate --------------------->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="lib/jquery.validate.min.js"></script>
+
+<!--------------------- DataTable --------------------->
+
+<script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+<link href="css/dataTables.css" rel="stylesheet">
 
 <!--------------------- Homepage --------------------->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,10 +43,13 @@
 	href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#proceed").click(function(){
+	
+	$('#example').DataTable();
+	
+	/* $("#proceed").click(function(){
 		if($("#commentContent").val()==""){
 			alert("게시글 내용을 입력해주세요.");
 		}else{
@@ -51,7 +57,7 @@ $(document).ready(function() {
 			var url = "${comment}?flag=3&commentContent="+$("#commentContent").val();
 			location.href = url;
 		}
-	});
+	}); */
 });
 </script>
 </head>
@@ -205,51 +211,44 @@ $(document).ready(function() {
 	</section>
 	<!--/#title-->
 
- 	<section id="freeBoard" class="container">
- 		<div class="white">
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th width = "175">게시글번호</th>
-							<th width = "175">아이디</th>
-							<th width = "375">게시판내용</th>
-							<th>작성날짜</th>
-						</tr>
-					</thead>
-			<c:forEach items="${commentList }" var="commentList">
-					<tbody>
-						<tr> 
-							<td align = "left">${commentList.commentNumber}</td>
-							<td align = "left">${commentList.userId}</td>
-							<td align = "left">
-								<c:url value="/showReplyList" var="url"></c:url>
-								<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
-							</td>
-							<td align = "left">${commentList.regDate}</td>
-						</tr>
-					</tbody>
-			</c:forEach>
-		</table>
-		</div>
+ 	<section id="QABoard" class="container">
+ 		<table id="example" class="table table-striped table-hover" cellspacing="0" width="100%">
+   
+        <thead>
+            <tr>
+                <th width="10%" align="center">글번호</th>
+                <th>제목</th>
+                <th width="20%">작성자</th>
+                <th width="20%">작성일</th>
+            </tr>
+        </thead>
+ 
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+ 		
+        <tbody>
+        <c:forEach items="${commentList }" var="commentList">
+            <tr>
+                <td>${commentList.commentNumber}</td>
+                <td>
+                	<c:url value="/showReplyList" var="url"></c:url>
+					<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
+				</td>
+				<td>${commentList.userId}</td>
+                <td>${commentList.regDate}</td>
+            </tr>
+         </c:forEach>   
+        </tbody>
+    </table>
 		
-	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}">
-				<hr>
-				<table>
-					<tr>
-						<td>게시글 작성</td>
-					<!-- 	<td>
-							<input type="radio" id="flag" value="1" name="flag">공지게시판
-							<input type="radio" id="flag" value="2" name="flag">자유게시판
-							<input type="radio" id="flag" value="3" name="flag">신고게시판
-							<label for="flag" class="error"></label>
-						</td>  -->
-					</tr>
-				</table><br>
- 					<form:textarea path="commentContent" rows="10" cols="130"></form:textarea><br><br>
-	 					<input type="button" id="proceed" name="proceed" value="글쓰기"/>
-						<input type="reset" value="다시쓰기"/>
-					</form:form> 
+	 <br>
+	<a href="<%=request.getContextPath()%>/writeComment?flag=3"><button class="btn btn-success btn-md write"><i class="icon-edit-sign"></i> 글쓰기</button></a>	
 				
     </section>
 

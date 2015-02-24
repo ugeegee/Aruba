@@ -40,13 +40,12 @@
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 	
-<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
 <script type="text/javascript">
 $(document).ready(function() {
 	
 	$('#example').DataTable();
 	
-	$("#proceed").click(function(){
+	/* $("#proceed").click(function(){
 		if($("#commentContent").val()==""){
 			alert("게시글 내용을 입력해주세요.");
 		}else{
@@ -54,7 +53,7 @@ $(document).ready(function() {
 			var url = "${comment}?flag=1&commentContent="+$("#commentContent").val();
 			location.href = url;
 		}
-	});
+	}); */
 });
 </script>
 <style>
@@ -213,7 +212,7 @@ table td,th{
 	</section>
 	<!--/#title-->
 
-<section id="freeBoard" class="container">
+<section id="noticeBoard" class="container">
 	
 		<table id="example" class="table table-striped table-hover" cellspacing="0" width="100%">
    
