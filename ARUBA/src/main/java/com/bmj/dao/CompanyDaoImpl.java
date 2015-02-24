@@ -1,6 +1,5 @@
 package com.bmj.dao;
 
-import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;

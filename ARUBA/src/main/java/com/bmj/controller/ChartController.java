@@ -79,6 +79,12 @@ public class ChartController {
 		List<Stats> myTimes = new ArrayList<Stats>();
 		myTimes = service.selectStatsByMemberId(companyperson.getMemberId());
 		logger.trace("수업 ::::::::::::::::" + myTimes);
+		if(myTimes.isEmpty()) {
+			logger.trace("수업, 아무것도없다.");
+		} else {
+			logger.trace("수업, 아무것도 있다.");
+			model.addAttribute("Times", myTimes);
+		}
 		int salary = companyperson.getSalary();
 		for (int i = 0; i < myTimes.size(); i++) {
 			int count = (int)(myTimes.get(i).getCount()* 24 * salary);
@@ -134,7 +140,12 @@ public class ChartController {
 
 		// month, memberId, count
 		logger.trace("수업 ::::::::::::::::" + myTimes);
-
+		if(myTimes.isEmpty()) {
+			logger.trace("수업, 아무것도없다.");
+		} else {
+			logger.trace("수업, 아무것도 있다.");
+			model.addAttribute("Times", myTimes);
+		}
 		int salary = companyperson.getSalary();
 		for(int i = 0; i < myTimes.size(); i++) {
 			//double count = 0;

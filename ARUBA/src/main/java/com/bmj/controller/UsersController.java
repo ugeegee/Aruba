@@ -2,7 +2,6 @@ package com.bmj.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.bmj.entity.Company;
 import com.bmj.entity.CompanyPerson;
 import com.bmj.entity.Users;
 import com.bmj.exception.ChartMenuFailException;
@@ -210,7 +208,7 @@ public class UsersController {
 			@RequestParam String email, @RequestParam String birth,
 			@RequestParam String question, @RequestParam String answer,
 			Model model, HttpSession session) {
-		String viewPath = "";
+
 		Users modifyUser = new Users();
 		Users loginUser = (Users) session.getAttribute("addUser");
 
@@ -240,7 +238,7 @@ public class UsersController {
 	public String mypageModifyPassSuccessGo(@RequestParam String userId,
 			@RequestParam String modifyPass1, @RequestParam String modifyPass2,
 			Model model) {
-		String viewPath = "";
+		
 		Users modifyPassUser = new Users();
 		modifyPassUser.setUserId(userId);
 		modifyPassUser.setPassword(modifyPass1);
@@ -249,12 +247,6 @@ public class UsersController {
 		service.updatePassUser(modifyPassUser); // 비번 업데이트 하고
 		modifyPassUser = service.loginUser(modifyPassUser); // 업데이트한 거로 새로 가져와서
 		model.addAttribute("addUser", modifyPassUser);
-
-		/*
-		 * if ((modifyPassUser.getGrade()).equals("사장")) { viewPath =
-		 * "redirect:/modifyEmployerPass"; } else { viewPath =
-		 * "redirect:/modifyEmployeePass"; }
-		 */
 
 		model.addAttribute("PopUp", 1);
 

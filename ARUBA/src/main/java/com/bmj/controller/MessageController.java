@@ -20,7 +20,6 @@ import com.bmj.entity.Company;
 import com.bmj.entity.CompanyPerson;
 import com.bmj.entity.Message;
 import com.bmj.entity.Users;
-import com.bmj.exception.LoginFailException;
 import com.bmj.exception.RegisterJobException;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.CompanyService;
@@ -121,7 +120,6 @@ public class MessageController {
 		request.setAttribute("PopUp", 1);
 
 		Users loginUser = (Users) session.getAttribute("addUser"); 
-		String viewPath = "";
 
 		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
 				.getUserId());

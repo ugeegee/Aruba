@@ -29,9 +29,15 @@ public class CommentController {
 
 	@Autowired
 	CommentService cservice;
-
+	
+	@RequestMapping(value = "/writeComment", method = RequestMethod.GET)
+	// 글쓰기버튼 눌렀을 때
+	public String writeCommentGo(@RequestParam int flag, Model model) {
+		model.addAttribute("nowFlag", flag);
+		return "/board/writeComment";
+	}
 	@RequestMapping(value = "/registerComment", method = RequestMethod.GET)
-	// 게시글 작성 성공시
+	// 게시글 작성하러옴
 	public String registerComment(@RequestParam String commentContent, 
 			@RequestParam int flag, Model model, HttpSession session) {
 		Comment comment = new Comment();
@@ -44,6 +50,12 @@ public class CommentController {
 		comment.setFlag(flag);
 		cservice.insertComment(comment);
 		model.addAttribute("addComment", comment);
+		/*return "/board/success";*/
+		return "redirect:/boardSuccess";
+	}
+	@RequestMapping(value = "/boardSuccess")
+	// 게시글 작성 성공알림
+	public String registerCommentSuccess() {
 		return "/board/success";
 	}
 	
