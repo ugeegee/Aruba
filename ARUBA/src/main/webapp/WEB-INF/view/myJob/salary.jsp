@@ -361,13 +361,13 @@ $(document).ready(function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>My Job</h1>
-					<p>Please input your login information</p>
+					<h1>My Wage</h1>
+					<p>나의 월급</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Job</li>
+						<li class="active">My Wage</li>
 						<li><a id="Job1">Job1</a></li>
 						<li><a id="Job2">Job2</a></li>
 						<li><a id="Job3">Job3</a></li>

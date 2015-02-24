@@ -224,21 +224,66 @@ $(document).ready(function() {
 								<td><input type="text" name="companyTel" id="companyTel" value="" class="form-control" placeholder="store phonenumber"/></td>
 							</tr>
 							</tbody>
-						</table>
-			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
-				<button type="submit" class="btn btn-success btn-md">Register</button>
-				<button type="reset" id="cancel" class="btn btn-success btn-md" >Reset</button>
-			</div>
-		</form>         	                    	     
-        </li>
-        </ul>
+							</table>
+							<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+							<button type="submit" class="btn btn-success btn-md">Register</button>
+							<button type="reset" id="cancel" class="btn btn-success btn-md" >Reset</button>
+							</div>
+							</form>         	                    	     
+       						 </li>
+       					 </ul>
         </div>
         </div>
     </div>
     </c:if>
  	
- 	
- 	
+ 	<c:if test="${emptyCompany =='NO' }">
+ 		<div class="pad">
+		<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h4>아르바이트 등록은 최대 3개까지 가능합니다.</h4>
+            	                <br>
+                	        </li>
+                	     </ul>
+             </div>
+         </div>
+         </div>
+	</c:if>
+	<hr>
+		<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>나의 아르바이트 목록</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th>회사코드</th>
+					<th>회사명</th>
+					<th>전화번호</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${myCompanies }" var="myCompanies">
+					<tr>
+						<td>${myCompanies.companyCode}</td>
+						<td>${myCompanies.companyName}</td>
+						<td>${myCompanies.companyTel}</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+		
  	 	<%-- <c:if test="${emptyCompany =='YES' }">
  			직장등록
 				<c:url value="/sendMsgToOwner" var="url"></c:url>
@@ -267,14 +312,13 @@ $(document).ready(function() {
 						<button type="reset" id="cancel">취소</button>
 					</div>
 				</form>
-			</c:if> --%>
+			</c:if> 
 			<c:if test="${emptyCompany =='NO' }">
 				<h2>아르바이트 등록은 최대 3개까지 가능합니다.</h2>
 			</c:if>
 			<br>
 			<br>
-
-			<h2>직원 직장정보</h2>
+ 			<h2>직원 직장정보</h2>
 
 			<table class="temp">
 				<tr>
@@ -291,7 +335,7 @@ $(document).ready(function() {
 						<td>${myCompanies.companyTel}</td>
 					</tr>
 				</c:forEach>
-			</table>
+			</table> --%>
     </section>
 
 		<section id="bottom" class="wet-asp">
