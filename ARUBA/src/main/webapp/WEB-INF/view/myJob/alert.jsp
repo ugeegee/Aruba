@@ -130,13 +130,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>My Job</h1>
-					<p>Please input your login information</p>
+					<h1>Alert</h1>
+					<p>알림</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Job</li>
+						<li>Alert</li>
 					</ul>
 				</div>
 			</div>
