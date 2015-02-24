@@ -58,8 +58,6 @@
 <script>
 
 $(document).ready(function() {
-	alert("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
-
 	var c = <%=request.getAttribute("nowCode")%>;
 	var c0;
 	var c1;
@@ -387,12 +385,14 @@ $(document).ready(function() {
 	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	<br>
 	<!-- 각도조절 바 -->
+	<c:if test="${!empty Times }">
 	<div id="sliders">
 		<table>
 			<tr><td>Alpha Angle</td><td><input id="R0" type="range" min="0" max="45" value="15"/> <span id="R0-value" class="value"></span></td></tr>
 		    <tr><td>Beta Angle</td><td><input id="R1" type="range" min="0" max="45" value="15"/> <span id="R1-value" class="value"></span></td></tr>
 		</table>
 	</div>
+	</c:if>
     </section>
 
 	<section id="bottom" class="wet-asphalt">
