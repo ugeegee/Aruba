@@ -156,8 +156,8 @@ $(function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Staff Control</h1>
-					<p>Please input your login information</p>
+					<h1>inaccessible</h1>
+					<p>접근불가~~~~~~~~처리</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
@@ -170,7 +170,7 @@ $(function() {
 	</section>
 	<!--/#title-->
 
- 	<section id="StaffControl" class="container">
+ 	<section id="ExceptionControl" class="container">
  	
  		<c:if test="${staffList == -1 }">
  			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
@@ -180,6 +180,11 @@ $(function() {
  			<c:out value="${addUser.userName }" />님<br>
  			등록된 아르바이트생이 없습니다.<br>
  			아르바이트생에게 회사코드, 전화번호를 알려줘서 회사를 등록하게 만드세요~
+ 		</c:if>
+ 		
+ 		<c:if test="${ScheduleFail == 1 }">
+ 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
+ 			회사를 등록한 후 스케쥴메뉴가 사용가능합니다.
  		</c:if>
  		
     </section>
