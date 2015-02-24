@@ -200,9 +200,47 @@ $(document).ready(function() {
 	<!--/#title-->
 
  	<section id="MyJob" class="container">
- 		<c:if test="${emptyCompany =='YES' }">
-				<h2>직원 JOB등록</h2>
-				<br>
+ 	<c:if test="${emptyCompany =='YES' }">
+ 	<div class="pad">
+		<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h4>당신이 일하고 있는 직장을 등록하세요.</h4>
+            	                <br>
+                	        </li>
+                    	    
+                    	    <li>
+              				<c:url value="/sendMsgToOwner" var="url"></c:url>
+							<form id="addJobForm" method="post" action="${url }">
+							<table class="table" style="border-collapse: seperate;">
+							<tbody>
+							<tr>
+								<th class="center"><label>회사코드</label></th>
+								<td><input type="text" name="companyCode" id="companyCode" value="" class="form-control" placeholder="store code"/></td>
+							</tr>
+							<tr>
+								<th class="center"><label>회사전화번호</label></th>
+								<td><input type="text" name="companyTel" id="companyTel" value="" class="form-control" placeholder="store phonenumber"/></td>
+							</tr>
+							</tbody>
+						</table>
+			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+				<button type="submit" class="btn btn-success btn-md">Register</button>
+				<button type="reset" id="cancel" class="btn btn-success btn-md" >Reset</button>
+			</div>
+		</form>         	                    	     
+        </li>
+        </ul>
+        </div>
+        </div>
+    </div>
+    </c:if>
+ 	
+ 	
+ 	
+ 	 	<%-- <c:if test="${emptyCompany =='YES' }">
+ 			직장등록
 				<c:url value="/sendMsgToOwner" var="url"></c:url>
 				<form id="addJobForm" method="post" action="${url }">
 
@@ -229,7 +267,7 @@ $(document).ready(function() {
 						<button type="reset" id="cancel">취소</button>
 					</div>
 				</form>
-			</c:if>
+			</c:if> --%>
 			<c:if test="${emptyCompany =='NO' }">
 				<h2>아르바이트 등록은 최대 3개까지 가능합니다.</h2>
 			</c:if>
