@@ -27,6 +27,7 @@ import com.bmj.entity.CompanyPerson;
 import com.bmj.entity.SaveTime;
 import com.bmj.entity.TimeTable;
 import com.bmj.entity.Users;
+import com.bmj.exception.ScheduleMenuFailException;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.TimeTableService;
 import com.google.gson.Gson; 
@@ -43,6 +44,28 @@ public class TimeTableController {
 	CompanyPersonService service2;
 	@Autowired
 	TimeTableService service;
+	
+	@RequestMapping(value = "/checkdeleteTime", method = RequestMethod.GET)
+	public String checkdeleteTime(Model model) {
+		//model.addAttribute("result", "First");
+		return "/schedule/employer/checkdeleteTime";
+	}
+	
+	@RequestMapping(value = "/deleteTimeTable", method = RequestMethod.GET)
+	public String deleteTheShow(HttpSession session, Model model) {
+		logger.trace("수업 인데.................?");
+		
+		Users loginUser = (Users) session.getAttribute("addUser");
+		CompanyPerson companyperson = service2.selectCompanyPersonByUserId(loginUser.getUserId());
+		try{
+			model.addAttribute("code", companyperson.getCompanyCode());
+		}catch(NullPointerException e){
+			throw new ScheduleMenuFailException("!!사장이 등록한 회사가 없음!!");
+		}	
+		
+		
+		return "/schedule/employer/allSchedule";
+	}
 	
 	/*스케쥴 추가하기.....!*/
 	@RequestMapping(value="/addTimeTable", method = RequestMethod.GET)
