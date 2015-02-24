@@ -12,7 +12,7 @@
  
  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
  <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
-<link href="board/dataTables.css" rel="stylesheet">
+<link href="css/dataTables.css" rel="stylesheet">
 <!--     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -44,7 +44,7 @@ table td{
 </head>
 <body>
 	/index 입력!!<br><br><br><br><br>
-	<!-- <table id="example" class="display" cellspacing="0" width="100%">
+	<table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -525,10 +525,10 @@ table td{
                 <td>$112,000</td>
             </tr>
         </tbody>
-    </table> -->
+    </table>
     <br><br><br><br>
     
-    <table id="example" class="display" cellspacing="0" width="100%">
+    <!-- <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th width="10%" align="center">글번호</th>
@@ -641,6 +641,6 @@ table td{
             
             
         </tbody>
-    </table>
+    </table> -->
 </body>
 </html>
