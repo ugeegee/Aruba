@@ -140,12 +140,12 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>Alert</h1>
-					<p>Please input your login information</p>
+					<p>알림</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Store</li>
+						<li>Alert</li>
 					</ul>
 				</div>
 			</div>

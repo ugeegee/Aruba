@@ -60,6 +60,11 @@ $(document).ready(function() {
 	}); */
 });
 </script>
+<style>
+table td,th{
+	text-align : center;
+}
+</style>
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
@@ -238,7 +243,7 @@ $(document).ready(function() {
                 <td>${commentList.commentNumber}</td>
                 <td>
                 	<c:url value="/showReplyList" var="url"></c:url>
-					<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
+					<strong><a href="${url}?no=${commentList.commentNumber}">${commentList.commentTitle}</a></strong>
 				</td>
 				<td>${commentList.userId}</td>
                 <td>${commentList.regDate}</td>

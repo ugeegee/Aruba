@@ -111,13 +111,7 @@
         </div>
     </div>
  	</section>
- 		<%--
-					<c:out value="${addUser.userName }" />님, 안녕히 가세요.
-					<c:url value="/index" var="url"></c:url>
-					<a href="${url }">메인으로</a>
-			
- --%>    
-
+ 
 
 
 	<section id="bottom" class="wet-asp">

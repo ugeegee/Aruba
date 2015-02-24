@@ -38,13 +38,14 @@ public class CommentController {
 	}
 	@RequestMapping(value = "/registerComment", method = RequestMethod.GET)
 	// 게시글 작성하러옴
-	public String registerComment(@RequestParam String commentContent, 
+	public String registerComment(@RequestParam String commentTitle,@RequestParam String commentContent, 
 			@RequestParam int flag, Model model, HttpSession session) {
 		Comment comment = new Comment();
 		Users loginUser = (Users) session.getAttribute("addUser");
 		//Date date = new Date();
 		//regDate = new Date();
 		comment.setUserId(loginUser.getUserId());
+		comment.setCommentTitle(commentTitle);
 		comment.setCommentContent(commentContent);
 		comment.setRegDate(new Date());
 		comment.setFlag(flag);

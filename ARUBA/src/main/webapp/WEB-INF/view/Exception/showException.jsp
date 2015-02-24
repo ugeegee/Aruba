@@ -203,14 +203,25 @@ $(function() {
 
 	<section id="title" class="emerald">
 		<div class="container">
+				<!-- 사장이 회사를 등록하지 않고 staff control 누른 경우 없는경우 회사등록촉구-->
 					<c:if test="${staffList == -1 }">
-						<!-- 회사가 아예없는경우 -->
-		 				<h1>Staff Control Fail</h1>
-						<p>Please ~~~~~</p>
+		 				<div class="row">
+						<div class="col-sm-6">
+		 					<h1>Staff Control</h1>
+							<p>직원 관리</p>
+						</div>
+						<div class="col-sm-6">
+							<ul class="breadcrumb pull-right">
+								<li class="active">My Store</li>
+								<li>Staff Control</li>
+							</ul>
+						</div>
+						</div>
  					</c:if>
- 					
+				
+
+				<!-- 사장이 회사 등록 후 사장만 있는 경우 직원등록 촉구-->			 					
  					<c:if test="${staffList == 0 }">
- 						<!-- 회사 등록 후 사장만 있는 경우 -->
  						<div class="row">
 						<div class="col-sm-6">
 		 					<h1>Staff Control</h1>
@@ -232,12 +243,12 @@ $(function() {
 						<p>Please ~~~~~</p>
  					</c:if>
  					
+ 				<!-- 사장이 회사 등록을 하지 않고 월급 관리를 보는 경우 회사등록 촉구-->
  					<c:if test="${ChartFail == 1 }">
- 						<!-- 회사가 없어서 차트 메뉴를 불가능하게 -->
  						<div class="row">
 						<div class="col-sm-6">
 		 					<h1>Wage Control</h1>
-							<p>월급 관리</p>
+							<p>급여 관리</p>
 						</div>
 						<div class="col-sm-6">
 							<ul class="breadcrumb pull-right">
@@ -252,18 +263,32 @@ $(function() {
 	<!--/#title-->
 
  	<section id="ExceptionControl" class="container">
- 	
+ 		
+ 		<!-- 사장이 회사를 등록하지 않고 staff control 누른 경우 없는경우 회사등록촉구-->
  		<c:if test="${staffList == -1 }">
- 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
- 			회사를 등록한 후 직원조회가 가능합니다.
- 		</c:if>
+ 			<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.</h5>
+ 								<h5>회사를 등록한 후 직원조회가 가능합니다.</h5><br>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
+  		</c:if>
+ 		
+ 		
+ 		<!-- 사장이 회사 등록 후 사장만 있는 경우 직원등록 촉구-->
  		<c:if test="${staffList == 0 }">
  			<div class="pad">
 			<div id="pricing-table">
 	 		<div class="smallbox">
     	                <ul class="plan featured">
         	                <li class="plan-name">
-            	                <h5><c:out value="${addUser.userName }" />님 현재 회사에
+            	                <h5><c:out value="${addUser.userName }" />님, 현재 회사에
 						 			등록된 직원이 없습니다.<br></h5>
  								<h5>아르바이트생에서 회사코드, 전화번호를 이용해 회사를 등록할 수 있게 하십시오.</h5>
                 	        </li>
@@ -278,9 +303,20 @@ $(function() {
  			회사를 등록한 후 스케쥴메뉴가 사용가능합니다.
  		</c:if>
  		
+ 		<!-- 사장이 회사 등록을 하지 않고 월급 관리를 보는 경우 회사등록 촉구-->	
  		<c:if test="${ChartFail == 1 }">
- 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
- 			회사를 등록한 후 급여메뉴가 사용가능합니다.
+ 				<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br></h5>
+ 								<h5>회사를 등록한 후 급여메뉴가 사용가능합니다.</h5>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
  		</c:if>
     </section>
 

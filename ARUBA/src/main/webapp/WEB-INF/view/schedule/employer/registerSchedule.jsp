@@ -339,7 +339,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li class="active">Shift Table</a></li>
+						<li class="active">Shift Table</li>
 						<li>Register Shift</li>
 					</ul>
 				</div>

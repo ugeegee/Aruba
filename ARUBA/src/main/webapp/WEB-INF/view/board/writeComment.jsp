@@ -9,7 +9,9 @@
 <head>
 <meta charset="utf-8">
 
+<!--------------------- Validate --------------------->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="lib/jquery.validate.min.js"></script>
 
 <!--------------------- DataTable --------------------->
 
@@ -40,27 +42,66 @@
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 	
-<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
 <script type="text/javascript">
 $(document).ready(function() {
 	
 	$('#example').DataTable();
 	
-	$("#proceed").click(function(){
-		if($("#commentContent").val()==""){
-			alert("게시글 내용을 입력해주세요.");
-		}else{
-			<c:url value="/registerComment" var="comment"></c:url>
-			var url = "${comment}?flag="+<%=request.getAttribute("nowFlag")%>+"&commentContent="+$("#commentContent").val();
-			location.href = url;
+	$("#commentForm").validate({
+		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
+		/* submitHandler : function() {
+			var f = confirm("글을 등록하시겠습니까?");
+			if (f) {
+				return true;
+			} else {
+				return false;
+			}
+		}, */
+		ignore: "",
+		//규칙
+		rules : {
+			commentTitle : {
+				required : true,
+				minlength : 1,
+				maxlength : 50
+			},
+			commentContent : {
+				required : true,
+				minlength : 1,
+				maxlength : 200
+			}
+		},
+		//규칙체크 실패시 출력될 메시지
+		messages : {
+			
+			commentTitle : {
+				required : "필수 입력사항 입니다.",
+				minlength : "최소 {0}글자이상이어야 합니다",
+				maxlength : "최대 {0}글자이하이어야 합니다"
+			},
+			commentContent : {
+				required : "필수 입력사항 입니다.",
+				minlength : "최소 {0}글자이상이어야 합니다",
+				maxlength : "최대 {0}글자이하이어야 합니다"
+			}
 		}
 	});
+
+	var commentForm = $("#commentForm");
+	for ( var item in commentForm) {
+		console.log(item + " : " + commentForm[item]);
+	}
 });
 </script>
 <style>
 table td,th{
 	text-align : center;
 }
+label.error {
+	color: red;
+	/* font-style: italic */
+}
+
 </style>
 </head>
 <body>
@@ -217,7 +258,7 @@ table td,th{
 	
 	<div id="comment-form">
 	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
+			<form:form modelAttribute="addComment" id="commentForm" method="get" action="${action}" class="form-horizontal">
 				<h3>게시글 작성</h3>	
 				<br>
 				FLAG : <c:if test="${nowFlag=='1' }">공지</c:if>
@@ -228,11 +269,15 @@ table td,th{
 				
 				<div class="form-group">
                  	<div class="col-sm-12">
-                    	<form:textarea path="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
+                 		<br><br>
+                 		<input type="hidden" id="flag" name="flag" value=${nowFlag}> 
+                 		<form:input path="commentTitle" name="commentTitle" class="form-control" placeholder="제목"/>
+                    	<br><br>
+                    	<form:textarea path="commentContent" name="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
                     </div>
                 </div>
 					<input type="reset" value="다시쓰기" class="btn btn-success btn-md write"/>
-					<input type="button" id="proceed" name="proceed" value="글쓰기" class="btn btn-success btn-md write"/>
+					<input type="submit" value="글쓰기" class="btn btn-success btn-md write"/>
 					
 			</form:form> 
 	</div>

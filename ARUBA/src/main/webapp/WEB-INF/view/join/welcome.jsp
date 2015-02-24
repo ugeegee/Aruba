@@ -203,7 +203,7 @@
 	 				<div class="smallbox">
     	                <ul class="plan featured">
         	                <li class="plan-name">
-            	                <h4><c:out value="${addUser.userId }" />님 회원가입을 축하드립니다.</h4>
+            	                <h4><c:out value="${addUser.userId }" />님, 회원가입을 축하드립니다.</h4>
                 	        </li>
         	             	<li class="plan-action">
         	             		<c:if test="${addUser.grade=='사장' }">
