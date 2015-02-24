@@ -232,7 +232,7 @@ $(document).ready(function() {
 	 		<div class="smallbox">
     	                <ul class="plan featured">
         	                <li class="plan-name">
-            	                <h4>당신이 운영하는 회사를 등록해주세요.</h4>
+            	                <h4>당신이 운영하는 회사를 등록하세요.</h4>
             	                <br>
                 	        </li>
                     	    <li>
