@@ -376,6 +376,7 @@ public class UsersController {
 		// 나의 회사 코드 가져오기...!
 		CompanyPerson companyperson = cpService
 				.selectCompanyPersonByUserId(userId);
+		
 		int companyCode = companyperson.getCompanyCode();
 		logger.trace("수업 CompanyCode : " + companyperson.getCompanyCode());
 		// company_person에 가서 직원 아이디 갖고오기!!

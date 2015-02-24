@@ -112,6 +112,8 @@ public class MessageController {
 		return "/myJob/alert";
 	}
 
+	// ///////////////////////////////////////////////////////////////////////////////////////////////////
+
 	@ExceptionHandler
 	public String RegisterJobFail(RegisterJobException e,
 			HttpServletRequest request, HttpSession session) {
@@ -139,4 +141,7 @@ public class MessageController {
 
 		return "myJob/myJob";
 	}
+	
+	// ///////////////////////////////////////////////////////////////////////////////////////////////////
+
 }

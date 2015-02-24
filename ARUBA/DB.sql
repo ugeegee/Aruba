@@ -266,7 +266,7 @@ END;
 
 /*첫회사로 추가해줘야함-삭제메세지 관리*/
 insert into Company(company_name, company_tel, holiday_comm, night_comm) 
-values ('messageControl', '123456789', -100, -100)
+values ('messageControl', '123456789', -100, -100);
 
 /*********************************************************************************/
 
