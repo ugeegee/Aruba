@@ -97,7 +97,7 @@
 	 				<div class="smallbox">
     	                <ul class="plan featured">
         	                <li class="plan-name">
-            	                <h4><c:out value="${addUser.userName }" />님의 계정이 정상적으로 탈퇴되었습니다.</h4><br><br>
+            	                <h4><c:out value="${addUser.userName }" />님의 계정이 정상적으로 탈퇴되었습니다.</h4><br>
             	                <h5>더 나은 서비스로 보답하겠습니다.</h5>
                 	        </li>
         	             	<li class="plan-action">

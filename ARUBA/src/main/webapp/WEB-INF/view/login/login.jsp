@@ -50,7 +50,7 @@ label.error {
 	$(document).ready(function() {
 		
 		if(<%=request.getAttribute("PopUp")%> == 1){
-			alert("아이디 혹은 비밀번호가 틀렸습니다.");
+			alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
 		}
 		
 		$("#loginForm").validate({
