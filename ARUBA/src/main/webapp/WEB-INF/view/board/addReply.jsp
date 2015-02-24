@@ -61,6 +61,17 @@ $(document).ready(function() {
 			alert("본인 글만 삭제할 수 있습니다!!");
 		}
 	});
+	$("#modifyBtn").click(function(){
+		var id = $("#writeId").html();
+		var no = $("#writeNo").html();
+		if(id == loginId){
+			alert("자신이쓴글입니다!! "+no);
+			var url = "<%=request.getContextPath()%>/modifyComment?commentNumber="+no;
+			$(location).attr('href',url); 
+		}else{
+			alert("본인 글만 수정할 수 있습니다!!");
+		}
+	});
 	$("#replyForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 		/* submitHandler : function() {
@@ -290,6 +301,7 @@ label.error {
 					<td align = "center">${selectedComment.regDate}</td>
 					<td align = "center">
 					<button id="deleteBtn">삭제</button>
+					<button id="modifyBtn">수정</button>
 					</td>
 				</tr>
 				<tr>

@@ -19,10 +19,9 @@
 	
 	<update id="updateComment" parameterType="Comment">
 		update bComment set 
-			user_id=#{userId}, 
+			comment_title=#{commentTitle},
 			comment_content=#{commentContent}, 
-			reg_date=#{regDate}, 
-			flag=#{flag}
+			reg_date=#{regDate}
 		where comment_number=#{commentNumber}
 	</update>
 

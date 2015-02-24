@@ -53,7 +53,7 @@ public class ReplyController {
 
 	@RequestMapping(value = "/showReplyList", method = RequestMethod.GET)
 	//글보기
-	public String showReplyList(@RequestParam int no, Model model, HttpSession session) {
+	public String showCommentContent(@RequestParam int no, Model model, HttpSession session) {
 		model.addAttribute("addReply", new Reply());
 		Comment selectedComment = cservice.selectComment(no);
 		List<Reply> replyList = rservice.selectAllReply(no);
@@ -67,7 +67,7 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value = "/deleteComment", method = RequestMethod.GET)
-	//글보기
+	//글삭제
 	public String deleteCommentSuccess(@RequestParam int commentNumber, Model model) {
 		//글을 지우기전에 되돌아갈 flag얻어오고
 		int trunbackFlag = cservice.selectFlagByCommentNo(commentNumber);
