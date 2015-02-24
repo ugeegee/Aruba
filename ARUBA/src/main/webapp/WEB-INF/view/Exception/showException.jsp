@@ -157,18 +157,22 @@ $(function() {
 			<div class="row">
 				<div class="col-sm-6">
 					<c:if test="${staffList == -1 }">
+						<!-- 회사가 아예없는경우 -->
 		 				<h1>Staff Control Fail</h1>
 						<p>Please ~~~~~</p>
  					</c:if>
  					<c:if test="${staffList == 0 }">
+ 						<!-- 회사 등록 후 사장만 있는 경우 -->
 		 				<h1>Staff Control Fail</h1>
 						<p>Please ~~~~~</p>
  					</c:if>
  					<c:if test="${ScheduleFail == 1 }">
+ 						<!-- 회사가 없어서 스케쥴 메뉴를 불가능하게 -->
  						<h1>Schedule Fail</h1>
 						<p>Please ~~~~~</p>
  					</c:if>
  					<c:if test="${ChartFail == 1 }">
+ 						<!-- 회사가 없어서 차트 메뉴를 불가능하게 -->
  						<h1>Wage Fail</h1>
 						<p>Please ~~~~~</p>
  					</c:if>
