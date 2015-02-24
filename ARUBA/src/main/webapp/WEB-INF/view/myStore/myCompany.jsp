@@ -256,8 +256,9 @@ $(document).ready(function() {
 				<tbody>
 					<tr>
 						<td><label>회사코드</label></td>
-						<td><form:input path="companyCode" name="companyCode" id="companyCode" class="form-control"/></td>
-						<td><input type="hidden" name="ownerPass" id="ownerPass" value=${ownerPass} /></td>					
+						<td><c:out value="${myCom.companyCode }" />
+						<form:hidden path="companyCode" name="companyCode" id="companyCode" class="form-control"/>
+						<input type="hidden" name="ownerPass" id="ownerPass" value=${ownerPass} /></td>					
 					</tr>
 						
 					<tr>

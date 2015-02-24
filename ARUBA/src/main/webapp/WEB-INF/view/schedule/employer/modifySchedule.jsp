@@ -235,6 +235,12 @@ $(document).ready(function() {
 		});
 		}
 	});
+	
+	$("#initbutton").click(function() {
+		var url = "<%=request.getContextPath()%>/checkdeleteTime"; 
+		window.open(url, "_blank", "width=600, height=600, toolbar=no, menubar=no, resizable=no");
+	})
+	
 	$("#updatebutton").click(function() {
 		var updateStart = JSON.stringify(updates);
 		var updateEnd = JSON.stringify(results);
@@ -428,8 +434,9 @@ $(document).ready(function() {
 	
 	<br>
 	<br>
+
 	<div id = 'update'  class="savee">
-		<button id = "updatebutton" class="btn btn-danger btn-md btn-block">Modify</button>
+		<button id = "initbutton" class="btn btn-success btn-md">Init</button><button id = "updatebutton" class="btn btn-danger btn-md btn-block">Modify</button>
 	</div>
 	</section>
 
