@@ -55,6 +55,11 @@
 		}); */
 	});
 </script>
+<style>
+table td,th{
+	text-align : center;
+}
+</style>
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
@@ -234,8 +239,8 @@
 				<c:forEach items="${commentList }" var="commentList">
 					<tr>
 						<td>${commentList.commentNumber}</td>
-						<td><c:url value="/showReplyList" var="url"></c:url> <a
-							href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
+						<td><c:url value="/showReplyList" var="url"></c:url> 
+							<strong><a href="${url}?no=${commentList.commentNumber}">${commentList.commentTitle}</a></strong>
 						</td>
 						<td>${commentList.userId}</td>
 						<td>${commentList.regDate}</td>

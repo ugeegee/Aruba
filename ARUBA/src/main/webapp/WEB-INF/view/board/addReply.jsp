@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+
 <!--------------------- Validate --------------------->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="lib/jquery.validate.min.js"></script>
@@ -34,10 +35,10 @@
 	href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#proceed").click(function(){
+	/* $("#proceed").click(function(){
 		 if($("#replyContent").val()==""){
 			alert("댓글 내용을 입력해주세요.");
 		}else{
@@ -45,9 +46,58 @@ $(document).ready(function() {
 			var url = "${reply}?commentNumber="+$("#commentNumber").val()+"&replyContent="+$("#replyContent").val();
 			location.href = url;
 		} 
+	}); */
+	$("#replyForm").validate({
+		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
+		/* submitHandler : function() {
+			var f = confirm("글을 등록하시겠습니까?");
+			if (f) {
+				return true;
+			} else {
+				return false;
+			}
+		}, */
+		ignore: "",
+		//규칙
+		rules : {
+			commentTitle : {
+				required : true,
+				minlength : 1,
+				maxlength : 50
+			},
+			commentContent : {
+				required : true,
+				minlength : 1,
+				maxlength : 200
+			}
+		},
+		//규칙체크 실패시 출력될 메시지
+		messages : {
+			
+			commentTitle : {
+				required : "필수 입력사항 입니다.",
+				minlength : "최소 {0}글자이상이어야 합니다",
+				maxlength : "최대 {0}글자이하이어야 합니다"
+			},
+			commentContent : {
+				required : "필수 입력사항 입니다.",
+				minlength : "최소 {0}글자이상이어야 합니다",
+				maxlength : "최대 {0}글자이하이어야 합니다"
+			}
+		}
 	});
+
+	var replyForm = $("#replyForm");
+	for ( var item in replyForm) {
+		console.log(item + " : " + replyForm[item]);
+	}
 });
 </script>
+<style>
+table th{
+	text-align : center;
+}
+</style>
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
@@ -201,24 +251,36 @@ $(document).ready(function() {
 	</section>
 	<!--/#title-->
  	<section id="freeBoard" class="container">
- 		addReply
- 		<div class="mainmenubg">
-		<div class="main zerogrid">
-			<table class="temp">
+			<hr>
+			<table class="temp" width="100%">
 				<tr>
-					<th width = "175" align="center">게시글번호</th>
-					<th width = "175">아이디</th>
-					<th width = "375">게시글내용</th>
+					<th width = "10%">글번호</th>
+					<th width = "30%">종류?</th>
+					<th width = "30%">작성자</th>
 					<th>작성날짜</th>
- 				<%-- <th>
- 				<c:url value="/deleteComment" var="url"></c:url>
-				<a href="${url}?userId=${commentList.commentNumber}"><button>내게시글 삭제</button></a></th> --%>
+					<th width = "10%">
+
+					</th>
 				</tr>
 				<tr> 
 					<td align = "center">${selectedComment.commentNumber}</td>
-					<td align = "center">${selectedComment.userId}</td>
-					<td align = "center">${selectedComment.commentContent}</td>
+					<td align = "center">
+					<c:if test="${selectedComment.flag=='1' }">공지게시판</c:if>
+					<c:if test="${selectedComment.flag=='2' }">자유게시판</c:if>
+					<c:if test="${selectedComment.flag=='3' }">Q&A게시판</c:if>
+					</td>
+					<td align = "center" id="writeId">${selectedComment.userId}</td>
 					<td align = "center">${selectedComment.regDate}</td>
+					<td align = "center">
+					<c:url value="/deleteComment" var="url"></c:url>
+					<a href="${url}?userId=${commentList.commentNumber}"><button>삭제</button></a>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="5"><strong>${selectedComment.commentTitle}</strong></td>
+				</tr>
+				<tr>
+					<td colspan="5">${selectedComment.commentContent}</td>
 				</tr>
 			</table>
 			<br><br><br><hr>
@@ -243,16 +305,13 @@ $(document).ready(function() {
 			<form:form modelAttribute="addReply" id="replyForm" method="post" action="${action}">
 				<table>
 					<tr>
-						<td><label></label></td>
-						<td><form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" /></td>
+						<form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" />
 					</tr>
 				</table><br>
 			<form:textarea path="replyContent" id="replyContent" rows="3" cols="130"></form:textarea>
  				<input type="button" name="proceed" id="proceed" value="댓글등록"/>
 				<input type="reset" value="다시쓰기"/>
 			</form:form>
-		</div>
-	</div>
     </section>
 	
 		<section id="bottom" class="wet-asp">

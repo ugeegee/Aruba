@@ -240,7 +240,7 @@ table td,th{
                 <td>${commentList.commentNumber}</td>
                 <td>
                 	<c:url value="/showReplyList" var="url"></c:url>
-					<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
+					<strong><a href="${url}?no=${commentList.commentNumber}">${commentList.commentTitle}</a></strong>
 				</td>
 				<td>${commentList.userId}</td>
                 <td>${commentList.regDate}</td>

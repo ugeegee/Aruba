@@ -245,12 +245,11 @@ $(document).ready(function() {
 			<table>
 			<tr>
 				<td><label>Code</label></td>
-				<td><form:hidden path="companyCode" name="companyCode" id="companyCode"/></td>
+				<td><c:out value="${myCom.companyCode }" />
+				<form:hidden path="companyCode" name="companyCode" id="companyCode"/>
+				<input type="hidden" name="ownerPass" id="ownerPass" value=${ownerPass} /></td>
 			</tr>
-			<tr>
-				<td><label>OwnerPass</label></td>
-				<td><input type="hidden" name="ownerPass" id="ownerPass" value=${ownerPass} /></td>
-			</tr>
+	
 			<tr>
 			<tr>
 				<td><label>회사명</label></td>
@@ -270,7 +269,7 @@ $(document).ready(function() {
 			</tr>		
 			<tr>
 				<td><label>비밀번호</label></td>
-				<td><input type="text" name="nowPass" id="nowPass" /></td>
+				<td><input type="password" name="nowPass" id="nowPass" /></td>
 			</tr>
 				</table>
 					<input type="submit" name="modify" value="수정"/>

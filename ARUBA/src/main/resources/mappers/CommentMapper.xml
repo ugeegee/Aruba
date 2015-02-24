@@ -13,8 +13,8 @@
 	</resultMap>  -->
 	
 	<insert id = "insertComment" parameterType = "Comment">
-		insert into bComment(user_id, comment_content, reg_date, flag) 
-		values (#{userId}, #{commentContent}, #{regDate}, #{flag})
+		insert into bComment(user_id, comment_title, comment_content, reg_date, flag) 
+		values (#{userId}, #{commentTitle}, #{commentContent}, #{regDate}, #{flag})
 	</insert>
 	
 	<update id="updateComment" parameterType="Comment">
