@@ -38,7 +38,7 @@
 	
 <script type="text/javascript">
 $(document).ready(function() {
-	/* $("#proceed").click(function(){
+	/*  $("#proceed").click(function(){
 		 if($("#replyContent").val()==""){
 			alert("댓글 내용을 입력해주세요.");
 		}else{
@@ -46,7 +46,21 @@ $(document).ready(function() {
 			var url = "${reply}?commentNumber="+$("#commentNumber").val()+"&replyContent="+$("#replyContent").val();
 			location.href = url;
 		} 
-	}); */
+	});  */
+	
+	var loginId = "<%=request.getAttribute("loginId")%>";
+	
+	$("#deleteBtn").click(function(){
+		var id = $("#writeId").html();
+		var no = $("#writeNo").html();
+		if(id == loginId){
+			alert("자신이쓴글입니다!! "+no);
+			var url = "<%=request.getContextPath()%>/deleteComment?commentNumber="+no;
+			$(location).attr('href',url); 
+		}else{
+			alert("본인 글만 삭제할 수 있습니다!!");
+		}
+	});
 	$("#replyForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 		/* submitHandler : function() {
@@ -236,8 +250,18 @@ table th{
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Free Board</h1>
-					<p>자유게시판</p>
+					<c:if test="${selectedComment.flag=='1' }">
+						<h1>Notice Board</h1>
+						<p>공지게시판</p>
+					</c:if>
+					<c:if test="${selectedComment.flag=='2' }">
+						<h1>Free Board</h1>
+						<p>자유게시판</p>
+					</c:if>
+					<c:if test="${selectedComment.flag=='3' }">
+						<h1>Q&A Board</h1>
+						<p>Q&A 게시판</p>
+					</c:if>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
@@ -263,7 +287,7 @@ table th{
 					</th>
 				</tr>
 				<tr> 
-					<td align = "center">${selectedComment.commentNumber}</td>
+					<td align = "center" id="writeNo">${selectedComment.commentNumber}</td>
 					<td align = "center">
 					<c:if test="${selectedComment.flag=='1' }">공지게시판</c:if>
 					<c:if test="${selectedComment.flag=='2' }">자유게시판</c:if>
@@ -272,8 +296,7 @@ table th{
 					<td align = "center" id="writeId">${selectedComment.userId}</td>
 					<td align = "center">${selectedComment.regDate}</td>
 					<td align = "center">
-					<c:url value="/deleteComment" var="url"></c:url>
-					<a href="${url}?userId=${commentList.commentNumber}"><button>삭제</button></a>
+					<button id="deleteBtn">삭제</button>
 					</td>
 				</tr>
 				<tr>

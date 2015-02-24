@@ -72,4 +72,16 @@ public class CommentServiceImpl implements CommentService {
 		List<Comment> result = dao.selectAllQnAComment();
 		return result;
 	}
+
+	@Override
+	public int selectFlagByCommentNo(int commentNumber) {
+		int result = dao.selectFlagByCommentNo(commentNumber);
+		return result;
+	}
+
+	@Override
+	public int deleteCommentByCommentNo(int commentNumber) {
+		int result = dao.deleteCommentByCommentNo(commentNumber);
+		return result;
+	}
 }

@@ -36,7 +36,7 @@ public class CommentController {
 		model.addAttribute("nowFlag", flag);
 		return "/board/writeComment";
 	}
-	@RequestMapping(value = "/registerComment", method = RequestMethod.GET)
+	@RequestMapping(value = "/registerComment", method = RequestMethod.POST)
 	// 게시글 작성하러옴
 	public String registerComment(@RequestParam String commentTitle,@RequestParam String commentContent, 
 			@RequestParam int flag, Model model, HttpSession session) {
@@ -52,13 +52,16 @@ public class CommentController {
 		cservice.insertComment(comment);
 		model.addAttribute("addComment", comment);
 		/*return "/board/success";*/
-		return "redirect:/boardSuccess";
+		
+		model.addAttribute("turnbackFlag", flag);
+		
+		return "/board/success";
 	}
-	@RequestMapping(value = "/boardSuccess")
+	/*@RequestMapping(value = "/boardSuccess")
 	// 게시글 작성 성공알림
 	public String registerCommentSuccess() {
 		return "/board/success";
-	}
+	}*/
 	
 	@RequestMapping(value = "/notice")
 	public String showNoticeList(Model model) {

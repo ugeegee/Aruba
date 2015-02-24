@@ -10,4 +10,6 @@ public interface ReplyDao {
 	int updateReply(Reply reply);
 	int deleteReply(String userId);
 	List<Reply> selectAllReply(int commentNumber);
+	
+	int deleteReplyByCommentNo(int commentNumber);
 }

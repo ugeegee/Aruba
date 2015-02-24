@@ -258,7 +258,7 @@ label.error {
 	
 	<div id="comment-form">
 	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" id="commentForm" method="get" action="${action}" class="form-horizontal">
+			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
 				<h3>게시글 작성</h3>	
 				<br>
 				FLAG : <c:if test="${nowFlag=='1' }">공지</c:if>

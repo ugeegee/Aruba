@@ -31,6 +31,11 @@
 		user_id=#{userId}
 	</delete>
 	
+	<delete id="deleteCommentByCommentNo" parameterType="Integer">
+		delete from bComment where
+		comment_number=#{commentNumber}
+	</delete>
+	
 	<select id="selectAllNoticeComment" resultType="Comment">
 		select * from bComment where flag= 1
 	</select>
@@ -49,6 +54,10 @@
 	
 	<select id="CountByUserId" parameterType="String" resultType="INTEGER">
 		select count(*) from bComment where user_id=(#{userId})
+	</select>
+	
+	<select id="selectFlagByCommentNo" parameterType="INTEGER" resultType="INTEGER">
+		select flag from bComment where comment_number=#{commentNumber}
 	</select>
 
 </mapper>

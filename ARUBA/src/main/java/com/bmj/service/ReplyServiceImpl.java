@@ -45,4 +45,10 @@ public class ReplyServiceImpl implements ReplyService {
 		List<Reply> result = dao.selectAllReply(commentNumber);
 		return result;
 	}
+
+	@Override
+	public int deleteReplyByCommentNo(int commentNumber) {
+		int result = dao.deleteReplyByCommentNo(commentNumber);
+		return result;
+	}
 }

@@ -76,4 +76,16 @@ public class CommentDaoImpl implements CommentDao {
 		comments = sqlSession.selectList(stmt);
 		return comments;
 	}
+
+	@Override
+	public int selectFlagByCommentNo(int commentNumber) {
+		String stmt = namespace + "selectFlagByCommentNo";
+		return sqlSession.selectOne(stmt, commentNumber);
+	}
+
+	@Override
+	public int deleteCommentByCommentNo(int commentNumber) {
+		String stmt = namespace + "deleteCommentByCommentNo";
+		return sqlSession.delete(stmt, commentNumber);
+	}
 }
