@@ -90,7 +90,7 @@ $(document).ready(function() {
 					<c:if test="${!empty addUser }">
 						<!-- MY PAGE 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 										Account</a></li>
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Store<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myCompany">Store
 											Control</a></li>
@@ -121,7 +121,7 @@ $(document).ready(function() {
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="<%=request.getContextPath()%>/registerSchedule">Register
@@ -142,7 +142,7 @@ $(document).ready(function() {
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myJob">My
 											Job</a></li>
@@ -163,7 +163,7 @@ $(document).ready(function() {
 
 						<!-- 게시판 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/notice">Notice
 										Board</a></li>
@@ -206,21 +206,21 @@ $(document).ready(function() {
 			<table class="table table-striped table-hover">
 				<thead>
 				<tr>
-					<th width = "175">게시글번호</th>
-					<th width = "175">아이디</th>
-					<th width = "375">게시판내용</th>
-					<th>작성날짜</th>
+					<th width="">게시글번호</th>
+					<th width="">제목</th>
+					<th width="">작성자</th>
+					<th width="">작성일</th>
 				</tr>
 				</thead>
 			<c:forEach items="${commentList }" var="commentList">
 					<tbody>
 					<tr> 
 						<td align = "left">${commentList.commentNumber}</td>
-						<td align = "left">${commentList.userId}</td>
 						<td align = "left">
 							<c:url value="/showReplyList" var="url"></c:url>
 							<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
-					</td>
+						</td>
+						<td align = "left">${commentList.userId}</td>
 						<td align = "left">${commentList.regDate}</td>
 					</tr>
 					</tbody>

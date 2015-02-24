@@ -160,7 +160,7 @@ label.error {
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="<%=request.getContextPath()%>/registerSchedule">Register
@@ -232,8 +232,8 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>My Page</li>
-						<li class="active">Delete Account</li>
+						<li class="active">My Page</li>
+						<li>Delete Account</li>
 					</ul>
 				</div>
 			</div>
@@ -245,6 +245,9 @@ label.error {
  		<c:url value="/leaveAruba" var="url" />
         <form:form modelAttribute="addUser" class="center" role="form" id="passForm" method="post" action="${url }">
             <fieldset class="registration-form">
+            	<div class="form-group">
+            		탈퇴 전, 본인 확인을 위해 비밀번호를 입력해주세요.
+            	</div>
                 <div class="form-group">
                     <form:hidden path="userId" id="userId" name="userId" class="form-control"/>
                 </div>

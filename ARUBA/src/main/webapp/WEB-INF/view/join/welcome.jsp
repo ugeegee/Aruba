@@ -41,6 +41,12 @@
 <script>
 
 </script>
+
+<style>
+.welcome{
+	float:middle;
+}
+</style>
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
@@ -81,7 +87,7 @@
 					<c:if test="${!empty addUser }">
 						<!-- MY PAGE 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 										Account</a></li>
@@ -99,7 +105,7 @@
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Store<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myCompany">Store
 											Control</a></li>
@@ -112,7 +118,7 @@
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="<%=request.getContextPath()%>/registerSchedule">Register
@@ -133,7 +139,7 @@
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myJob">My
 											Job</a></li>
@@ -155,7 +161,7 @@
 
 						<!-- 게시판 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/notice">Notice
 										Board</a></li>
@@ -179,22 +185,41 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Welcome!!</h1>
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada</p>
+					<h1>Welcome!</h1>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Services</li>
+						<li class="active">Home</li>
+						<li>Welcome</li>
 					</ul>
 				</div>
-			</div>
+				<br>
+				<br>
+				<hr>
+				<br>
+				<br>
+				
+				<div class="welcome">
+					
+					<h3><c:out value="${addUser.userId }" />님 회원가입을 축하드립니다.</h3><br>
+						
+			 		<c:if test="${addUser.grade=='사장' }">
+ 					<h4>자신이 운영하는 회사를 등록해주세요. 지금하지 않아도 나중에 Store Control에서 가능합니다.</h4> 					
+		 			<c:url value="/registerCompany" var="url"></c:url>
+					<a href="${url }"><button class="btn btn-danger btn-md btn-block">Register Store</button></a>
+					</c:if>
+		
+					<c:if test="${addUser.grade=='직원' }">
+					<h4>자신이 근무하는 직장을 등록해주세요. 지금하지 않아도 나중에 My Job에서 가능합니다.</h4>
+					<c:url value="/myJob" var="url"></c:url>
+					<a href="${url }"><button class="btn btn-danger btn-md btn-block">직원-회사등록</button></a>
+					</c:if>
+				</div>
 		</div>
 	</section>
 	<!--/#title-->
 
-	<section id="Welcome" class="container">
+	<%-- <section id="Welcome" class="container">
  		<c:out value="${addUser.userId }" /> 반갑습니다.
  		
  		<c:if test="${addUser.grade=='사장' }">
@@ -208,131 +233,14 @@
 			<a href="${url }"><button>직원-회사등록</button></a>
 		</c:if>
     </section>
-
+ --%>
 			
-			<div class="row">
-				<div class="col-md-4 col-sm-6">
-					<div class="media">
-						<div class="pull-left">
-							<i class="icon-windows icon-md"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">Windows Development</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
-						</div>
-					</div>
-				</div>
-				<!--/.col-md-4-->
-				<div class="col-md-4 col-sm-6">
-					<div class="media">
-						<div class="pull-left">
-							<i class="icon-android icon-md"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">Android Development</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
-						</div>
-					</div>
-				</div>
-				<!--/.col-md-4-->
-				<div class="col-md-4 col-sm-6">
-					<div class="media">
-						<div class="pull-left">
-							<i class="icon-apple icon-md"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">iOS Development</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
-						</div>
-					</div>
-				</div>
-				<!--/.col-md-4-->
-			</div>
-			<!--/.row-->
-			<div class="gap"></div>
-			<div class="row">
-				<div class="col-md-4 col-sm-6">
-					<div class="media">
-						<div class="pull-left">
-							<i class="icon-linux icon-md"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">Linux Development</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
-						</div>
-					</div>
-				</div>
-				<!--/.col-md-4-->
-				<div class="col-md-4 col-sm-6">
-					<div class="media">
-						<div class="pull-left">
-							<i class="icon-dribbble icon-md"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">Graphic Design</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
-						</div>
-					</div>
-				</div>
-				<!--/.col-md-4-->
-				<div class="col-md-4 col-sm-6">
-					<div class="media">
-						<div class="pull-left">
-							<i class="icon-google-plus icon-md"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">SEO Services</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
-						</div>
-					</div>
-				</div>
-				<!--/.col-md-4-->
-			</div>
-			<!--/.row-->
-			<hr>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="center">
-						<h2>What our clients say</h2>
-						<p>Pellentesque habitant morbi tristique senectus et netus et
-							malesuada fames ac turpis egestas.</p>
-					</div>
-					<div class="gap"></div>
-					<div class="row">
-						<div class="col-md-6">
-							<blockquote>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Integer posuere erat a ante.</p>
-								<small>Someone famous in <cite title="Source Title">Source
-										Title</cite></small>
-							</blockquote>
-						</div>
-						<div class="col-md-6">
-							<blockquote>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Integer posuere erat a ante.</p>
-								<small>Someone famous in <cite title="Source Title">Source
-										Title</cite></small>
-							</blockquote>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--/#services-->
+		
+		
+		
+		
+		
+		
 
 	<section id="bottom" class="wet-asphalt">
 		<div class="container">

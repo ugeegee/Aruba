@@ -82,8 +82,8 @@
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>Home</li>
-						<li class="active">Logout</li>
+						<li class="active">Home</li>
+						<li>Logout</li>
 					</ul>
 				</div>
 			</div>
@@ -91,14 +91,34 @@
 	</section>
 	<!--/#title-->
 
- <section id="Logout" class="container">
- 		<div align="center" style="margin-bottom: 50px; margin-top:30px;">
-		<h2><c:out value="${addUser.userName }" />님, 다음에도 이용해주세요.<br>
-		안녕히 가세요.</h2>
-		<c:url value="/index" var="url"></c:url>
-		<a href="${url }">메인으로</a>
-	</div>
-    </section>
+
+
+	<!-- 로그아웃 내용 -->
+	<section id="Logout" class="container ">
+	<div class="ccenter">
+		<div id="pricing-table">
+	 		<div class="col-md-3 col-xs-6">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5>로그아웃 되셨습니다.</h5>
+                	        </li>
+                    	    <li class="plan-action">
+                    	     <c:url value="/index" var="url"></c:url>
+                       	     <a href="#" class="btn btn-primary btn-md">Home</a>
+                      	  </li>
+                    	</ul>
+           </div>
+        </div>
+      </div>
+ 	</section>
+ 		<%--
+					<c:out value="${addUser.userName }" />님, 안녕히 가세요.
+					<c:url value="/index" var="url"></c:url>
+					<a href="${url }">메인으로</a>
+			
+ --%>    
+
+
 
 	<section id="bottom" class="wet-asphalt">
 		<div class="container">

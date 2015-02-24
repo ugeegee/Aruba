@@ -249,8 +249,8 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Sign Up</li>
+						<li class="active">Home</li>
+						<li>Sign Up</li>
 					</ul>
 				</div>
 			</div>
@@ -262,6 +262,9 @@ label.error {
  		<c:url value="/join" var="url" />
         <form class="center" role="form" id="joinForm" method="post" action="${url }">
             <fieldset class="registration-form">
+            	<div class="form-group">
+            		* 아이디를 생성하시려면, 중복확인 버튼을 눌러주세요
+            	</div>
                 <div class="form-group">
                     <input type="text" id="formId" name="formId" disabled class="form-control">
                     <input type="hidden" name="userId" id="userId" value="" />
@@ -269,22 +272,25 @@ label.error {
                     <input type="hidden" name="buttonCheck" id="buttonCheck" value="" />
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+                    <input type="password" id="password" name="password" placeholder="password" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password2" name="password2" placeholder="Password(again)" class="form-control">
+                    <input type="password" id="password2" name="password2" placeholder="password(again)" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="text" id="userName" name="userName" placeholder="Name" class="form-control">
+                    <input type="text" id="userName" name="userName" placeholder="name" class="form-control">
                 </div>
                 <div class="form-group">
                     <input type="text" id="tel" name="tel" placeholder="H.P" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="text" id="email" name="email" placeholder="E-mail" class="form-control">
+                    <input type="text" id="email" name="email" placeholder="e-mail" class="form-control">
                 </div>
                  <div class="form-group">
-                    <input type="text" id="datepicker" name="birth" placeholder="birth" class="form-control">
+                    <input type="text" id="datepicker" name="birth" placeholder="birthdate" class="form-control">
+                </div>
+                <div class="form-group">
+                	* 사장과 직원 여부를 선택해주세요.
                 </div>
                 <div class="form-group">
                     <input type="radio" id="grade_employer" value="사장" name="grade" class="form-control" required>사장
@@ -292,7 +298,7 @@ label.error {
                		<label for="grade" class="error"></label>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="question" name="question" placeholder="question to find password?..?" class="form-control" size="30">
+                    <input type="text" id="question" name="question" placeholder="question to find your password" class="form-control" size="30">
                 </div>
                  <div class="form-group">
                     <input type="text" id="answer" name="answer" placeholder="your answer" class="form-control">

@@ -102,7 +102,7 @@ table td,th{
 					<c:if test="${!empty addUser }">
 						<!-- MY PAGE 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 										Account</a></li>
@@ -120,7 +120,7 @@ table td,th{
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Store<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myCompany">Store
 											Control</a></li>
@@ -133,7 +133,7 @@ table td,th{
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="<%=request.getContextPath()%>/registerSchedule">Register
@@ -154,7 +154,7 @@ table td,th{
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myJob">My
 											Job</a></li>
@@ -175,7 +175,7 @@ table td,th{
 
 						<!-- 게시판 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/notice">Notice
 										Board</a></li>
@@ -220,9 +220,9 @@ table td,th{
         <thead>
             <tr>
                 <th width="10%" align="center">글번호</th>
-                <th width="20%">아이디</th>
-                <th>게시판내용</th>
-                <th width="20%">작성날짜</th>
+                <th>제목</th>
+                <th width="20%">작성자</th>
+                <th width="20%">작성일</th>
             </tr>
         </thead>
  
@@ -239,16 +239,18 @@ table td,th{
         <c:forEach items="${commentList }" var="commentList">
             <tr>
                 <td>${commentList.commentNumber}</td>
-                <td>${commentList.userId}</td>
                 <td>
                 	<c:url value="/showReplyList" var="url"></c:url>
 					<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
 				</td>
+				<td>${commentList.userId}</td>
                 <td>${commentList.regDate}</td>
             </tr>
          </c:forEach>   
         </tbody>
     </table>
+    <br>
+	<button id="proceed" name="proceed" class="btn btn-success btn-md write"><i class="icon-edit-sign"></i> 글쓰기</button>
 	
 	<br>
 	<br>

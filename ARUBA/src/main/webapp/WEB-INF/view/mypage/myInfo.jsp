@@ -320,8 +320,8 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>My Page</li>
-						<li class="active">Modify Account</li>
+						<li class="active">My Page</li>
+						<li>Modify Account</li>
 					</ul>
 				</div>
 			</div>
@@ -333,6 +333,9 @@ label.error {
  		<c:url value="/modifyInfo" var="url" />
         <form:form modelAttribute="addUser" class="center" role="form" id="modifyForm" method="post" action="${url }">
             <fieldset class="registration-form">
+            	<div class="form-group">
+                    	정보 수정과 현재 비밀번호 입력 후 버튼을 누르면 정보가 변경됩니다.
+                </div>
                 <div class="form-group">
                     <form:hidden path="userId" id="userId" name="userId" class="form-control"/>
                 </div>
@@ -355,7 +358,7 @@ label.error {
                     <form:input path="birth" id="datepicker" name="birth" placeholder="birth" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <form:input path="question" id="question" name="question" placeholder="question to find password?..?" class="form-control" size="30"/>
+                    <form:input path="question" id="question" name="question" placeholder="question to find password" class="form-control" size="30"/>
                 </div>
                  <div class="form-group">
                     <form:input path="answer" id="answer" name="answer" placeholder="your answer" class="form-control"/>
