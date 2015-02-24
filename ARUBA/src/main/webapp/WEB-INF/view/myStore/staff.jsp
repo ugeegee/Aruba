@@ -157,12 +157,12 @@ $(function() {
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>Staff Control</h1>
-					<p>Please input your login information</p>
+					<p>직원 관리</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Store</li>
+						<li>Staff Control</li>
 					</ul>
 				</div>
 			</div>
