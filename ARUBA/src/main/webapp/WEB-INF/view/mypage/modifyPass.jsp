@@ -254,8 +254,8 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>My Page</li>
-						<li class="active">Change Password</li>
+						<li class="active">My Page</li>
+						<li>Change Password</li>
 					</ul>
 				</div>
 			</div>
@@ -267,6 +267,9 @@ label.error {
  		<c:url value="/modifyPass" var="url" />
         <form:form modelAttribute="addUser" class="center" role="form" id="passForm" method="post" action="${url }">
             <fieldset class="registration-form">
+            	<div class="form-group">
+            		현재 비밀번호와 새로 설정할 비밀번호를 입력해주세요.
+            	</div>
                 <div class="form-group">
                     <form:hidden path="userId" id="userId" name="userId" class="form-control"/>
                 </div>

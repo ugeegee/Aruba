@@ -136,8 +136,8 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>Home</li>
-						<li class="active">Login</li>
+						<li class="active">Home</li>
+						<li>Login</li>
 					</ul>
 				</div>
 			</div>
@@ -151,12 +151,15 @@ label.error {
 			action="${url }">
 			<fieldset class="registration-form">
 				<div class="form-group">
+					* 아이디와 비밀번호를 입력해주세요.
+				</div>
+				<div class="form-group">
 					<input type="text" id="userId" name="userId" placeholder="ID"
 						class="form-control">
 				</div>
 				<div class="form-group">
 					<input type="password" id="password" name="password"
-						placeholder="Password" class="form-control">
+						placeholder="password" class="form-control">
 				</div>
 				<div class="form-group">
 					<button class="btn btn-success btn-md btn-block">Log In</button>
