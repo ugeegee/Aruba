@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html>
 <head>
-
-<style>
-.temp td{
-	border: 1px solid black;
-}
-</style>
-
 <meta charset="utf-8">
 
-<!--------------------- Validate --------------------->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="lib/jquery.validate.min.js"></script>
+
+<!--------------------- DataTable --------------------->
+
+<script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+<link href="css/dataTables.css" rel="stylesheet">
 
 <!--------------------- Homepage --------------------->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,30 +39,32 @@
 	href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
-
-<script>
-$(function() {
 	
-	$(".btn").click(function(){
-		var btnId=$(this).attr("id");
-		alert(btnId);
-		
-		var codeId = "#code"+btnId;
-		var userId = "#id"+btnId;
-		var salaryId = "#salary"+btnId;
-		
-		alert("회사코드"+$(codeId).html());
-		alert("직원아이디"+$(userId).html());
-		alert("시급"+$(salaryId).val());
-		
-		var url = "<%=request.getContextPath()%>/modifySalary?companyCode="+$(codeId).html()+"&userId="+$(userId).html()+"&salary="+$(salaryId).val();
-		$(location).attr('href',url); 
+<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$('#example').DataTable();
+	
+	$("#proceed").click(function(){
+		if($("#commentContent").val()==""){
+			alert("게시글 내용을 입력해주세요.");
+		}else{
+			<c:url value="/registerComment" var="comment"></c:url>
+			var url = "${comment}?flag="+<%=request.getAttribute("nowFlag")%>+"&commentContent="+$("#commentContent").val();
+			location.href = url;
+		}
 	});
 });
 </script>
+<style>
+table td,th{
+	text-align : center;
+}
+</style>
 </head>
 <body>
-		<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
+	<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
 		role="banner">
 		<div class="container">
 			<div class="navbar-header">
@@ -137,8 +133,7 @@ $(function() {
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table <i
-									class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="<%=request.getContextPath()%>/registerSchedule">Register
@@ -170,13 +165,12 @@ $(function() {
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table <i
-									class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<c:url value="/mySchedule" var="url" />
 									<li><a href="${url }">My Shift</a></li>
-								</ul></li>
-
+								</ul>
+							</li>
 						</c:if>
 
 						<!-- 게시판 버튼 -->
@@ -203,87 +197,48 @@ $(function() {
 
 	<section id="title" class="emerald">
 		<div class="container">
-					<c:if test="${staffList == -1 }">
-						<!-- 회사가 아예없는경우 -->
-		 				<h1>Staff Control Fail</h1>
-						<p>Please ~~~~~</p>
- 					</c:if>
- 					
- 					<c:if test="${staffList == 0 }">
- 						<!-- 회사 등록 후 사장만 있는 경우 -->
- 						<div class="row">
-						<div class="col-sm-6">
-		 					<h1>Staff Control</h1>
-							<p>직원 관리</p>
-						</div>
-						<div class="col-sm-6">
-							<ul class="breadcrumb pull-right">
-								<li class="active">My Store</li>
-								<li>Staff Control</li>
-							</ul>
-						</div>
-						</div>
- 					</c:if>
- 					
- 					
- 					<c:if test="${ScheduleFail == 1 }">
- 						<!-- 회사가 없어서 스케쥴 메뉴를 불가능하게 -->
- 						<h1>Schedule Fail</h1>
-						<p>Please ~~~~~</p>
- 					</c:if>
- 					
- 					<c:if test="${ChartFail == 1 }">
- 						<!-- 회사가 없어서 차트 메뉴를 불가능하게 -->
- 						<div class="row">
-						<div class="col-sm-6">
-		 					<h1>Wage Control</h1>
-							<p>월급 관리</p>
-						</div>
-						<div class="col-sm-6">
-							<ul class="breadcrumb pull-right">
-								<li class="active">My Store</li>
-								<li>Wage Control</li>
-							</ul>
-						</div>
-						</div>
- 					</c:if>
- 		</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h1>Notice Board</h1>
+					<p>공지게시판</p>
+				</div>
+				<div class="col-sm-6">
+					<ul class="breadcrumb pull-right">
+						<li><a href="index.html">Board</a></li>
+						<li class="active">Notice Board</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</section>
 	<!--/#title-->
 
- 	<section id="ExceptionControl" class="container">
- 	
- 		<c:if test="${staffList == -1 }">
- 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
- 			회사를 등록한 후 직원조회가 가능합니다.
- 		</c:if>
- 		<c:if test="${staffList == 0 }">
- 			<div class="pad">
-			<div id="pricing-table">
-	 		<div class="smallbox">
-    	                <ul class="plan featured">
-        	                <li class="plan-name">
-            	                <h5><c:out value="${addUser.userName }" />님 현재 회사에
-						 			등록된 직원이 없습니다.<br></h5>
- 								<h5>아르바이트생에서 회사코드, 전화번호를 이용해 회사를 등록할 수 있게 하십시오.</h5>
-                	        </li>
-                    	</ul>
-           	</div>
-       		</div>
-    		</div>
- 		</c:if>
- 		
- 		<c:if test="${ScheduleFail == 1 }">
- 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
- 			회사를 등록한 후 스케쥴메뉴가 사용가능합니다.
- 		</c:if>
- 		
- 		<c:if test="${ChartFail == 1 }">
- 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
- 			회사를 등록한 후 급여메뉴가 사용가능합니다.
- 		</c:if>
+<section id="writeComment" class="container">
+	
+	<div id="comment-form">
+	 	<c:url value="/registerComment" var="action"></c:url>
+			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
+				<h3>게시글 작성</h3>	
+				<br>
+				FLAG : <c:if test="${nowFlag=='1' }">공지</c:if>
+						<c:if test="${nowFlag=='2' }">자유</c:if>
+						<c:if test="${nowFlag=='3' }">Q&A</c:if>
+				
+				|| 작성자 : ${addUser.userId }<br>
+				
+				<div class="form-group">
+                 	<div class="col-sm-12">
+                    	<form:textarea path="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
+                    </div>
+                </div>
+					<input type="reset" value="다시쓰기" class="btn btn-success btn-md write"/>
+					<input type="button" id="proceed" name="proceed" value="글쓰기" class="btn btn-success btn-md write"/>
+					
+			</form:form> 
+	</div>
     </section>
 
+	
 	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">

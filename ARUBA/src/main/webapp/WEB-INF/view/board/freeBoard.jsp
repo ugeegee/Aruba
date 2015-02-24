@@ -7,9 +7,13 @@
 <html>
 <head>
 <meta charset="utf-8">
-<!--------------------- Validate --------------------->
+
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="lib/jquery.validate.min.js"></script>
+
+<!--------------------- DataTable --------------------->
+
+<script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+<link href="css/dataTables.css" rel="stylesheet">
 
 <!--------------------- Homepage --------------------->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,38 +39,21 @@
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-/*  $(document).ready(function() {
-	$("#commentForm").validate({
-		ignore: "",
-		rules : {
-			proceed : {
-				required : true 
+	$(document).ready(function() {
+
+		$('#example').DataTable();
+
+		/* $("#proceed").click(function(){
+			if($("#commentContent").val()==""){
+				alert("게시글 내용을 입력해주세요.");
+			}else{
+				<c:url value="/registerComment" var="comment"></c:url>
+				var url = "${comment}?flag=2&commentContent="+$("#commentContent").val();
+				location.href = url;
 			}
-		},
-		messages : {
-			proceed : {
-				required : "게시판 작성 필수입니다."
-			}
-		}
+		}); */
 	});
-	var commentForm = $("#commentForm");
-	for ( var item in commentForm) {
-		console.log(item + " : " + commentForm[item]);
-	} 
-});  */
-$(document).ready(function() {
-	$("#proceed").click(function(){
-		if($("#commentContent").val()==""){
-			alert("게시글 내용을 입력해주세요.");
-		}else{
-			<c:url value="/registerComment" var="comment"></c:url>
-			var url = "${comment}?flag=2&commentContent="+$("#commentContent").val();
-			location.href = url;
-		}
-	});
-});
 </script>
 </head>
 <body>
@@ -139,7 +126,8 @@ $(document).ready(function() {
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i
+									class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="<%=request.getContextPath()%>/registerSchedule">Register
@@ -171,12 +159,12 @@ $(document).ready(function() {
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i
+									class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<c:url value="/mySchedule" var="url" />
 									<li><a href="${url }">My Shift</a></li>
-								</ul>
-							</li>
+								</ul></li>
 
 						</c:if>
 
@@ -220,116 +208,97 @@ $(document).ready(function() {
 	</section>
 	<!--/#title-->
 
- 	<section id="freeBoard" class="container">
-		<div class="white">
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th width = "175">게시글번호</th>
-						<th width = "175">아이디</th>
-						<th width = "375">게시판내용</th>
-						<th>작성날짜</th>
-					</tr>
-				</thead>
-				<c:forEach items="${commentList }" var="commentList">
-				<tbody>
-						<tr> 
-							<td align = "left">${commentList.commentNumber}</td>
-							<td align = "left">${commentList.userId}</td>
-							<td align = "left">
-								<c:url value="/showReplyList" var="url"></c:url>
-								<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
-							</td>
-							<td align = "left">${commentList.regDate}</td>
-							<%-- <td><c:url value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url"/>
-							<a href="${url }"><button>승낙</button></a></td> --%>
-						</tr>
-				</tbody>
-				</c:forEach>
-			</table>
-		</div>
-		
-	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}">
-				<hr>
-				<table>
-					<tr>
-						<td>게시글 작성</td>
-				<!-- 	<td>
-							<input type="radio" id="flag" value="1" name="flag">공지게시판
-							<input type="radio" id="flag" value="2" name="flag">자유게시판
-							<input type="radio" id="flag" value="3" name="flag">신고게시판
-							<label for="flag" class="error"></label>
-						</td>  -->
-					</tr>
-				</table><br>
- 					<form:textarea path="commentContent" rows="10" cols="130"></form:textarea><br><br>
-	 					<input type="button" id="proceed" name="proceed" value="글쓰기"/>
-						<input type="reset" value="다시쓰기"/>
-					</form:form> 
-    </section>
+	<section id="freeBoard" class="container">
+		<table id="example" class="table table-striped table-hover"
+			cellspacing="0" width="100%">
 
-	<section id="bottom" class="wet-asphalt">
+			<thead>
+				<tr>
+					<th width="10%" align="center">글번호</th>
+					<th>제목</th>
+					<th width="20%">작성자</th>
+					<th width="20%">작성일</th>
+				</tr>
+			</thead>
+
+			<tfoot>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</tfoot>
+
+			<tbody>
+				<c:forEach items="${commentList }" var="commentList">
+					<tr>
+						<td>${commentList.commentNumber}</td>
+						<td><c:url value="/showReplyList" var="url"></c:url> <a
+							href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
+						</td>
+						<td>${commentList.userId}</td>
+						<td>${commentList.regDate}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<br> <a href="<%=request.getContextPath()%>/writeComment?flag=2"><button
+				class="btn btn-success btn-md write">
+				<i class="icon-edit-sign"></i> 글쓰기
+			</button></a>
+
+	</section>
+
+	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<h4>About Us</h4>
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-						vitae, ultricies eget, tempor sit amet, ante.</p>
-					<p>Pellentesque habitant morbi tristique senectus.</p>
+					<h4><i class="icon-thumbs-up-alt"></i> About Us</h4>
+					<p>We are team 'MalSikizimarazo' meaning 'dont talk to me while we are eating' in Korean.</p>
+					<p>This team was named under the fact that we have calm and respectful eating etiquette.</p>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Company</h4>
+					<h4><i class="icon-globe"></i> Project Aruba</h4>
 					<div>
-						<ul class="arrow">
-							<li><a href="#">The Company</a></li>
-							<li><a href="#">Our Team</a></li>
-							<li><a href="#">Our Partners</a></li>
-							<li><a href="#">Our Services</a></li>
-							<li><a href="#">Faq</a></li>
-							<li><a href="#">Conatct Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Copyright</a></li>
-						</ul>
+						<p>Aruba is a web-project providing efficient shift tables for part time jobs in the world.</p>
+						<p>It is easily visiable and understandble for employers to manage all different individual employee's shifts. It presents wage graphs and charts on a frequent time basis.</p>
+						<p>Project Aruba would not exist without the support of KoDB.</p>
 					</div>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Latest Blog</h4>
+					<h4><i class="icon-lightbulb"></i> Our Service</h4>
 					<div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb1.jpg" alt="">
+								<i class="icon-calendar icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									17 Aug 2013</small>
+								<span class="media-heading">Shift Table </span>
+								<small class="muted">You can register and modify shift table and see it whenever you want.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb2.jpg" alt="">
+								<i class="icon-money icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									13 Sep 2013</small>
+								<span class="media-heading">Salary Check</span> 
+								<small class="muted">Your salary graph is updated on a daily basis.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb3.jpg" alt="">
+								<i class="icon-edit-sign icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									11 Jul 2013</small>
+								<span class="media-heading">Board</span> 
+								<small class="muted">It provides two boards depending on necessary.
+One is opened to anything to share freely and another is based on qna.</small>
 							</div>
 						</div>
 					</div>
@@ -337,22 +306,13 @@ $(document).ready(function() {
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Address</h4>
+					<h4><i class="icon-building"></i> Address</h4>
 					<address>
-						<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr>
-						(123) 456-7890
+						<strong>MALSIKIZIMARAZO</strong><br> 
+						Sejoing Univ <br>
+						Gwangjin-gu, Seoul, South Korea<br> 
+						Phone : 010-5096-3002
 					</address>
-					<h4>Newsletter</h4>
-					<form role="form">
-						<div class="input-group">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Enter your email"> <span
-								class="input-group-btn">
-								<button class="btn btn-danger" type="button">Go!</button>
-							</span>
-						</div>
-					</form>
 				</div>
 				<!--/.col-md-3-->
 			</div>
@@ -360,22 +320,16 @@ $(document).ready(function() {
 	</section>
 	<!--/#bottom-->
 
-	<footer id="footer" class="midnight-blue">
+	<footer id="footer" class="wet-asphalt">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
+					&copy; 2015 MalSikizimarazo. All Rights Reserved.
 				</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Faq</a></li>
-						<li><a href="#">Contact Us</a></li>
 						<li><a id="gototop" class="gototop" href="#"><i
-								class="icon-chevron-up"></i></a></li>
+								class="icon-circle-arrow-up icon-2x"></i></a></li>
 						<!--#gototop-->
 					</ul>
 				</div>

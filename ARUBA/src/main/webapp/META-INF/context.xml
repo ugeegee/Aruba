@@ -21,8 +21,8 @@
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
 	
 		
-    <!-- <Resources>
+    <Resources>
 		<PreResources base="c:\db\uploaded\" className= "org.apache.catalina.webresources.DirResourceSet" webAppMount = "/WEB-INF/upload"/>
 	</Resources>    
-     -->
+    
 </Context>
