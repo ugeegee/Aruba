@@ -51,7 +51,7 @@ $(document).ready(function() {
 			alert("게시글 내용을 입력해주세요.");
 		}else{
 			<c:url value="/registerComment" var="comment"></c:url>
-			var url = "${comment}?flag=1&commentContent="+$("#commentContent").val();
+			var url = "${comment}?flag="+<%=request.getAttribute("nowFlag")%>+"&commentContent="+$("#commentContent").val();
 			location.href = url;
 		}
 	});
@@ -213,45 +213,29 @@ table td,th{
 	</section>
 	<!--/#title-->
 
-<section id="freeBoard" class="container">
+<section id="writeComment" class="container">
 	
-		<table id="example" class="table table-striped table-hover" cellspacing="0" width="100%">
-   
-        <thead>
-            <tr>
-                <th width="10%" align="center">글번호</th>
-                <th>제목</th>
-                <th width="20%">작성자</th>
-                <th width="20%">작성일</th>
-            </tr>
-        </thead>
- 
-        <tfoot>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </tfoot>
- 		
-        <tbody>
-        <c:forEach items="${commentList }" var="commentList">
-            <tr>
-                <td>${commentList.commentNumber}</td>
-                <td>
-                	<c:url value="/showReplyList" var="url"></c:url>
-					<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
-				</td>
-				<td>${commentList.userId}</td>
-                <td>${commentList.regDate}</td>
-            </tr>
-         </c:forEach>   
-        </tbody>
-    </table>
-    <br>
-	<a href="<%=request.getContextPath()%>/writeComment?flag=1"><button class="btn btn-success btn-md write"><i class="icon-edit-sign"></i> 글쓰기</button></a>
-	
+	<div id="comment-form">
+	 	<c:url value="/registerComment" var="action"></c:url>
+			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
+				<h3>게시글 작성</h3>	
+				<br>
+				FLAG : <c:if test="${nowFlag=='1' }">공지</c:if>
+						<c:if test="${nowFlag=='2' }">자유</c:if>
+						<c:if test="${nowFlag=='3' }">Q&A</c:if>
+				
+				|| 작성자 : ${addUser.userId }<br>
+				
+				<div class="form-group">
+                 	<div class="col-sm-12">
+                    	<form:textarea path="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
+                    </div>
+                </div>
+					<input type="reset" value="다시쓰기" class="btn btn-success btn-md write"/>
+					<input type="button" id="proceed" name="proceed" value="글쓰기" class="btn btn-success btn-md write"/>
+					
+			</form:form> 
+	</div>
     </section>
 
 	
