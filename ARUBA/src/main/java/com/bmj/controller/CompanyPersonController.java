@@ -86,10 +86,10 @@ public class CompanyPersonController {
 		// 사장 삭제.
 		if(comPersonList == null){
 			model.addAttribute("staffList", -1);
-			viewPath = "/myStore/noStaff";
+			viewPath = "/Exception/showException";
 		} else if (comPersonList.size() == 1){
 			model.addAttribute("staffList", 0);
-			viewPath = "/myStore/noStaff";
+			viewPath = "/Exception/showException";
 		} else if (comPersonList.size() > 1){
 			for (int i = 0; i < comPersonList.size(); i++) {
 				if (loginUser.getUserId().equals(comPersonList.get(i).getUserId())) {
@@ -166,7 +166,5 @@ public class CompanyPersonController {
 		mService.insertMessage(message);
 		return "redirect:/staff";
 	}
-
-	// ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

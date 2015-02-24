@@ -28,7 +28,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.bmj.entity.Company;
 import com.bmj.entity.CompanyPerson;
 import com.bmj.entity.Users;
+import com.bmj.exception.ChartMenuFailException;
 import com.bmj.exception.LoginFailException;
+import com.bmj.exception.ScheduleMenuFailException;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.MessageService;
 import com.bmj.service.TimeTableService;
@@ -318,7 +320,14 @@ public class UsersController {
 
 	@RequestMapping(value = "/wage")
 	// 사장 mypage 메뉴에서 Wage(알바생들 줄 급여관리)
-	public String mypageWageGo() {
+	public String mypageWageGo(HttpSession session) {
+		Users loginUser = (Users) session.getAttribute("addUser");
+		CompanyPerson cp = cpService.selectCompanyPersonByUserId(loginUser.getUserId());
+		try{
+			int companyCode = cp.getCompanyCode();
+		}catch(NullPointerException e){
+			throw new ChartMenuFailException("!!사장이 등록한 회사가 없음!!");
+		}
 		return "/myStore/wage";
 	}
 
@@ -366,18 +375,20 @@ public class UsersController {
 
 	// ////////////사장 시간표 메뉴
 	@RequestMapping(value = "/registerSchedule")
-	public String registerScheduleGo(Model model, HttpSession session) { // 시간표
-																			// -
-																			// 시간표
-																			// 등록
+	public String registerScheduleGo(Model model, HttpSession session) { // 시간표-시간표 등록
+		
 		Users user = (Users) session.getAttribute("addUser");
 		String userId = user.getUserId();
 		logger.trace("수업 UserId : " + user);
 		// 나의 회사 코드 가져오기...!
 		CompanyPerson companyperson = cpService
 				.selectCompanyPersonByUserId(userId);
-		
-		int companyCode = companyperson.getCompanyCode();
+		int companyCode = -1;
+		try{
+			companyCode = companyperson.getCompanyCode();
+		}catch(NullPointerException e){
+			throw new ScheduleMenuFailException("!!사장이 등록한 회사가 없음!!");
+		}
 		logger.trace("수업 CompanyCode : " + companyperson.getCompanyCode());
 		// company_person에 가서 직원 아이디 갖고오기!!
 		List<CompanyPerson> result = cpService.selectByCompanyCode(companyCode);
@@ -413,7 +424,12 @@ public class UsersController {
 		// 나의 회사 코드 가져오기...!
 		CompanyPerson companyperson = cpService
 				.selectCompanyPersonByUserId(userId);
-		int companyCode = companyperson.getCompanyCode();
+		int companyCode = -1;
+		try{
+			companyCode = companyperson.getCompanyCode();
+		}catch(NullPointerException e){
+			throw new ScheduleMenuFailException("!!사장이 등록한 회사가 없음!!");
+		}
 		logger.trace("수업 CompanyCode : " + companyperson.getCompanyCode());
 		// company_person에 가서 직원 아이디 갖고오기!!
 		List<CompanyPerson> result = cpService.selectByCompanyCode(companyCode);
@@ -445,7 +461,11 @@ public class UsersController {
 		Users loginUser = (Users) session.getAttribute("addUser");
 		CompanyPerson companyperson = cpService
 				.selectCompanyPersonByUserId(loginUser.getUserId());
-		model.addAttribute("code", companyperson.getCompanyCode());
+		try{
+			model.addAttribute("code", companyperson.getCompanyCode());
+		}catch(NullPointerException e){
+			throw new ScheduleMenuFailException("!!사장이 등록한 회사가 없음!!");
+		}
 		return "/schedule/employer/allSchedule";
 	}
 
@@ -498,6 +518,22 @@ public class UsersController {
 		request.setAttribute("PopUp", 1);
 
 		return "/login/login";
+	}
+	
+	@ExceptionHandler
+	public String ScheduleMenuFail(ScheduleMenuFailException e, HttpServletRequest request) {
+		logger.trace("등록한 회사가 없으므로 시간표메뉴사용불가");
+		request.setAttribute("ScheduleFail", 1);
+		
+		return "/Exception/showException";
+	}
+	
+	@ExceptionHandler
+	public String ChartMenuFail(ChartMenuFailException e, HttpServletRequest request) {
+		logger.trace("등록한 회사가 없으므로 차트메뉴사용불가");
+		request.setAttribute("ChartFail", 1);
+		
+		return "/Exception/showException";
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////////////////////////
