@@ -6,6 +6,7 @@ public class Comment {
 	
 	private int commentNumber;
 	private String userId;
+	private String commentTitle;
 	private String commentContent;
 	private Date regDate;
 	private int flag;
@@ -52,10 +53,20 @@ public class Comment {
 		this.flag = flag;
 	}
 
+	public String getCommentTitle() {
+		return commentTitle;
+	}
+
+	public void setCommentTitle(String commentTitle) {
+		this.commentTitle = commentTitle;
+	}
+
 	@Override
 	public String toString() {
-		return "Bcomment [commentNumber=" + commentNumber + ", userId="
-				+ userId + ", commentContent=" + commentContent + ", regDate="
-				+ regDate + ", flag=" + flag + "]";
+		return "Comment [commentNumber=" + commentNumber + ", userId=" + userId
+				+ ", commentTitle=" + commentTitle + ", commentContent="
+				+ commentContent + ", regDate=" + regDate + ", flag=" + flag
+				+ "]";
 	}
+
 }

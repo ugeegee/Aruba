@@ -46,7 +46,8 @@ CREATE TABLE bComment
 (
 	comment_number number NOT NULL,
 	user_id varchar2(20) NOT NULL,
-	comment_content varchar2(300) NOT NULL,
+	comment_title varchar2(150) NOT NULL,
+	comment_content varchar2(600) NOT NULL,
 	reg_date date DEFAULT sysdate,
 	flag number NOT NULL,
 	PRIMARY KEY (comment_number)
