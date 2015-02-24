@@ -213,12 +213,12 @@ $(document).ready(function() {
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>Store Control</h1>
-					<p>Please input your login information</p>
+					<p>회사 관리</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Store</li>
+						<li>Store Control</li>
 					</ul>
 				</div>
 			</div>
@@ -227,42 +227,62 @@ $(document).ready(function() {
 	<!--/#title-->
 
  	<section id="StoreControl" class="container">
- 	<h2>회사를 등록해주세요.</h2>
- 		<c:url value="/registerCompany" var="url"/>
-					<form id="addComForm" action="${url }" method="post">
-
-						<table class="table" style="border-collapse: seperate;">
-							<colgroup>
-								<col style="align: center;" />
-							</colgroup>
-							<tbody>
-								<tr>
-									<th><label>회사명</label></th>
-									<td><input type="text" name="companyName" id="companyName"
-										value="" /></td>
-								</tr>
-								<tr>
-									<th><label>회사전화번호</label></th>
-									<td><input type="text" name="companyTel" id="companyTel" value="" /></td>
-								</tr>
-								<tr>
-									<th><label>주말수당(%)</label></th>
-									<td><input type="text" name="holidayComm" id="holidayComm" value="0" /></td>
-								</tr>
-								<tr>
-									<th><label>야근수당(%)</label></th>
-									<td><input type="text" id="nightComm" name="nightComm" value="0" /></td>
-								</tr>
-
-							</tbody>
-						</table>
-						<div align="center" style="margin-bottom: 50px; margin-top: 30px;">
-							<button type="submit">등록</button>
-							<button type="reset" id="cancel">취소</button>
-						</div>
-					</form>
+ 	<div class="pad">
+		<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h4>당신이 운영하는 회사를 등록해주세요.</h4>
+            	                <br>
+                	        </li>
+                    	    <li>
+              					<c:url value="/registerCompany" var="url"/>
+		<form id="addComForm" action="${url }" method="post">
+			<table class="table" style="border-collapse: seperate;">
+				<%-- <colgroup>
+					<col style="align: center;" />
+				</colgroup> --%>
+				<tbody>
+					<tr>
+						<th class="center"><label>회사명</label></th>
+						<td><input type="text" name="companyName" id="companyName" placeholder="store name" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>회사전화번호</label></th>
+						<td><input type="text" name="companyTel" id="companyTel" placeholder="store phonenumber" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>주말수당(%)</label></th>
+						<td><input type="text" name="holidayComm" id="holidayComm" value="0" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>야근수당(%)</label></th>
+						<td><input type="text" id="nightComm" name="nightComm" value="0" class="form-control"/></td>
+					</tr>
+				</tbody>
+			</table>
+			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+				<button type="submit" class="btn btn-success btn-md">Register</button>
+				<button type="reset" id="cancel" class="btn btn-success btn-md">Cancel</button>
+			</div>
+		</form>         	     
+                       	     
+                       	     
+        </li>
+        </ul>
+        </div>
+        </div>
+    </div>
+ 	
+ 		
     </section>
 
+
+
+
+
+
+<!-- 푸터임 -->
 	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">

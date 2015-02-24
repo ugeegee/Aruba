@@ -246,7 +246,7 @@ label.error {
         <form:form modelAttribute="addUser" class="center" role="form" id="passForm" method="post" action="${url }">
             <fieldset class="registration-form">
             	<div class="form-group">
-            		탈퇴 전, 본인 확인을 위해 비밀번호를 입력해주세요.
+            		* 탈퇴 전, 본인 확인을 위해 비밀번호를 입력해주세요.
             	</div>
                 <div class="form-group">
                     <form:hidden path="userId" id="userId" name="userId" class="form-control"/>

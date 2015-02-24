@@ -70,8 +70,8 @@ label.error {
 			/* alert("팝업창이 나올 것!!"); */
 					var url = "<%=request.getContextPath()%>/checkIdPopUp"; 
 					<%-- var url = "<%=request.getContextPath() %>/checkId?userId="+$("#userId").val(); --%>
-					window.open(url, "_blank", "width=500, height=550, toolbar=no, menubar=no, resizable=no");
-		});
+					window.open(url, "_blank", "width=600, height=600, toolbar=no, menubar=no, resizable=no");
+		})
 
 		$("#joinForm").validate({
 			//validation이 끝난 이후의 submit 직전 추가 작업할 부분

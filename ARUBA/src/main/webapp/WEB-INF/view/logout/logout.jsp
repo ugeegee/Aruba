@@ -104,7 +104,7 @@
                 	        </li>
                     	    <li class="plan-action">
                     	     <c:url value="/index" var="url"></c:url>
-                       	     <a href="${url }" class="btn btn-primary btn-md">Home</a>
+                       	     <a href="${url }" class="btn btn-success btn-md">Home</a>
                       	  </li>
                     	</ul>
            </div>
