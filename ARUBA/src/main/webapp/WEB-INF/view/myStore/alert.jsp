@@ -10,11 +10,7 @@
 <html>
 <head>
 
-<style>
-.temp td {
-	border: 1px solid black;
-}
-</style>
+
 
 <meta charset="utf-8">
 
@@ -154,9 +150,64 @@
 	<!--/#title-->
 
 	<section id="AlertControl" class="container">
-		사장의 쪽지관리~~~~<br>
-		<br>
-		<table class="temp">
+		<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>messages</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th class="center">#</th>
+					<th class="center">회사코드</th>
+					<th class="center">보낸이</th>
+					<th class="center">받는이</th>
+					<th class="center">내용</th>
+					<th class="center">보낸날짜</th>
+					<!-- <th class="center">수신확인</th> -->
+					<th class="center">승인버튼</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${myComMessages }" var="myComMessages">
+
+				<tr>
+					<td class="center">${myComMessages.messageNumber}</td>
+					<td class="center">${myComMessages.companyCode}</td>
+					<td class="center">${myComMessages.userId}</td>
+					<td class="center">${myComMessages.receiverId}</td>
+					<td class="center">${myComMessages.messageContent}</td>
+					<td class="center">${myComMessages.regDate}</td>
+					<%-- <td class="center">
+						${myComMessages.flag }
+					</td> --%>
+					<td class="center">
+						<c:if test="${myComMessages.flag =='0' }">					
+							<c:url value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url" /> 
+							<a href="${url }"><button class="btn btn-success btn-md">승인</button></a>
+						</c:if>
+						<c:if test="${myComMessages.flag =='1' }">	
+							<button class="btn btn-success btn-md" disabled>승인</button>
+						</c:if>
+					
+					</td>
+				
+				</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>
+
+
+<%-- 		<table class="temp">
 			<tr>
 				<th>쪽지번호</th>
 				<th>회사코드</th>
@@ -194,7 +245,7 @@
 			</c:forEach>
 		</table>
 	</section>
-
+ --%>
 	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">
