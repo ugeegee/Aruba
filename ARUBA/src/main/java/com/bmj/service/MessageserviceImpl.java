@@ -60,8 +60,8 @@ public class MessageserviceImpl implements MessageService {
 		return result;
 	}
 	@Override
-	public Message selectUncheckedMessageByComCode(int companyCode) {
-		Message result = dao.selectUncheckedMessageByComCode(companyCode);
+	public Message selectUncheckedMessageByMessage(Message message) {
+		Message result = dao.selectUncheckedMessageByMessage(message);
 		return result;
 	}
 

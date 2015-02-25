@@ -59,6 +59,11 @@ public class UsersServiceImpl implements UsersService {
 		Users result = dao.selectUserByUserId(userId);
 		return result;
 	}
+	@Override
+	public Users selectUserByBirthAndEmail(Users user) {
+		Users result = dao.selectUserByBirthAndEmail(user);
+		return result;
+	}
 	
 	
 }

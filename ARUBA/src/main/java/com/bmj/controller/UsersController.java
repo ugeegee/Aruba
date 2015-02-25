@@ -174,6 +174,29 @@ public class UsersController {
 	public String loginGGo(Model model) {
 		return "/login/login";
 	}
+	
+	@RequestMapping(value = "/findId", method = RequestMethod.GET)
+	public String findIdGo() {
+		return "/login/findId";
+	}
+	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+	public String findIdSuccessGo(@RequestParam String birth, @RequestParam String email, Model model) {
+		Users findUser = new Users();
+		findUser.setBirth(birth);
+		findUser.setEmail(email);
+		
+		findUser = service.selectUserByBirthAndEmail(findUser);
+		
+		return "/login/findResult";
+	}
+	@RequestMapping(value = "/findPass", method = RequestMethod.GET)
+	public String findPassGo() {
+		return "/login/findPass";
+	}
+	@RequestMapping(value = "/findPass", method = RequestMethod.POST)
+	public String findPassSuccessGo() {
+		return "/login/findResult";
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginSuccess(@RequestParam String userId,
