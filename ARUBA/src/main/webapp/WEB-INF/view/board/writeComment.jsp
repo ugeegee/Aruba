@@ -222,7 +222,7 @@ label.error {
 										Board</a></li>
 								<li><a href="<%=request.getContextPath()%>/free">Free
 										Board</a></li>
-								<li><a href="<%=request.getContextPath()%>/qna">QnA
+								<li><a href="<%=request.getContextPath()%>/qna">Q&A
 										Board</a></li>
 							</ul></li>
 					</c:if>
@@ -240,13 +240,33 @@ label.error {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Notice Board</h1>
-					<p>공지게시판</p>
+					<c:if test="${nowFlag=='1' }">
+						<h1>Notice Board</h1>
+						<p>공지게시판</p>
+					</c:if>
+					<c:if test="${nowFlag=='2' }">
+						<h1>Free Board</h1>
+						<p>자유게시판</p>
+					</c:if>
+					<c:if test="${nowFlag=='3' }">
+						<h1>Q&A Board</h1>
+						<p>Q&A 게시판</p>
+					</c:if>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Board</a></li>
-						<li class="active">Notice Board</li>
+					<c:if test="${nowFlag=='1' }">
+						<li class="active">Board</li>
+						<li>Notice Board</li>
+					</c:if>
+					<c:if test="${nowFlag=='2' }">
+						<li class="active">Board</li>
+						<li>Free Board</li>
+					</c:if>
+					<c:if test="${nowFlag=='3' }">
+						<li class="active">Board</li>
+						<li>Q&A Board</li>
+					</c:if>
 					</ul>
 				</div>
 			</div>
@@ -255,7 +275,12 @@ label.error {
 	<!--/#title-->
 
 <section id="writeComment" class="container">
-	
+	<div class="panel panel-default">
+  	<div class="panel-heading">Panel heading</div>
+  	<div class="panel-body">
+    Panel content
+  	</div>
+	</div>
 	<div id="comment-form">
 	 	<c:url value="/registerComment" var="action"></c:url>
 			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
