@@ -145,7 +145,56 @@
 	<!--/#title-->
 
 	<section id="MyJob" class="container">
-		직원의 쪽지관리~~<br> <br>
+		<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>messages</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th>쪽지번호</th>
+					<th>회사코드</th>
+					<th>보낸사람</th>
+					<th>받는사람</th>
+					<th>쪽지내용</th>
+					<th>보낸날짜</th>
+					<th>읽음여부</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${myMessages }" var="myMessages">
+
+				<tr>
+					<td>${myMessages.messageNumber}</td>
+					<td>${myMessages.companyCode}</td>
+					<td>${myMessages.userId}</td>
+					<td>${myMessages.receiverId}</td>
+					<td>${myMessages.messageContent}</td>
+					<td>${myMessages.regDate}</td>
+					<td>
+						<c:if test="${myMessages.flag =='0' }">
+							대기
+						</c:if>
+						<c:if test="${myMessages.flag =='1' }">
+							승인
+						</c:if>
+					</td>
+				</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	
+	<%-- 	직원의 쪽지관리~~<br> <br>
 		<table class="temp">
 			<tr>
 				<th>쪽지번호</th>
@@ -177,7 +226,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</section>
+	</section> --%>
 
 		<section id="bottom" class="wet-asp">
 		<div class="container">
