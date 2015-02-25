@@ -100,11 +100,6 @@ public class CompanyPersonDaoImpl implements CompanyPersonDao {
 		return sqlSession.delete(stmt, companyperson);
 	}
 
-	@Override
-	public String selectOwnerIdByComCode(int companyCode) {
-		String stmt = namespace + "selectOwnerIdByComCode";
-		return sqlSession.selectOne(stmt, companyCode);
-	}
 
 	/*@Override
 	public CompanyPerson selectCompanyPersonByPerson(CompanyPerson person) {

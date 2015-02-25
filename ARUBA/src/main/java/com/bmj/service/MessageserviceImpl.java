@@ -25,8 +25,8 @@ public class MessageserviceImpl implements MessageService {
 		return result;
 	}
 	@Override
-	public int updateMesageFlagByMsgNum(int messageNumber) {
-		int result = dao.updateMesageFlagByMsgNum(messageNumber);
+	public int updateMesageAcceptFlagByMsgNum(int messageNumber) {
+		int result = dao.updateMesageAcceptFlagByMsgNum(messageNumber);
 		return result;
 	}
 	@Override
@@ -47,6 +47,21 @@ public class MessageserviceImpl implements MessageService {
 	@Override
 	public int deleteMessageByCompanyCode(int companyCode) {
 		int result = dao.deleteMessageByCompanyCode(companyCode);
+		return result;
+	}
+	@Override
+	public int updateMesageRejectFlagByMsgNum(int messageNumber) {
+		int result = dao.updateMesageRejectFlagByMsgNum(messageNumber);
+		return result;
+	}
+	@Override
+	public int countUncheckedFlagByUserId(String userId) {
+		int result = dao.countUncheckedFlagByUserId(userId);
+		return result;
+	}
+	@Override
+	public Message selectUncheckedMessageByComCode(int companyCode) {
+		Message result = dao.selectUncheckedMessageByComCode(companyCode);
 		return result;
 	}
 

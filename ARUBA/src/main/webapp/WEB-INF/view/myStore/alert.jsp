@@ -187,9 +187,15 @@
 						<c:if test="${myComMessages.flag =='0' }">					
 							<c:url value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url" /> 
 							<a href="${url }"><button class="btn btn-success btn-md">승인</button></a>
+							<c:url value="/rejectNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url" /> 
+							<a href="${url }"><button class="btn btn-success btn-md">거절</button></a>
 						</c:if>
+						
 						<c:if test="${myComMessages.flag =='1' }">	
 							<button class="btn btn-success btn-md" disabled>승인</button>
+						</c:if>
+						<c:if test="${myComMessages.flag =='2' }">	
+							<button class="btn btn-success btn-md" disabled>거절</button>
 						</c:if>
 					
 					</td>
@@ -234,10 +240,20 @@
 					<td>
 						<c:if test="${myComMessages.flag =='0' }">					
 							<c:url value="/addNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url" /> 
-							<a href="${url }"><button>확인</button></a>
+							<a href="${url }"><button>승인</button></a>	
+						<c:url value="/rejectNewEmployee?userId=${myComMessages.userId }&companyCode=${myComMessages.companyCode }&messageNumber=${myComMessages.messageNumber }" var="url"/>
+							<a href="${url }"><button>거절</button></a>
 						</c:if>
+						
+						
 						<c:if test="${myComMessages.flag =='1' }">	
-							<button disabled>확인</button>
+							<button disabled>승인</button>
+							<!-- <button disabled>거절</button> -->
+						</c:if>
+						
+						<c:if test="${myComMessages.flag =='2' }">	
+							<!-- <button disabled>승인</button> -->
+							<button disabled>거절</button>
 						</c:if>
 					
 					</td>

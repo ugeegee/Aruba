@@ -207,8 +207,8 @@ table td,th{
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Board</a></li>
-						<li class="active">Q&A Board</li>
+						<li class="active">Board</li>
+						<li>Q&A Board</li>
 					</ul>
 				</div>
 			</div>

@@ -17,9 +17,15 @@
 		select * from message where company_code = #{companyCode}
 	</select>
 	
-	<update id = "updateMesageFlagByMsgNum" parameterType="Integer">
+	<update id = "updateMesageAcceptFlagByMsgNum" parameterType="Integer">
 		update message set 
 		flag = 1
+		where message_number= #{messageNumber}
+	</update>
+	
+	<update id = "updateMesageRejectFlagByMsgNum" parameterType="Integer">
+		update message set 
+		flag = 2
 		where message_number= #{messageNumber}
 	</update>
 	
@@ -30,6 +36,14 @@
 	<delete id="deleteMessageByCompanyCode" parameterType="Integer">
 		delete from message where company_code = #{companyCode}
 	</delete>
+	
+	<select id="countUncheckedFlagByUserId" parameterType="String" resultType="Integer">
+		select count(*) from message where flag = 0 and user_id = #{userId}
+	</select>
+	
+	<select id="selectUncheckedMessageByComCode" parameterType="Integer" resultType="Message">
+		select * from message where flag = 0 and company_code = #{companyCode}
+	</select>
 	
 	
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->

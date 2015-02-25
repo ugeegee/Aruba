@@ -53,6 +53,12 @@ $(document).ready(function() {
 	if(<%=request.getAttribute("PopUp")%> == 1){
 		alert("없는 회사정보 입니다.");
 	}
+	if(<%=request.getAttribute("PopUp")%> == 2){
+		alert("이미 등록한 회사정보입니다.");
+	}
+	if(<%=request.getAttribute("PopUp")%> == 3){
+		alert("승인 대기중인 회사정보입니다.");
+	}
 	
 	$("#addJobForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
@@ -199,42 +205,44 @@ $(document).ready(function() {
 	</section>
 	<!--/#title-->
 
+ 	
+ 	
+ 	
  	<section id="MyJob" class="container">
+ 	
  	<c:if test="${emptyCompany =='YES' }">
  	<div class="pad">
 		<div id="pricing-table">
-	 		<div class="smallbox">
-    	                <ul class="plan featured">
-        	                <li class="plan-name">
-            	                <h4>당신이 일하고 있는 직장을 등록하세요.</h4>
-            	                <br>
-                	        </li>
-                    	    
-                    	    <li>
-              				<c:url value="/sendMsgToOwner" var="url"></c:url>
-							<form id="addJobForm" method="post" action="${url }">
-							<table class="table" style="border-collapse: seperate;">
-							<tbody>
-							<tr>
-								<th class="center"><label>회사코드</label></th>
-								<td><input type="text" name="companyCode" id="companyCode" value="" class="form-control" placeholder="store code"/></td>
-							</tr>
-							<tr>
-								<th class="center"><label>회사전화번호</label></th>
-								<td><input type="text" name="companyTel" id="companyTel" value="" class="form-control" placeholder="store phonenumber"/></td>
-							</tr>
-							</tbody>
-							</table>
-							<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
-							<button type="submit" class="btn btn-success btn-md">Register</button>
-							<button type="reset" id="cancel" class="btn btn-success btn-md" >Reset</button>
-							</div>
-							</form>         	                    	     
-       						 </li>
-       					 </ul>
-        </div>
-        </div>
-    </div>
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>Register Your Job</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			<c:url value="/sendMsgToOwner" var="url"></c:url>
+				<form id="addJobForm" method="post" action="${url }">
+				<table class="table table-striped table-hover">
+				<tbody>
+					<tr>
+						<th class="center"><label>회사코드</label></th>
+						<td class="center"><input type="text" name="companyCode" id="companyCode" value="" class="form-control" placeholder="store code"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>회사전화번호</label></th>
+						<td class="center"><input type="text" name="companyTel" id="companyTel" value="" class="form-control" placeholder="store phonenumber"/></td>
+					</tr>
+				</tbody>
+				</table>
+				<div align="center" style="margin-bottom: 10px; margin-top: 30px;">
+				<button type="submit" class="btn btn-success btn-md">Register</button>
+				<button type="reset" id="cancel" class="btn btn-success btn-md" >Reset</button>
+			</div>
+			</form>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
     </c:if>
  	
  	<c:if test="${emptyCompany =='NO' }">
@@ -243,8 +251,11 @@ $(document).ready(function() {
 	 		<div class="smallbox">
     	                <ul class="plan featured">
         	                <li class="plan-name">
-            	                <h4>아르바이트 등록은 최대 3개까지 가능합니다.</h4>
+
+            	                <h4>아르바이트 등록과 신청은 최대 3개까지 가능합니다.<br>
+            	                	사장님의 승인을 기다리십시오.</h4>
             	                <br>
+            	                
                 	        </li>
                 	     </ul>
              </div>
@@ -256,23 +267,28 @@ $(document).ready(function() {
 		<div id="pricing-table">
 	 	<div class="smallbox">
 	 	<div class="panel panel-default">
-		<div class="panel-heading center"><h4><b>나의 아르바이트 목록</b></h4></div>
+		<div class="panel-heading center"><h4><b>My Job List</b></h4></div>
 		<div class="panel-body">
 		<div class="white">
 			<table class="table table-striped table-hover">
 				<thead>
 				<tr>
-					<th>회사코드</th>
-					<th>회사명</th>
-					<th>전화번호</th>
+					<th class="center">회사코드</th>
+					<th class="center">회사명</th>
+					<th class="center">전화번호</th>
+					<th width="10%"></th>
 				</tr>
 				</thead>
 				<tbody>
 				<c:forEach items="${myCompanies }" var="myCompanies">
 					<tr>
-						<td>${myCompanies.companyCode}</td>
-						<td>${myCompanies.companyName}</td>
-						<td>${myCompanies.companyTel}</td>
+						<td class="center">${myCompanies.companyCode}</td>
+						<td class="center">${myCompanies.companyName}</td>
+						<td class="center">${myCompanies.companyTel}</td>
+						<td>
+							<c:url value="/deleteJob?companyCode=${myCompanies.companyCode}" var="url" /> 
+							<a href="${url }"><button class="btn btn-success btn-md">삭제</button></a>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

@@ -181,7 +181,7 @@ table td,th{
 										Board</a></li>
 								<li><a href="<%=request.getContextPath()%>/free">Free
 										Board</a></li>
-								<li><a href="<%=request.getContextPath()%>/qna">QnA
+								<li><a href="<%=request.getContextPath()%>/qna">Q&A
 										Board</a></li>
 							</ul></li>
 					</c:if>
@@ -204,8 +204,8 @@ table td,th{
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>Board</li>
-						<li class="active">Free Board</li>
+						<li class="active">Board</li>
+						<li>Free Board</li>
 					</ul>
 				</div>
 			</div>

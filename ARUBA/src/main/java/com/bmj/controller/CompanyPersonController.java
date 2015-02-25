@@ -55,13 +55,22 @@ public class CompanyPersonController {
 			@RequestParam String userId, @RequestParam int messageNumber) {
 		logger.trace("승낙버튼누름!! 회사" + companyCode + " 아이디 " + userId);
 
-		mService.updateMesageFlagByMsgNum(messageNumber); // 읽었으니까 1로바꿈
+		mService.updateMesageAcceptFlagByMsgNum(messageNumber); // 승낙했으니까 1로바꿈
 
 		CompanyPerson companyperson = new CompanyPerson();
 		companyperson.setCompanyCode(companyCode);
 		companyperson.setUserId(userId);
 		companyperson.setHireDate("오늘");
 		cpService.insertCompanyEmployee(companyperson); // 알바생추가
+		return "redirect:/alert_employer";
+	}
+	@RequestMapping(value = "/rejectNewEmployee", method = RequestMethod.GET)
+	public String rejectNewEmployeeSuccessGo(@RequestParam int companyCode,
+			@RequestParam String userId, @RequestParam int messageNumber) {
+		logger.trace("거절버튼누름!! 회사" + companyCode + " 아이디 " + userId);
+
+		mService.updateMesageRejectFlagByMsgNum(messageNumber); // 거절했으니까 2로바꿈
+
 		return "redirect:/alert_employer";
 	}
 
@@ -163,6 +172,44 @@ public class CompanyPersonController {
 
 		mService.insertMessage(message);
 		return "redirect:/staff";
+	}
+
+	@RequestMapping(value = "/deleteJob", method = RequestMethod.GET)
+	//알바생 직장삭제
+	public String deleteJobSuccess(@RequestParam int companyCode, HttpSession session) {
+		
+		Users loginUser = (Users) session.getAttribute("addUser");
+		CompanyPerson companyperson = new CompanyPerson();
+		companyperson.setCompanyCode(companyCode);
+		companyperson.setUserId(loginUser.getUserId());
+		
+		// 시간표삭제
+		int memberId = cpService.selectMemberIdbyCompanyPerson(companyperson);
+		tService.deleteTimeTableByMemberId(memberId);
+		// 직장삭제 메세지 보내기
+		Message message = new Message();
+		message.setCompanyCode(companyCode);
+		message.setUserId(loginUser.getUserId());
+		
+		List<CompanyPerson> cpList = cpService.selectByCompanyCode(companyCode);
+		String ownerId = "";
+		for (int i = 0; i < cpList.size(); i++) {
+			Users temp = uService.selectUserByUserId(cpList.get(i).getUserId());
+			if ((temp.getGrade().equals("사장"))) {
+				ownerId = temp.getUserId();
+				break;
+			}
+		}
+		message.setReceiverId(ownerId);
+		message.setMessageContent("직장 삭제");
+		message.setFlag(-1);
+
+		mService.insertMessage(message);
+		
+		// CP삭제
+		cpService.deleteCompanyPersonByComCodeAndUserId(companyperson);
+		
+		return "redirect:/myJob";
 	}
 
 }

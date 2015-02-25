@@ -107,13 +107,7 @@ public class CompanyPersonServiceImpl implements CompanyPersonService {
 		int result = dao.deleteCompanyPersonByComCodeAndUserId(companyperson);
 		return result;
 	}
-
-	@Override
-	public String selectOwnerIdByComCode(int companyCode) {
-		String result = dao.selectOwnerIdByComCode(companyCode);
-		return result;
-	}
-
+	
 	/*@Override
 	public CompanyPerson selectCompanyPersonByPerson(CompanyPerson person) {
 		CompanyPerson companyperson = dao.selectCompanyPersonByPerson(person);

@@ -91,11 +91,6 @@
 		delete from company_person where company_code=#{companyCode} and user_id =#{userId} 
 	</delete>
 	
-	<!-- <select id="selectOwnerIdByComCode" parameterType="Integer" resultType="String">
-		select u.user_id from users u, company_person p 
-		where u.user_id = p.user_id and
-		u.grade='사장' and p.company_code = #{companyCode};
-	</select> -->
 	
 	
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
