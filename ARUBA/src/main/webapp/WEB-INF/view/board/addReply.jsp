@@ -40,11 +40,12 @@
 $(document).ready(function() {
 	
 	var loginId = "<%=request.getAttribute("loginId")%>";
+	var adminId = "admin";
 	
 	$("#deleteBtn").click(function(){
 		var id = $("#writeId").html();
 		var no = $("#writeNo").html();
-		if(id == loginId){
+		if(id == loginId || adminId == loginId){
 			/* alert("자신이쓴글입니다!! "+no); */
 			var url = "<%=request.getContextPath()%>/deleteComment?commentNumber="+no;
 			$(location).attr('href',url); 
@@ -65,7 +66,7 @@ $(document).ready(function() {
 	});
 	$(".ttt").click(function(){
 		var btnId = $(this).attr("id");
-		alert(btnId);
+		/* alert(btnId); */
 		
 		var idId = "#ReplyId"+btnId;
 		var noId = "#ReplyNo"+btnId;
@@ -74,7 +75,7 @@ $(document).ready(function() {
 		alert("댓글번호"+$(noId).html()); */
 		
 		
-		if($(idId).html() == loginId){
+		if($(idId).html() == loginId || adminId == loginId){
 			/* alert("댓글이 삭제됩니다."); */
 			var url = "<%=request.getContextPath()%>/deleteReply?replyNumber="+$(noId).html()+"&commentNumber="+commentNo;
 			$(location).attr('href',url);
