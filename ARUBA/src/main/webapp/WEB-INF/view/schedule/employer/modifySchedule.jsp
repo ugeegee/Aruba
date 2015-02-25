@@ -277,8 +277,8 @@ $(document).ready(function() {
 #external-events .fc-event {
 	margin: 10px 0;
 	cursor: pointer;
-	background-color: navy;
-	border: 1px solid white;
+	/* background-color: navy;
+	border: 1px solid white; */
 	/* color: yellow; event의 글씨 */
 }
 

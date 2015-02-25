@@ -15,8 +15,8 @@
     <Resource name="jdbc/myOracle" auth="Container" type="javax.sql.DataSource"
 
             maxActive="100" maxIdle="30" maxWait="10000"
-            username="bmj" password="oracle" driverClassName="oracle.jdbc.driver.OracleDriver"
-            url="jdbc:oracle:thin:@localhost:1521:XE"/>
+            username="bmj" password="tiger" driverClassName="oracle.jdbc.driver.OracleDriver"
+            url="jdbc:oracle:thin:@210.107.234.69:1521:XE"/>
 
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
 	
