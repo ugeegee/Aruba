@@ -51,4 +51,10 @@ public class ReplyServiceImpl implements ReplyService {
 		int result = dao.deleteReplyByCommentNo(commentNumber);
 		return result;
 	}
+
+	@Override
+	public int deleteReplyByReplyNo(int replyNumber) {
+		int result = dao.deleteReplyByReplyNo(replyNumber);
+		return result;
+	}
 }

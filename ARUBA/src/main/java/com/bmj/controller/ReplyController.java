@@ -50,6 +50,15 @@ public class ReplyController {
 		
 		return "redirect:/showReplyList?no="+commentNumber;
 	}
+	
+	@RequestMapping(value = "/deleteReply", method = RequestMethod.GET)
+	// 댓글 삭제 성공시
+	public String deleteReplySuccess(@RequestParam int replyNumber, @RequestParam int commentNumber) {
+		//댓글지우고
+		rservice.deleteReplyByReplyNo(replyNumber);
+		//글보던페이지로 바로 이동하게
+		return "redirect:/showReplyList?no="+commentNumber;
+	}
 
 	@RequestMapping(value = "/showReplyList", method = RequestMethod.GET)
 	//글보기

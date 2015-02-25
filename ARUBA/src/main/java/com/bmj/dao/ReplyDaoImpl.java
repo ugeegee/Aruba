@@ -53,4 +53,10 @@ public class ReplyDaoImpl implements ReplyDao {
 		String stmt = namespace + "deleteReplyByCommentNo";
 		return sqlSession.delete(stmt, commentNumber);
 	}
+
+	@Override
+	public int deleteReplyByReplyNo(int replyNumber) {
+		String stmt = namespace +"deleteReplyByReplyNo";
+		return sqlSession.delete(stmt, replyNumber);
+	}
 }

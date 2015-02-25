@@ -12,4 +12,5 @@ public interface ReplyDao {
 	List<Reply> selectAllReply(int commentNumber);
 	
 	int deleteReplyByCommentNo(int commentNumber);
+	int deleteReplyByReplyNo(int replyNumber);
 }

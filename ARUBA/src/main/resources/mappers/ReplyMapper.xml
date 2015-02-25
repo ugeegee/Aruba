@@ -36,6 +36,11 @@
 		comment_number=#{commentNumber}
 	</delete>
 	
+	<delete id="deleteReplyByReplyNo" parameterType="Integer">
+		delete from Reply where
+		reply_number=#{replyNumber}
+	</delete>
+	
 	<select id="selectAllReply" parameterType="INTEGER" resultType="Reply">
 		select * from Reply where comment_number=(#{commentNumber})
 	</select>

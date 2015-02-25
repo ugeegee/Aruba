@@ -38,15 +38,6 @@
 	
 <script type="text/javascript">
 $(document).ready(function() {
-	/*  $("#proceed").click(function(){
-		 if($("#replyContent").val()==""){
-			alert("댓글 내용을 입력해주세요.");
-		}else{
-			<c:url value="/registerReply" var="reply"></c:url>
-			var url = "${reply}?commentNumber="+$("#commentNumber").val()+"&replyContent="+$("#replyContent").val();
-			location.href = url;
-		} 
-	});  */
 	
 	var loginId = "<%=request.getAttribute("loginId")%>";
 	
@@ -72,16 +63,27 @@ $(document).ready(function() {
 			alert("본인 글만 수정할 수 있습니다!!");
 		}
 	});
+	$(".btn").click(function(){
+		var btnId = $(this).attr("id");
+		alert(btnId);
+		
+		var idId = "#ReplyId"+btnId;
+		var noId = "#ReplyNo"+btnId;
+		var commentNo = $("#writeNo").html();
+		/* alert("댓글단아이디"+$(idId).html());
+		alert("댓글번호"+$(noId).html()); */
+		
+		
+		if($(idId).html() == loginId){
+			alert("댓글이 삭제됩니다.");
+			var url = "<%=request.getContextPath()%>/deleteReply?replyNumber="+$(noId).html()+"&commentNumber="+commentNo;
+			$(location).attr('href',url);
+		}else{
+			alert("본인 댓글만 삭제할 수 있습니다!!");
+		} 
+	});
+	
 	$("#replyForm").validate({
-		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
-		/* submitHandler : function() {
-			var f = confirm("글을 등록하시겠습니까?");
-			if (f) {
-				return true;
-			} else {
-				return false;
-			}
-		}, */
 		ignore: "",
 		//규칙
 		rules : {
@@ -318,13 +320,15 @@ label.error {
 						<th>댓글내용</th>
 						<th width = "15%">아이디</th>
 						<th width = "20%">작성날짜</th>
+						<th width = "10%"></th>
 					</tr>
 				<c:forEach items="${replyList }" var="replyList">
 					<tr> 
-						<td align = "center">${replyList.replyNumber}</td>
-						<td align = "center">${replyList.replyContent}</td>
-						<td align = "center">${replyList.userId}</td>
+						<td align = "center" id="ReplyNobtn${replyList.replyNumber}">${replyList.replyNumber}</td>
+						<td>${replyList.replyContent}</td>
+						<td align = "center" id="ReplyIdbtn${replyList.replyNumber}">${replyList.userId}</td>
 						<td align = "center">${replyList.regDate }</td>
+						<td align = "center"><button id="btn${replyList.replyNumber}" class="btn">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>

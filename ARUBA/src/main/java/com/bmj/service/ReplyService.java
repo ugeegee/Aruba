@@ -11,4 +11,5 @@ public interface ReplyService {
 	List<Reply> selectAllReply(int commentNumber);
 	
 	int deleteReplyByCommentNo(int commentNumber);
+	int deleteReplyByReplyNo(int replyNumber);
 }
