@@ -239,8 +239,18 @@ $(function() {
  					
  					<c:if test="${ScheduleFail == 1 }">
  						<!-- 회사가 없어서 스케쥴 메뉴를 불가능하게 -->
- 						<h1>Schedule Fail</h1>
-						<p>Please ~~~~~</p>
+ 						<div class="row">
+						<div class="col-sm-6">
+		 					<h1>Shift Table</h1>
+							<p>근무시간표</p>
+						</div>
+						<div class="col-sm-6">
+							<ul class="breadcrumb pull-right">
+								<li class="active">Home</li>
+								<li>Shift Table</li>
+							</ul>
+						</div>
+						</div>
  					</c:if>
  					
  				<!-- 사장이 회사 등록을 하지 않고 월급 관리를 보는 경우 회사등록 촉구-->
@@ -299,9 +309,19 @@ $(function() {
  		</c:if>
  		
  		<c:if test="${ScheduleFail == 1 }">
- 			<c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.<br>
- 			회사를 등록한 후 스케쥴메뉴가 사용가능합니다.
- 		</c:if>
+ 			<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 먼저 회사등록을 해주십시오.</h5>
+ 								<h5>회사를 등록한 후 스케쥴 메뉴를 사용할 수 있습니다.</h5><br>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
+		</c:if>
  		
  		<!-- 사장이 회사 등록을 하지 않고 월급 관리를 보는 경우 회사등록 촉구-->	
  		<c:if test="${ChartFail == 1 }">

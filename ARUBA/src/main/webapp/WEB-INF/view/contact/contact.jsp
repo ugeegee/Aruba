@@ -247,9 +247,11 @@ table td,th{
         </div>
     </section><!--/#contact-page-->
 	
-	<section id="thanksto" class="midnight-blue">
-	thanks to
-	
+	<section id="thanksto" class="emerald">
+		<div class="container center">
+		
+			<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title="">Thanks to..</button>
+		</div>
 	
 	</section>	
 	

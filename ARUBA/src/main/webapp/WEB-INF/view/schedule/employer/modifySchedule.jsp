@@ -251,7 +251,7 @@ $(document).ready(function() {
 	
 	$("#initbutton").click(function() {
 		var url = "<%=request.getContextPath()%>/checkdeleteTime"; 
-		window.open(url, "_blank", "width=600, height=600, toolbar=no, menubar=no, resizable=no");
+		window.open(url, "_blank", "width=600, height=200, toolbar=no, menubar=no, resizable=no");
 	})
 	
 	$("#updatebutton").click(function() {
@@ -426,7 +426,7 @@ $(document).ready(function() {
 	<section id="modifySchedule" class="container">
 		<div id='wrap'>
 				<div id='external-events'>
-				<h4>Company!</h4>
+				<h4>My Staffs</h4>
 				<!-- <table border = "1"> -->
 				<%-- <c:forEach items="${employees}" var="employee">
 					<!-- <tr> -->
@@ -449,9 +449,10 @@ $(document).ready(function() {
 	
 	<br>
 	<br>
-
-	<div id = 'update'  class="savee">
-		<button id = "initbutton" class="btn btn-success btn-md">Init</button><button id = "updatebutton" class="btn btn-danger btn-md btn-block">Modify</button>
+	
+	<div align="center" style="margin-bottom: 40px; margin-top:20px">
+		<button id="initbutton" class="btn btn-danger btn-lg">Initialize Shift</button>
+		<button id="updatebutton" class="btn btn-danger btn-lg">Modify Shift</button>
 	</div>
 	</section>
 
