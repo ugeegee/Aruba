@@ -13,11 +13,6 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="lib/jquery.validate.min.js"></script>
 
-<!--------------------- DataTable --------------------->
-
-<script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
-<link href="css/dataTables.css" rel="stylesheet">
-
 <!--------------------- Homepage --------------------->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -44,8 +39,6 @@
 	
 <script type="text/javascript">
 $(document).ready(function() {
-	
-	$('#example').DataTable();
 	
 	$("#commentForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
@@ -257,27 +250,28 @@ label.error {
 <section id="writeComment" class="container">
 	
 	<div id="comment-form">
-	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
-				<h3>게시글 작성</h3>	
+	 	<c:url value="/modifyComment" var="action"></c:url>
+			<form:form modelAttribute="selectedComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
+				<h3>게시글 수정</h3>	
 				<br>
-				FLAG : <c:if test="${nowFlag=='1' }">공지</c:if>
-						<c:if test="${nowFlag=='2' }">자유</c:if>
-						<c:if test="${nowFlag=='3' }">Q&A</c:if>
+				FLAG : <c:if test="${selectedComment.flag=='1' }">공지</c:if>
+						<c:if test="${selectedComment.flag=='2' }">자유</c:if>
+						<c:if test="${selectedComment.flag=='3' }">Q&A</c:if>
 				
 				|| 작성자 : ${addUser.userId }<br>
 				
 				<div class="form-group">
                  	<div class="col-sm-12">
                  		<br><br>
-                 		<input type="hidden" id="flag" name="flag" value=${nowFlag}> 
-                 		<form:input path="commentTitle" name="commentTitle" class="form-control" placeholder="제목"/>
+                 		<!-- <input type="hidden" id="flag" name="flag" value=${selectedComment.flag}>  -->
+                 		<form:hidden path="commentNumber" name="commentNumber" class="form-control"/>
+                 		<form:input path="commentTitle" name="commentTitle" class="form-control"/>
                     	<br><br>
-                    	<form:textarea path="commentContent" name="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
+                    	<form:textarea path="commentContent" name="commentContent" rows="8" class="form-control"></form:textarea>
                     </div>
                 </div>
 					<input type="reset" value="다시쓰기" class="btn btn-success btn-md write"/>
-					<input type="submit" value="글쓰기" class="btn btn-success btn-md write"/>
+					<input type="submit" value="수정하기" class="btn btn-success btn-md write"/> 
 					
 			</form:form> 
 	</div>

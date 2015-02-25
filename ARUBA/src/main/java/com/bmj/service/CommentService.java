@@ -13,4 +13,10 @@ public interface CommentService {
 	List<Comment> selectAllQnAComment();
 	Comment selectComment(int commentNumber);
 	Integer CountByUserId(String userId);
+	
+	int selectFlagByCommentNo(int commentNumber);
+	int deleteCommentByCommentNo(int commentNumber);
+	List<Integer> selectCommentNoListByUserId(String userId);
+	int updateUserIdByCommentNo(int commentNumber);
+	
 }

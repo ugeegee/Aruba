@@ -47,4 +47,28 @@ public class ReplyDaoImpl implements ReplyDao {
 		replies = sqlSession.selectList(stmt, commentNumber);
 		return replies;
 	}
+
+	@Override
+	public int deleteReplyByCommentNo(int commentNumber) {
+		String stmt = namespace + "deleteReplyByCommentNo";
+		return sqlSession.delete(stmt, commentNumber);
+	}
+
+	@Override
+	public int deleteReplyByReplyNo(int replyNumber) {
+		String stmt = namespace +"deleteReplyByReplyNo";
+		return sqlSession.delete(stmt, replyNumber);
+	}
+
+	@Override
+	public List<Integer> selectReplyNoListByUserId(String userId) {
+		String stmt = namespace + "selectReplyNoListByUserId";
+		return sqlSession.selectList(stmt, userId);
+	}
+
+	@Override
+	public int updateUserIdByReplyNo(int replyNumber) {
+		String stmt = namespace + "updateUserIdByReplyNo";
+		return sqlSession.update(stmt, replyNumber);
+	}
 }

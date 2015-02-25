@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bmj.entity.Comment;
+import com.bmj.entity.Reply;
 import com.bmj.entity.Users;
 import com.bmj.service.CommentService;
 
@@ -36,7 +37,7 @@ public class CommentController {
 		model.addAttribute("nowFlag", flag);
 		return "/board/writeComment";
 	}
-	@RequestMapping(value = "/registerComment", method = RequestMethod.GET)
+	@RequestMapping(value = "/registerComment", method = RequestMethod.POST)
 	// 게시글 작성하러옴
 	public String registerComment(@RequestParam String commentTitle,@RequestParam String commentContent, 
 			@RequestParam int flag, Model model, HttpSession session) {
@@ -51,13 +52,43 @@ public class CommentController {
 		comment.setFlag(flag);
 		cservice.insertComment(comment);
 		model.addAttribute("addComment", comment);
-		/*return "/board/success";*/
-		return "redirect:/boardSuccess";
-	}
-	@RequestMapping(value = "/boardSuccess")
-	// 게시글 작성 성공알림
-	public String registerCommentSuccess() {
+		
+		model.addAttribute("turnbackFlag", flag);
+		
 		return "/board/success";
+	}
+	
+	@RequestMapping(value = "/modifyComment", method = RequestMethod.GET)
+	//글수정페이지로
+	public String modifyCommentGo(@RequestParam int commentNumber, Model model, HttpSession session) {
+		
+		Comment selectedComment = cservice.selectComment(commentNumber);
+		model.addAttribute("selectedComment", selectedComment);
+		logger.trace("수업 : " + selectedComment);
+		
+		/*Users loginUser = (Users) session.getAttribute("addUser");
+		model.addAttribute("loginId", loginUser.getUserId());*/
+		return "/board/modifyComment";	
+	}
+	@RequestMapping(value = "/modifyComment", method = RequestMethod.POST)
+	//글수정하러옴
+	public String modifyCommentSuccessGo(@RequestParam int commentNumber, @RequestParam String commentTitle, @RequestParam String commentContent,
+										Model model, HttpSession session) {
+		
+		
+		Comment selectedComment = cservice.selectComment(commentNumber);
+		model.addAttribute("selectedComment", selectedComment);
+		logger.trace("수업 : " + selectedComment);
+		
+		Comment comment = new Comment();
+		comment.setCommentNumber(commentNumber);
+		comment.setCommentTitle(commentTitle);
+		comment.setCommentContent(commentContent);
+		comment.setRegDate(new Date());
+		
+		cservice.updateComment(comment);
+		
+		return "redirect:/showReplyList?no="+commentNumber;	
 	}
 	
 	@RequestMapping(value = "/notice")

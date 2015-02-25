@@ -29,8 +29,10 @@ import com.bmj.entity.Users;
 import com.bmj.exception.ChartMenuFailException;
 import com.bmj.exception.LoginFailException;
 import com.bmj.exception.ScheduleMenuFailException;
+import com.bmj.service.CommentService;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.MessageService;
+import com.bmj.service.ReplyService;
 import com.bmj.service.TimeTableService;
 import com.bmj.service.UsersService;
 
@@ -58,6 +60,10 @@ public class UsersController {
 	MessageService mService;
 	@Autowired
 	TimeTableService tService;
+	@Autowired
+	CommentService cmService;
+	@Autowired
+	ReplyService rService;
 
 	@RequestMapping(value = "/count", method = RequestMethod.GET)
 	public String getAllDeptList(Model model) {
@@ -263,7 +269,20 @@ public class UsersController {
 		leaveUser.setUserId(loginUser.getUserId()); // 아이디만 현재 로그인한 회원으로 가져오기
 		leaveUser.setPassword(nowPassword);
 
-		// ////직원탈퇴시-삭제 (댓글>게시글)>시간표>companyPerson>메세지>users
+		//////직원탈퇴시-삭제 (댓글>게시글)>시간표>companyPerson>메세지>users
+		//댓글 userId변경하기
+		List<Integer> replyNoList = rService.selectReplyNoListByUserId(loginUser.getUserId());
+		for(int i = 0; i<replyNoList.size(); i++){
+			rService.updateUserIdByReplyNo(replyNoList.get(i).intValue());
+		}
+		logger.trace("탈퇴시 댓글아이디 변경완료!!!!!!");
+		//게시글 userId변경하기
+		List<Integer> commentNoList = cmService.selectCommentNoListByUserId(loginUser.getUserId());
+		for(int i = 0; i<commentNoList.size(); i++){
+			cmService.updateUserIdByCommentNo(commentNoList.get(i).intValue());
+		}
+		logger.trace("탈퇴시 작성글아이디 변경완료!!!!!");
+		
 		List<Integer> memberId = cpService.selectMemberIdListbyUserId(leaveUser
 				.getUserId());
 		logger.trace("가져온 멤버아이디!!!!! " + memberId);

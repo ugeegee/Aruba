@@ -38,48 +38,64 @@
 	
 <script type="text/javascript">
 $(document).ready(function() {
-	/* $("#proceed").click(function(){
-		 if($("#replyContent").val()==""){
-			alert("댓글 내용을 입력해주세요.");
+	
+	var loginId = "<%=request.getAttribute("loginId")%>";
+	
+	$("#deleteBtn").click(function(){
+		var id = $("#writeId").html();
+		var no = $("#writeNo").html();
+		if(id == loginId){
+			alert("자신이쓴글입니다!! "+no);
+			var url = "<%=request.getContextPath()%>/deleteComment?commentNumber="+no;
+			$(location).attr('href',url); 
 		}else{
-			<c:url value="/registerReply" var="reply"></c:url>
-			var url = "${reply}?commentNumber="+$("#commentNumber").val()+"&replyContent="+$("#replyContent").val();
-			location.href = url;
+			alert("본인 글만 삭제할 수 있습니다!!");
+		}
+	});
+	$("#modifyBtn").click(function(){
+		var id = $("#writeId").html();
+		var no = $("#writeNo").html();
+		if(id == loginId){
+			alert("자신이쓴글입니다!! "+no);
+			var url = "<%=request.getContextPath()%>/modifyComment?commentNumber="+no;
+			$(location).attr('href',url); 
+		}else{
+			alert("본인 글만 수정할 수 있습니다!!");
+		}
+	});
+	$(".btn").click(function(){
+		var btnId = $(this).attr("id");
+		alert(btnId);
+		
+		var idId = "#ReplyId"+btnId;
+		var noId = "#ReplyNo"+btnId;
+		var commentNo = $("#writeNo").html();
+		/* alert("댓글단아이디"+$(idId).html());
+		alert("댓글번호"+$(noId).html()); */
+		
+		
+		if($(idId).html() == loginId){
+			alert("댓글이 삭제됩니다.");
+			var url = "<%=request.getContextPath()%>/deleteReply?replyNumber="+$(noId).html()+"&commentNumber="+commentNo;
+			$(location).attr('href',url);
+		}else{
+			alert("본인 댓글만 삭제할 수 있습니다!!");
 		} 
-	}); */
+	});
+	
 	$("#replyForm").validate({
-		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
-		/* submitHandler : function() {
-			var f = confirm("글을 등록하시겠습니까?");
-			if (f) {
-				return true;
-			} else {
-				return false;
-			}
-		}, */
 		ignore: "",
 		//규칙
 		rules : {
-			commentTitle : {
+			replyContent: {
 				required : true,
 				minlength : 1,
-				maxlength : 50
-			},
-			commentContent : {
-				required : true,
-				minlength : 1,
-				maxlength : 200
+				maxlength : 30
 			}
 		},
 		//규칙체크 실패시 출력될 메시지
 		messages : {
-			
-			commentTitle : {
-				required : "필수 입력사항 입니다.",
-				minlength : "최소 {0}글자이상이어야 합니다",
-				maxlength : "최대 {0}글자이하이어야 합니다"
-			},
-			commentContent : {
+			replyContent : {
 				required : "필수 입력사항 입니다.",
 				minlength : "최소 {0}글자이상이어야 합니다",
 				maxlength : "최대 {0}글자이하이어야 합니다"
@@ -96,6 +112,10 @@ $(document).ready(function() {
 <style>
 table th{
 	text-align : center;
+}
+label.error {
+	color: red;
+	/* font-style: italic */
 }
 </style>
 </head>
@@ -236,8 +256,18 @@ table th{
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Free Board</h1>
-					<p>자유게시판</p>
+					<c:if test="${selectedComment.flag=='1' }">
+						<h1>Notice Board</h1>
+						<p>공지게시판</p>
+					</c:if>
+					<c:if test="${selectedComment.flag=='2' }">
+						<h1>Free Board</h1>
+						<p>자유게시판</p>
+					</c:if>
+					<c:if test="${selectedComment.flag=='3' }">
+						<h1>Q&A Board</h1>
+						<p>Q&A 게시판</p>
+					</c:if>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
@@ -263,7 +293,7 @@ table th{
 					</th>
 				</tr>
 				<tr> 
-					<td align = "center">${selectedComment.commentNumber}</td>
+					<td align = "center" id="writeNo">${selectedComment.commentNumber}</td>
 					<td align = "center">
 					<c:if test="${selectedComment.flag=='1' }">공지게시판</c:if>
 					<c:if test="${selectedComment.flag=='2' }">자유게시판</c:if>
@@ -272,8 +302,8 @@ table th{
 					<td align = "center" id="writeId">${selectedComment.userId}</td>
 					<td align = "center">${selectedComment.regDate}</td>
 					<td align = "center">
-					<c:url value="/deleteComment" var="url"></c:url>
-					<a href="${url}?userId=${commentList.commentNumber}"><button>삭제</button></a>
+					<button id="deleteBtn">삭제</button>
+					<button id="modifyBtn">수정</button>
 					</td>
 				</tr>
 				<tr>
@@ -284,19 +314,21 @@ table th{
 				</tr>
 			</table>
 			<br><br><br><hr>
-		 	<table class="temp">
+		 	<table class="temp" width="100%">
 					<tr>
-						<th width = "175">댓글번호</th>
-						<th width = "175">아이디</th>
-						<th width = "375">댓글내용</th>
-						<th>작성날짜</th>
+						<th width = "10%">댓글번호</th>
+						<th>댓글내용</th>
+						<th width = "15%">아이디</th>
+						<th width = "20%">작성날짜</th>
+						<th width = "10%"></th>
 					</tr>
 				<c:forEach items="${replyList }" var="replyList">
 					<tr> 
-						<td align = "center">${replyList.replyNumber}</td>
-						<td align = "center">${replyList.userId}</td>
-						<td align = "center">${replyList.replyContent}</td>
+						<td align = "center" id="ReplyNobtn${replyList.replyNumber}">${replyList.replyNumber}</td>
+						<td>${replyList.replyContent}</td>
+						<td align = "center" id="ReplyIdbtn${replyList.replyNumber}">${replyList.userId}</td>
 						<td align = "center">${replyList.regDate }</td>
+						<td align = "center"><button id="btn${replyList.replyNumber}" class="btn">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -308,8 +340,9 @@ table th{
 						<form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" />
 					</tr>
 				</table><br>
-			<form:textarea path="replyContent" id="replyContent" rows="3" cols="130"></form:textarea>
- 				<input type="button" name="proceed" id="proceed" value="댓글등록"/>
+				<form:input path="replyContent" name="replyContent" class="form-control" placeholder="댓글 쓰기"/>
+ 				<br>
+ 				<input type="submit" value="댓글등록"/>
 				<input type="reset" value="다시쓰기"/>
 			</form:form>
     </section>

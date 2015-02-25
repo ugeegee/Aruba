@@ -19,16 +19,26 @@
 	
 	<update id="updateComment" parameterType="Comment">
 		update bComment set 
-			user_id=#{userId}, 
+			comment_title=#{commentTitle},
 			comment_content=#{commentContent}, 
-			reg_date=#{regDate}, 
-			flag=#{flag}
+			reg_date=#{regDate}
 		where comment_number=#{commentNumber}
+	</update>
+	
+	<update id="updateUserIdByCommentNo" parameterType="Integer">
+		update bComment set
+			user_id='탈퇴한회원'
+		where comment_number=#{commentNumber} 	
 	</update>
 
 	<delete id="deleteComment" parameterType="string">
 		delete from bComment where
 		user_id=#{userId}
+	</delete>
+	
+	<delete id="deleteCommentByCommentNo" parameterType="Integer">
+		delete from bComment where
+		comment_number=#{commentNumber}
 	</delete>
 	
 	<select id="selectAllNoticeComment" resultType="Comment">
@@ -49,6 +59,14 @@
 	
 	<select id="CountByUserId" parameterType="String" resultType="INTEGER">
 		select count(*) from bComment where user_id=(#{userId})
+	</select>
+	
+	<select id="selectFlagByCommentNo" parameterType="INTEGER" resultType="INTEGER">
+		select flag from bComment where comment_number=#{commentNumber}
+	</select>
+	
+	<select id="selectCommentNoListByUserId" parameterType="String" resultType="INTEGER">
+		select comment_number from bComment where user_id=#{userId}
 	</select>
 
 </mapper>
