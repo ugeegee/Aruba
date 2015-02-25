@@ -55,13 +55,22 @@ public class CompanyPersonController {
 			@RequestParam String userId, @RequestParam int messageNumber) {
 		logger.trace("승낙버튼누름!! 회사" + companyCode + " 아이디 " + userId);
 
-		mService.updateMesageFlagByMsgNum(messageNumber); // 읽었으니까 1로바꿈
+		mService.updateMesageAcceptFlagByMsgNum(messageNumber); // 승낙했으니까 1로바꿈
 
 		CompanyPerson companyperson = new CompanyPerson();
 		companyperson.setCompanyCode(companyCode);
 		companyperson.setUserId(userId);
 		companyperson.setHireDate("오늘");
 		cpService.insertCompanyEmployee(companyperson); // 알바생추가
+		return "redirect:/alert_employer";
+	}
+	@RequestMapping(value = "/rejectNewEmployee", method = RequestMethod.GET)
+	public String rejectNewEmployeeSuccessGo(@RequestParam int companyCode,
+			@RequestParam String userId, @RequestParam int messageNumber) {
+		logger.trace("거절버튼누름!! 회사" + companyCode + " 아이디 " + userId);
+
+		mService.updateMesageRejectFlagByMsgNum(messageNumber); // 거절했으니까 2로바꿈
+
 		return "redirect:/alert_employer";
 	}
 

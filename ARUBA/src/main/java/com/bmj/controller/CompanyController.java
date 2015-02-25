@@ -174,14 +174,17 @@ public class CompanyController {
 	// 알바 mypage 메뉴에서 직업관리
 	public String mypageMyJobGo(Model model, HttpSession session) {
 		Users loginUser = (Users) session.getAttribute("addUser"); // 로그인하고 있는 알바생 정보 가져오고
-
+		
+		//현재 가입된 회사 수
 		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
 		List<Company> comList = new ArrayList<Company>();
 		for(int i = 0; i < codeList.size(); i++){
 			comList.add(i, service.selectCompanyByCompanyCode( codeList.get(i).intValue() ) );
 		}
+		//현재 가입대기중인 회사 수
+		int uncheckedMessage = mService.countUncheckedFlagByUserId(loginUser.getUserId());
 		
-		if(codeList.size() > 2){
+		if(codeList.size()+uncheckedMessage > 2){
 			model.addAttribute("emptyCompany", "NO");
 		}else{
 			model.addAttribute("emptyCompany", "YES");

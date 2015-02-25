@@ -181,6 +181,9 @@
 						<c:if test="${myMessages.flag =='1' }">
 							승인
 						</c:if>
+						<c:if test="${myMessages.flag =='2' }">
+							거절
+						</c:if>
 					</td>
 				</tr>
 				</c:forEach>
