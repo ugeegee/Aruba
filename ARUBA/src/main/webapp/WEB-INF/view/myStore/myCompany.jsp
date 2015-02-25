@@ -280,7 +280,7 @@ $(document).ready(function() {
 					</tr>
 				</tbody>			
 			</table>
-			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+			<div align="center" style="margin-bottom: 10px; margin-top: 30px;">
 				<input type="submit" class="btn btn-success btn-md" name="modify" value="Modify"/>
 				<input type="submit" class="btn btn-success btn-md" name="delete" value="Delete"/>
 			</div>

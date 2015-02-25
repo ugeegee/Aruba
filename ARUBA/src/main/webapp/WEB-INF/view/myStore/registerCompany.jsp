@@ -256,7 +256,7 @@ $(document).ready(function() {
 					</tr>
 				</tbody>
 			</table>
-			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+			<div align="center" style="margin-bottom: 10px; margin-top: 30px;">
 				<button type="submit" class="btn btn-success btn-md">Register</button>
 				<button type="reset" id="cancel" class="btn btn-success btn-md">Cancel</button>
 			</div>
