@@ -81,12 +81,12 @@ public class ChartController {
 		myTimes = service.selectStatsByMemberId(companyperson.getMemberId());
 		
 		logger.trace("수업 ::::::::::::::::" + myTimes);			// 모든 월단위 start_end - start_start
-		if(myTimes.isEmpty()) {
+		/*if(myTimes.isEmpty()) {
 			logger.trace("수업, 아무것도없다.");
 		} else {
 			logger.trace("수업, 아무것도 있다.");
 			model.addAttribute("Times", myTimes);
-		}
+		}*/
 		int salary = companyperson.getSalary();
 		for (int i = 0; i < myTimes.size(); i++) {
 			int count = (int)(myTimes.get(i).getCount()* 24 * salary);
@@ -145,12 +145,12 @@ public class ChartController {
 		// month, memberId, count
 		logger.trace("수업 ::::::::::::::::" + myTimes);
 		logger.trace("수업 nightTimes : " + nightTimes);
-		if(myTimes.isEmpty()) {
+		/*if(myTimes.isEmpty()) {
 			logger.trace("수업, 아무것도없다.");
 		} else {
 			logger.trace("수업, 아무것도 있다.");
 			model.addAttribute("Times", myTimes);
-		}
+		}*/
 		int salary = companyperson.getSalary();
 		for(int i = 0; i < myTimes.size(); i++) {
 			//double count = 0;
