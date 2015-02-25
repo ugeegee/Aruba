@@ -434,9 +434,10 @@ $(document).ready(function() {
 	
 	<br>
 	<br>
-
-	<div id = 'update'  class="savee">
-		<button id = "initbutton" class="btn btn-success btn-md">Init</button><button id = "updatebutton" class="btn btn-danger btn-md btn-block">Modify</button>
+	
+	<div align="center" style="margin-bottom: 40px; margin-top:20px">
+		<button id="initbutton" class="btn btn-danger btn-lg">Initialize Shift</button>
+		<button id="updatebutton" class="btn btn-danger btn-lg">Modify Shift</button>
 	</div>
 	</section>
 

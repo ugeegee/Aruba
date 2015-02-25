@@ -367,7 +367,7 @@
 		<div id='wrap'>
 
 			<div id='external-events'>
-				<h4>Company!</h4>
+				<h4>My Staffs</h4>
 				<!-- <table border = "1"> -->
 				<c:forEach items="${employees}" var="employee" varStatus="cur">
 					<!-- <tr> -->
@@ -377,7 +377,7 @@
 					<!-- </tr> -->
 				</c:forEach>
 				<p>
-					<label for = 'drop-remove'>무언가의 할 말....?</label>
+					<label for = 'drop-remove'>* 직원 아이콘을 달력에 드래그해서 근무시간을 설정하세요. </label>
 				</p>
 				<!-- </table> -->
 				<!-- <p>
@@ -392,10 +392,8 @@
 
 		</div>
 		
-		<br>
-		<br>
-		<div id="save1" class="savee">
-			<button id="save" class="btn btn-danger btn-md btn-block">Save</button>
+			<div align="center" style="margin-bottom: 40px; margin-top:20px">
+			<button id="save" class="btn btn-danger btn-lg">Save Shift</button>
 		</div>
 	</section>
 
