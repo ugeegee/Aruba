@@ -238,7 +238,22 @@
 	width: 900px;
 }
 
+/* .fc_event0 {
+	background-color:green;
+}
 
+.event_1 {
+	background-color:blue;
+}
+
+.event_2 {
+	background-color:yellow;
+}
+
+.event_3 {
+	background-color:black;
+}
+ */
 .savee{
 	float: right;
 	width: 16.666666666666664%;
@@ -354,13 +369,16 @@
 			<div id='external-events'>
 				<h4>Company!</h4>
 				<!-- <table border = "1"> -->
-				<c:forEach items="${employees}" var="employee">
+				<c:forEach items="${employees}" var="employee" varStatus="cur">
 					<!-- <tr> -->
 					<!-- <td> -->
-					<div class='fc-event'>${employee.userId}</div>
+					<div class = 'fc-event' class='fc-event_${cur.index}'>${employee.userId}</div>
 					<!-- </td> -->
 					<!-- </tr> -->
 				</c:forEach>
+				<p>
+					<label for = 'drop-remove'>무언가의 할 말....?</label>
+				</p>
 				<!-- </table> -->
 				<!-- <p>
 					<input type='checkbox' id='drop-remove' /> <label

@@ -59,6 +59,11 @@ public class MessageserviceImpl implements MessageService {
 		int result = dao.countUncheckedFlagByUserId(userId);
 		return result;
 	}
+	@Override
+	public Message selectUncheckedMessageByComCode(int companyCode) {
+		Message result = dao.selectUncheckedMessageByComCode(companyCode);
+		return result;
+	}
 
 
 

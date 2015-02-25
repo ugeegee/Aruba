@@ -56,6 +56,13 @@ public class TimeTableServiceImpl implements TimeTableService {
 		List<Stats> result = dao.selectStatsByCompanyCode(companyCode);
 		return result;
 	}
+	
+	@Override
+	public List<Stats> selectNightStatsByCompanyCode(int companyCode) {
+		logger.trace("여기는 Time Table 서비스~~~~~~~~~~~~~~~~~~~~~!" + companyCode);
+		List<Stats> result = dao.selectNightStatsByCompanyCode(companyCode);
+		return result;
+	}
 
 	@Override
 	public int selectKeybyTime(TimeTable timetable) {
@@ -88,5 +95,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 		int result = dao.deleteTimeTableByCompanyCode(companyCode);
 		return result;
 	}
+
+
 
 }

@@ -13,4 +13,5 @@ public interface MessageService {
 	List<Message> selectMessageByUserId(String userId);
 	List<Message> selectMessageByComCode(int companyCode);
 	int countUncheckedFlagByUserId(String userId);
+	Message selectUncheckedMessageByComCode(int companyCode);
 }

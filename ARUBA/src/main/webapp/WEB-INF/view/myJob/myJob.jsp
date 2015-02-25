@@ -53,6 +53,12 @@ $(document).ready(function() {
 	if(<%=request.getAttribute("PopUp")%> == 1){
 		alert("없는 회사정보 입니다.");
 	}
+	if(<%=request.getAttribute("PopUp")%> == 2){
+		alert("이미 등록한 회사정보입니다.");
+	}
+	if(<%=request.getAttribute("PopUp")%> == 3){
+		alert("승인 대기중인 회사정보입니다.");
+	}
 	
 	$("#addJobForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
@@ -270,6 +276,7 @@ $(document).ready(function() {
 					<th class="center">회사코드</th>
 					<th class="center">회사명</th>
 					<th class="center">전화번호</th>
+					<th width="10%"></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -278,6 +285,10 @@ $(document).ready(function() {
 						<td class="center">${myCompanies.companyCode}</td>
 						<td class="center">${myCompanies.companyName}</td>
 						<td class="center">${myCompanies.companyTel}</td>
+						<td>
+							<c:url value="/deleteJob?companyCode=${myCompanies.companyCode}" var="url" /> 
+							<a href="${url }"><button class="btn btn-success btn-md">삭제</button></a>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

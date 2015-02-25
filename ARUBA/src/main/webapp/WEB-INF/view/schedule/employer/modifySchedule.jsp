@@ -83,7 +83,7 @@ $(document).ready(function() {
 		/* initialize the external events
 		-----------------------------------------------------------------*/
 
-		$('#external-events .fc-event').each(function() {
+		/* $('#external-events .fc-event').each(function() {
 
 			// store data so the calendar knows to render an event upon drop
 			$(this).data('event', {
@@ -100,7 +100,7 @@ $(document).ready(function() {
 			//  original position after the drag
 			});
 
-		});
+		}); */
 		
 		$('#calendar').fullCalendar({
 			//defaultDate: '2015-02-12',
@@ -410,7 +410,7 @@ $(document).ready(function() {
 
 	<section id="modifySchedule" class="container">
 		<div id='wrap'>
-				<div id='external-events'>
+				<%-- <div id='external-events'>
 				<h4>Company!</h4>
 				<!-- <table border = "1"> -->
 				<c:forEach items="${employees}" var="employee">
@@ -425,7 +425,7 @@ $(document).ready(function() {
 					<input type='checkbox' id='drop-remove' /> <label
 						for='drop-remove'>remove after drop</label>
 				</p> -->
-			</div>
+			</div> --%>
 	<div id='calendar'></div>
 	<br>
 			<div style='clear: both'></div>
