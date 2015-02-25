@@ -403,8 +403,24 @@ $(document).ready(function() {
 		</table>
 	</div>
 	</c:if>
+	
+	
+	
+	
+	
 	<c:if test="${empty Times }">
-		<h2>시간표를 먼저 등록해주세요.</h2>
+		<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 근무시간표를 먼저 등록해주세요.</h5>
+ 								<br>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
 	</c:if>
     </section>
 
