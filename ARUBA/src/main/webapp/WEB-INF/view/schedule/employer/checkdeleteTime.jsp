@@ -13,7 +13,9 @@ $(document).ready(function() {
 	$("#delete").click(function(){
 		<c:url value="/deleteTimeTable" var="deleteTimeTable"></c:url>
 		var url = "${deleteTimeTable}";
-		location.href = url;		
+		/* opener.$("#hidden").val("delete"); */
+		opener.location.href = url;	
+		window.close();
 	});
 	$("#cancel").click(function(){
 		self.close();
@@ -25,6 +27,7 @@ $(document).ready(function() {
 <body>
 DB의 모든 시간표를 삭제하시겠습니까?
 <button id = "delete">삭제</button>
+<input type = "hidden" id = "hidden" class = "hidden">
 <button id = "cancel">취소</button>
 </body>
 </html>
