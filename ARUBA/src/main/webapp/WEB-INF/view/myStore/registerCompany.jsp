@@ -227,7 +227,48 @@ $(document).ready(function() {
 	<!--/#title-->
 
  	<section id="StoreControl" class="container">
- 	<div class="pad">
+ 		<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>Register Company</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			 <c:url value="/registerCompany" var="url"/>
+			<form id="addComForm" action="${url }" method="post">
+			<table class="table table-striped table-hover">
+				<tbody>
+					<tr>
+						<th class="center"><label>회사명</label></th>
+						<td><input type="text" name="companyName" id="companyName" placeholder="store name" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>회사전화번호</label></th>
+						<td><input type="text" name="companyTel" id="companyTel" placeholder="store phonenumber" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>주말수당(%)</label></th>
+						<td><input type="text" name="holidayComm" id="holidayComm" value="0" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>야근수당(%)</label></th>
+						<td><input type="text" id="nightComm" name="nightComm" value="0" class="form-control"/></td>
+					</tr>
+				</tbody>
+			</table>
+			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+				<button type="submit" class="btn btn-success btn-md">Register</button>
+				<button type="reset" id="cancel" class="btn btn-success btn-md">Cancel</button>
+			</div>
+			</form>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+ 	
+ <%-- 	<div class="pad">
 		<div id="pricing-table">
 	 		<div class="smallbox">
     	                <ul class="plan featured">
@@ -236,12 +277,12 @@ $(document).ready(function() {
             	                <br>
                 	        </li>
                     	    <li>
-              					<c:url value="/registerCompany" var="url"/>
+        <c:url value="/registerCompany" var="url"/>
 		<form id="addComForm" action="${url }" method="post">
 			<table class="table" style="border-collapse: seperate;">
-				<%-- <colgroup>
+				<colgroup>
 					<col style="align: center;" />
-				</colgroup> --%>
+				</colgroup>
 				<tbody>
 					<tr>
 						<th class="center"><label>회사명</label></th>
@@ -273,7 +314,7 @@ $(document).ready(function() {
         </div>
         </div>
     </div>
- 	
+ 	 --%>
  		
     </section>
 

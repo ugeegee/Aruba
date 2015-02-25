@@ -240,8 +240,58 @@ $(document).ready(function() {
 	<!--/#title-->
 
  	<section id="StoreControl" class="container">
-
- 		<div class="pad">
+		 		<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>Current Company</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			 <c:url value="/modifyMyCom" var="action" />
+				  <form:form modelAttribute="myCom" mehtod="post" action="${action }" id="modifyComForm">
+			<table class="table table-striped table-hover">
+				<tbody>
+				  <tr>
+						<td class="center"><label>회사코드</label></td>
+						<td class="center"><c:out value="${myCom.companyCode }" />
+						<form:hidden path="companyCode" name="companyCode" id="companyCode" class="form-control"/>
+						<input type="hidden" name="ownerPass" id="ownerPass" value=${ownerPass} /></td>					
+					</tr>
+						
+					<tr>
+						<th class="center"><label>회사명</label></th>
+						<td><form:input path="companyName" name="companyName" id="companyName" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>회사전화번호</label></th>
+						<td><form:input path="companyTel" name="companyTel" id="companyTel" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>주말수당(%)</label></th>
+						<td><form:input path="holidayComm" name="holidayComm" id="holidayComm" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>야근수당(%)</label></th>
+						<td> <form:input path="nightComm" name="nightComm" id="nightComm" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>비밀번호</label></th>
+						<td><input type="password" name="nowPass" id="nowPass" class="form-control"/></td>
+					</tr>
+				</tbody>			
+			</table>
+			<div align="center" style="margin-bottom: 20px; margin-top: 30px;">
+				<input type="submit" class="btn btn-success btn-md" name="modify" value="Modify"/>
+				<input type="submit" class="btn btn-success btn-md" name="delete" value="Delete"/>
+			</div>
+			</form:form>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+ 		<%-- <div class="pad">
 		<div id="pricing-table">
 	 		<div class="smallbox">
     	                <ul class="plan featured">
@@ -294,7 +344,7 @@ $(document).ready(function() {
         </ul>
         </div>
         </div>
-    </div>
+    </div> --%>
 				
     </section>
 

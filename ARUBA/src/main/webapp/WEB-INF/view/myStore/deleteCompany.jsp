@@ -154,14 +154,31 @@
 	<!--/#title-->
 
 	<section id="deleteCompanySuccess" class="container">
-		<div align="center" style="margin-bottom: 50px; margin-top:30px;">
+		<div class="pad">
+		<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님의 회사에 대한 모든 정보가 삭제되었습니다.</h5>
+            	                <h5>회사에 남은 직원들에게 삭제메시지가 보내졌으며 Store Control에서 언제든지 새로운 회사를 등록할 수 있습니다.</h5>
+                	        </li>
+                    	    <li class="plan-action">
+                    	     <c:url value="/index" var="url"></c:url>
+                       	     <a href="${url }" class="btn btn-success btn-md">Home</a>
+                      	  </li>
+                    	</ul>
+           </div>
+        </div>
+    	</div>
+		
+		<%-- <div align="center" style="margin-bottom: 50px; margin-top:30px;">
 		<h2><c:out value="${addUser.userName }" />님.<br>
 		회사에 대한 정보는 모두 삭제되었으며<br>
 		직원이 존재했을시 회사 삭제메세제가 보내졌습니다.<br>
 		Store Control에서 새로 회사추가가 가능합니다. 또 이용하세여~~</h2>
 		<c:url value="/index" var="url"></c:url>
 		<a href="${url }">메인으로</a>
-		</div>
+		</div> --%>
 	</section>
 
 	<section id="bottom" class="wet-asp">

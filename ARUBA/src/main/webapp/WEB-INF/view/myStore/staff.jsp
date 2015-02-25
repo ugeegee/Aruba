@@ -171,10 +171,56 @@ $(function() {
 	<!--/#title-->
 
  	<section id="StaffControl" class="container">
- 	
- 		사장의 직원관리<br><br>
+ 		<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>Staff List</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th class="center">status</th>
+					<th class="center">회사코드</th>
+					<th class="center">이름</th>
+					<th class="center">아이디</th>
+					<th class="center">전화번호</th>
+					<th class="center">이메일</th>
+					<th class="center">시급</th>
+					<th class="center">고용일</th>
+					<th class="center">직원삭제</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${staffList }" var="staffList" varStatus="status">
+				<tr>
+					<td class="center">${status.index }</td>
+					<td id="codebtn${status.index }" class="center">${staffList.companyCode}</td>
+					<td class="center">${staffList.userName}</td>
+					<td id="idbtn${status.index }" class="center">${staffList.userId}</td>
+					<td class="center">${staffList.tel}</td>
+					<td class="center">${staffList.email}</td>
+					<td class="center"><input type="text" name="salary${status.index }" id="salarybtn${status.index }" value="${staffList.salary}">
+						<button id="btn${status.index }" class="btn btn-success btn-md">Modify</button>
+					</td>
+					<td class="center">${staffList.hireDate}</td>
+					<td class="center"><c:url value="/deleteStaff?companyCode=${staffList.companyCode}&userId=${staffList.userId}" var="url"/>
+					<a href="${url }"><button class="btn btn-success btn-md">Delete</button></a></td>
+				</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	</section>		
 			
-			<table class="temp">
+			<%-- <table class="temp">
 				<tr>
 					<th>status</th>
 					<th>회사코드</th>
@@ -202,9 +248,8 @@ $(function() {
 						<a href="${url }"><button>삭제</button></a></td>
 					</tr>
 				</c:forEach>
-			</table>
+			</table> --%>
 			
-    </section>
 
 	<section id="bottom" class="wet-asp">
 		<div class="container">
