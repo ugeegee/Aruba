@@ -261,14 +261,13 @@ table td,th{
 			</small>
 			<p><br>and</p>
 			<small>
+				<b>JuYeon Kang, giving advice on web-design and support translation into English subtitles on the webpage</b><br>
 				Andy Joe, our fifth group member<br>
 				Chan restaurant, responsble for our lunch for 40 days<br>
-				The flock of ducks blocking our way to the campus yet not letting us go home<br>
-				
-				MiGeum Jeon, supported spiritually and Social Life Teacher<br>
-				<b>JuYeon Kang, giving advice on web-design and support translation into English subtitles on the webpage</b><br>
+				The flock of ducks blocking our way to the campus yet not letting us go home<br>				
+				MiGeum Jeon, supported spiritually and Social Life Teacher of JungIn<br>
 				JunHo Jang, produced Diffuser and supported JungIn in IT sector<br>
-				SeoungJun Lee, the first beard man who I have talked to in my life and my chatbuddy<br>
+				SeoungJun Lee, the first beard man who JungIn has talked to in my life and my chatbuddy<br>
 				Suzi Ann, named 'Malsikizimarazo'<br>
 				JaeYong Lee, lunch buddy<br>
 				JiSeon Kim, Collector of wise saying<br>
