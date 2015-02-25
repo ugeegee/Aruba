@@ -238,9 +238,9 @@ table td,th{
         </tfoot>
  		
         <tbody>
-        <c:forEach items="${commentList }" var="commentList">
+        <c:forEach items="${commentList }" var="commentList" varStatus="cur">
             <tr>
-                <td>${commentList.commentNumber}</td>
+                <td>${cur.index + 1}</td>
                 <td>
                 	<c:url value="/showReplyList" var="url"></c:url>
 					<strong><a href="${url}?no=${commentList.commentNumber}">${commentList.commentTitle}</a></strong>

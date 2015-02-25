@@ -212,10 +212,10 @@ $(document).ready(function() {
 					<th width="">작성일</th>
 				</tr>
 				</thead>
-			<c:forEach items="${commentList }" var="commentList">
+			<c:forEach items="${commentList }" var="commentList" varStatus="cur">
 					<tbody>
 					<tr> 
-						<td align = "left">${commentList.commentNumber}</td>
+						<td align = "left">${cur.index + 1}</td>
 						<td align = "left">
 							<c:url value="/showReplyList" var="url"></c:url>
 							<a href="${url}?no=${commentList.commentNumber}">${commentList.commentContent}</a>
