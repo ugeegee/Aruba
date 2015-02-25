@@ -249,8 +249,35 @@ table td,th{
 	
 	<section id="thanksto" class="emerald">
 		<div class="container center">
-		
-			<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title="">Thanks to..</button>
+			<i class="icon-heart icon-4x"></i>
+			<h1>Thanks to </h1>
+			<br>
+			<p>Aruba project members</p>
+			<small>
+					JiYeon Yoo, skillful as Ronaldo in coding<br>
+					KwangWook Park, skillful as Alonso in coding<br>
+					JungIn Choi, skillful as Neymar in coding<br>
+					YeonJun Kim, skillful as Suarez  in coding
+			</small>
+			<p><br>and</p>
+			<small>
+				Andy Joe, our fifth group member<br>
+				Chan restaurant, responsble for our lunch for 40 days<br>
+				The flock of ducks blocking our way to the campus yet not letting us go home<br>
+				
+				MiGeum Jeon, supported spiritually and Social Life Teacher<br>
+				<b>JuYeon Kang, giving advice on web-design and support translation into English subtitles on the webpage</b><br>
+				JunHo Jang, produced Diffuser and supported JungIn in IT sector<br>
+				SeoungJun Lee, the first beard man who I have talked to in my life and my chatbuddy<br>
+				Suzi Ann, named 'Malsikizimarazo'<br>
+				JaeYong Lee, lunch buddy<br>
+				JiSeon Kim, Collector of wise saying<br>
+				Teaching assistances, taking register and supporting snacking<br>
+				and KoDB
+				<br><br><br><br>
+			</small>
+			
+			<!-- <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title="">Thanks to..</button> -->
 		</div>
 	
 	</section>	
