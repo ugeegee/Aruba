@@ -78,6 +78,9 @@
 		delete from time_table where company_code =#{companyCode} 
 	</delete>
 	
+	<delete id="deleteTimeTableByTimekey" parameterType="Integer">
+		delete from time_table where time_key =#{timeKey} 
+	</delete>
 	<!--
 	
 	<select id = "selectCompanyByCompanyCode" resultType="Company" parameterType="Integer">

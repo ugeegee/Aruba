@@ -226,7 +226,7 @@ public class TimeTableController {
 			savetime.setStart(settingTime(lists.get(idx).getWorkingStart()));
 			savetime.setEnd(settingTime(lists.get(idx).getWorkingEnd()));
 			// 나중에 색 때문에라도 직원수로 나눠라 그냥.
-			savetime.setColor(color[lists.get(idx).getMemberId()%14]);
+			savetime.setColor(color[lists.get(idx).getMemberId()%13]);
 			logger.trace("수업 savetime : " + savetime);
 			list2.add(idx, savetime);
 		}
@@ -305,19 +305,23 @@ public class TimeTableController {
 	}
 	
 	@RequestMapping(value="/updateTimeTable")
-	public String updateCalendar(@RequestParam String updateStart, @RequestParam String updateEnd, Model model, HttpSession session) {
+	public String updateCalendar(@RequestParam String updateStart, @RequestParam String updateEnd, @RequestParam String deleteItem, Model model, HttpSession session) {
 		Users loginUser = (Users)session.getAttribute("addUser");
 		CompanyPerson companyperson = service2.selectCompanyPersonByUserId(loginUser.getUserId());
 		model.addAttribute("code", companyperson.getCompanyCode());
 		
 		Calendar operationTime = Calendar.getInstance();
+		Calendar deletesTime = Calendar.getInstance();
 		// 수정 시작 시간.
 		logger.trace("수업 Start : " + updateStart);
 		// 수정 끝난 시간.
 		logger.trace("수업 End : " + updateEnd);
+		// 삭제할 데이터
+		logger.trace("수업 delete : " + deleteItem);
 		Gson gson = new Gson();
 		ArrayList start = new ArrayList();
 		ArrayList end = new ArrayList();
+		ArrayList deletes = new ArrayList();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
 		Date compareStart = new Date();
@@ -325,8 +329,10 @@ public class TimeTableController {
 		Date workingEnd = new Date();
 		start = gson.fromJson(updateStart, ArrayList.class);
 		end = gson.fromJson(updateEnd, ArrayList.class);
+		deletes = gson.fromJson(deleteItem, ArrayList.class);
 		logger.trace("수업 Gson Start : " + start);
-		logger.trace("수업 Gson Start : " + end);
+		logger.trace("수업 Gson End : " + end);
+		logger.trace("수업 Gson Delete : " + deletes);
 		// update할 timeKey를 추출.
 		for(int i = 0; i < start.size(); i ++) {
 		TimeTable timetable = new TimeTable();
@@ -385,6 +391,35 @@ public class TimeTableController {
 		logger.trace("수업 Update : " + updateTable);
 		service.updateTimeTable(updateTable);
 		}
+		
+		int dmemberId = 0;
+		Date deleteT = new Date();
+		for(int k = 0; k < deletes.size(); k++) {
+			com.google.gson.internal.LinkedTreeMap map = (com.google.gson.internal.LinkedTreeMap)deletes.get(k);
+			dmemberId = Integer.parseInt(map.get("title").toString());
+			try {
+				deleteT = formatter.parse(map.get("start").toString());
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		deletesTime.setTime(deleteT);
+		int dyear = deletesTime.get(Calendar.YEAR);
+		int dmonth = deletesTime.get(Calendar.MONTH)+1;
+		int dday = deletesTime.get(Calendar.DATE);
+		int dhour = deletesTime.get(Calendar.HOUR_OF_DAY);
+		List<TimeTable> deleteTime = service.selectByMemberId(dmemberId);
+		int dTimekey = 0;
+		for(int q = 0; q < deleteTime.size(); q++) {
+			deletesTime.setTime(deleteTime.get(q).getWorkingDate());
+			if(deletesTime.get(Calendar.YEAR) == dyear && deletesTime.get(Calendar.MONTH)+1 == dmonth 
+					&& deletesTime.get(Calendar.DATE) == dday && deletesTime.get(Calendar.HOUR_OF_DAY) == dhour){
+				dTimekey = deleteTime.get(q).getTimeKey();
+			}
+		}
+		service.deleteTimeTableByTimekey(dTimekey);
+		
 		return "/schedule/employer/allSchedule";
 	}
 }

@@ -90,91 +90,108 @@
 
 				/* initialize the calendar
 				-----------------------------------------------------------------*/
-
 				$('#calendar').fullCalendar({
-							header : {
-								left : 'prev,next today',
-								center : 'title',
-								right : 'month,agendaWeek,agendaDay'
-							},
-							timeFormat : {
-								'' : 'HH:mm',
-								agenda : 'HH:mm',
-							//console.log("agenda" , HH:mm)
-							},
-							editable : true,
-							droppable : true, // this allows things to be dropped onto the calendar
-							eventDrop : function(event) {
-								id = event._id;
-								title = event.title;
-								start = event.start.format('YYYY-MM-DD HH:mm:ss');
-								console.log("Drop_id : " + id);
-								console.log('Drop_title : ', title);
-								console.log('Drop_start : ', start);
-								//console.log('end111', event.end.toString());	
+					header : {
+						left : 'prev,next today',
+						center : 'title',
+						right : 'month,agendaWeek,agendaDay'
+					},
+					timeFormat : {
+						'' : 'HH:mm',
+						agenda : 'HH:mm',
+					//console.log("agenda" , HH:mm)
+					},
+					editable : true,
+					droppable : true, // this allows things to be dropped onto the calendar
+					eventDrop : function(event) {
+						id = event._id;
+						title = event.title;
+						start = event.start.format('YYYY-MM-DD HH:mm:ss');
+						console.log("Drop_id : " + id);
+						console.log('Drop_title : ', title);
+						console.log('Drop_start : ', start);
+						//console.log('end111', event.end.toString());	
 
-								if (event.end == null) {
-									//alert("뭐지?")
-									event.end = event.start.clone();
-									event.end.set("hours", event.end.get("hours")+2);
-									end = event.end.format('YYYY-MM-DD HH:mm:ss');
-									console.log('Drop_end : ', end);
-								} else {
-									/* event.end.set("hours", event.end.get("hours") + 2); */
-									end = event.end.format('YYYY-MM-DD HH:mm:ss');
-									console.log('Drop_end : ', end);
+						if (event.end == null) {
+							//alert("뭐지?")
+							event.end = event.start.clone();
+							event.end.set("hours", event.end.get("hours")+2);
+							end = event.end.format('YYYY-MM-DD HH:mm:ss');
+							console.log('Drop_end : ', end);
+						} else {
+							/* event.end.set("hours", event.end.get("hours") + 2); */
+							end = event.end.format('YYYY-MM-DD HH:mm:ss');
+							console.log('Drop_end : ', end);
+						}
+						for ( var i in result) {
+							if (result[i] != null) {
+								if (result[i].id == id) {
+									result.splice(i, 1);
+									console.log(result);
 								}
-								for ( var i in result) {
-									if (result[i] != null) {
-										if (result[i].id == id) {
-											result.splice(i, 1);
-											console.log(result);
-										}
-									}
-								}
-
-								var newTemp = new createTimeTable(id, title,
-										start, end);
-								result.push(newTemp);
-								console.log(result);
-							},
-							/* eventDragStop : function(event, ui) {
-							}, */
-							eventResize : function(event/* , delta, revertFunc */) {
-								title = event.title;
-								start = event.start.format('YYYY-MM-DD HH:mm:ss');
-								
-								end = event.end.format('YYYY-MM-DD HH:mm:ss');
-								id = event._id;
-
-								/* ArrayList<timetable> list;
-								if () 
-								list.add(?); */
-								console.log("Resize_id : " + id);
-								console.log("Resize_title : " + title);
-								console.log("Resize_start : " + start);
-								console.log("Resize_End : " + end);
-
-								for ( var i in result) {
-									if (result[i] != null) {
-										if (result[i].id == id) {
-											result.splice(i, 1);
-											console.log(result);
-										}
-									}
-								}
-
-								var newTemp = new createTimeTable(id, title,
-										start, end);
-								result.push(newTemp);
-								console.log(result);
-							},
-							/* eventResizeStop : function(event) {
-							}, */
-							drop : function(date, ui, jsEvent) {
-								console.log(date._d);
 							}
-						});
+						}
+						var newTemp = new createTimeTable(id, title,
+								start, end);
+						result.push(newTemp);
+						console.log(result);
+					},
+					/* eventDragStop : function(event, ui) {
+					}, */
+					eventResize : function(event/* , delta, revertFunc */) {
+						title = event.title;
+						start = event.start.format('YYYY-MM-DD HH:mm:ss');
+						
+						end = event.end.format('YYYY-MM-DD HH:mm:ss');
+						id = event._id;
+
+						console.log("Resize_id : " + id);
+						console.log("Resize_title : " + title);
+						console.log("Resize_start : " + start);
+						console.log("Resize_End : " + end);
+						for ( var i in result) {
+							if (result[i] != null) {
+								if (result[i].id == id) {
+									result.splice(i, 1);
+									console.log(result);
+								}
+							}
+						}
+
+						var newTemp = new createTimeTable(id, title,
+								start, end);
+						result.push(newTemp);
+						console.log(result);
+					},
+			        eventDestroy: function(event, element, view)
+			        {
+			            alert("removing stuff");
+			        },
+					eventClick: function(event) {
+						title = event.title;
+						start = event.start.format('YYYY-MM-DD HH:mm:ss');
+						//end = event.end.format('YYYY-MM-DD HH:mm:ss');
+						id = event._id;
+						$(this).css('background-color', 'yellow');
+						if ($('#drop-remove').is(':checked')) {
+							// if so, remove the element from the "Draggable Events" list
+							//$(this).remove();
+							$('#calendar').fullCalendar('removeEvents', id);
+							//element.remove();
+							for ( var i in result) {
+								if (result[i] != null) {
+									if (result[i].id == id) {
+										result.splice(i, 1);
+										console.log(result);
+									}
+								}
+							}
+						}
+					},
+					drop : function(date, ui, jsEvent) {
+						console.log(date._d);
+					}
+				});
 				console.log("title : " + title + ", start : " + start
 						+ ", End : " + end);
 
@@ -367,7 +384,7 @@
 		<div id='wrap'>
 
 			<div id='external-events'>
-				<h4>Company!</h4>
+				<h4>My Staffs</h4>
 				<!-- <table border = "1"> -->
 				<c:forEach items="${employees}" var="employee" varStatus="cur">
 					<!-- <tr> -->
@@ -377,13 +394,14 @@
 					<!-- </tr> -->
 				</c:forEach>
 				<p>
-					<label for = 'drop-remove'>무언가의 할 말....?</label>
+					<label for = 'drop-remove'>* 직원 아이콘을 달력에 드래그해서 근무시간을 설정하세요. </label>
 				</p>
+
 				<!-- </table> -->
-				<!-- <p>
+				<p>
 					<input type='checkbox' id='drop-remove' /> <label
-						for='drop-remove'>remove after drop</label>
-				</p> -->
+						for='drop-remove'>remove after click</label>
+				</p>
 			</div>
 
 			<div id='calendar'></div>
@@ -392,10 +410,8 @@
 
 		</div>
 		
-		<br>
-		<br>
-		<div id="save1" class="savee">
-			<button id="save" class="btn btn-danger btn-md btn-block">Save</button>
+			<div align="center" style="margin-bottom: 40px; margin-top:20px">
+			<button id="save" class="btn btn-danger btn-lg">Save Shift</button>
 		</div>
 	</section>
 

@@ -91,5 +91,9 @@ public class TimeTableDaoImpl implements TimeTableDao {
 		return sqlSession.delete(stmt, companyCode);
 	}
 
-
+	@Override
+	public int deleteTimeTableByTimekey(int timekey) {
+		String stmt = namespace + "deleteTimeTableByTimekey";
+		return sqlSession.delete(stmt, timekey);
+	}
 }
