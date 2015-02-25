@@ -164,50 +164,57 @@
 			</ol>
 			<div class="carousel-inner">
 				<div class="item active"
-					style="background-image: url(images/slider/bg1.jpg)">
-					<div class="container">
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="carousel-content centered">
-									<h1 class="animation animated-item-1">Convenient and Easy Shift Table</h1>
-									<h4 class="animation animated-item-2">
-									We manage high quality of shift table when you provide shifts to your employees. 
-									You can register/log-in and enjoy our service.
-									</h4>
-										
-									<br> <a class="btn btn-md animation animated-item-3"
-										href="<%=request.getContextPath()%>/join">Sign Up</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--/.item-->
-				<div class="item"
 					style="background-image: url(images/slider/bg2.jpg)">
 					<div class="container">
 						<div class="row">
+							<div class="row">
 							<div class="col-sm-12">
 								<div class="carousel-content center centered">
-									<h1 class="boxed animation animated-item-1">Easy Catched-up Wage Chart with Visual Effects</h1>
-									<h4 class="boxed animation animated-item-2">It helps you visualize monthly staffs' wage on illustrated charts and graphs at a glance.</h4>
-									<br><br><a class="btn btn-md animation animated-item-3"
+									<h1 class="boxed animation animated-item-2">Convenient and Easy Shift Table</h1>
+									<h4 class="boxed animation animated-item-3">We manage high quality of shift table when you provide shifts to your employees. 
+									You can register/log-in and enjoy our service.</h4>
+									<br> <a class="btn btn-md animation animated-item-4"
 										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>
 						</div>
+						</div>
 					</div>
 				</div>
 				<!--/.item-->
-				<div class="item"
-					style="background-image: url(images/slider/bg3.jpg)">
+			<div class="item" style="background-image: url(images/slider/bg3.jpg)">
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="carousel-content centered">
-									<h1 class="boxed animation animated-item-1">Communication via Aruba</h1>
-									<h4 class="boxed animation animated-item-2">Share information and your difficulties with others by posting and commenting.</h4>
+									<h1 class="boxed animation animated-item-1">Easy Catched-up Wage Chart with Visual Effects</h1>
+									<h4 class="boxed animation animated-item-2">It helps you visualize monthly staffs' wage on illustrated charts and graphs at a glance.</h4>
 									<br> <a class="btn btn-md animation animated-item-3"
+										href="<%=request.getContextPath()%>/join">Sign Up</a>
+								</div>
+							</div>
+							<div class="col-sm-6 hidden-xs animation animated-item-4">
+                                <div class="centered">
+                                    <div class="embed-container">
+                                        <img class="boxed" src="images/slider/ex1.jpg" width="100%" height="100%"/>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+				<!--/.item-->
+				
+				
+				<div class="item"
+					style="background-image: url(images/slider/bg1.jpg)">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="carousel-content center centered">
+									<h1 class="boxed animation animated-item-1">Communication via Aruba</h1>
+									<h4 class="boxed animation animated-item-2">Share information and your difficulties with others by posting and commenting.</h4> 									
+									<br><br><a class="btn btn-md animation animated-item-3"
 										href="<%=request.getContextPath()%>/join">Sign Up</a>
 								</div>
 							</div>

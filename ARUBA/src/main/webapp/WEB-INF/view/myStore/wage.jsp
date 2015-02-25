@@ -389,17 +389,38 @@ $(document).ready(function() {
  	<section id="WageControl" class="container">
  		
 			<!-- <button id="chartBtn">직원 월급 조회하기</button> -->
-	<!-- 그래프 -->
-	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
 	
 	<!-- 각도조절 바 -->
 	<c:if test="${!empty Times }">
+		<!-- 그래프 -->
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	<div id="sliders">
 		<table>
 			<tr><td>Alpha Angle</td><td><input id="R0" type="range" min="0" max="45" value="15"/> <span id="R0-value" class="value"></span></td></tr>
 		    <tr><td>Beta Angle</td><td><input id="R1" type="range" min="0" max="45" value="15"/> <span id="R1-value" class="value"></span></td></tr>
 		</table>
 	</div>
+	</c:if>
+	
+	
+	
+	
+	
+	<c:if test="${empty Times }">
+		<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 근무시간표를 먼저 등록해주세요.</h5>
+ 								<br>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
 	</c:if>
     </section>
 

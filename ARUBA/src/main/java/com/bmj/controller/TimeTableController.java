@@ -253,12 +253,7 @@ public class TimeTableController {
 	}
 	
 	/*----------------------여기부터 수정부분.----------------------*/
-	/*@RequestMapping(value="/updateCalendar")
-	public String viewsCalendar() {
-		// 여기 수정 준비...
-		return "calendar/viewCalendar";
-	}*/
-	
+
 	// ajax..... 수정할때 쓰는 ajax! 
 	@RequestMapping(value = "/updateAjax")
 	public @ResponseBody String ajaxReceive2(Model model, HttpSession session) {
@@ -403,7 +398,7 @@ public class TimeTableController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		
 		deletesTime.setTime(deleteT);
 		int dyear = deletesTime.get(Calendar.YEAR);
 		int dmonth = deletesTime.get(Calendar.MONTH)+1;
@@ -419,7 +414,7 @@ public class TimeTableController {
 			}
 		}
 		service.deleteTimeTableByTimekey(dTimekey);
-		
+		}
 		return "/schedule/employer/allSchedule";
 	}
 }

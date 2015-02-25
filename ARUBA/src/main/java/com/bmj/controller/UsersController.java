@@ -26,6 +26,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.bmj.entity.CompanyPerson;
 import com.bmj.entity.Message;
+import com.bmj.entity.TimeTable;
 import com.bmj.entity.Users;
 import com.bmj.exception.ChartMenuFailException;
 import com.bmj.exception.LoginFailException;
@@ -459,13 +460,17 @@ public class UsersController {
 
 	@RequestMapping(value = "/wage")
 	// 사장 mypage 메뉴에서 Wage(알바생들 줄 급여관리)
-	public String mypageWageGo(HttpSession session) {
+	public String mypageWageGo(Model model, HttpSession session) {
 		Users loginUser = (Users) session.getAttribute("addUser");
 		CompanyPerson cp = cpService.selectCompanyPersonByUserId(loginUser.getUserId());
+		List<TimeTable> tt = tService.selectByCompanyCode(cp.getCompanyCode());
 		try{
 			int companyCode = cp.getCompanyCode();
 		}catch(NullPointerException e){
 			throw new ChartMenuFailException("!!사장이 등록한 회사가 없음!!");
+		}
+		if(!tt.isEmpty()) {
+			model.addAttribute("Times", cp);
 		}
 		return "/myStore/wage";
 	}
@@ -477,19 +482,32 @@ public class UsersController {
 	public String mypageSalaryGo(Model model, HttpSession session) {
 		Users loginUser = (Users) session.getAttribute("addUser");
 		logger.trace("수업ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" + loginUser);
-		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
-				.getUserId());
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
+		TimeTable timetable = new TimeTable();
+		List<TimeTable> tt = null;
 		int first = -1;
 		logger.trace("수업 CodeList : " + codeList);
 		for (int i = 0; i < codeList.size(); i++) {
 			model.addAttribute("code" + i, codeList.get(i).intValue());
 			first = codeList.get(0).intValue();
+			tt = tService.selectByCompanyCode(first);
 		}
+		
+		for(int l = 0; l < tt.size(); l++) {
+			if(loginUser.getUserId().equals(cpService.selectUserIdbyMemberId(tt.get(l).getMemberId()))) {
+				model.addAttribute("Times", tt);
+			}
+		}
+		
+		
 
 		// myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
 		model.addAttribute("nowCode", first);
 		model.addAttribute("oneTime", true);
-
+		/*if(!codeList.isEmpty()) {
+			logger.trace("수업 ?????????????????????????");
+			model.addAttribute("Times", codeList);
+		}*/
 		return "/myJob/salary";
 	}
 

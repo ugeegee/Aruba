@@ -304,13 +304,13 @@ insert into Company(company_name, company_tel, holiday_comm, night_comm)
 values ('GS25시', '020000000', 80, 80);
 
 insert into company_person(company_code, user_id, hire_date) 
-values(1, 'park', '2010-01-01');
+values(2, 'park', '2010-01-01');
 insert into company_person(company_code, user_id, salary, hire_date) 
-values (1, 'Kim', 5500, '2015-02-12');
+values (2, 'Kim', 5500, '2015-02-12');
 insert into company_person(company_code, user_id, salary, hire_date) 
-values (1, 'Choi', 5000, '2015-02-12');
+values (2, 'Choi', 5000, '2015-02-12');
 insert into company_person(company_code, user_id, salary, hire_date) 
-values (1, 'Yoo', 6000, '2015-02-12');
+values (2, 'Yoo', 6000, '2015-02-12');
 
 
 

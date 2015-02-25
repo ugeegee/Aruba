@@ -165,7 +165,7 @@
 					},
 			        eventDestroy: function(event, element, view)
 			        {
-			            alert("removing stuff");
+			            //alert("removing stuff");
 			        },
 					eventClick: function(event) {
 						title = event.title;

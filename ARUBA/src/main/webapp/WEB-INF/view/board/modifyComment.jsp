@@ -233,13 +233,33 @@ label.error {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Notice Board</h1>
-					<p>공지게시판</p>
+					<c:if test="${selectedComment.flag=='1' }">
+						<h1>Notice Board</h1>
+						<p>공지게시판</p>
+					</c:if>
+					<c:if test="${selectedComment.flag=='2' }">
+						<h1>Free Board</h1>
+						<p>자유게시판</p>
+					</c:if>
+					<c:if test="${selectedComment.flag=='3' }">
+						<h1>Q&A Board</h1>
+						<p>Q&A 게시판</p>
+					</c:if>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Board</a></li>
-						<li class="active">Notice Board</li>
+					<c:if test="${selectedComment.flag=='1' }">
+						<li class="active">Board</li>
+						<li>Notice Board</li>
+					</c:if>
+					<c:if test="${selectedComment.flag=='2' }">
+						<li class="active">Board</li>
+						<li>Free Board</li>
+					</c:if>
+					<c:if test="${selectedComment.flag=='3' }">
+						<li class="active">Board</li>
+						<li>Q&A Board</li>
+					</c:if>
 					</ul>
 				</div>
 			</div>
@@ -247,9 +267,27 @@ label.error {
 	</section>
 	<!--/#title-->
 
-<section id="writeComment" class="container">
-	
+<section id="writeComment" class="container">	
 	<div id="comment-form">
+	 	<c:url value="/modifyComment" var="action"></c:url>
+		<form:form modelAttribute="selectedComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
+			<div class="panel panel-default">
+  				<div class="panel-heading">
+  					<form:hidden path="commentNumber" name="commentNumber" class="form-control"/>
+                 	<form:input path="commentTitle" name="commentTitle" class="form-control"/>
+  				</div>
+  				<div class="panel-body">
+              	 	<form:textarea path="commentContent" name="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
+                    <div align="center" style="margin-bottom: 10px; margin-top: 30px;">
+                    	<input type="reset" value="Reset" class="btn btn-success btn-md"/>
+						<input type="submit" value="Modify Posting" class="btn btn-success btn-md"/>               	
+		     		</div>
+				</div>
+				</div>
+				</form:form> 	
+  	</div>
+	
+	<%-- <div id="comment-form">
 	 	<c:url value="/modifyComment" var="action"></c:url>
 			<form:form modelAttribute="selectedComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
 				<h3>게시글 수정</h3>	
@@ -262,7 +300,6 @@ label.error {
 				
 				<div class="form-group">
                  	<div class="col-sm-12">
-                 		<br><br>
                  		<!-- <input type="hidden" id="flag" name="flag" value=${selectedComment.flag}>  -->
                  		<form:hidden path="commentNumber" name="commentNumber" class="form-control"/>
                  		<form:input path="commentTitle" name="commentTitle" class="form-control"/>
@@ -274,7 +311,7 @@ label.error {
 					<input type="submit" value="수정하기" class="btn btn-success btn-md write"/> 
 					
 			</form:form> 
-	</div>
+	</div> --%>
     </section>
 
 	

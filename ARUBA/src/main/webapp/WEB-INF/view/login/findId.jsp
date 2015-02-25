@@ -255,7 +255,7 @@ label.error {
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
 						<li class="active">Home</li>
-						<li>Find password</li>
+						<li>Find ID</li>
 					</ul>
 				</div>
 			</div>
