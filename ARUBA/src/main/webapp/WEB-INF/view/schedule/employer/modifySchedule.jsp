@@ -170,6 +170,7 @@ $(document).ready(function() {
 				
 				var deleteid = new createTimeTable(id, title, start, end);
 				deletes.push(deleteid);
+				console.log(deletes);
 			},
 			eventDragStart: function(event) {
 				title = event.title;
