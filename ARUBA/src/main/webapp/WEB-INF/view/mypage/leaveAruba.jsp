@@ -242,7 +242,12 @@ label.error {
 	<!--/#title-->
 
 	<section id="DeleteAccount" class="container">
- 		<c:url value="/leaveAruba" var="url" />
+		<c:if test="${addUser.grade=='사장' }">
+ 			<c:url value="/leaveAruba_employer" var="url" />
+ 		</c:if>
+ 		<c:if test="${addUser.grade=='직원' }">
+ 			<c:url value="/leaveAruba_employee" var="url" />
+ 		</c:if>
         <form:form modelAttribute="addUser" class="center" role="form" id="passForm" method="post" action="${url }">
             <fieldset class="registration-form">
             	<div class="form-group">
