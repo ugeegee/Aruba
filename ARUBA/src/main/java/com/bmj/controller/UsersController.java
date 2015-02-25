@@ -25,12 +25,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.bmj.entity.CompanyPerson;
+import com.bmj.entity.Message;
 import com.bmj.entity.Users;
 import com.bmj.exception.ChartMenuFailException;
 import com.bmj.exception.LoginFailException;
 import com.bmj.exception.ScheduleMenuFailException;
 import com.bmj.service.CommentService;
 import com.bmj.service.CompanyPersonService;
+import com.bmj.service.CompanyService;
 import com.bmj.service.MessageService;
 import com.bmj.service.ReplyService;
 import com.bmj.service.TimeTableService;
@@ -54,6 +56,8 @@ public class UsersController {
 
 	@Autowired
 	UsersService service;
+	@Autowired
+	CompanyService cService;
 	@Autowired
 	CompanyPersonService cpService;
 	@Autowired
@@ -258,10 +262,69 @@ public class UsersController {
 
 		return "/mypage/modifyPass";
 	}
+	@RequestMapping(value = "/leaveAruba_employer", method = RequestMethod.POST)
+	// 회원탈퇴 - 사장
+	public String mypageLeaveArubaEmployerSuccessGo(@RequestParam String nowPassword,
+			Model model, HttpSession session, SessionStatus sessionStatus) {
+		Users leaveUser = new Users();
+		Users loginUser = (Users) session.getAttribute("addUser");
 
-	@RequestMapping(value = "/leaveAruba", method = RequestMethod.POST)
-	// 회원탈퇴 - 사장,알바 공통
-	public String mypageLeaveArubaSuccessGo(@RequestParam String nowPassword,
+		leaveUser.setUserId(loginUser.getUserId()); // 아이디만 현재 로그인한 회원으로 가져오기
+		leaveUser.setPassword(nowPassword);
+
+		//////사장탈퇴시-삭제 (댓글>게시글)> 회사삭제할때랑 똑같이(시간표>companyPerson>메세지) > users
+		//댓글 userId변경하기
+		List<Integer> replyNoList = rService.selectReplyNoListByUserId(loginUser.getUserId());
+		for(int i = 0; i<replyNoList.size(); i++){
+			rService.updateUserIdByReplyNo(replyNoList.get(i).intValue());
+		}
+		logger.trace("탈퇴시 댓글아이디 변경완료!!!!!!");
+		//게시글 userId변경하기
+		List<Integer> commentNoList = cmService.selectCommentNoListByUserId(loginUser.getUserId());
+		for(int i = 0; i<commentNoList.size(); i++){
+			cmService.updateUserIdByCommentNo(commentNoList.get(i).intValue());
+		}
+		logger.trace("탈퇴시 작성글아이디 변경완료!!!!!");
+		
+		List<Integer> codeList = cpService.selectComCodeByUserId(leaveUser.getUserId());
+		
+		//회사를 등록하지 않은 사장일 수 있으니 size확인
+		//회사지울꺼니깐 회사코드에걸린 시간표 다지우고
+		if(codeList.size() != 0){
+			int comCode = codeList.get(0).intValue();
+			tService.deleteTimeTableByCompanyCode(comCode);
+			logger.trace("시간표지움!!!!!!!!!!!!!");
+		
+			//회사코드에걸린 회사원가져오고
+			List<CompanyPerson> cpList = cpService.selectByCompanyCode(comCode);
+			logger.trace("회사원들은????!!!!"+cpList);
+			Message message = new Message();
+			message.setCompanyCode(1);					//messageControl회사 넣어야함!!
+			message.setUserId("탈퇴한회원");
+			message.setMessageContent("사장 탈퇴로 인한 회사 삭제");
+			message.setFlag(-1); 
+			//회사삭제 메세지날리고 회사원지우고
+			for(int i = 0; i<cpList.size(); i++){
+				message.setReceiverId(cpList.get(i).getUserId());
+				mService.insertMessage(message); 
+				cpService.deleteCompanyPersonByUserId(cpList.get(i).getUserId());
+			}
+		
+			//회사코드에걸린 메세지도지우고
+			mService.deleteMessageByCompanyCode(comCode);
+			//회사지우기
+			cService.deleteCompanyByCompanyCode(comCode);
+		}
+		
+		service.deleteUser(leaveUser);
+		
+		sessionStatus.setComplete();
+
+		return "/mypage/goodBye";
+	}
+	@RequestMapping(value = "/leaveAruba_employee", method = RequestMethod.POST)
+	// 회원탈퇴 - 알바
+	public String mypageLeaveArubaEmployeeSuccessGo(@RequestParam String nowPassword,
 			Model model, HttpSession session, SessionStatus sessionStatus) {
 		Users leaveUser = new Users();
 		Users loginUser = (Users) session.getAttribute("addUser");
