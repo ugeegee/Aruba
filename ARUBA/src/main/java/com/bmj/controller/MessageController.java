@@ -62,7 +62,7 @@ public class MessageController {
 		// 존재하는 회사일 때, 이미 등록한 회사인지아닌지 확인
 		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
 		for (int i = 0; i < codeList.size(); i++) {
-			if (codeList.get(i).intValue() == companyCode) {
+			if (codeList.get(i).intValue() == companyCode) {	//이미등록한회사다.
 				alreadyRegister = true;
 				model.addAttribute("PopUp", 2);
 				
@@ -85,10 +85,14 @@ public class MessageController {
 				viewPath = "myJob/myJob";
 			}
 		}
-		// 존재하는 회사일 때, 현재 대기중인 회사인지아닌지 확인
-		Message uncheckedMessage = mService.selectUncheckedMessageByComCode(companyCode);
+		// 존재하는 회사일 때, 현재 대기중인 회사인지아닌지 확인(컴패니코드로 조회한 메세지중 flag0이고 보낸사람 로그인한 알바생
+		Message temp = new Message();
+		temp.setCompanyCode(companyCode);
+		temp.setUserId(loginUser.getUserId());
+		temp.setFlag(0);
+		Message uncheckedMessage = mService.selectUncheckedMessageByMessage(temp);
 		logger.trace("대기중인회사인지 메세지확인!!!!"+uncheckedMessage);
-		if(uncheckedMessage != null){
+		if(uncheckedMessage != null){	//현재 대기중인 회사임
 			alreadyRegister = true;
 			model.addAttribute("PopUp", 3);
 			
@@ -119,10 +123,9 @@ public class MessageController {
 					.selectByCompanyCode(companyCode);
 			String ownerId = "";
 			for (int i = 0; i < cpList.size(); i++) {
-				Users temp = uService.selectUserByUserId(cpList.get(i)
-						.getUserId());
-				if ((temp.getGrade().equals("사장"))) {
-					ownerId = temp.getUserId();
+				Users tempUser = uService.selectUserByUserId(cpList.get(i).getUserId());
+				if ((tempUser.getGrade().equals("사장"))) {
+					ownerId = tempUser.getUserId();
 					break;
 				}
 			}

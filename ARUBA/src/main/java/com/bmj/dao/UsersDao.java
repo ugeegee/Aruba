@@ -11,4 +11,5 @@ public interface UsersDao {
 	Users loginUser(Users user);
 	int countByUserId(String userId);
 	Users selectUserByUserId(String userId);
+	Users selectUserByBirthAndEmail(Users user);
 }

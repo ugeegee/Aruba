@@ -51,6 +51,10 @@
 		delete from users where user_id =#{userId}
 	</delete>
 	
+	<select id="selectUserByBirthAndEmail" parameterType = "Users" resultType = "Users">
+		select * from users where email=#{email} and birth=#{birth}
+	</select>
+	
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
 	<!-- <insert id = "insertDept" parameterType = "Department">
 		insert into departments(department_id, department_name,manager_id,location_id) 
