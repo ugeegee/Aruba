@@ -181,24 +181,33 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<c:if test="${turnbackFlag == '1' }">
+					<c:if test="${nowFlag=='1' }">
 						<h1>Notice Board</h1>
 						<p>공지게시판</p>
 					</c:if>
-					<c:if test="${turnbackFlag == '2' }">
+					<c:if test="${nowFlag=='2' }">
 						<h1>Free Board</h1>
 						<p>자유게시판</p>
 					</c:if>
-					<c:if test="${turnbackFlag == '3' }">
+					<c:if test="${nowFlag=='3' }">
 						<h1>Q&A Board</h1>
 						<p>Q&A 게시판</p>
 					</c:if>
-					
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>Board</li>
-						<li class="active">Free Board</li>
+					<c:if test="${nowFlag=='1' }">
+						<li class="active">Board</li>
+						<li>Notice Board</li>
+					</c:if>
+					<c:if test="${nowFlag=='2' }">
+						<li class="active">Board</li>
+						<li>Free Board</li>
+					</c:if>
+					<c:if test="${nowFlag=='3' }">
+						<li class="active">Board</li>
+						<li>Q&A Board</li>
+					</c:if>
 					</ul>
 				</div>
 			</div>
@@ -206,24 +215,32 @@
 	</section>
 	<!--/#title-->
 	<section id="freeBoard" class="container">
-		<div class="mainmenubg">
-			<div class="main zerogrid">
-				<h1>삭제 성공</h1><br>
-				<br>
-				<c:if test="${turnbackFlag == '1' }">
-					<c:url value="/notice" var="url"></c:url>
-				</c:if>
-				<c:if test="${turnbackFlag == '2' }">
-					<c:url value="/free" var="url"></c:url>
-				</c:if>
-				<c:if test="${turnbackFlag == '3' }">
-					<c:url value="/qna" var="url"></c:url>
-				</c:if>
+		<div class="pad">
+		<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5>게시글이 삭제되었습니다.</h5>
+                	        </li>
+                    	    <li class="plan-action">
+                    	     <c:if test="${turnbackFlag == '1' }">
+								<c:url value="/notice" var="url"></c:url>
+							</c:if>
+			
+							<c:if test="${turnbackFlag == '2' }">
+								<c:url value="/free" var="url"></c:url>
+							</c:if>
+			
+							<c:if test="${turnbackFlag == '3' }">
+								<c:url value="/qna" var="url"></c:url>
+							</c:if>
+                       	     
+                       	     <a href="${url }" class="btn btn-success btn-md">Board</a>
+                      	  	</li>
+                    	</ul>
+          		 </div>
+        	</div>		
 
-				<a href="${url }">게시판으로 돌아가기</a>
-
-			</div>
-		</div>
 	</section>
 
 	<section id="bottom" class="wet-asp">
