@@ -215,7 +215,7 @@ label.error {
 										Board</a></li>
 								<li><a href="<%=request.getContextPath()%>/free">Free
 										Board</a></li>
-								<li><a href="<%=request.getContextPath()%>/qna">QnA
+								<li><a href="<%=request.getContextPath()%>/qna">Q&A
 										Board</a></li>
 							</ul></li>
 					</c:if>

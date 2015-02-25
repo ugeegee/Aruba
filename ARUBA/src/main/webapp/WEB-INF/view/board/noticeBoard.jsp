@@ -169,7 +169,7 @@ $(document).ready(function() {
 										Board</a></li>
 								<li><a href="<%=request.getContextPath()%>/free">Free
 										Board</a></li>
-								<li><a href="<%=request.getContextPath()%>/qna">QnA
+								<li><a href="<%=request.getContextPath()%>/qna">Q&A
 										Board</a></li>
 							</ul></li>
 					</c:if>
@@ -192,8 +192,8 @@ $(document).ready(function() {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Board</a></li>
-						<li class="active">Notice Board</li>
+						<li class="active">Board</li>
+						<li>Notice Board</li>
 					</ul>
 				</div>
 			</div>
