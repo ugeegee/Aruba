@@ -88,4 +88,16 @@ public class CommentDaoImpl implements CommentDao {
 		String stmt = namespace + "deleteCommentByCommentNo";
 		return sqlSession.delete(stmt, commentNumber);
 	}
+
+	@Override
+	public List<Integer> selectCommentNoListByUserId(String userId) {
+		String stmt = namespace + "selectCommentNoListByUserId";
+		return sqlSession.selectList(stmt, userId);
+	}
+
+	@Override
+	public int updateUserIdByCommentNo(int commentNumber) {
+		String stmt = namespace + "updateUserIdByCommentNo";
+		return sqlSession.update(stmt, commentNumber);
+	}
 }

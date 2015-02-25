@@ -269,7 +269,19 @@ END;
 insert into Company(company_name, company_tel, holiday_comm, night_comm) 
 values ('messageControl', '123456789', -100, -100);
 
+/*첫회원으로 관리자추가*/
+insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
+values ('admin', '123', '123', '관리자', '0101112222', 'admin@naver.com', '06/08/1987', '사장', '관리자니?', '네');
+
+/*기본회원으로 추가-탈퇴한 회원의 글, 댓글관리*/
+insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
+values ('탈퇴한회원', '123', '123', '탈퇴자', '0102223333', 'out@naver.com', '06/08/1987', '사장', '탈퇴회원?', '네');
 /*********************************************************************************/
+
+
+
+
+
 
 insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
 values ('park', '123', '123', '박광욱', '010-', 'p@naver.com', '06/08/1987', '사장', '몇살?', '20살');

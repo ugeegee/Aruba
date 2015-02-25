@@ -12,4 +12,6 @@ public interface ReplyService {
 	
 	int deleteReplyByCommentNo(int commentNumber);
 	int deleteReplyByReplyNo(int replyNumber);
+	List<Integer> selectReplyNoListByUserId(String userId);
+	int updateUserIdByReplyNo(int replyNumber);
 }

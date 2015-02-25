@@ -84,4 +84,16 @@ public class CommentServiceImpl implements CommentService {
 		int result = dao.deleteCommentByCommentNo(commentNumber);
 		return result;
 	}
+
+	@Override
+	public List<Integer> selectCommentNoListByUserId(String userId) {
+		List<Integer> result = dao.selectCommentNoListByUserId(userId);
+		return result;
+	}
+
+	@Override
+	public int updateUserIdByCommentNo(int commentNumber) {
+		int result = dao.updateUserIdByCommentNo(commentNumber);
+		return result;
+	}
 }

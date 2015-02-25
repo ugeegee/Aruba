@@ -57,4 +57,16 @@ public class ReplyServiceImpl implements ReplyService {
 		int result = dao.deleteReplyByReplyNo(replyNumber);
 		return result;
 	}
+
+	@Override
+	public List<Integer> selectReplyNoListByUserId(String userId) {
+		List<Integer> result = dao.selectReplyNoListByUserId(userId);
+		return result;
+	}
+
+	@Override
+	public int updateUserIdByReplyNo(int replyNumber) {
+		int result = dao.updateUserIdByReplyNo(replyNumber);
+		return result;
+	}
 }

@@ -25,6 +25,12 @@
 			reg_date=#{regDate}
 		where reply_number=#{replyNumber}
 	</update>
+	
+	<update id="updateUserIdByReplyNo">
+		update Reply set
+			user_id='탈퇴한회원'
+		where reply_number=#{replyNumber}
+	</update>
 
 	<delete id="deleteReply" parameterType="string">
 		delete from Reply where
@@ -43,5 +49,9 @@
 	
 	<select id="selectAllReply" parameterType="INTEGER" resultType="Reply">
 		select * from Reply where comment_number=(#{commentNumber})
+	</select>
+	
+	<select id="selectReplyNoListByUserId" parameterType="String" resultType="Integer">
+		select reply_number from Reply where user_id = #{userId}
 	</select>
 </mapper>
