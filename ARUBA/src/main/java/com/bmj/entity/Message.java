@@ -12,7 +12,8 @@ public class Message {
 	private int flag;
 	//확인여부가 불필요한 메세지 -1
 	//미확인 0
-	//확인 1
+	//승인 1
+	//거절 2
 	
 	public Message() {}
 

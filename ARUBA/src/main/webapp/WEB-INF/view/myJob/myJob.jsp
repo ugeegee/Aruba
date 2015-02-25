@@ -245,7 +245,11 @@ $(document).ready(function() {
 	 		<div class="smallbox">
     	                <ul class="plan featured">
         	                <li class="plan-name">
-            	                <h5>아르바이트 등록은 최대 3개까지 가능합니다.</h5>
+
+            	                <h4>아르바이트 등록과 신청은 최대 3개까지 가능합니다.<br>
+            	                	사장님의 승인을 기다리십시오.</h4>
+            	                <br>
+            	                
                 	        </li>
                 	     </ul>
              </div>

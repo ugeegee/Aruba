@@ -52,6 +52,5 @@ public class CompanyServiceImpl implements CompanyService {
 		return result;
 	}
 	
-	
 
 }
