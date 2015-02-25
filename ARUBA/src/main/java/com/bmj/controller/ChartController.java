@@ -63,6 +63,7 @@ public class ChartController {
 		// 수정 이젠 나의 회사에 따라 나의 멤버 ID 찾기.
 		CompanyPerson companyperson = new CompanyPerson();
 		List<CompanyPerson> result = cpservice.selectByCompanyCode(Integer.parseInt(companyCode));
+		
 		for(int i = 0; i < result.size(); i++) {
 			if(user.getUserId().equals(result.get(i).getUserId())) {
 				companyperson.setCompanyCode(Integer.parseInt(companyCode));
@@ -78,7 +79,8 @@ public class ChartController {
 				
 		List<Stats> myTimes = new ArrayList<Stats>();
 		myTimes = service.selectStatsByMemberId(companyperson.getMemberId());
-		logger.trace("수업 ::::::::::::::::" + myTimes);
+		
+		logger.trace("수업 ::::::::::::::::" + myTimes);			// 모든 월단위 start_end - start_start
 		if(myTimes.isEmpty()) {
 			logger.trace("수업, 아무것도없다.");
 		} else {
@@ -90,7 +92,7 @@ public class ChartController {
 			int count = (int)(myTimes.get(i).getCount()* 24 * salary);
 			myTimes.get(i).setCount(count);
 		}
-		logger.trace("수업, 기본 셋팅 완료 : " + myTimes);
+		logger.trace("수업, 기본 셋팅 완료 : " + myTimes);	// 월급 계산됨.
 		
 		JSONObject objJson = new JSONObject();
 		JSONArray arrayJson = new JSONArray();
@@ -135,11 +137,14 @@ public class ChartController {
 		// 일단여기에선 UserId : Kim , memberId = 6
 		// 3. 직원 아이디로 근무표를 조회한다.
 		Stats stats = new Stats();
-		List<Stats> myTimes = new ArrayList<Stats>();
+		
+		List<Stats> myTimes = new ArrayList<Stats>();		// 모든 직원 시간 저장할 List
+		List<Stats> nightTimes = new ArrayList<Stats>();
 		myTimes = service.selectStatsByCompanyCode(companyperson.getCompanyCode());
-
+		nightTimes = service.selectNightStatsByCompanyCode(companyperson.getCompanyCode());
 		// month, memberId, count
 		logger.trace("수업 ::::::::::::::::" + myTimes);
+		logger.trace("수업 nightTimes : " + nightTimes);
 		if(myTimes.isEmpty()) {
 			logger.trace("수업, 아무것도없다.");
 		} else {
@@ -151,13 +156,15 @@ public class ChartController {
 			//double count = 0;
 			int count = 0;
 			for(int j = 0; j < employee.size(); j++) {
+				// 시급 찾을려고 준 조건.
 				if(myTimes.get(i).getMemberId() == employee.get(j).getMemberId()) {
-					//count = myTimes.get(i).getCount() * employee.get(j).getSalary();
-					count = (int)(myTimes.get(i).getCount()* 24 * employee.get(j).getSalary());
-					// 추가수당 생각해보기...
-					/*if(company.getHolidayComm() != 0) {
-						count = (int) (count + count * (company.getHolidayComm()/100));
-					} else if*/
+					count = (int) (myTimes.get(i).getCount() * 24 * employee.get(j).getSalary());
+					/*for (int x = 0; x < nightTimes.size(); x++) {
+						if(myTimes.get(i).getMemberId() == nightTimes.get(x).getMemberId() & myTimes.get(i).getMonth().equals(nightTimes.get(x).getMonth())) {
+							myTimes.get(i).setCount((myTimes.get(i).getCount()* 24)-nightTimes.get(x).getCount()); 	
+						}
+						count = (int)(myTimes.get(i).getCount()* 24 * employee.get(j).getSalary() + nightTimes.get(x).getCount()*((float)company.getNightComm()/100+1)*employee.get(j).getSalary());
+					}*/
 				}
 			}
 			myTimes.get(i).setCount(count);

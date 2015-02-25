@@ -47,9 +47,17 @@
 	</select> -->
 	
 	<select id = "selectStatsBycompanyCode" resultType="Stats" parameterType="Integer">
-		SELECT TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId",
-		SUM(working_end-working_start) as "count" FROM time_table
-		where company_code = #{companyCode} GROUP BY TO_CHAR(working_date, 'YYYY/MM'), member_id order by 1
+		SELECT TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", SUM(working_end-working_start) as "count" 
+		FROM time_table
+		where company_code = #{companyCode} 
+		GROUP BY TO_CHAR(working_date, 'YYYY/MM'), member_id order by 1
+	</select>
+	
+	<select id = "selectNightStatsByCompanyCode" resultType = "Stats" parameterType = "Integer">
+		SELECT TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", SUM(TO_NUMBER(to_char(working_end, 'hh24'))-22) as "count" 
+		FROM time_table 
+		WHERE TO_CHAR(working_end, 'hh24') > '22' and company_code = #{companyCode}
+		GROUP BY TO_CHAR(working_date, 'YYYY/MM'), member_id ORDER BY 1	
 	</select>
 	
 	<select id = "selectKeybyTime" resultType="Integer" parameterType="TimeTable">

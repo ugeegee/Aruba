@@ -39,7 +39,7 @@ public class TimeTableController {
 	}
 	
 	/*private String[] color = {"#000000", "#ff0000", "#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff"};*/
-	private String[] color = {"#980000", "#993800", "#997000", "#998A00", "6B9900", "#2F9D27", "#008299", "#003399", "#050099", "3F0099", "990085", "99004C", "4C4C4C", "353535"};
+	private String[] color = {"#980000", "#993800", "#997000", "#998A00", "#6B9900", "#2F9D27", "#008299", "#003399", "#050099", "#3F0099", "#990085", "#99004C", "#4C4C4C", "#353535"};
 		
 	@Autowired
 	CompanyPersonService service2;
@@ -225,6 +225,7 @@ public class TimeTableController {
 			logger.trace("수업 Date 확인하기 : " + lists.get(idx).getWorkingDate());
 			savetime.setStart(settingTime(lists.get(idx).getWorkingStart()));
 			savetime.setEnd(settingTime(lists.get(idx).getWorkingEnd()));
+			// 나중에 색 때문에라도 직원수로 나눠라 그냥.
 			savetime.setColor(color[lists.get(idx).getMemberId()%14]);
 			logger.trace("수업 savetime : " + savetime);
 			list2.add(idx, savetime);
