@@ -45,22 +45,22 @@ $(document).ready(function() {
 		var id = $("#writeId").html();
 		var no = $("#writeNo").html();
 		if(id == loginId){
-			alert("자신이쓴글입니다!! "+no);
+			/* alert("자신이쓴글입니다!! "+no); */
 			var url = "<%=request.getContextPath()%>/deleteComment?commentNumber="+no;
 			$(location).attr('href',url); 
 		}else{
-			alert("본인 글만 삭제할 수 있습니다!!");
+			alert("본인이 작성한 글만 삭제할 수 있습니다.");
 		}
 	});
 	$("#modifyBtn").click(function(){
 		var id = $("#writeId").html();
 		var no = $("#writeNo").html();
 		if(id == loginId){
-			alert("자신이쓴글입니다!! "+no);
+			/* alert("자신이쓴글입니다!! "+no); */
 			var url = "<%=request.getContextPath()%>/modifyComment?commentNumber="+no;
 			$(location).attr('href',url); 
 		}else{
-			alert("본인 글만 수정할 수 있습니다!!");
+			alert("본인이 작성한 글만 수정할 수 있습니다.");
 		}
 	});
 	$(".ttt").click(function(){
@@ -75,11 +75,11 @@ $(document).ready(function() {
 		
 		
 		if($(idId).html() == loginId){
-			alert("댓글이 삭제됩니다.");
+			/* alert("댓글이 삭제됩니다."); */
 			var url = "<%=request.getContextPath()%>/deleteReply?replyNumber="+$(noId).html()+"&commentNumber="+commentNo;
 			$(location).attr('href',url);
 		}else{
-			alert("본인 댓글만 삭제할 수 있습니다!!");
+			alert("본인이 작성한 댓글만 삭제할 수 있습니다.");
 		} 
 	});
 	
@@ -256,15 +256,15 @@ label.error {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<c:if test="${nowFlag=='1' }">
+					<c:if test="${selectedComment.flag=='1' }">
 						<h1>Notice Board</h1>
 						<p>공지게시판</p>
 					</c:if>
-					<c:if test="${nowFlag=='2' }">
+					<c:if test="${selectedComment.flag=='2' }">
 						<h1>Free Board</h1>
 						<p>자유게시판</p>
 					</c:if>
-					<c:if test="${nowFlag=='3' }">
+					<c:if test="${selectedComment.flag=='3' }">
 						<h1>Q&A Board</h1>
 						<p>Q&A 게시판</p>
 					</c:if>
@@ -294,13 +294,13 @@ label.error {
 	
 	
  	<section id="freeBoard" class="container">
-<%--  		<div id="comment-form">
+ 		<div id="comment-form">
 			<div class="panel panel-default">
   				<div class="panel-heading">
   					<table class="new">
-  						<tr><td width="10%">글번호 │ ${selectedComment.commentNumber}</td>
-  							<td width="10%">작성자 │ ${selectedComment.userId}</td>
-  							<td width="10%">작성일 │ ${selectedComment.regDate}</td>
+  						<tr><td width="3%">글번호 │ </td><td width="10%" id="writeNo">${selectedComment.commentNumber}</td>
+  							<td width="3%">작성자 │ </td><td width="10%" id="writeId">${selectedComment.userId}</td>
+  							<td width="3%">작성일 │ </td><td width="10%"> ${selectedComment.regDate}</td>
   						</tr>
   					</table>
   				</div>
@@ -308,14 +308,65 @@ label.error {
   					제목 │ <strong>${selectedComment.commentTitle}</strong>
   				</div>
   				<div class="panel-body">
-  					<br>
-  					${selectedComment.commentContent}
-  					<div align="right" style="margin-bottom: 10px;">
-				<button id="modifyBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Modify Posting</button>
-				<button id="deleteBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Delete Posting</button>
-			</div>
-  					<br><br><br>
-  					<hr>
+  					<!-- 글내용 -->
+  					<div class="boardcontent">
+  						<br>
+  						${selectedComment.commentContent}
+  						<br><br><br>
+  						<div align="right" style="margin-bottom: 10px;">
+							<button id="modifyBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Modify Posting</button>
+							<button id="deleteBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Delete Posting</button>
+						</div>
+					</div>	
+					<hr>
+					
+					<!-- 댓글내용 -->
+					<div class="replycontent">
+					<c:forEach items="${replyList }" var="replyList">
+  						<div class="media">
+                        	<div class="pull-left">
+                            	<img class="avatar img-circle" src="images/blog/avatar3.png" alt="">
+                            </div>
+                            <div class="media-body">
+                            <div class="well">
+                            	<div class="media-heading">
+                            		<div id="ReplyNottt${replyList.replyNumber}" hidden>${replyList.replyNumber}</div>
+                                	<strong id="ReplyIdttt${replyList.replyNumber}">${replyList.userId}</strong>&nbsp; 
+                                	<small>${replyList.regDate }</small>
+                                </div>
+                                <p>${replyList.replyContent}</p>
+                                <div align="right" >
+                                	<button id="ttt${replyList.replyNumber}" class="ttt btn btn-success btn-xs">Delete Comment</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+					</c:forEach>
+					</div>
+					
+					
+					<!-- 댓글쓰는부분 -->
+					<div id="comment-form">
+                    	<c:url value="/registerReply" var="action"></c:url>
+						<form:form modelAttribute="addReply" id="replyForm" method="post" action="${action}"  class="form-horizontal" >
+						<form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" />
+ 							<div class="form-group">
+                             	<div class="col-sm-12">
+                             		<form:input path="replyContent" name="replyContent" class="form-control" placeholder="Leave a comment"/>
+                                </div>
+                            </div>
+                            <div align="right" style="margin-bottom: 10px;">
+                            <input type="submit" value="Submit Comment" class="btn btn-success btn-xs"/>
+							<input type="reset" value="Reset" class="btn btn-success btn-xs"/>
+							</div>
+                        </form:form>
+                   </div><!--/#comment-form-->
+				</div>
+				</div>
+				</div>
+
+
+  				<%-- 
   					<c:forEach items="${replyList }" var="replyList">
   						<div class="media">
                         	<div class="pull-left">
@@ -358,10 +409,10 @@ label.error {
 				<button id="modifyBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Modify Posting</button>
 				<button id="deleteBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Delete Posting</button>
 			</div> -->
-		</div> --%>
+		</div>  --%>
 		
 		
-		<table class="temp" width="100%">
+		<%-- <table class="temp" width="100%">
 				<tr>
 					<th width = "10%">글번호</th>
 					<th width = "30%">종류?</th>
@@ -424,7 +475,7 @@ label.error {
  				<br>
  				<input type="submit" value="댓글등록"/>
 				<input type="reset" value="다시쓰기"/>
-			</form:form>
+			</form:form> --%>
     </section>
 	
 
