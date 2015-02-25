@@ -53,6 +53,12 @@ $(document).ready(function() {
 	if(<%=request.getAttribute("PopUp")%> == 1){
 		alert("없는 회사정보 입니다.");
 	}
+	if(<%=request.getAttribute("PopUp")%> == 2){
+		alert("이미 등록한 회사정보입니다.");
+	}
+	if(<%=request.getAttribute("PopUp")%> == 3){
+		alert("승인 대기중인 회사정보입니다.");
+	}
 	
 	$("#addJobForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분

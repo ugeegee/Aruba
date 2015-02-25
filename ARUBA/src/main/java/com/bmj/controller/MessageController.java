@@ -47,53 +47,112 @@ public class MessageController {
 	// 사장에게 메세지보내고 자신에게도 메세지 남고
 	@RequestMapping(value = "/sendMsgToOwner", method = RequestMethod.POST)
 	public String registerJobSuccess(@RequestParam int companyCode,
-			@RequestParam String companyTel, HttpSession session) {
+			@RequestParam String companyTel, HttpSession session, Model model) {
 
+		boolean alreadyRegister = false;
+		String viewPath = "";
 		// 입력받은 code,tel 회사존재여부 확인
 		Company searchCom = new Company();
 		searchCom.setCompanyCode(companyCode);
 		searchCom.setCompanyTel(companyTel);
 		searchCom = cService.selectCompanyByCodeAndTel(searchCom);
 
-		Message message = new Message();
-		Users loginUser = (Users) session.getAttribute("addUser"); // 현재로그인한
-																	// 사람=메세지
-																	// 보내는사람
-
-		message.setCompanyCode(companyCode);
-		message.setUserId(loginUser.getUserId());
-		List<CompanyPerson> cpList = cpService.selectByCompanyCode(companyCode);
-		String ownerId = "";
-		for (int i = 0; i < cpList.size(); i++) {
-			Users temp = uService.selectUserByUserId(cpList.get(i).getUserId());
-			if ((temp.getGrade().equals("사장"))) {
-				ownerId = temp.getUserId();
-				break;
+		Users loginUser = (Users) session.getAttribute("addUser"); // 메세지보내는알바생
+		int uncheckedMessageCount;
+		// 존재하는 회사일 때, 이미 등록한 회사인지아닌지 확인
+		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
+		for (int i = 0; i < codeList.size(); i++) {
+			if (codeList.get(i).intValue() == companyCode) {
+				alreadyRegister = true;
+				model.addAttribute("PopUp", 2);
+				
+				//현재 가입된 회사 수
+				List<Company> comList = new ArrayList<Company>();
+				for(int j = 0; j < codeList.size(); j++){
+					comList.add(j, cService.selectCompanyByCompanyCode( codeList.get(j).intValue() ) );
+				}
+				//현재 가입대기중인 회사 수
+				uncheckedMessageCount = mService.countUncheckedFlagByUserId(loginUser.getUserId());
+				
+				if(codeList.size()+uncheckedMessageCount > 2){
+					model.addAttribute("emptyCompany", "NO");
+				}else{
+					model.addAttribute("emptyCompany", "YES");
+				}
+				logger.trace("가져온 나의 회사 정보!! " + comList);
+				model.addAttribute("myCompanies", comList);
+				
+				viewPath = "myJob/myJob";
 			}
 		}
-		message.setReceiverId(ownerId);
-		message.setMessageContent("아르바이트 등록");
-		message.setFlag(0); // 보지 않은 메세지=0, 본 메세지=1
+		// 존재하는 회사일 때, 현재 대기중인 회사인지아닌지 확인
+		Message uncheckedMessage = mService.selectUncheckedMessageByComCode(companyCode);
+		logger.trace("대기중인회사인지 메세지확인!!!!"+uncheckedMessage);
+		if(uncheckedMessage != null){
+			alreadyRegister = true;
+			model.addAttribute("PopUp", 3);
+			
+			//현재 가입된 회사 수
+			List<Company> comList = new ArrayList<Company>();
+			for(int j = 0; j < codeList.size(); j++){
+				comList.add(j, cService.selectCompanyByCompanyCode( codeList.get(j).intValue() ) );
+			}
+			//현재 가입대기중인 회사 수
+			uncheckedMessageCount = mService.countUncheckedFlagByUserId(loginUser.getUserId());
+			
+			if(codeList.size()+uncheckedMessageCount > 2){
+				model.addAttribute("emptyCompany", "NO");
+			}else{
+				model.addAttribute("emptyCompany", "YES");
+			}
+			logger.trace("가져온 나의 회사 정보!! " + comList);
+			model.addAttribute("myCompanies", comList);
+			
+			viewPath = "myJob/myJob";
+		}
+		if (alreadyRegister == false) {
+			Message message = new Message();
 
-		mService.insertMessage(message);
+			message.setCompanyCode(companyCode);
+			message.setUserId(loginUser.getUserId());
+			List<CompanyPerson> cpList = cpService
+					.selectByCompanyCode(companyCode);
+			String ownerId = "";
+			for (int i = 0; i < cpList.size(); i++) {
+				Users temp = uService.selectUserByUserId(cpList.get(i)
+						.getUserId());
+				if ((temp.getGrade().equals("사장"))) {
+					ownerId = temp.getUserId();
+					break;
+				}
+			}
+			message.setReceiverId(ownerId);
+			message.setMessageContent("아르바이트 등록");
+			message.setFlag(0); // 보지 않은 메세지=0, 본 메세지=1
 
-		return "redirect:/alert_employee";
+			mService.insertMessage(message);
+			viewPath = "redirect:/alert_employee";
+		}
+		return viewPath;
 	}
 
 	@RequestMapping(value = "/alert_employer")
 	// 사장 mypage 메뉴에서 Alerts(쪽지관리)
 	public String mypagAlertsEmployerGo(HttpSession session, Model model) {
 		Users loginUser = (Users) session.getAttribute("addUser"); // 로그인한 사장정보
-		/*List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
-				.getUserId());
-
-		int ComCode = codeList.get(0).intValue();
-
-		List<Message> myComMessages = mService.selectMessageByComCode(ComCode);*/
+		/*
+		 * List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
+		 * .getUserId());
+		 * 
+		 * int ComCode = codeList.get(0).intValue();
+		 * 
+		 * List<Message> myComMessages =
+		 * mService.selectMessageByComCode(ComCode);
+		 */
 		List<Message> myComMessages = mService.selectMessageByUserId(loginUser
 				.getUserId());
 
-		logger.trace("가져온 나의 회사 메세지들!! " + myComMessages);
+		logger.trace("가져온 사장 메세지들!! " + myComMessages);
 		model.addAttribute("myComMessages", myComMessages);
 
 		return "/myStore/alert";
@@ -106,7 +165,7 @@ public class MessageController {
 		List<Message> myMessages = mService.selectMessageByUserId(loginUser
 				.getUserId());
 
-		logger.trace("!!가져온 나의 메세지들!! " + myMessages);
+		logger.trace("!!가져온 직원 메세지들!! " + myMessages);
 		model.addAttribute("myMessages", myMessages);
 		return "/myJob/alert";
 	}
@@ -119,7 +178,7 @@ public class MessageController {
 		logger.trace("직원이 직장등록하려했으나 없는회사임!!!!!");
 		request.setAttribute("PopUp", 1);
 
-		Users loginUser = (Users) session.getAttribute("addUser"); 
+		Users loginUser = (Users) session.getAttribute("addUser");
 
 		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser
 				.getUserId());
@@ -139,7 +198,7 @@ public class MessageController {
 
 		return "myJob/myJob";
 	}
-	
+
 	// ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

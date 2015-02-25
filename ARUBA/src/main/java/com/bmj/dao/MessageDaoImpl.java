@@ -61,6 +61,11 @@ public class MessageDaoImpl implements MessageDao {
 		String stmt = namespace + "countUncheckedFlagByUserId";
 		return sqlSession.selectOne(stmt, userId);
 	}
+	@Override
+	public Message selectUncheckedMessageByComCode(int companyCode) {
+		String stmt = namespace + "selectUncheckedMessageByComCode";
+		return sqlSession.selectOne(stmt, companyCode);
+	}
 	
 
 }
