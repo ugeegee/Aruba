@@ -275,13 +275,29 @@ label.error {
 	<!--/#title-->
 
 <section id="writeComment" class="container">
-	<div class="panel panel-default">
-  	<div class="panel-heading">Panel heading</div>
-  	<div class="panel-body">
-    Panel content
-  	</div>
-	</div>
 	<div id="comment-form">
+	 	<c:url value="/registerComment" var="action"></c:url>
+		<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
+			<div class="panel panel-default">
+  				<div class="panel-heading">
+  					<input type="hidden" id="flag" name="flag" value=${nowFlag}> 
+  					<form:input path="commentTitle" name="commentTitle" class="form-control" placeholder="제목"/>
+  				</div>
+  				<div class="panel-body">
+               <%--   			<input type="hidden" id="flag" name="flag" value=${nowFlag}> 
+                 			<form:input path="commentTitle" name="commentTitle" class="form-control" placeholder="제목"/> --%>
+                   	 	<form:textarea path="commentContent" name="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
+                    <div align="center" style="margin-bottom: 10px; margin-top: 30px;">
+                    	<input type="reset" value="Reset" class="btn btn-success btn-md"/>
+						<input type="submit" value="Submit" class="btn btn-success btn-md"/>
+					</div>
+				</div>
+				</div>
+				</form:form> 	
+  	</div>
+    </section>
+    
+	<%-- <div id="comment-form">
 	 	<c:url value="/registerComment" var="action"></c:url>
 			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
 				<h3>게시글 작성</h3>	
@@ -305,8 +321,8 @@ label.error {
 					<input type="submit" value="글쓰기" class="btn btn-success btn-md write"/>
 					
 			</form:form> 
-	</div>
-    </section>
+	</div> --%>
+
 
 	
 	<section id="bottom" class="wet-asp">

@@ -213,12 +213,45 @@ table td,th{
 	</section>
 	<!--/#title-->
 
-	콘택투 내용
-	지도
-	떙스투
+	 <section id="contact-page" class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h4>Contact Form</h4>
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="sendemail.php" role="form">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="text" class="form-control" required="required" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" required="required" placeholder="Last Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" required="required" placeholder="Email address">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-lg">Send Message</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Message"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div><!--/.col-sm-8-->
+            <div class="col-sm-4">
+                <h4>Our Location</h4>
+                <iframe width="100%" height="215" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=sejoing+university&amp;aq=&amp;sll=47.643186,-121.319275&amp;sspn=1.197255,1.609497&amp;g=Leavenworth,+Chelan,+Washington&amp;ie=UTF8&amp;hq=sejoing+university&amp;hnear=&amp;ll=37.549035,127.07536&amp;spn=0.006295,0.006295&amp;t=m&amp;iwloc=A&amp;output=embed"></iframe>
+            </div><!--/.col-sm-4-->
+        </div>
+    </section><!--/#contact-page-->
+	
+	<section id="thanksto" class="midnight-blue">
+	thanks to
 	
 	
-	
+	</section>	
 	
 
 	<section id="bottom" class="wet-asp">

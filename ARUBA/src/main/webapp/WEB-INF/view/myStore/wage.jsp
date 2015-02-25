@@ -101,30 +101,46 @@ $(document).ready(function() {
                 }
                 
                 console.log("------------중복제거nameArr-------------");
-                for(var q  = 0; q < nameArr.length; q++) {
+                var name = nameArr.reduce(function(a, b){
+                	if(a.indexOf(b) < 0) a.push(b);
+                	return a;
+                }, []);
+                
+                console.log("name : " + name);
+                console.log("nameArr : " + nameArr);
+                
+                //var idx;
+               /*  for(var q  = 0; q < nameArr.length; q++) {
 					var name = nameArr[q];
 					//console.log(q + " , " + name);
-					for(var idx = q; idx < nameArr.length; idx++){
+					for(idx = q+1; idx <= nameArr.length+1; idx++) {
+						if(name == nameArr[idx]) {
+							console.log("idx : " + idx + nameArr.length);
+							nameArr.splice(idx, 1);
+						}
+					}
+					 for(var idx = q; idx < nameArr.length; idx++){
 						//idx = idx + 1;	
 						console.log(idx + ", " + name);
 						if(nameArr[idx]==name&&idx!=q) {
 							//console.log("zzzzzzzzzzzzzzzzz : " + idx);								
 							nameArr.splice(idx, 1);	
 						}
-					}
-                }
-				console.log(nameArr);   
+					} 
+					console.log(q + ", " + nameArr);
+                } */
+				//console.log(nameArr);   
 				
-				for(var k in nameArr) {
+				for(var k in name) {
 					tempArr = new Array();
 					for(var l in outArr) {
-						if(nameArr[k] == outArr[l][2]) {
+						if(name[k] == outArr[l][2]) {
 							tempArr.push(outArr[l][1]);						
 						}
 					}
 					console.log("ssssssssssssssss : " + tempArr);
 					dataArr.push(tempArr);
-            		seriesData.push({name:nameArr[k], data:dataArr[k]});
+            		seriesData.push({name:name[k], data:dataArr[k]});
             		console.log(k + " : " + seriesData);
 				}
 

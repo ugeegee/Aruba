@@ -49,17 +49,17 @@
 <script>
 $(function() {
 	
-	$(".btn").click(function(){
+	$(".ttt").click(function(){
 		var btnId=$(this).attr("id");
-		alert(btnId);
+		/* alert(btnId); */
 		
 		var codeId = "#code"+btnId;
 		var userId = "#id"+btnId;
 		var salaryId = "#salary"+btnId;
 		
-		alert("회사코드"+$(codeId).html());
+		/* alert("회사코드"+$(codeId).html());
 		alert("직원아이디"+$(userId).html());
-		alert("시급"+$(salaryId).val());
+		alert("시급"+$(salaryId).val()); */
 		
 		var url = "<%=request.getContextPath()%>/modifySalary?companyCode="+$(codeId).html()+"&userId="+$(userId).html()+"&salary="+$(salaryId).val();
 		$(location).attr('href',url); 
@@ -196,13 +196,13 @@ $(function() {
 				<c:forEach items="${staffList }" var="staffList" varStatus="status">
 				<tr>
 					<td class="center">${status.index }</td>
-					<td id="codebtn${status.index }" class="center">${staffList.companyCode}</td>
+					<td id="codettt${status.index }" class="center">${staffList.companyCode}</td>
 					<td class="center">${staffList.userName}</td>
-					<td id="idbtn${status.index }" class="center">${staffList.userId}</td>
+					<td id="idttt${status.index }" class="center">${staffList.userId}</td>
 					<td class="center">${staffList.tel}</td>
 					<td class="center">${staffList.email}</td>
-					<td class="center"><input type="text" name="salary${status.index }" id="salarybtn${status.index }" value="${staffList.salary}">
-						<button id="btn${status.index }" class="btn btn-success btn-md">Modify</button>
+					<td class="center"><input type="text" name="salary${status.index }" id="salaryttt${status.index }" value="${staffList.salary}">
+						<button id="ttt${status.index }" class="ttt btn btn-success btn-md">Modify</button>
 					</td>
 					<td class="center">${staffList.hireDate}</td>
 					<td class="center"><c:url value="/deleteStaff?companyCode=${staffList.companyCode}&userId=${staffList.userId}" var="url"/>
