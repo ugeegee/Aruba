@@ -166,15 +166,15 @@ $(document).ready(function() {
 			$(function () {
 				var chart = new Highcharts.Chart({
 				chart: {
-					backgroundColor: {
+					/* backgroundColor: {
 				    	linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
 				    	stops: [
 				   			[0, '#2a2a2b'],
 							[1, '#3e3e40']
 						]
-				    },
+				    }, */
 				    style: {
-				    	fontFamily: "'Unica One', sans-serif"
+				    	fontFamily: "Malgun Gothic"
 				    },
 				    plotBorderColor: '#606063',
 				   	renderTo: 'container',
@@ -377,21 +377,24 @@ $(document).ready(function() {
 		</div>
 	</section>
 	<!--/#title-->
-
+<!-- 직원의 월급관리<br> -->
  	<section id="MyJob" class="container">
- 		<!-- 직원의 월급관리<br> -->
- 		<!-- 그래프 -->
 	<br>
-	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
 	<br>
 	<!-- 각도조절 바 -->
 	<c:if test="${!empty Times }">
+	<!-- 그래프 -->
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	<div id="sliders">
 		<table>
 			<tr><td>Alpha Angle</td><td><input id="R0" type="range" min="0" max="45" value="15"/> <span id="R0-value" class="value"></span></td></tr>
 		    <tr><td>Beta Angle</td><td><input id="R1" type="range" min="0" max="45" value="15"/> <span id="R1-value" class="value"></span></td></tr>
 		</table>
 	</div>
+	</c:if>
+	<c:if test="${empty Times }">
+		<h2>등록된 시간표가 없습니다.</h2>
 	</c:if>
     </section>
 

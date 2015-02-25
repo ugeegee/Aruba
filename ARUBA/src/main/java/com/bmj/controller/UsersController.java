@@ -459,7 +459,7 @@ public class UsersController {
 
 	@RequestMapping(value = "/wage")
 	// 사장 mypage 메뉴에서 Wage(알바생들 줄 급여관리)
-	public String mypageWageGo(HttpSession session) {
+	public String mypageWageGo(Model model, HttpSession session) {
 		Users loginUser = (Users) session.getAttribute("addUser");
 		CompanyPerson cp = cpService.selectCompanyPersonByUserId(loginUser.getUserId());
 		try{
@@ -467,6 +467,7 @@ public class UsersController {
 		}catch(NullPointerException e){
 			throw new ChartMenuFailException("!!사장이 등록한 회사가 없음!!");
 		}
+		model.addAttribute("Times", cp);
 		return "/myStore/wage";
 	}
 
@@ -489,7 +490,7 @@ public class UsersController {
 		// myJob들어갈때는 무조건 첫번째회사로 셋팅(없다면 -1들어갈것)
 		model.addAttribute("nowCode", first);
 		model.addAttribute("oneTime", true);
-
+		model.addAttribute("Times", codeList);
 		return "/myJob/salary";
 	}
 
