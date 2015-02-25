@@ -17,5 +17,5 @@ public interface TimeTableDao {
 	int selectKeybyTime(TimeTable timetable);
 	int updateTimeTable(TimeTable updateTable);
 	double selectCountByRuntime(TimeTable runtimesalary);
-	
+	int deleteTimeTableByTimekey(int timekey);
 }

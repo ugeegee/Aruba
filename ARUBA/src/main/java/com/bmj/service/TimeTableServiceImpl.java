@@ -96,6 +96,12 @@ public class TimeTableServiceImpl implements TimeTableService {
 		return result;
 	}
 
+	@Override
+	public int deleteTimeTableByTimekey(int timekey) {
+		int result = dao.deleteTimeTableByTimekey(timekey);
+		return result;
+	}
+
 
 
 }
