@@ -1,22 +1,28 @@
 <!DOCTYPE html>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<html>
+<html lang="en">
 <head>
+
+<style>
+@charset "utf-8";
+
+label.error {
+	color: red;
+	/* font-style: italic */
+}
+</style>
+
 <meta charset="utf-8">
 
 <!--------------------- Validate --------------------->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="lib/jquery.validate.min.js"></script>
-
-<!--------------------- DataTable --------------------->
-
-<script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
-<link href="css/dataTables.css" rel="stylesheet">
 
 <!--------------------- Homepage --------------------->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,68 +47,70 @@
 	href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
-	
-<script type="text/javascript">
-$(document).ready(function() {
-	
-	$('#example').DataTable();
-	
-	$("#commentForm").validate({
-		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
-		/* submitHandler : function() {
-			var f = confirm("글을 등록하시겠습니까?");
-			if (f) {
-				return true;
-			} else {
-				return false;
-			}
-		}, */
-		ignore: "",
-		//규칙
-		rules : {
-			commentTitle : {
-				required : true,
-				minlength : 1,
-				maxlength : 50
-			},
-			commentContent : {
-				required : true,
-				minlength : 1,
-				maxlength : 200
-			}
-		},
-		//규칙체크 실패시 출력될 메시지
-		messages : {
-			
-			commentTitle : {
-				required : "필수 입력사항 입니다.",
-				minlength : "최소 {0}글자이상이어야 합니다",
-				maxlength : "최대 {0}글자이하이어야 합니다"
-			},
-			commentContent : {
-				required : "필수 입력사항 입니다.",
-				minlength : "최소 {0}글자이상이어야 합니다",
-				maxlength : "최대 {0}글자이하이어야 합니다"
-			}
-		}
-	});
 
-	var commentForm = $("#commentForm");
-	for ( var item in commentForm) {
-		console.log(item + " : " + commentForm[item]);
-	}
-});
+<!--------------------- DatePicker --------------------->
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+<script>
+	$(document).ready(function() {
+
+		var dp = {
+				changeMonth : true,
+				changeYear : true,
+				yearRange : "1930:2015"
+			};
+			$("#datepicker").datepicker(dp);
+		
+			$("#findForm").validate({
+				//validation이 끝난 이후의 submit 직전 추가 작업할 부분
+				/* submitHandler : function() {
+					var f = confirm("글을 등록하시겠습니까?");
+					if (f) {
+						return true;
+					} else {
+						return false;
+					}
+				}, */
+				//규칙
+				rules : {
+					email : {
+						required : true,
+						minlength : 2,
+						maxlength : 30,
+						email : true
+					},
+					birth : {
+						required : true,
+						minlength : 9,
+						maxlength : 10
+					}
+				},
+				//규칙체크 실패시 출력될 메시지
+				messages : {
+					email : {
+						required : "필수 입력사항 입니다.",
+						minlength : "최소 {0}글자이상이어야 합니다",
+						maxlength : "최대 {0}글자이하이어야 합니다",
+						email : "메일 기재 규칙에 어긋납니다."
+					},
+					birth : {
+						required : "필수 입력사항 입니다.",
+						minlength : "최소 {0}글자이상이어야 합니다",
+						maxlength : "최대 {0}글자이하이어야 합니다",
+						date : "생년월일 기재 규칙에 어긋납니다."
+					}
+				}
+			});
+
+			var findForm = $("#findForm");
+			for ( var item in findForm) {
+				console.log(item + " : " + findForm[item]);
+			}
+		});
 </script>
-<style>
-table td,th{
-	text-align : center;
-}
-label.error {
-	color: red;
-	/* font-style: italic */
-}
-
-</style>
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt"
@@ -205,13 +213,14 @@ label.error {
 								</ul></li>
 
 							<!-- 근무표 버튼 -->
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<c:url value="/mySchedule" var="url" />
 									<li><a href="${url }">My Shift</a></li>
 								</ul>
 							</li>
+
 						</c:if>
 
 						<!-- 게시판 버튼 -->
@@ -240,33 +249,13 @@ label.error {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<c:if test="${nowFlag=='1' }">
-						<h1>Notice Board</h1>
-						<p>공지게시판</p>
-					</c:if>
-					<c:if test="${nowFlag=='2' }">
-						<h1>Free Board</h1>
-						<p>자유게시판</p>
-					</c:if>
-					<c:if test="${nowFlag=='3' }">
-						<h1>Q&A Board</h1>
-						<p>Q&A 게시판</p>
-					</c:if>
+					<h1>Find your ID</h1>
+					<p>아이디찾기</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-					<c:if test="${nowFlag=='1' }">
-						<li class="active">Board</li>
-						<li>Notice Board</li>
-					</c:if>
-					<c:if test="${nowFlag=='2' }">
-						<li class="active">Board</li>
-						<li>Free Board</li>
-					</c:if>
-					<c:if test="${nowFlag=='3' }">
-						<li class="active">Board</li>
-						<li>Q&A Board</li>
-					</c:if>
+						<li class="active">Home</li>
+						<li>Find password</li>
 					</ul>
 				</div>
 			</div>
@@ -274,57 +263,31 @@ label.error {
 	</section>
 	<!--/#title-->
 
-<section id="writeComment" class="container">
-	<div id="comment-form">
-	 	<c:url value="/registerComment" var="action"></c:url>
-		<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
-			<div class="panel panel-default">
-  				<div class="panel-heading">
-  					<input type="hidden" id="flag" name="flag" value=${nowFlag}> 
-  					<form:input path="commentTitle" name="commentTitle" class="form-control" placeholder="제목"/>
-  				</div>
-  				<div class="panel-body">
-               <%--   			<input type="hidden" id="flag" name="flag" value=${nowFlag}> 
-                 			<form:input path="commentTitle" name="commentTitle" class="form-control" placeholder="제목"/> --%>
-                   	 	<form:textarea path="commentContent" name="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
-                    <div align="center" style="margin-bottom: 10px; margin-top: 30px;">
-                    	<input type="reset" value="Reset" class="btn btn-success btn-md"/>
-						<input type="submit" value="Submit" class="btn btn-success btn-md"/>
-					</div>
-				</div>
-				</div>
-				</form:form> 	
-  	</div>
-    </section>
-    
-	<%-- <div id="comment-form">
-	 	<c:url value="/registerComment" var="action"></c:url>
-			<form:form modelAttribute="addComment" id="commentForm" method="post" action="${action}" class="form-horizontal">
-				<h3>게시글 작성</h3>	
-				<br>
-				FLAG : <c:if test="${nowFlag=='1' }">공지</c:if>
-						<c:if test="${nowFlag=='2' }">자유</c:if>
-						<c:if test="${nowFlag=='3' }">Q&A</c:if>
-				
-				|| 작성자 : ${addUser.userId }<br>
-				
-				<div class="form-group">
-                 	<div class="col-sm-12">
-                 		<br><br>
-                 		<input type="hidden" id="flag" name="flag" value=${nowFlag}> 
-                 		<form:input path="commentTitle" name="commentTitle" class="form-control" placeholder="제목"/>
-                    	<br><br>
-                    	<form:textarea path="commentContent" name="commentContent" rows="8" class="form-control" placeholder="내용을 작성해주세요"></form:textarea>
-                    </div>
+	<section id="FindId" class="container">
+ 		<c:url value="/findId" var="url" />
+        <form class="center" role="form" id="findForm" method="post" action="${url }">
+            <fieldset class="registration-form">
+            	<div class="form-group">
+                    	* 생년월일과 이메일을 입력하시면, 아이디를 찾을 수 있습니다.
                 </div>
-					<input type="reset" value="다시쓰기" class="btn btn-success btn-md write"/>
-					<input type="submit" value="글쓰기" class="btn btn-success btn-md write"/>
-					
-			</form:form> 
-	</div> --%>
+                
+                <div class="form-group">
+                    <input type="text" id="datepicker" name="birth" placeholder="birthdate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="email" name="email" placeholder="e-mail" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                	<br>
+                    <button class="btn btn-success btn-md  btn-block">Find ID</button>
+                </div>
+                
+            </fieldset>
+        </form>
+    </section>
 
 
-	
 	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">

@@ -45,25 +45,25 @@ $(document).ready(function() {
 		var id = $("#writeId").html();
 		var no = $("#writeNo").html();
 		if(id == loginId){
-			alert("자신이쓴글입니다!! "+no);
+			/* alert("자신이쓴글입니다!! "+no); */
 			var url = "<%=request.getContextPath()%>/deleteComment?commentNumber="+no;
 			$(location).attr('href',url); 
 		}else{
-			alert("본인 글만 삭제할 수 있습니다!!");
+			alert("본인이 작성한 글만 삭제할 수 있습니다.");
 		}
 	});
 	$("#modifyBtn").click(function(){
 		var id = $("#writeId").html();
 		var no = $("#writeNo").html();
 		if(id == loginId){
-			alert("자신이쓴글입니다!! "+no);
+			/* alert("자신이쓴글입니다!! "+no); */
 			var url = "<%=request.getContextPath()%>/modifyComment?commentNumber="+no;
 			$(location).attr('href',url); 
 		}else{
-			alert("본인 글만 수정할 수 있습니다!!");
+			alert("본인이 작성한 글만 수정할 수 있습니다.");
 		}
 	});
-	$(".btn").click(function(){
+	$(".ttt").click(function(){
 		var btnId = $(this).attr("id");
 		alert(btnId);
 		
@@ -75,11 +75,11 @@ $(document).ready(function() {
 		
 		
 		if($(idId).html() == loginId){
-			alert("댓글이 삭제됩니다.");
+			/* alert("댓글이 삭제됩니다."); */
 			var url = "<%=request.getContextPath()%>/deleteReply?replyNumber="+$(noId).html()+"&commentNumber="+commentNo;
 			$(location).attr('href',url);
 		}else{
-			alert("본인 댓글만 삭제할 수 있습니다!!");
+			alert("본인이 작성한 댓글만 삭제할 수 있습니다.");
 		} 
 	});
 	
@@ -271,18 +271,148 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>Board</li>
-						<li class="active">Free Board</li>
+					<c:if test="${nowFlag=='1' }">
+						<li class="active">Board</li>
+						<li>Notice Board</li>
+					</c:if>
+					<c:if test="${nowFlag=='2' }">
+						<li class="active">Board</li>
+						<li>Free Board</li>
+					</c:if>
+					<c:if test="${nowFlag=='3' }">
+						<li class="active">Board</li>
+						<li>Q&A Board</li>
+					</c:if>
 					</ul>
 				</div>
 			</div>
 		</div>
-	
 	</section>
 	<!--/#title-->
+	
+	
+	
+	
  	<section id="freeBoard" class="container">
-			<hr>
-			<table class="temp" width="100%">
+ 		<div id="comment-form">
+			<div class="panel panel-default">
+  				<div class="panel-heading">
+  					<table class="new">
+  						<tr><td width="3%">글번호 │ </td><td width="10%" id="writeNo">${selectedComment.commentNumber}</td>
+  							<td width="3%">작성자 │ </td><td width="10%" id="writeId">${selectedComment.userId}</td>
+  							<td width="3%">작성일 │ </td><td width="10%"> ${selectedComment.regDate}</td>
+  						</tr>
+  					</table>
+  				</div>
+  				<div class="panel-heading">
+  					제목 │ <strong>${selectedComment.commentTitle}</strong>
+  				</div>
+  				<div class="panel-body">
+  					<!-- 글내용 -->
+  					<div class="boardcontent">
+  						<br>
+  						${selectedComment.commentContent}
+  						<br><br><br>
+  						<div align="right" style="margin-bottom: 10px;">
+							<button id="modifyBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Modify Posting</button>
+							<button id="deleteBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Delete Posting</button>
+						</div>
+					</div>	
+					<hr>
+					
+					<!-- 댓글내용 -->
+					<div class="replycontent">
+					<c:forEach items="${replyList }" var="replyList">
+  						<div class="media">
+                        	<div class="pull-left">
+                            	<img class="avatar img-circle" src="images/blog/avatar3.png" alt="">
+                            </div>
+                            <div class="media-body">
+                            <div class="well">
+                            	<div class="media-heading">
+                            		<div id="ReplyNottt${replyList.replyNumber}" hidden>${replyList.replyNumber}</div>
+                                	<strong id="ReplyIdttt${replyList.replyNumber}">${replyList.userId}</strong>&nbsp; 
+                                	<small>${replyList.regDate }</small>
+                                </div>
+                                <p>${replyList.replyContent}</p>
+                                <div align="right" >
+                                	<button id="ttt${replyList.replyNumber}" class="ttt btn btn-success btn-xs">Delete Comment</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+					</c:forEach>
+					</div>
+					
+					
+					<!-- 댓글쓰는부분 -->
+					<div id="comment-form">
+                    	<c:url value="/registerReply" var="action"></c:url>
+						<form:form modelAttribute="addReply" id="replyForm" method="post" action="${action}"  class="form-horizontal" >
+						<form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" />
+ 							<div class="form-group">
+                             	<div class="col-sm-12">
+                             		<form:input path="replyContent" name="replyContent" class="form-control" placeholder="Leave a comment"/>
+                                </div>
+                            </div>
+                            <div align="right" style="margin-bottom: 10px;">
+                            <input type="submit" value="Submit Comment" class="btn btn-success btn-xs"/>
+							<input type="reset" value="Reset" class="btn btn-success btn-xs"/>
+							</div>
+                        </form:form>
+                   </div><!--/#comment-form-->
+				</div>
+				</div>
+				</div>
+
+
+  				<%-- 
+  					<c:forEach items="${replyList }" var="replyList">
+  						<div class="media">
+                        	<div class="pull-left">
+                            	<img class="avatar img-circle" src="images/blog/avatar3.png" alt="">
+                            </div>
+                            <div class="media-body">
+                            <div class="well">
+                            	<div class="media-heading">
+                                	<strong>${replyList.userId}</strong>&nbsp; <small>${replyList.regDate }</small>
+                                </div>
+                                <p>${replyList.replyContent}</p>
+                                <button id="btn${replyList.replyNumber}" class="btn">삭제</button>
+                            </div>
+                            </div>
+                        </div>
+					</c:forEach>
+					
+					
+					<!-- 댓글다는부분 -->
+					<div id="comment-form">
+                    	<c:url value="/registerReply" var="action"></c:url>
+						<form:form modelAttribute="addReply" id="replyForm" method="post" action="${action}"  class="form-horizontal" >
+						<form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" />
+ 							<div class="form-group">
+                             	<div class="col-sm-12">
+                             		<form:input path="replyContent" name="replyContent" class="form-control" placeholder="Leave a comment"/>
+                                </div>
+                            </div>
+                            <div align="right" style="margin-bottom: 10px;">
+                            <input type="submit" value="Submit Comment" class="btn btn-success btn-xs"/>
+							<input type="reset" value="Reset" class="btn btn-success btn-xs"/>
+							</div>
+                        </form:form>
+                   </div><!--/#comment-form-->
+								
+      			</div>
+			</div>
+			
+			<!-- <div align="right" style="margin-bottom: 10px;">
+				<button id="modifyBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Modify Posting</button>
+				<button id="deleteBtn" class="btn btn-success btn-sm"><i class="icon-edit-sign"></i> Delete Posting</button>
+			</div> -->
+		</div>  --%>
+		
+		
+		<%-- <table class="temp" width="100%">
 				<tr>
 					<th width = "10%">글번호</th>
 					<th width = "30%">종류?</th>
@@ -313,8 +443,80 @@ label.error {
 					<td colspan="5">${selectedComment.commentContent}</td>
 				</tr>
 			</table>
-			<br><br><br><hr>
-		 	<table class="temp" width="100%">
+			<br><br><br><hr> 
+			
+			<table class="temp" width="100%">
+					<tr>
+						<th width = "10%">댓글번호</th>
+						<th>댓글내용</th>
+						<th width = "15%">아이디</th>
+						<th width = "20%">작성날짜</th>
+						<th width = "10%"></th>
+					</tr>
+				<c:forEach items="${replyList }" var="replyList">
+					<tr> 
+						<td align = "center" id="ReplyNottt${replyList.replyNumber}">${replyList.replyNumber}</td>
+						<td>${replyList.replyContent}</td>
+						<td align = "center" id="ReplyIdttt${replyList.replyNumber}">${replyList.userId}</td>
+						<td align = "center">${replyList.regDate }</td>
+						<td align = "center"><button id="ttt${replyList.replyNumber}" class="ttt">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</table>		
+					<hr>
+		<c:url value="/registerReply" var="action"></c:url>
+			<form:form modelAttribute="addReply" id="replyForm" method="post" action="${action}">
+				<table>
+					<tr>
+						<form:input type = "hidden" path="commentNumber" value = "${selectedComment.commentNumber}" />
+					</tr>
+				</table><br>
+				<form:input path="replyContent" name="replyContent" class="form-control" placeholder="댓글 쓰기"/>
+ 				<br>
+ 				<input type="submit" value="댓글등록"/>
+				<input type="reset" value="다시쓰기"/>
+			</form:form> --%>
+    </section>
+	
+
+
+
+
+	 
+		<%-- 	<table class="temp" width="100%">
+				<tr>
+					<th width = "10%">글번호</th>
+					<th width = "30%">종류?</th>
+					<th width = "30%">작성자</th>
+					<th>작성날짜</th>
+					<th width = "10%">
+
+					</th>
+				</tr>
+				<tr> 
+					<td align = "center" id="writeNo">${selectedComment.commentNumber}</td>
+					<td align = "center">
+					<c:if test="${selectedComment.flag=='1' }">공지게시판</c:if>
+					<c:if test="${selectedComment.flag=='2' }">자유게시판</c:if>
+					<c:if test="${selectedComment.flag=='3' }">Q&A게시판</c:if>
+					</td>
+					<td align = "center" id="writeId">${selectedComment.userId}</td>
+					<td align = "center">${selectedComment.regDate}</td>
+					<td align = "center">
+					<button id="deleteBtn">삭제</button>
+					<button id="modifyBtn">수정</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="5"><strong>${selectedComment.commentTitle}</strong></td>
+				</tr>
+				<tr>
+					<td colspan="5">${selectedComment.commentContent}</td>
+				</tr>
+			</table>
+			<br><br><br><hr> 
+			
+			<table class="temp" width="100%">
 					<tr>
 						<th width = "10%">댓글번호</th>
 						<th>댓글내용</th>
@@ -331,8 +533,8 @@ label.error {
 						<td align = "center"><button id="btn${replyList.replyNumber}" class="btn">삭제</button></td>
 					</tr>
 				</c:forEach>
-			</table>
-			<hr>
+			</table>		
+					<hr>
 		<c:url value="/registerReply" var="action"></c:url>
 			<form:form modelAttribute="addReply" id="replyForm" method="post" action="${action}">
 				<table>
@@ -345,8 +547,11 @@ label.error {
  				<input type="submit" value="댓글등록"/>
 				<input type="reset" value="다시쓰기"/>
 			</form:form>
-    </section>
-	
+			
+			 --%>
+
+
+
 		<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">

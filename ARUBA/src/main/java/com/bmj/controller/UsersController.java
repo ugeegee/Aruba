@@ -174,6 +174,71 @@ public class UsersController {
 	public String loginGGo(Model model) {
 		return "/login/login";
 	}
+	
+	@RequestMapping(value = "/findId", method = RequestMethod.GET)
+	public String findIdGo() {
+		//아이디찾기 누름
+		return "/login/findId";
+	}
+	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+	public String findIdSuccessGo(@RequestParam String birth, @RequestParam String email, Model model) {
+		//아이디찾기 누름->생년월일, 이메일 입력받아옴
+		Users findUser = new Users();
+		findUser.setBirth(birth);
+		findUser.setEmail(email);
+		
+		List<Users> findUserList = service.selectUserByBirthAndEmail(findUser);
+		if(findUserList.size() != 0){
+			//찾은 결과 있음
+			model.addAttribute("findUserList", findUserList); 
+			model.addAttribute("findResult", "showId");
+		}else{
+			//찾은 결과 없음
+			model.addAttribute("findResult", "idFail");
+		}
+		
+		return "/login/findResult";
+	}
+	@RequestMapping(value = "/findPass", method = RequestMethod.GET)
+	public String findPassGo(Model model) {
+		model.addAttribute("findPassStep", 1);
+		return "/login/findPass";
+	}
+	@RequestMapping(value = "/findPassInputID", method = RequestMethod.POST)
+	public String findPassInputIDGo(@RequestParam String userId, Model model) {
+		String viewPath="";
+		Users inputUser = service.selectUserByUserId(userId);
+		logger.trace("없는사람일때!!!!"+inputUser);
+		if(inputUser != null){
+			//입력받은 아이디로 존재하는 회원이 있음
+			model.addAttribute("inputUser", inputUser);
+			model.addAttribute("findPassStep", 2);
+			viewPath = "/login/findPass";
+		}else{
+			model.addAttribute("findResult", "step1Fail");
+			viewPath = "/login/findResult";
+		}
+		
+		return viewPath;
+	}
+	@RequestMapping(value = "/findPassInputAnswer", method = RequestMethod.POST)
+	public String findPassSuccessGo(@RequestParam String userId, @RequestParam String answer, Model model) {
+		String viewPath="";
+		Users tempUser = new Users();
+		tempUser.setUserId(userId);
+		tempUser.setAnswer(answer);
+		Users findUser = service.selectUserByIdAndAnswer(tempUser);
+		if(findUser != null){
+			model.addAttribute("findResult", "showPass");
+			model.addAttribute("findUser", findUser);
+			viewPath = "/login/findResult";
+		}else{
+			model.addAttribute("findResult", "step2Fail");
+			viewPath = "/login/findResult";
+		}
+		
+		return viewPath;
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginSuccess(@RequestParam String userId,

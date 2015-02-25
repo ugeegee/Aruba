@@ -165,6 +165,10 @@ label.error {
 					<br>
 					<button class="btn btn-success btn-md btn-block">Log In</button>
 				</div>
+				<div class="form-group">
+					<a href="<%=request.getContextPath()%>/findId">아이디찾기</a><br>
+					<a href="<%=request.getContextPath()%>/findPass">비밀번호찾기</a>
+				</div>
 			</fieldset>
 		</form>
 	</section>

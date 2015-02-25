@@ -9,6 +9,7 @@ DROP TRIGGER TRI_time_table_time_key;
 
 
 
+
 /* Drop Tables */
 
 DROP TABLE Reply CASCADE CONSTRAINTS;
