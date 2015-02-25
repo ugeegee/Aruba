@@ -270,6 +270,7 @@ $(document).ready(function() {
 					<th class="center">회사코드</th>
 					<th class="center">회사명</th>
 					<th class="center">전화번호</th>
+					<th width="10%"></th>
 				</tr>
 				</thead>
 				<tbody>
@@ -278,6 +279,10 @@ $(document).ready(function() {
 						<td class="center">${myCompanies.companyCode}</td>
 						<td class="center">${myCompanies.companyName}</td>
 						<td class="center">${myCompanies.companyTel}</td>
+						<td>
+							<c:url value="/deleteJob?companyCode=${myCompanies.companyCode}" var="url" /> 
+							<a href="${url }"><button class="btn btn-success btn-md">삭제</button></a>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

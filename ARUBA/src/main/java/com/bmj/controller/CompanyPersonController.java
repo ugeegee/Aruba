@@ -174,4 +174,42 @@ public class CompanyPersonController {
 		return "redirect:/staff";
 	}
 
+	@RequestMapping(value = "/deleteJob", method = RequestMethod.GET)
+	//알바생 직장삭제
+	public String deleteJobSuccess(@RequestParam int companyCode, HttpSession session) {
+		
+		Users loginUser = (Users) session.getAttribute("addUser");
+		CompanyPerson companyperson = new CompanyPerson();
+		companyperson.setCompanyCode(companyCode);
+		companyperson.setUserId(loginUser.getUserId());
+		
+		// 시간표삭제
+		int memberId = cpService.selectMemberIdbyCompanyPerson(companyperson);
+		tService.deleteTimeTableByMemberId(memberId);
+		// 직장삭제 메세지 보내기
+		Message message = new Message();
+		message.setCompanyCode(companyCode);
+		message.setUserId(loginUser.getUserId());
+		
+		List<CompanyPerson> cpList = cpService.selectByCompanyCode(companyCode);
+		String ownerId = "";
+		for (int i = 0; i < cpList.size(); i++) {
+			Users temp = uService.selectUserByUserId(cpList.get(i).getUserId());
+			if ((temp.getGrade().equals("사장"))) {
+				ownerId = temp.getUserId();
+				break;
+			}
+		}
+		message.setReceiverId(ownerId);
+		message.setMessageContent("직장 삭제");
+		message.setFlag(-1);
+
+		mService.insertMessage(message);
+		
+		// CP삭제
+		cpService.deleteCompanyPersonByComCodeAndUserId(companyperson);
+		
+		return "redirect:/myJob";
+	}
+
 }

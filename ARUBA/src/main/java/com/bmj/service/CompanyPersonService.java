@@ -20,6 +20,5 @@ public interface CompanyPersonService {
 	String selectUserIdbyMemberId(int memberId);
 	int selectMemberIdbyCompanyPerson(CompanyPerson companyperson);
 	List<Integer> selectMemberIdListbyUserId(String userId);
-	String selectOwnerIdByComCode(int companyCode);
 	/*CompanyPerson selectCompanyPersonByPerson(CompanyPerson person);*/
 }
