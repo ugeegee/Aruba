@@ -38,8 +38,9 @@ public class TimeTableController {
 		logger = LoggerFactory.getLogger(TimeTableController.class);
 	}
 	
-	private String[] color = {"#000000", "#ff0000", "#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff"};
-	
+	/*private String[] color = {"#000000", "#ff0000", "#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff"};*/
+	private String[] color = {"#980000", "#993800", "#997000", "#998A00", "6B9900", "#2F9D27", "#008299", "#003399", "#050099", "3F0099", "990085", "99004C", "4C4C4C", "353535"};
+		
 	@Autowired
 	CompanyPersonService service2;
 	@Autowired
@@ -57,12 +58,13 @@ public class TimeTableController {
 		
 		Users loginUser = (Users) session.getAttribute("addUser");
 		CompanyPerson companyperson = service2.selectCompanyPersonByUserId(loginUser.getUserId());
+		int companyCode = companyperson.getCompanyCode();
+		service.deleteTimeTableByCompanyCode(companyCode);
 		try{
 			model.addAttribute("code", companyperson.getCompanyCode());
 		}catch(NullPointerException e){
 			throw new ScheduleMenuFailException("!!사장이 등록한 회사가 없음!!");
 		}	
-		
 		
 		return "/schedule/employer/allSchedule";
 	}
@@ -223,7 +225,7 @@ public class TimeTableController {
 			logger.trace("수업 Date 확인하기 : " + lists.get(idx).getWorkingDate());
 			savetime.setStart(settingTime(lists.get(idx).getWorkingStart()));
 			savetime.setEnd(settingTime(lists.get(idx).getWorkingEnd()));
-			savetime.setColor(color[lists.get(idx).getMemberId()%6]);
+			savetime.setColor(color[lists.get(idx).getMemberId()%14]);
 			logger.trace("수업 savetime : " + savetime);
 			list2.add(idx, savetime);
 		}

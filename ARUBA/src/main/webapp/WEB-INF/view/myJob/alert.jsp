@@ -10,11 +10,7 @@
 <html>
 <head>
 
-<style>
-.temp td {
-	border: 1px solid black;
-}
-</style>
+
 
 <meta charset="utf-8">
 
@@ -155,31 +151,31 @@
 			<table class="table table-striped table-hover">
 				<thead>
 				<tr>
-					<th>쪽지번호</th>
-					<th>회사코드</th>
-					<th>보낸사람</th>
-					<th>받는사람</th>
-					<th>쪽지내용</th>
-					<th>보낸날짜</th>
-					<th>읽음여부</th>
+					<th class="center">#</th>
+					<th class="center">회사코드</th>
+					<th class="center">보낸이</th>
+					<th class="center">받는이</th>
+					<th class="center">내용</th>
+					<th class="center">보낸날짜</th>
+					<th class="center">수신확인</th>
 				</tr>
 				</thead>
 				<tbody>
 				<c:forEach items="${myMessages }" var="myMessages">
 
 				<tr>
-					<td>${myMessages.messageNumber}</td>
-					<td>${myMessages.companyCode}</td>
-					<td>${myMessages.userId}</td>
-					<td>${myMessages.receiverId}</td>
-					<td>${myMessages.messageContent}</td>
-					<td>${myMessages.regDate}</td>
-					<td>
+					<td class="center">${myMessages.messageNumber}</td>
+					<td class="center">${myMessages.companyCode}</td>
+					<td class="center">${myMessages.userId}</td>
+					<td class="center">${myMessages.receiverId}</td>
+					<td class="center">${myMessages.messageContent}</td>
+					<td class="center">${myMessages.regDate}</td>
+					<td class="center">
 						<c:if test="${myMessages.flag =='0' }">
-							대기
+							승인대기중
 						</c:if>
 						<c:if test="${myMessages.flag =='1' }">
-							승인
+							승인완료
 						</c:if>
 						<c:if test="${myMessages.flag =='2' }">
 							거절
@@ -195,7 +191,7 @@
 	</div>
 	</div>
 	</div>
-	
+	</section>	
 	
 	<%-- 	직원의 쪽지관리~~<br> <br>
 		<table class="temp">
@@ -228,8 +224,8 @@
 					</td>
 				</tr>
 			</c:forEach>
-		</table>
-	</section> --%>
+		</table> --%>
+
 
 		<section id="bottom" class="wet-asp">
 		<div class="container">

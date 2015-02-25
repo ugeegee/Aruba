@@ -30,7 +30,7 @@ table {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
-  border-top: 1px solid #1C1E22;
+  border-top: 1px solid #ecf0f1;
 }
 .table > thead > tr > th {
   vertical-align: bottom;
