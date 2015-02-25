@@ -63,6 +63,7 @@ $(document).ready(function() {
 	var id;
 	var results = new Array();
 	var updates = new Array();
+	var deletes = new Array();
 	var outArr = new Array();
 	var inArr = new Array();
 	var e = new Array();
@@ -147,16 +148,28 @@ $(document).ready(function() {
 				results.push(newTemp);
 				console.log(results);
 			}, 
+			eventDestroy: function(event, element, view)
+	        {
+	            //alert("removing stuff");
+	        },
 			eventClick: function(event, element) {
 				title = event.title;
 				start = event.start.format('YYYY-MM-DD HH:mm:ss');
 				end = event.end.format('YYYY-MM-DD HH:mm:ss');
 				id = event._id;
-				
+				$(this).css('background-color', 'blue');
+				if ($('#drop-remove').is(':checked')) {
+					// if so, remove the element from the "Draggable Events" list
+					// $(this).remove();
+					$('#calendar').fullCalendar('removeEvents', id);
+				}
 				console.log("Click_id : " + id);
 				console.log("Click_title : " + title);
 				console.log("Click_start : " + start);
 				console.log("Click_End : " + end);	
+				
+				var deleteid = new createTimeTable(id, title, start, end);
+				deletes.push(deleteid);
 			},
 			eventDragStart: function(event) {
 				title = event.title;
@@ -244,10 +257,12 @@ $(document).ready(function() {
 	$("#updatebutton").click(function() {
 		var updateStart = JSON.stringify(updates);
 		var updateEnd = JSON.stringify(results);
+		var deleteItem = JSON.stringify(deletes);
 		console.log(updates);
 		console.log(results);
+		console.log(deletes);
 		<c:url value="/updateTimeTable" var="updateTimeTable"></c:url>
-		var url = "${updateTimeTable}?updateStart=" + updateStart + "&updateEnd=" + updateEnd;
+		var url = "${updateTimeTable}?updateStart=" + updateStart + "&updateEnd=" + updateEnd + "&deleteItem=" + deleteItem;
 		location.href = url;
 	})
 })
@@ -410,22 +425,22 @@ $(document).ready(function() {
 
 	<section id="modifySchedule" class="container">
 		<div id='wrap'>
-				<%-- <div id='external-events'>
+				<div id='external-events'>
 				<h4>Company!</h4>
 				<!-- <table border = "1"> -->
-				<c:forEach items="${employees}" var="employee">
+				<%-- <c:forEach items="${employees}" var="employee">
 					<!-- <tr> -->
 					<!-- <td> -->
 					<div class='fc-event'>${employee.userId}</div>
 					<!-- </td> -->
 					<!-- </tr> -->
-				</c:forEach>
+				</c:forEach> --%>
 				<!-- </table> -->
-				<!-- <p>
+				<p>
 					<input type='checkbox' id='drop-remove' /> <label
-						for='drop-remove'>remove after drop</label>
-				</p> -->
-			</div> --%>
+						for='drop-remove'>remove after click</label>
+				</p>
+			</div>
 	<div id='calendar'></div>
 	<br>
 			<div style='clear: both'></div>

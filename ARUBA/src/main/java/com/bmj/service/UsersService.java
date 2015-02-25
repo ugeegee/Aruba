@@ -1,5 +1,7 @@
 package com.bmj.service;
 
+import java.util.List;
+
 import com.bmj.entity.Users;
 
 public interface UsersService {
@@ -11,5 +13,6 @@ public interface UsersService {
 	Users loginUser(Users user);
 	int countByUserId(String userId);
 	Users selectUserByUserId(String userId);
-	Users selectUserByBirthAndEmail(Users user);
+	List<Users> selectUserByBirthAndEmail(Users user);
+	Users selectUserByIdAndAnswer(Users user);
 }

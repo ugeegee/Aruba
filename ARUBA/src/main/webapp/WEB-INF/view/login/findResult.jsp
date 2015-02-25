@@ -58,58 +58,58 @@ label.error {
 	$(document).ready(function() {
 
 		var dp = {
-				changeMonth : true,
-				changeYear : true,
-				yearRange : "1930:2015"
-			};
-			$("#datepicker").datepicker(dp);
-		
-			$("#findForm").validate({
-				//validation이 끝난 이후의 submit 직전 추가 작업할 부분
-				/* submitHandler : function() {
-					var f = confirm("글을 등록하시겠습니까?");
-					if (f) {
-						return true;
-					} else {
-						return false;
-					}
-				}, */
-				//규칙
-				rules : {
-					email : {
-						required : true,
-						minlength : 2,
-						maxlength : 30,
-						email : true
-					},
-					birth : {
-						required : true,
-						minlength : 9,
-						maxlength : 10
-					}
-				},
-				//규칙체크 실패시 출력될 메시지
-				messages : {
-					email : {
-						required : "필수 입력사항 입니다.",
-						minlength : "최소 {0}글자이상이어야 합니다",
-						maxlength : "최대 {0}글자이하이어야 합니다",
-						email : "메일 기재 규칙에 어긋납니다."
-					},
-					birth : {
-						required : "필수 입력사항 입니다.",
-						minlength : "최소 {0}글자이상이어야 합니다",
-						maxlength : "최대 {0}글자이하이어야 합니다",
-						date : "생년월일 기재 규칙에 어긋납니다."
-					}
-				}
-			});
+			changeMonth : true,
+			changeYear : true,
+			yearRange : "1930:2015"
+		};
+		$("#datepicker").datepicker(dp);
 
-			var findForm = $("#findForm");
-			for ( var item in findForm) {
-				console.log(item + " : " + findForm[item]);
+		$("#findForm").validate({
+			//validation이 끝난 이후의 submit 직전 추가 작업할 부분
+			/* submitHandler : function() {
+				var f = confirm("글을 등록하시겠습니까?");
+				if (f) {
+					return true;
+				} else {
+					return false;
+				}
+			}, */
+			//규칙
+			rules : {
+				email : {
+					required : true,
+					minlength : 2,
+					maxlength : 30,
+					email : true
+				},
+				birth : {
+					required : true,
+					minlength : 9,
+					maxlength : 10
+				}
+			},
+			//규칙체크 실패시 출력될 메시지
+			messages : {
+				email : {
+					required : "필수 입력사항 입니다.",
+					minlength : "최소 {0}글자이상이어야 합니다",
+					maxlength : "최대 {0}글자이하이어야 합니다",
+					email : "메일 기재 규칙에 어긋납니다."
+				},
+				birth : {
+					required : "필수 입력사항 입니다.",
+					minlength : "최소 {0}글자이상이어야 합니다",
+					maxlength : "최대 {0}글자이하이어야 합니다",
+					date : "생년월일 기재 규칙에 어긋납니다."
+				}
 			}
 		});
+
+		var findForm = $("#findForm");
+		for ( var item in findForm) {
+			console.log(item + " : " + findForm[item]);
+		}
+	});
 </script>
 </head>
 <body>
@@ -182,7 +182,8 @@ label.error {
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i
+									class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="<%=request.getContextPath()%>/registerSchedule">Register
@@ -213,13 +214,13 @@ label.error {
 								</ul></li>
 
 							<!-- 근무표 버튼 -->
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i
+									class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<c:url value="/mySchedule" var="url" />
 									<li><a href="${url }">My Shift</a></li>
-								</ul>
-							</li>
+								</ul></li>
 
 						</c:if>
 
@@ -250,12 +251,12 @@ label.error {
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>Find Result</h1>
-					<p>찾기 결과!!</p>
+					<p>찾기 결과</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li class="active">My Page</li>
-						<li>Modify Account</li>
+						<li class="active">Home</li>
+						<li>Find result</li>
 					</ul>
 				</div>
 			</div>
@@ -263,61 +264,109 @@ label.error {
 	</section>
 	<!--/#title-->
 
-	<section id="FindId" class="container">
- 		<c:url value="/findId" var="url" />
-        <form class="center" role="form" id="findForm" method="post" action="${url }">
-            <fieldset class="registration-form">
-            	<div class="form-group">
-                    	* 생년월일과 이메일을 입력하시면, 아이디를 찾을 수 있습니다.
-                </div>
-                
-                <div class="form-group">
-                    <input type="text" id="datepicker" name="birth" placeholder="birthdate" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="email" name="email" placeholder="e-mail" class="form-control">
-                </div>
-                
-                <div class="form-group">
-                	<br>
-                    <button class="btn btn-success btn-md  btn-block">Find ID</button>
-                </div>
-                
-            </fieldset>
-        </form>
-    </section>
+	<section id="FindResult" class="container">
+		<div class="pad">
+			<div id="pricing-table">
+				<div class="smallbox">
+					<ul class="plan featured">
+						<c:if test="${findResult=='showId' }">  
+							<li class="plan-name">
+								<h5>아이디 찾기 결과</h5> 
+								<c:forEach items="${findUserList }" var="findUserList">
+									${findUserList.userId }<br>
+								</c:forEach>
+							</li>
+							<li class="plan-action"><c:url value="/login" var="url"></c:url>
+								<a href="${url }" class="btn btn-success btn-md">Log In Page</a></li>
+						</c:if>
+						<c:if test="${findResult =='showPass' }">
+							<li class="plan-name">
+								<h5>비밀번호 찾기 결과</h5> 
+								
+									<br>${findUser.password }
+							
+							</li>
+							<li class="plan-action"><c:url value="/login" var="url"></c:url>
+								<a href="${url }" class="btn btn-success btn-md">Log In Page</a></li>
+						</c:if>
+						
+						
+						<c:if test="${findResult =='idFail' }">
+							<li class="plan-name">
+								<h5>입력한 정보로 가입된 정보가 없습니다.</h5> 
+									다시 찾으시겠습니까?
+							</li>
+							<li class="plan-action"><c:url value="/findId" var="url"></c:url>
+								<a href="${url }" class="btn btn-success btn-md">Find ID</a></li>
+						</c:if>
+						
+						
+						<c:if test="${findResult =='step1Fail' }">
+							<li class="plan-name">
+								<h5>입력한 정보로 가입된 정보가 없습니다.</h5> 
+									다시 찾으시겠습니까?
+							</li>
+							<li class="plan-action"><c:url value="/findPass" var="url"></c:url>
+								<a href="${url }" class="btn btn-success btn-md">Find Password</a></li>
+						</c:if>
+						
+						<c:if test="${findResult =='step2Fail' }">
+							<li class="plan-name">
+								<h5>질문에 대한 답이 틀렸습니다.</h5> 
+									다시 찾으시겠습니까?
+							</li>
+							<li class="plan-action"><c:url value="/findPass" var="url"></c:url>
+								<a href="${url }" class="btn btn-success btn-md">Find Password</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
 
 
 	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<h4><i class="icon-thumbs-up-alt"></i> About Us</h4>
-					<p>We are team 'MalSikizimarazo' meaning 'dont talk to me while we are eating' in Korean.</p>
-					<p>This team was named under the fact that we have calm and respectful eating etiquette.</p>
+					<h4>
+						<i class="icon-thumbs-up-alt"></i> About Us
+					</h4>
+					<p>We are team 'MalSikizimarazo' meaning 'dont talk to me while
+						we are eating' in Korean.</p>
+					<p>This team was named under the fact that we have calm and
+						respectful eating etiquette.</p>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4><i class="icon-globe"></i> Project Aruba</h4>
+					<h4>
+						<i class="icon-globe"></i> Project Aruba
+					</h4>
 					<div>
-						<p>Aruba is a web-project providing efficient shift tables for part time jobs in the world.</p>
-						<p>It is easily visiable and understandble for employers to manage all different individual employee's shifts. It presents wage graphs and charts on a frequent time basis.</p>
+						<p>Aruba is a web-project providing efficient shift tables for
+							part time jobs in the world.</p>
+						<p>It is easily visiable and understandble for employers to
+							manage all different individual employee's shifts. It presents
+							wage graphs and charts on a frequent time basis.</p>
 						<p>Project Aruba would not exist without the support of KoDB.</p>
 					</div>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4><i class="icon-lightbulb"></i> Our Service</h4>
+					<h4>
+						<i class="icon-lightbulb"></i> Our Service
+					</h4>
 					<div>
 						<div class="media">
 							<div class="pull-left">
 								<i class="icon-calendar icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading">Shift Table </span>
-								<small class="muted">You can register and modify shift table and see it whenever you want.</small>
+								<span class="media-heading">Shift Table </span> <small
+									class="muted">You can register and modify shift table
+									and see it whenever you want.</small>
 							</div>
 						</div>
 						<div class="media">
@@ -325,8 +374,9 @@ label.error {
 								<i class="icon-money icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading">Salary Check</span> 
-								<small class="muted">Your salary graph is updated on a daily basis.</small>
+								<span class="media-heading">Salary Check</span> <small
+									class="muted">Your salary graph is updated on a daily
+									basis.</small>
 							</div>
 						</div>
 						<div class="media">
@@ -334,9 +384,9 @@ label.error {
 								<i class="icon-edit-sign icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading">Board</span> 
-								<small class="muted">It provides two boards depending on necessary.
-One is opened to anything to share freely and another is based on qna.</small>
+								<span class="media-heading">Board</span> <small class="muted">It
+									provides two boards depending on necessary. One is opened to
+									anything to share freely and another is based on qna.</small>
 							</div>
 						</div>
 					</div>
@@ -344,12 +394,12 @@ One is opened to anything to share freely and another is based on qna.</small>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4><i class="icon-building"></i> Address</h4>
+					<h4>
+						<i class="icon-building"></i> Address
+					</h4>
 					<address>
-						<strong>MALSIKIZIMARAZO</strong><br> 
-						Sejoing Univ <br>
-						Gwangjin-gu, Seoul, South Korea<br> 
-						Phone : 010-5096-3002
+						<strong>MALSIKIZIMARAZO</strong><br> Sejoing Univ <br>
+						Gwangjin-gu, Seoul, South Korea<br> Phone : 010-5096-3002
 					</address>
 				</div>
 				<!--/.col-md-3-->
@@ -361,9 +411,8 @@ One is opened to anything to share freely and another is based on qna.</small>
 	<footer id="footer" class="wet-asphalt">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6">
-					&copy; 2015 MalSikizimarazo. All Rights Reserved.
-				</div>
+				<div class="col-sm-6">&copy; 2015 MalSikizimarazo. All Rights
+					Reserved.</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
 						<li><a id="gototop" class="gototop" href="#"><i

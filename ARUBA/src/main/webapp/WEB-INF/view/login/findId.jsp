@@ -254,8 +254,8 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li class="active">My Page</li>
-						<li>Modify Account</li>
+						<li class="active">Home</li>
+						<li>Find password</li>
 					</ul>
 				</div>
 			</div>

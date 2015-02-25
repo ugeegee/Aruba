@@ -104,7 +104,7 @@ CREATE TABLE Users
 	user_id varchar2(20) NOT NULL,
 	password varchar2(20) NOT NULL,
 	password2 varchar2(20) NOT NULL,
-	user_name varchar2(10) NOT NULL,
+	user_name varchar2(50) NOT NULL,
 	tel varchar2(20),
 	email varchar2(30) NOT NULL,
 	birth varchar2(10) NOT NULL,

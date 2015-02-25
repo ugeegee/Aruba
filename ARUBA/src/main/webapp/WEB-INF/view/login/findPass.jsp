@@ -56,11 +56,7 @@ label.error {
 
 <script>
 	$(document).ready(function() {
-	
-		if(<%=request.getAttribute("PopUp")%> == 1){
-			alert("회원정보가 수정되었습니다.");
-		}
-		
+
 		var dp = {
 				changeMonth : true,
 				changeYear : true,
@@ -68,7 +64,7 @@ label.error {
 			};
 			$("#datepicker").datepicker(dp);
 		
-			$("#modifyForm").validate({
+			$("#findForm").validate({
 				//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 				/* submitHandler : function() {
 					var f = confirm("글을 등록하시겠습니까?");
@@ -80,22 +76,6 @@ label.error {
 				}, */
 				//규칙
 				rules : {
-					nowPassword : {
-						required : true,
-						minlength : 3,
-						maxlength : 20,
-						equalTo : "#password"
-					},
-					userName : {
-						required : true,
-						minlength : 1,
-						maxlength : 3
-					},
-					tel : {
-						minlength: 10, 
-						maxlength: 12, 
-						digits : true 
-					},
 					email : {
 						required : true,
 						minlength : 2,
@@ -107,40 +87,15 @@ label.error {
 						minlength : 9,
 						maxlength : 10
 					},
-					grade : {
-						required : true,
-						minlength : 2,
-						maxlength : 10
-					},
-					question : {
-						required : true,
-						minlength : 2, 
-						maxlength : 18
-					},
 					answer : {
 						required : true,
 						minlength : 1,
 						maxlength : 6
 					}
+					
 				},
 				//규칙체크 실패시 출력될 메시지
 				messages : {
-					nowPassword : {
-						required : "필수 입력사항 입니다.",
-						minlength : "최소 {0}글자이상이어야 합니다",
-						maxlength : "최대 {0}글자이하이어야 합니다",
-						equalTo : "비밀번호가 불일치합니다"
-					},
-					userName : {
-						required : "필수 입력사항 입니다.",
-						minlength : "최소 {0}글자이상이어야 합니다",
-						maxlength : "최대 {0}글자이하이어야 합니다"
-					},
-					tel : {
-						minlength: "최소 {0}글자이상이어야 합니다", 
-						maxlength: "최대 {0}글자이하이어야 합니다", 
-						digits : "핸드폰 번호는 숫자만 입력해주세요."
-					},
 					email : {
 						required : "필수 입력사항 입니다.",
 						minlength : "최소 {0}글자이상이어야 합니다",
@@ -153,16 +108,6 @@ label.error {
 						maxlength : "최대 {0}글자이하이어야 합니다",
 						date : "생년월일 기재 규칙에 어긋납니다."
 					},
-					grade : {
-						required : "필수 입력사항 입니다.",
-						minlength : "최소 {0}글자이상이어야 합니다",
-						maxlength : "최대 {0}글자이하이어야 합니다"
-					},
-					question : {
-						required : "필수 입력사항 입니다.",
-						minlength : "최소 {0}글자이상이어야 합니다",
-						maxlength : "최대 {0}글자이하이어야 합니다"
-					},
 					answer : {
 						required : "필수 입력사항 입니다.",
 						minlength : "최소 {0}글자이상이어야 합니다",
@@ -171,9 +116,9 @@ label.error {
 				}
 			});
 
-			var modifyForm = $("#modifyForm");
-			for ( var item in modifyForm) {
-				console.log(item + " : " + modifyForm[item]);
+			var findForm = $("#findForm");
+			for ( var item in findForm) {
+				console.log(item + " : " + findForm[item]);
 			}
 		});
 </script>
@@ -320,8 +265,8 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li class="active">My Page</li>
-						<li>Modify Account</li>
+						<li class="active">Home</li>
+						<li>Find password</li>
 					</ul>
 				</div>
 			</div>
@@ -329,47 +274,56 @@ label.error {
 	</section>
 	<!--/#title-->
 
-	<section id="Modify Account" class="container">
- 		<c:url value="/modifyInfo" var="url" />
-        <form:form modelAttribute="addUser" class="center" role="form" id="modifyForm" method="post" action="${url }">
+<c:if test="${findPassStep == 1 }">
+	<section id="FindPass" class="container">
+ 		<c:url value="/findPassInputID" var="url" />
+        <form class="center" role="form" id="findForm" method="post" action="${url }">
             <fieldset class="registration-form">
             	<div class="form-group">
-                    	* 정보 수정과 현재 비밀번호 입력 후 버튼을 누르면 정보가 변경됩니다.
+                    	* 비밀번호를 찾고자하는 아이디를 입력하세요.
                 </div>
+                
                 <div class="form-group">
-                    <form:hidden path="userId" id="userId" name="userId" class="form-control"/>
+                    <input type="text" id="userId" name="userId" placeholder="ID" class="form-control">
                 </div>
+                
                 <div class="form-group">
-                    <form:hidden path="password" id="password" name="password" class="form-control"/>
+                	<br>
+                    <button class="btn btn-success btn-md  btn-block">NEXT</button>
                 </div>
-                <div class="form-group">
-                    <input type="password" id="nowPassword" name="nowPassword" placeholder="password" class="form-control">
-                </div>
-                <div class="form-group">
-                    <form:input path="userName" id="userName" name="userName" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <form:input path="tel" id="tel" name="tel" placeholder="H.P" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <form:input path="email" id="email" name="email" class="form-control"/>
-                </div>
-                 <div class="form-group">
-                    <form:input path="birth" id="datepicker" name="birth" placeholder="birth" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <form:input path="question" id="question" name="question" placeholder="question to find password" class="form-control" size="30"/>
-                </div>
-                 <div class="form-group">
-                    <form:input path="answer" id="answer" name="answer" placeholder="your answer" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-success btn-md btn-block">Modify Info</button>
-                </div>
+                
             </fieldset>
-        </form:form>
+        </form>
     </section>
-
+</c:if>
+<c:if test="${findPassStep == 2 }">
+	<section id="FindPass" class="container">
+ 		<c:url value="/findPassInputAnswer" var="url" />
+        <form class="center" role="form" id="findForm" method="post" action="${url }">
+            <fieldset class="registration-form">
+            	<div class="form-group">
+                    	* 질문에대한 답을 입력하세요.
+                </div>
+                
+                <div class="form-group">
+                    <input type="hidden" id="userId" name="userId" value="${inputUser.userId }" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="question" name="question" value="${inputUser.question }" disabled class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="answer" name="answer" placeholder="your answer" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                	<br>
+                    <button class="btn btn-success btn-md  btn-block">Find password</button>
+                </div>
+                
+            </fieldset>
+        </form>
+    </section>
+</c:if>
 
 	<section id="bottom" class="wet-asp">
 		<div class="container">

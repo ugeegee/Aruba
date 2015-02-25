@@ -1,5 +1,7 @@
 package com.bmj.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,8 +68,13 @@ public class UsersDaoImpl implements UsersDao {
 		return sqlSession.selectOne(stmt, userId);
 	}
 	@Override
-	public Users selectUserByBirthAndEmail(Users user) {
+	public List<Users> selectUserByBirthAndEmail(Users user) {
 		String stmt = namespace + "selectUserByBirthAndEmail";
+		return sqlSession.selectList(stmt, user);
+	}
+	@Override
+	public Users selectUserByIdAndAnswer(Users user) {
+		String stmt = namespace + "selectUserByIdAndAnswer";
 		return sqlSession.selectOne(stmt, user);
 	}
 

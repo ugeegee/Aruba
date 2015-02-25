@@ -1,5 +1,7 @@
 package com.bmj.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +62,13 @@ public class UsersServiceImpl implements UsersService {
 		return result;
 	}
 	@Override
-	public Users selectUserByBirthAndEmail(Users user) {
-		Users result = dao.selectUserByBirthAndEmail(user);
+	public List<Users> selectUserByBirthAndEmail(Users user) {
+		List<Users> result = dao.selectUserByBirthAndEmail(user);
+		return result;
+	}
+	@Override
+	public Users selectUserByIdAndAnswer(Users user) {
+		Users result = dao.selectUserByIdAndAnswer(user);
 		return result;
 	}
 	
