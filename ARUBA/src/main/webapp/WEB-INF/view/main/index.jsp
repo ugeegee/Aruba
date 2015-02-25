@@ -233,13 +233,11 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="media">
 						<div class="pull-left">
-							<i class="icon-user icon-md"></i>
+							<i class="icon-calendar icon-md"></i>
 						</div>
 						<div class="media-body">
-							<h3 class="media-heading">My Store and Job</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
+							<h3 class="media-heading">Shift Table</h3>
+							<p>You can register and modify shift table and see it whenever you want.</p>
 						</div>
 					</div>
 				</div>
@@ -247,13 +245,11 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="media">
 						<div class="pull-left">
-							<i class="icon-calendar icon-md"></i>
+							<i class="icon-money icon-md"></i>
 						</div>
 						<div class="media-body">
-							<h3 class="media-heading">Shift Table</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
+							<h3 class="media-heading">Salary Check</h3>
+							<p>Your salary graph is updated on a daily basis.</p>
 						</div>
 					</div>
 				</div>
@@ -265,9 +261,8 @@
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Board</h3>
-							<p>Pellentesque habitant morbi tristique senectus et netus et
-								malesuada fames ac turpis egestas. Vestibulum tortor quam,
-								feugiat vitae.</p>
+							<p>It provides two boards depending on necessary.
+One is opened to anything to share freely and another is based on qna.</p>
 						</div>
 					</div>
 				</div>

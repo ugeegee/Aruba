@@ -45,22 +45,22 @@ $(document).ready(function() {
 		var id = $("#writeId").html();
 		var no = $("#writeNo").html();
 		if(id == loginId){
-			alert("자신이쓴글입니다!! "+no);
+			/* alert("자신이쓴글입니다!! "+no); */
 			var url = "<%=request.getContextPath()%>/deleteComment?commentNumber="+no;
 			$(location).attr('href',url); 
 		}else{
-			alert("본인 글만 삭제할 수 있습니다!!");
+			alert("본인이 작성한 글만 삭제할 수 있습니다.");
 		}
 	});
 	$("#modifyBtn").click(function(){
 		var id = $("#writeId").html();
 		var no = $("#writeNo").html();
 		if(id == loginId){
-			alert("자신이쓴글입니다!! "+no);
+			/* alert("자신이쓴글입니다!! "+no); */
 			var url = "<%=request.getContextPath()%>/modifyComment?commentNumber="+no;
 			$(location).attr('href',url); 
 		}else{
-			alert("본인 글만 수정할 수 있습니다!");
+			alert("본인이 작성한 글만 수정할 수 있습니다.");
 		}
 	});
 	$(".ttt").click(function(){
@@ -75,11 +75,11 @@ $(document).ready(function() {
 		
 		
 		if($(idId).html() == loginId){
-			alert("댓글이 삭제됩니다.");
+			/* alert("댓글이 삭제됩니다."); */
 			var url = "<%=request.getContextPath()%>/deleteReply?replyNumber="+$(noId).html()+"&commentNumber="+commentNo;
 			$(location).attr('href',url);
 		}else{
-			alert("본인 댓글만 삭제할 수 있습니다!!");
+			alert("본인이 작성한 댓글만 삭제할 수 있습니다.");
 		} 
 	});
 	
