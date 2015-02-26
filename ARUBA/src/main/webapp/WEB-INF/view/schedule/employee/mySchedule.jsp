@@ -67,22 +67,22 @@ $(document).ready(function() {
 
 	
 	$('#Job1').click(function(){
-		alert("Job1누름");
-		alert("c0 = "+c0);
+		//alert("Job1누름");
+		//alert("c0 = "+c0);
 		companyCode = c0;
 		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c0;
 		$(location).attr('href',url);
 	});
 	$('#Job2').click(function(){
-		alert("Job2누름");
-		alert("c1 = "+c1);
+		//alert("Job2누름");
+		//alert("c1 = "+c1);
 		companyCode = c1;
 		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c1;
 		$(location).attr('href',url);
 	});
 	$('#Job3').click(function(){
-		alert("Job3누름");
-		alert("c2 = "+c2);
+		//alert("Job3누름");
+		//alert("c2 = "+c2);
 		companyCode = c2;
 		var url = "<%=request.getContextPath()%>/selectSchedule?companyCode="+c2;
 		$(location).attr('href',url);
@@ -220,7 +220,17 @@ $(document).ready(function() {
 
 
 		<c:if test="${nowCode < 0 }">
-			직장정보가 없습니다.
+			<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5>등록된 직장이 없습니다.</h5>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
 		</c:if>
 		<c:if test="${nowCode > 0 }">
 			<div id='calendar'></div>
