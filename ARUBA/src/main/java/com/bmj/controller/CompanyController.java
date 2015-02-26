@@ -1,6 +1,7 @@
 package com.bmj.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -117,7 +118,7 @@ public class CompanyController {
 		Users loginUser = (Users) session.getAttribute("addUser");
 		message.setCompanyCode(1);					//messageControl회사 넣어야함!!
 		message.setUserId(loginUser.getUserId());
-		message.setMessageContent("회사 삭제알림");
+		message.setMessageContent(loginUser.getUserId()+"님 회사 삭제알림");
 		message.setFlag(-1); 
 		//회사삭제 메세지날리고 회사원지우고
 		for(int i = 0; i<cpList.size(); i++){
@@ -161,7 +162,8 @@ public class CompanyController {
 		companyperson.setCompanyCode(company2.getCompanyCode());
 		companyperson.setUserId(user.getUserId());
 		companyperson.setSalary(0);                 //DB입력할때 필요하니깐 사장은 0으로
-		companyperson.setHireDate("의미없음");
+		Date today = new Date();
+		companyperson.setHireDate(today.toString());
 		// service.company_person.insert();
 		cpService.insertCompanyOwner(companyperson);
 

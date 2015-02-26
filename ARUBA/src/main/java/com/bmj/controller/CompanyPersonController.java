@@ -1,6 +1,7 @@
 package com.bmj.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -60,7 +61,8 @@ public class CompanyPersonController {
 		CompanyPerson companyperson = new CompanyPerson();
 		companyperson.setCompanyCode(companyCode);
 		companyperson.setUserId(userId);
-		companyperson.setHireDate("오늘");
+		Date today = new Date();
+		companyperson.setHireDate(today.toString());
 		cpService.insertCompanyEmployee(companyperson); // 알바생추가
 		return "redirect:/alert_employer";
 	}
@@ -167,7 +169,7 @@ public class CompanyPersonController {
 		message.setCompanyCode(companyCode);
 		message.setUserId(loginUser.getUserId());
 		message.setReceiverId(userId);
-		message.setMessageContent("아르바이트 삭제");
+		message.setMessageContent("사장 "+loginUser.getUserId()+"님이 아르바이트 삭제");
 		message.setFlag(-1);
 
 		mService.insertMessage(message);
@@ -201,7 +203,7 @@ public class CompanyPersonController {
 			}
 		}
 		message.setReceiverId(ownerId);
-		message.setMessageContent("직장 삭제");
+		message.setMessageContent("아르바이트 "+loginUser.getUserId()+"님이 직장 삭제");
 		message.setFlag(-1);
 
 		mService.insertMessage(message);

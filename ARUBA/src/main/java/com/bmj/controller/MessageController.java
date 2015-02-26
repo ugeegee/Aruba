@@ -130,7 +130,7 @@ public class MessageController {
 				}
 			}
 			message.setReceiverId(ownerId);
-			message.setMessageContent("아르바이트 등록");
+			message.setMessageContent(loginUser.getUserId()+"님이 아르바이트 등록");
 			message.setFlag(0); // 보지 않은 메세지=0, 본 메세지=1
 
 			mService.insertMessage(message);
