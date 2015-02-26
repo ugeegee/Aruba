@@ -231,7 +231,7 @@ table td,th{
                                 <input type="text" class="form-control" required="required" placeholder="Email address">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-lg">Send Message</button>
+                                <a href="<%=request.getContextPath()%>/index" class="btn btn-success btn-lg">Send Message</a>
                             </div>
                         </div>
                         <div class="col-sm-7">
