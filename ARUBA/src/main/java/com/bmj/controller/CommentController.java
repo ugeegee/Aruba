@@ -92,10 +92,13 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value = "/notice")
-	public String showNoticeList(Model model) {
+	public String showNoticeList(Model model, HttpSession session) {
 		model.addAttribute("addComment", new Comment());
 		List<Comment> commentList = cservice.selectAllNoticeComment();
 		model.addAttribute("commentList", commentList);
+		
+		Users loginUser = (Users) session.getAttribute("addUser"); 
+		model.addAttribute("loginId", loginUser.getUserId());
 		/*return "/board/noticeBoard";*/
 		return "/board/noticeTest";
 	}

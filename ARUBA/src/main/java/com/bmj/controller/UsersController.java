@@ -421,6 +421,26 @@ public class UsersController {
 			logger.trace("시간표지움~~~!!!!");
 		}
 		// CP지우고
+		List<Integer> codeList = cpService.selectComCodeByUserId(leaveUser.getUserId());
+		String ownerId = "";
+		Message message = new Message();
+		for(int i = 0 ; i<codeList.size(); i++){
+			List<CompanyPerson> cpList = cpService.selectByCompanyCode(codeList.get(i).intValue());
+			for (int j = 0; j < cpList.size(); j++) {
+				Users tempUser = service.selectUserByUserId(cpList.get(j).getUserId());
+				if ((tempUser.getGrade().equals("사장"))) {
+					ownerId = tempUser.getUserId();
+					break;
+				}
+			}
+			message.setCompanyCode(codeList.get(i).intValue());			//messageControl회사 넣어야함!!
+			message.setUserId("탈퇴한회원");
+			message.setMessageContent("아르바이트 "+leaveUser.getUserId()+"님 회원 탈퇴로인한 직장삭제");
+			message.setFlag(-1); 
+			message.setReceiverId(ownerId);
+			mService.insertMessage(message); 
+		}
+		
 		cpService.deleteCompanyPersonByUserId(leaveUser.getUserId());
 		logger.trace("CP지움~~~!!!!");
 		// 메세지지우고
