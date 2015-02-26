@@ -383,7 +383,8 @@ $(document).ready(function() {
 
 	<br>
 	<!-- 각도조절 바 -->
-	<c:if test="${!empty Times }">
+	<%-- <c:if test="${!empty Times }"> --%>
+	<c:if test="${nowCode != -1 }">
 	<!-- 그래프 -->
 	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	<div id="sliders">
@@ -393,7 +394,8 @@ $(document).ready(function() {
 		</table>
 	</div>
 	</c:if>
-	<c:if test="${empty Times }">
+	<%-- <c:if test="${empty Times }"> --%>
+	<c:if test="${nowCode == -1 }">
 		<h2>등록된 시간표가 없습니다.</h2>
 	</c:if>
     </section>
