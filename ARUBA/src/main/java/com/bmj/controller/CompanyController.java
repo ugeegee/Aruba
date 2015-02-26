@@ -1,6 +1,7 @@
 package com.bmj.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -163,7 +164,9 @@ public class CompanyController {
 		companyperson.setUserId(user.getUserId());
 		companyperson.setSalary(0);                 //DB입력할때 필요하니깐 사장은 0으로
 		Date today = new Date();
-		companyperson.setHireDate(today.toString());
+		Calendar cToday = Calendar.getInstance();
+		cToday.setTime(today);
+		companyperson.setHireDate(cToday.get(Calendar.YEAR)+"/"+(cToday.get(Calendar.MONTH)+1)+"/"+cToday.get(Calendar.DATE));
 		// service.company_person.insert();
 		cpService.insertCompanyOwner(companyperson);
 
