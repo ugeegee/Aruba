@@ -75,22 +75,22 @@ $(document).ready(function() {
 	}else c2 = <%=request.getAttribute("code2")%>;
 
 	$('#Job1').click(function(){
-		alert("Job1누름");
-		alert("c0 = "+c0);
+		//alert("Job1누름");
+		//alert("c0 = "+c0);
 		companyCode = c0;
 		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c0;
 		$(location).attr('href',url);
 	});
 	$('#Job2').click(function(){
-		alert("Job2누름");
-		alert("c1 = "+c1);
+		//alert("Job2누름");
+		//alert("c1 = "+c1);
 		companyCode = c1;
 		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c1;
 		$(location).attr('href',url);
 	});
 	$('#Job3').click(function(){
-		alert("Job3누름");
-		alert("c2 = "+c2);
+		//alert("Job3누름");
+		//alert("c2 = "+c2);
 		companyCode = c2;
 		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c2;
 		$(location).attr('href',url);
@@ -194,9 +194,6 @@ $(document).ready(function() {
 	                	color: 'gray'
 	                }
 	            },
-				subtitle: {
-					text: 'ARUBA Program.....! By.MALSIKIZIMA'
-				},
 				xAxis: {
 					//type: 'category',
 					categories: Xcategorie
@@ -383,7 +380,8 @@ $(document).ready(function() {
 
 	<br>
 	<!-- 각도조절 바 -->
-	<c:if test="${!empty Times }">
+	<%-- <c:if test="${!empty Times }"> --%>
+	<c:if test="${nowCode != -1 }">
 	<!-- 그래프 -->
 	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	<div id="sliders">
@@ -393,8 +391,19 @@ $(document).ready(function() {
 		</table>
 	</div>
 	</c:if>
-	<c:if test="${empty Times }">
-		<h2>등록된 시간표가 없습니다.</h2>
+	<%-- <c:if test="${empty Times }"> --%>
+	<c:if test="${nowCode == -1 }">
+		<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5>등록된 직장이 없습니다.</h5>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
 	</c:if>
     </section>
 

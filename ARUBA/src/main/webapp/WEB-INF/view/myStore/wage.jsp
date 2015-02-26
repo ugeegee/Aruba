@@ -204,9 +204,6 @@ $(document).ready(function() {
 			title: {
                 text: '직원 급여 관리'
 			},
-			subtitle: {
-				text: 'ARUBA Program.....! By.MALSIKIZIMA'
-			},
 			xAxis: {
 				categories: Xcategorie
 			},
