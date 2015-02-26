@@ -75,22 +75,22 @@ $(document).ready(function() {
 	}else c2 = <%=request.getAttribute("code2")%>;
 
 	$('#Job1').click(function(){
-		alert("Job1누름");
-		alert("c0 = "+c0);
+		//alert("Job1누름");
+		//alert("c0 = "+c0);
 		companyCode = c0;
 		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c0;
 		$(location).attr('href',url);
 	});
 	$('#Job2').click(function(){
-		alert("Job2누름");
-		alert("c1 = "+c1);
+		//alert("Job2누름");
+		//alert("c1 = "+c1);
 		companyCode = c1;
 		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c1;
 		$(location).attr('href',url);
 	});
 	$('#Job3').click(function(){
-		alert("Job3누름");
-		alert("c2 = "+c2);
+		//alert("Job3누름");
+		//alert("c2 = "+c2);
 		companyCode = c2;
 		var url = "<%=request.getContextPath()%>/selectChart?companyCode="+c2;
 		$(location).attr('href',url);
