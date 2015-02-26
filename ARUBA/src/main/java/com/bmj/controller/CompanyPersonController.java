@@ -1,6 +1,7 @@
 package com.bmj.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +63,9 @@ public class CompanyPersonController {
 		companyperson.setCompanyCode(companyCode);
 		companyperson.setUserId(userId);
 		Date today = new Date();
-		companyperson.setHireDate(today.toString());
+		Calendar cToday = Calendar.getInstance();
+		cToday.setTime(today);
+		companyperson.setHireDate(cToday.get(Calendar.YEAR)+"/"+(cToday.get(Calendar.MONTH)+1)+"/"+cToday.get(Calendar.DATE));
 		cpService.insertCompanyEmployee(companyperson); // 알바생추가
 		return "redirect:/alert_employer";
 	}
