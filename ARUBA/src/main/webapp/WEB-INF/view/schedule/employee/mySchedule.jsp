@@ -220,7 +220,17 @@ $(document).ready(function() {
 
 
 		<c:if test="${nowCode < 0 }">
-			직장정보가 없습니다.
+			<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5>등록된 직장이 없습니다.</h5>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
 		</c:if>
 		<c:if test="${nowCode > 0 }">
 			<div id='calendar'></div>

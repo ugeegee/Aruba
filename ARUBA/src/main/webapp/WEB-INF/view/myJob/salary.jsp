@@ -393,7 +393,17 @@ $(document).ready(function() {
 	</c:if>
 	<%-- <c:if test="${empty Times }"> --%>
 	<c:if test="${nowCode == -1 }">
-		<h2>등록된 시간표가 없습니다.</h2>
+		<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5>등록된 직장이 없습니다.</h5>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
 	</c:if>
     </section>
 
