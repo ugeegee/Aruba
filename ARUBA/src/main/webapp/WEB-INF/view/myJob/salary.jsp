@@ -194,9 +194,6 @@ $(document).ready(function() {
 	                	color: 'gray'
 	                }
 	            },
-				subtitle: {
-					text: 'ARUBA Program.....! By.MALSIKIZIMA'
-				},
 				xAxis: {
 					//type: 'category',
 					categories: Xcategorie
