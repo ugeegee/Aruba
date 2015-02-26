@@ -45,15 +45,17 @@ $(document).ready(function() {
 	
 	$('#example').DataTable();
 	
-	/* $("#proceed").click(function(){
-		if($("#commentContent").val()==""){
-			alert("게시글 내용을 입력해주세요.");
-		}else{
-			<c:url value="/registerComment" var="comment"></c:url>
-			var url = "${comment}?flag=1&commentContent="+$("#commentContent").val();
-			location.href = url;
-		}
-	}); */
+	var loginId = "<%=request.getAttribute("loginId")%>";
+	var adminId = "admin";
+	
+	 $("#noticeWrite").click(function(){
+		 if(adminId == loginId){
+				var url = "<%=request.getContextPath()%>/writeComment?flag=1";
+				$(location).attr('href',url); 
+			}else{
+				alert("공지는 관리자만 쓸 수 있습니다.");
+			}
+	}); 
 });
 </script>
 <style>
@@ -249,7 +251,7 @@ table td,th{
         </tbody>
     </table>
     <br>
-	<a href="<%=request.getContextPath()%>/writeComment?flag=1"><button class="btn btn-success btn-md write"><i class="icon-edit-sign"></i> 글쓰기</button></a>
+	<button id="noticeWrite" class="btn btn-success btn-md write"><i class="icon-edit-sign"></i> 글쓰기</button>
 	
     </section>
 
