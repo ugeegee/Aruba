@@ -10,11 +10,7 @@
 <html>
 <head>
 
-<style>
-.temp td {
-	border: 1px solid black;
-}
-</style>
+
 
 <meta charset="utf-8">
 
@@ -72,7 +68,7 @@
 
 					<!-- MY PAGE 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 									Account</a></li>
@@ -88,7 +84,7 @@
 
 						<!-- MY JOB 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/myJob">My
 										Job</a></li>
@@ -98,12 +94,16 @@
 							</ul></li>
 
 						<!-- 근무표 버튼 -->
-						<c:url value="/mySchedule" var="url" />
-						<li><a href="${url }">My Table</a></li>
-
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 					<!-- 게시판 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/notice">Notice
 									Board</a></li>
@@ -126,13 +126,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>My Job</h1>
-					<p>Please input your login information</p>
+					<h1>Alert</h1>
+					<p>알림</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Job</li>
+						<li>Alert</li>
 					</ul>
 				</div>
 			</div>
@@ -141,12 +141,65 @@
 	<!--/#title-->
 
 	<section id="MyJob" class="container">
-		직원의 쪽지관리~~<br> <br>
+		<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>messages</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th class="center">#</th>
+					<th class="center">회사코드</th>
+					<th class="center">보낸이</th>
+					<th class="center">받는이</th>
+					<th class="center">내용</th>
+					<th class="center">보낸날짜</th>
+					<th class="center">수신확인</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${myMessages }" var="myMessages">
+
+				<tr>
+					<td class="center">${myMessages.messageNumber}</td>
+					<td class="center">${myMessages.companyCode}</td>
+					<td class="center">${myMessages.userId}</td>
+					<td class="center">${myMessages.receiverId}</td>
+					<td class="center">${myMessages.messageContent}</td>
+					<td class="center">${myMessages.regDate}</td>
+					<td class="center">
+						<c:if test="${myMessages.flag =='0' }">
+							승인대기중
+						</c:if>
+						<c:if test="${myMessages.flag =='1' }">
+							승인완료
+						</c:if>
+						<c:if test="${myMessages.flag =='2' }">
+							거절
+						</c:if>
+					</td>
+				</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>	
+	
+	<%-- 	직원의 쪽지관리~~<br> <br>
 		<table class="temp">
 			<tr>
 				<th>쪽지번호</th>
 				<th>회사코드</th>
-				<th>아이디(보낸사람)</th>
+				<th>보낸사람</th>
+				<th>받는사람</th>
 				<th>쪽지내용</th>
 				<th>보낸날짜</th>
 				<th>읽음여부</th>
@@ -158,75 +211,71 @@
 					<td>${myMessages.messageNumber}</td>
 					<td>${myMessages.companyCode}</td>
 					<td>${myMessages.userId}</td>
+					<td>${myMessages.receiverId}</td>
 					<td>${myMessages.messageContent}</td>
 					<td>${myMessages.regDate}</td>
-					<td>${myMessages.flag }</td>
+					<td>
+						<c:if test="${myMessages.flag =='0' }">
+							대기
+						</c:if>
+						<c:if test="${myMessages.flag =='1' }">
+							승인
+						</c:if>
+					</td>
 				</tr>
 			</c:forEach>
-		</table>
-	</section>
+		</table> --%>
 
-	<section id="bottom" class="wet-asphalt">
+
+		<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<h4>About Us</h4>
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-						vitae, ultricies eget, tempor sit amet, ante.</p>
-					<p>Pellentesque habitant morbi tristique senectus.</p>
+					<h4><i class="icon-thumbs-up-alt"></i> About Us</h4>
+					<p>We are team 'MalSikizimarazo' meaning 'dont talk to me while we are eating' in Korean.</p>
+					<p>This team was named under the fact that we have calm and respectful eating etiquette.</p>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Company</h4>
+					<h4><i class="icon-globe"></i> Project Aruba</h4>
 					<div>
-						<ul class="arrow">
-							<li><a href="#">The Company</a></li>
-							<li><a href="#">Our Team</a></li>
-							<li><a href="#">Our Partners</a></li>
-							<li><a href="#">Our Services</a></li>
-							<li><a href="#">Faq</a></li>
-							<li><a href="#">Conatct Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Copyright</a></li>
-						</ul>
+						<p>Aruba is a web-project providing efficient shift tables for part time jobs in the world.</p>
+						<p>It is easily visiable and understandble for employers to manage all different individual employee's shifts. It presents wage graphs and charts on a frequent time basis.</p>
+						<p>Project Aruba would not exist without the support of KoDB.</p>
 					</div>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Latest Blog</h4>
+					<h4><i class="icon-lightbulb"></i> Our Service</h4>
 					<div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb1.jpg" alt="">
+								<i class="icon-calendar icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									17 Aug 2013</small>
+								<span class="media-heading">Shift Table </span>
+								<small class="muted">You can register and modify shift table and see it whenever you want.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb2.jpg" alt="">
+								<i class="icon-money icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									13 Sep 2013</small>
+								<span class="media-heading">Salary Check</span> 
+								<small class="muted">Your salary graph is updated on a daily basis.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb3.jpg" alt="">
+								<i class="icon-edit-sign icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									11 Jul 2013</small>
+								<span class="media-heading">Board</span> 
+								<small class="muted">It provides two boards depending on necessary.
+One is opened to anything to share freely and another is based on qna.</small>
 							</div>
 						</div>
 					</div>
@@ -234,22 +283,13 @@
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Address</h4>
+					<h4><i class="icon-building"></i> Address</h4>
 					<address>
-						<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr>
-						(123) 456-7890
+						<strong>MALSIKIZIMARAZO</strong><br> 
+						Sejoing Univ <br>
+						Gwangjin-gu, Seoul, South Korea<br> 
+						Phone : 010-5096-3002
 					</address>
-					<h4>Newsletter</h4>
-					<form role="form">
-						<div class="input-group">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Enter your email"> <span
-								class="input-group-btn">
-								<button class="btn btn-danger" type="button">Go!</button>
-							</span>
-						</div>
-					</form>
 				</div>
 				<!--/.col-md-3-->
 			</div>
@@ -257,22 +297,16 @@
 	</section>
 	<!--/#bottom-->
 
-	<footer id="footer" class="midnight-blue">
+	<footer id="footer" class="wet-asphalt">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
+					&copy; 2015 MalSikizimarazo. All Rights Reserved.
 				</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Faq</a></li>
-						<li><a href="#">Contact Us</a></li>
 						<li><a id="gototop" class="gototop" href="#"><i
-								class="icon-chevron-up"></i></a></li>
+								class="icon-circle-arrow-up icon-2x"></i></a></li>
 						<!--#gototop-->
 					</ul>
 				</div>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.Reply">
+
+<!-- 	<resultMap type="Reply" id="ReplyMap">
+		<id column = "reply_number" jdbcType = "INTEGER" property = "replyNumber"/>
+		<result column = "user_id" jdbcType="VARCHAR" property= "userId"/>
+		<result column = "comment_number" jdbcType="INTEGER" property= "commentNumber"/>
+		<result column = "reply_content" jdbcType="VARCHAR" property= "replyContent"/>
+		<result column = "reg_date" jdbcType="DATE" property="regDate"/>
+	</resultMap>  -->
+	
+	<insert id="insertReply" parameterType="Reply">
+		insert into Reply(user_id, comment_number, reply_content)
+		values(#{userId}, #{commentNumber}, #{replyContent})
+	</insert>
+	
+	<update id="updateReply" parameterType="Reply">
+		update Reply set 
+			user_id=#{userId}, 
+			comment_number=#{commentNumber}, 
+			reply_content=#{replyContent}, 
+			reg_date=#{regDate}
+		where reply_number=#{replyNumber}
+	</update>
+	
+	<update id="updateUserIdByReplyNo">
+		update Reply set
+			user_id='탈퇴한회원'
+		where reply_number=#{replyNumber}
+	</update>
+
+	<delete id="deleteReply" parameterType="string">
+		delete from Reply where
+		user_id=#{userId}
+	</delete>
+	
+	<delete id="deleteReplyByCommentNo" parameterType="Integer">
+		delete from Reply where
+		comment_number=#{commentNumber}
+	</delete>
+	
+	<delete id="deleteReplyByReplyNo" parameterType="Integer">
+		delete from Reply where
+		reply_number=#{replyNumber}
+	</delete>
+	
+	<select id="selectAllReply" parameterType="INTEGER" resultType="Reply">
+		select * from Reply where comment_number=(#{commentNumber})
+	</select>
+	
+	<select id="selectReplyNoListByUserId" parameterType="String" resultType="Integer">
+		select reply_number from Reply where user_id = #{userId}
+	</select>
+</mapper>

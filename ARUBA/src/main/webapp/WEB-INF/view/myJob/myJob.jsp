@@ -49,7 +49,17 @@ label.error {
 
 <script>
 $(document).ready(function() {
-
+	
+	if(<%=request.getAttribute("PopUp")%> == 1){
+		alert("없는 회사정보 입니다.");
+	}
+	if(<%=request.getAttribute("PopUp")%> == 2){
+		alert("이미 등록한 회사정보입니다.");
+	}
+	if(<%=request.getAttribute("PopUp")%> == 3){
+		alert("승인 대기중인 회사정보입니다.");
+	}
+	
 	$("#addJobForm").validate({
 		//validation이 끝난 이후의 submit 직전 추가 작업할 부분
 		/* submitHandler : function() {
@@ -122,7 +132,7 @@ $(document).ready(function() {
 
 					<!-- MY PAGE 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 									Account</a></li>
@@ -138,7 +148,7 @@ $(document).ready(function() {
 
 						<!-- MY JOB 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/myJob">My
 										Job</a></li>
@@ -148,12 +158,17 @@ $(document).ready(function() {
 							</ul></li>
 
 						<!-- 근무표 버튼 -->
-						<c:url value="/mySchedule" var="url" />
-						<li><a href="${url }">My Table</a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 
 					<!-- 게시판 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/notice">Notice
 									Board</a></li>
@@ -177,12 +192,12 @@ $(document).ready(function() {
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>My Job</h1>
-					<p>Please input your login information</p>
+					<p>나의 아르바이트</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Job</li>
+						<li>My Job</li>
 					</ul>
 				</div>
 			</div>
@@ -190,10 +205,103 @@ $(document).ready(function() {
 	</section>
 	<!--/#title-->
 
+ 	
+ 	
+ 	
  	<section id="MyJob" class="container">
- 		<c:if test="${emptyCompany =='YES' }">
-				<h2>직원 JOB등록</h2>
-				<br>
+ 	
+ 	<c:if test="${emptyCompany =='YES' }">
+ 	<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>Register Your Job</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			<c:url value="/sendMsgToOwner" var="url"></c:url>
+				<form id="addJobForm" method="post" action="${url }">
+				<table class="table table-striped table-hover">
+				<tbody>
+					<tr>
+						<th class="center"><label>회사코드</label></th>
+						<td class="center"><input type="text" name="companyCode" id="companyCode" value="" class="form-control" placeholder="store code"/></td>
+					</tr>
+					<tr>
+						<th class="center"><label>회사전화번호</label></th>
+						<td class="center"><input type="text" name="companyTel" id="companyTel" value="" class="form-control" placeholder="store phonenumber"/></td>
+					</tr>
+				</tbody>
+				</table>
+				<div align="center" style="margin-bottom: 10px; margin-top: 30px;">
+				<button type="submit" class="btn btn-success btn-md">Register</button>
+				<button type="reset" id="cancel" class="btn btn-success btn-md" >Reset</button>
+			</div>
+			</form>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+    </c:if>
+ 	
+ 	<c:if test="${emptyCompany =='NO' }">
+ 		<div class="pad">
+		<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+
+            	                <h4>아르바이트 등록과 신청은 최대 3개까지 가능합니다.<br>
+            	                	사장님의 승인을 기다리십시오.</h4>
+            	                <br>
+            	                
+                	        </li>
+                	     </ul>
+             </div>
+         </div>
+         </div>
+	</c:if>
+	<hr>
+		<div class="pad">
+		<div id="pricing-table">
+	 	<div class="smallbox">
+	 	<div class="panel panel-default">
+		<div class="panel-heading center"><h4><b>My Job List</b></h4></div>
+		<div class="panel-body">
+		<div class="white">
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th class="center">회사코드</th>
+					<th class="center">회사명</th>
+					<th class="center">전화번호</th>
+					<th width="10%"></th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${myCompanies }" var="myCompanies">
+					<tr>
+						<td class="center">${myCompanies.companyCode}</td>
+						<td class="center">${myCompanies.companyName}</td>
+						<td class="center">${myCompanies.companyTel}</td>
+						<td>
+							<c:url value="/deleteJob?companyCode=${myCompanies.companyCode}" var="url" /> 
+							<a href="${url }"><button class="btn btn-success btn-md">삭제</button></a>
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+			</div>
+	</div>
+	</div>
+	</div>
+	</div>
+		
+ 	 	<%-- <c:if test="${emptyCompany =='YES' }">
+ 			직장등록
 				<c:url value="/sendMsgToOwner" var="url"></c:url>
 				<form id="addJobForm" method="post" action="${url }">
 
@@ -220,14 +328,13 @@ $(document).ready(function() {
 						<button type="reset" id="cancel">취소</button>
 					</div>
 				</form>
-			</c:if>
+			</c:if> 
 			<c:if test="${emptyCompany =='NO' }">
 				<h2>아르바이트 등록은 최대 3개까지 가능합니다.</h2>
 			</c:if>
 			<br>
 			<br>
-
-			<h2>직원 직장정보</h2>
+ 			<h2>직원 직장정보</h2>
 
 			<table class="temp">
 				<tr>
@@ -244,70 +351,58 @@ $(document).ready(function() {
 						<td>${myCompanies.companyTel}</td>
 					</tr>
 				</c:forEach>
-			</table>
+			</table> --%>
     </section>
 
-	<section id="bottom" class="wet-asphalt">
+		<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<h4>About Us</h4>
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-						vitae, ultricies eget, tempor sit amet, ante.</p>
-					<p>Pellentesque habitant morbi tristique senectus.</p>
+					<h4><i class="icon-thumbs-up-alt"></i> About Us</h4>
+					<p>We are team 'MalSikizimarazo' meaning 'dont talk to me while we are eating' in Korean.</p>
+					<p>This team was named under the fact that we have calm and respectful eating etiquette.</p>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Company</h4>
+					<h4><i class="icon-globe"></i> Project Aruba</h4>
 					<div>
-						<ul class="arrow">
-							<li><a href="#">The Company</a></li>
-							<li><a href="#">Our Team</a></li>
-							<li><a href="#">Our Partners</a></li>
-							<li><a href="#">Our Services</a></li>
-							<li><a href="#">Faq</a></li>
-							<li><a href="#">Conatct Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Copyright</a></li>
-						</ul>
+						<p>Aruba is a web-project providing efficient shift tables for part time jobs in the world.</p>
+						<p>It is easily visiable and understandble for employers to manage all different individual employee's shifts. It presents wage graphs and charts on a frequent time basis.</p>
+						<p>Project Aruba would not exist without the support of KoDB.</p>
 					</div>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Latest Blog</h4>
+					<h4><i class="icon-lightbulb"></i> Our Service</h4>
 					<div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb1.jpg" alt="">
+								<i class="icon-calendar icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									17 Aug 2013</small>
+								<span class="media-heading">Shift Table </span>
+								<small class="muted">You can register and modify shift table and see it whenever you want.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb2.jpg" alt="">
+								<i class="icon-money icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									13 Sep 2013</small>
+								<span class="media-heading">Salary Check</span> 
+								<small class="muted">Your salary graph is updated on a daily basis.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb3.jpg" alt="">
+								<i class="icon-edit-sign icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									11 Jul 2013</small>
+								<span class="media-heading">Board</span> 
+								<small class="muted">It provides two boards depending on necessary.
+One is opened to anything to share freely and another is based on qna.</small>
 							</div>
 						</div>
 					</div>
@@ -315,22 +410,13 @@ $(document).ready(function() {
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Address</h4>
+					<h4><i class="icon-building"></i> Address</h4>
 					<address>
-						<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr>
-						(123) 456-7890
+						<strong>MALSIKIZIMARAZO</strong><br> 
+						Sejoing Univ <br>
+						Gwangjin-gu, Seoul, South Korea<br> 
+						Phone : 010-5096-3002
 					</address>
-					<h4>Newsletter</h4>
-					<form role="form">
-						<div class="input-group">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Enter your email"> <span
-								class="input-group-btn">
-								<button class="btn btn-danger" type="button">Go!</button>
-							</span>
-						</div>
-					</form>
 				</div>
 				<!--/.col-md-3-->
 			</div>
@@ -338,22 +424,16 @@ $(document).ready(function() {
 	</section>
 	<!--/#bottom-->
 
-	<footer id="footer" class="midnight-blue">
+	<footer id="footer" class="wet-asphalt">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
+					&copy; 2015 MalSikizimarazo. All Rights Reserved.
 				</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Faq</a></li>
-						<li><a href="#">Contact Us</a></li>
 						<li><a id="gototop" class="gototop" href="#"><i
-								class="icon-chevron-up"></i></a></li>
+								class="icon-circle-arrow-up icon-2x"></i></a></li>
 						<!--#gototop-->
 					</ul>
 				</div>

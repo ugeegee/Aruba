@@ -1,6 +1,5 @@
 package com.bmj.service;
 
-
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -57,6 +56,13 @@ public class TimeTableServiceImpl implements TimeTableService {
 		List<Stats> result = dao.selectStatsByCompanyCode(companyCode);
 		return result;
 	}
+	
+	@Override
+	public List<Stats> selectNightStatsByCompanyCode(int companyCode) {
+		logger.trace("여기는 Time Table 서비스~~~~~~~~~~~~~~~~~~~~~!" + companyCode);
+		List<Stats> result = dao.selectNightStatsByCompanyCode(companyCode);
+		return result;
+	}
 
 	@Override
 	public int selectKeybyTime(TimeTable timetable) {
@@ -71,5 +77,31 @@ public class TimeTableServiceImpl implements TimeTableService {
 		int result = dao.updateTimeTable(updateTable);
 		return result;
 	}
+
+	@Override
+	public int deleteTimeTableByMemberId(int memberId) {
+		int result = dao.deleteTimeTableByMemberId(memberId);
+		return result;
+	}
+
+	@Override
+	public double selectCountByRuntime(TimeTable runtimesalary) {
+		double result = dao.selectCountByRuntime(runtimesalary);
+		return result;
+	}
+
+	@Override
+	public int deleteTimeTableByCompanyCode(int companyCode) {
+		int result = dao.deleteTimeTableByCompanyCode(companyCode);
+		return result;
+	}
+
+	@Override
+	public int deleteTimeTableByTimekey(int timekey) {
+		int result = dao.deleteTimeTableByTimekey(timekey);
+		return result;
+	}
+
+
 
 }

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bmj.entity.CompanyPerson;
-
 @Repository
 public class CompanyPersonDaoImpl implements CompanyPersonDao {
 	private static final Logger logger;
@@ -46,15 +45,9 @@ public class CompanyPersonDaoImpl implements CompanyPersonDao {
 		String stmt = namespace + "insertCompanyOwner";
 		return sqlSession.insert(stmt, companyperson);
 	}
-
-	/*@Override
-	public int selectComCodeByUserId(String userId) {
-		String stmt = namespace + "selectComCodeByUserId";
-		return sqlSession.selectOne(stmt, userId);
-	}*/
 	
 	@Override
-	public List<Integer> selectComCodeByUserId(String userId) {
+	public List<Integer> selectComCodeByUserId(String userId){
 		String stmt = namespace + "selectComCodeByUserId";
 		List<Integer> result = sqlSession.selectList(stmt, userId);
 		return result;
@@ -85,8 +78,32 @@ public class CompanyPersonDaoImpl implements CompanyPersonDao {
 	}
 
 	@Override
+	public int deleteCompanyPersonByUserId(String userId) {
+		String stmt = namespace + "deleteCompanyPersonByUserId";
+		return sqlSession.delete(stmt, userId);
+	}
+	@Override
 	public int selectMemberIdbyCompanyPerson(CompanyPerson companyperson) {
 		String stmt = namespace + "selectMemberIdbyCompanyPerson";
 		return sqlSession.selectOne(stmt, companyperson);
 	}
+
+	@Override
+	public List<Integer> selectMemberIdListbyUserId(String userId) {
+		String stmt = namespace + "selectMemberIdListbyUserId";
+		return sqlSession.selectList(stmt, userId);
+	}
+
+	@Override
+	public int deleteCompanyPersonByComCodeAndUserId(CompanyPerson companyperson) {
+		String stmt = namespace + "deleteCompanyPersonByComCodeAndUserId";
+		return sqlSession.delete(stmt, companyperson);
+	}
+
+
+	/*@Override
+	public CompanyPerson selectCompanyPersonByPerson(CompanyPerson person) {
+		String stmt = namespace + "selectCompanyPersonByPerson";
+		return sqlSession.selectOne(stmt, person);
+	}*/
 }

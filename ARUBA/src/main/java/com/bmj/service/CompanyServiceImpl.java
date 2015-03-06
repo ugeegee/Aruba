@@ -46,7 +46,11 @@ public class CompanyServiceImpl implements CompanyService {
 		Company result = dao.selectByCompanyCode(companyCode);
 		return result;
 	}
-	
+	@Override
+	public int deleteCompanyByCompanyCode(int companyCode) {
+		int result = dao.deleteCompanyByCompanyCode(companyCode);
+		return result;
+	}
 	
 
 }
