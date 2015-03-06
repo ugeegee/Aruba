@@ -1,6 +1,8 @@
 package com.bmj.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,8 @@ import com.bmj.entity.Message;
 import com.bmj.entity.Users;
 import com.bmj.service.CompanyPersonService;
 import com.bmj.service.CompanyService;
+import com.bmj.service.MessageService;
+import com.bmj.service.TimeTableService;
 
 @Controller
 // 컴패니는 session 남길 필요없음....
@@ -35,6 +39,10 @@ public class CompanyController {
 	CompanyService service;
 	@Autowired
 	CompanyPersonService cpService;
+	@Autowired
+	TimeTableService tService;
+	@Autowired
+	MessageService mService;
 
 	@RequestMapping(value= "/webProject/addCompany")
 	public String addCompany(Model model) {
@@ -81,19 +89,59 @@ public class CompanyController {
 
 		return viewPath;
 	}
-	@RequestMapping(value = "/modifyMyCom", method = RequestMethod.POST)
+	@RequestMapping(value = "/modifyMyCom", params="modify", method = RequestMethod.POST)
 	// 사장 - 회사정보수정
 	public String mypageModifyMyComSuccessGo(@ModelAttribute("myCom") Company myCom,
-			Model model) {
+			HttpSession session, Model model) {
 		
 		int result = service.updateCompany(myCom);
+		Users owner = (Users) session.getAttribute("addUser");
+		
 		logger.trace("회사정보 업데이트 결과!!  "+result);
-		return "redirect:/myCompany"; 			//업데이트끝나고 회사보는 페이지로
+		model.addAttribute("PopUp", 1);
+		model.addAttribute("ownerPass", owner.getPassword());
+		return "/myStore/myCompany"; 			//업데이트끝나고 회사보는 페이지로
 	}
+	
+	@RequestMapping(value = "/modifyMyCom", params="delete", method = RequestMethod.POST)
+	// 사장 - 회사정보삭제
+	public String mypageDeleteMyComSuccessGo(@ModelAttribute("myCom") Company myCom,
+			Model model, HttpSession session) {
+		logger.trace("삭제버튼눌럿어!!!!!!");
+		//시간표>companyPerson 삭제> 메세지남기기>회사삭제
+		//회사지울꺼니깐 회사코드에걸린 시간표 다지우고
+		tService.deleteTimeTableByCompanyCode(myCom.getCompanyCode());
+		logger.trace("시간표지움!!!!!!!!!!!!!");
+		//회사코드에걸린 회사원가져오고
+		List<CompanyPerson> cpList = cpService.selectByCompanyCode(myCom.getCompanyCode());
+		logger.trace("회사원들은????!!!!"+cpList);
+		Message message = new Message();
+		Users loginUser = (Users) session.getAttribute("addUser");
+		message.setCompanyCode(1);					//messageControl회사 넣어야함!!
+		message.setUserId(loginUser.getUserId());
+		message.setMessageContent(loginUser.getUserId()+"님 회사 삭제알림");
+		message.setFlag(-1); 
+		//회사삭제 메세지날리고 회사원지우고
+		for(int i = 0; i<cpList.size(); i++){
+			message.setReceiverId(cpList.get(i).getUserId());
+			mService.insertMessage(message); 
+			
+			cpService.deleteCompanyPersonByUserId(cpList.get(i).getUserId());
+		}
+		//회사코드에걸린 메세지도지우고
+		mService.deleteMessageByCompanyCode(myCom.getCompanyCode());
+		//회사지우기
+		int result = service.deleteCompanyByCompanyCode(myCom.getCompanyCode());
+		
+		logger.trace("회사지우기끝~~~!!!!"+result);
+		
+		return "/myStore/deleteCompany"; 		
+	}
+	
 	/* 회사 등록과 동시에 자신 등록(사장입장) */
 	@RequestMapping(value="/registerCompany", method = RequestMethod.POST)
 	public String registerCompanySuccess(@RequestParam String companyName, @RequestParam String companyTel,
-										@RequestParam Float holidayComm, @RequestParam Float nightComm,
+										@RequestParam int holidayComm, @RequestParam int nightComm,
 										HttpSession session) {
 		logger.trace("입력받은 회사정보!!!"+companyName+" "+companyTel+" "+holidayComm+" "+nightComm);
 		Company newCompany = new Company();
@@ -115,7 +163,10 @@ public class CompanyController {
 		companyperson.setCompanyCode(company2.getCompanyCode());
 		companyperson.setUserId(user.getUserId());
 		companyperson.setSalary(0);                 //DB입력할때 필요하니깐 사장은 0으로
-		companyperson.setHireDate("의미없음");
+		Date today = new Date();
+		Calendar cToday = Calendar.getInstance();
+		cToday.setTime(today);
+		companyperson.setHireDate(cToday.get(Calendar.YEAR)+"/"+(cToday.get(Calendar.MONTH)+1)+"/"+cToday.get(Calendar.DATE));
 		// service.company_person.insert();
 		cpService.insertCompanyOwner(companyperson);
 
@@ -128,21 +179,25 @@ public class CompanyController {
 	// 알바 mypage 메뉴에서 직업관리
 	public String mypageMyJobGo(Model model, HttpSession session) {
 		Users loginUser = (Users) session.getAttribute("addUser"); // 로그인하고 있는 알바생 정보 가져오고
-		String viewPath = "";
 		
+		//현재 가입된 회사 수
 		List<Integer> codeList = cpService.selectComCodeByUserId(loginUser.getUserId());
 		List<Company> comList = new ArrayList<Company>();
 		for(int i = 0; i < codeList.size(); i++){
 			comList.add(i, service.selectCompanyByCompanyCode( codeList.get(i).intValue() ) );
 		}
+		//현재 가입대기중인 회사 수
+		int uncheckedMessage = mService.countUncheckedFlagByUserId(loginUser.getUserId());
 		
-		if(codeList.size() > 2){
+		if(codeList.size()+uncheckedMessage > 2){
 			model.addAttribute("emptyCompany", "NO");
 		}else{
 			model.addAttribute("emptyCompany", "YES");
 		}
 		logger.trace("가져온 나의 회사 정보!! " + comList);
 		model.addAttribute("myCompanies", comList);
+		
+		model.addAttribute("PopUp", 0);
 		
 		return "/myJob/myJob";
 	}

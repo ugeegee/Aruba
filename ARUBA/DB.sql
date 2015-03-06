@@ -9,6 +9,7 @@ DROP TRIGGER TRI_time_table_time_key;
 
 
 
+
 /* Drop Tables */
 
 DROP TABLE Reply CASCADE CONSTRAINTS;
@@ -46,7 +47,8 @@ CREATE TABLE bComment
 (
 	comment_number number NOT NULL,
 	user_id varchar2(20) NOT NULL,
-	comment_content varchar2(300) NOT NULL,
+	comment_title varchar2(150) NOT NULL,
+	comment_content varchar2(600) NOT NULL,
 	reg_date date DEFAULT sysdate,
 	flag number NOT NULL,
 	PRIMARY KEY (comment_number)
@@ -102,7 +104,7 @@ CREATE TABLE Users
 	user_id varchar2(20) NOT NULL,
 	password varchar2(20) NOT NULL,
 	password2 varchar2(20) NOT NULL,
-	user_name varchar2(10) NOT NULL,
+	user_name varchar2(50) NOT NULL,
 	tel varchar2(20),
 	email varchar2(30) NOT NULL,
 	birth varchar2(10) NOT NULL,
@@ -234,6 +236,7 @@ CREATE TABLE message
 	message_number number NOT NULL,
 	company_code number NOT NULL,
 	user_id varchar2(20),
+	receiver_id varchar2(20),
 	message_content varchar2(100) NOT NULL,
 	reg_date date DEFAULT sysdate,
 	flag number DEFAULT 1,
@@ -263,6 +266,23 @@ END;
 
 /
 
+/*첫회사로 추가해줘야함-삭제메세지 관리*/
+insert into Company(company_name, company_tel, holiday_comm, night_comm) 
+values ('messageControl', '123456789', -100, -100);
+
+/*첫회원으로 관리자추가*/
+insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
+values ('admin', '123', '123', '관리자', '0101112222', 'admin@naver.com', '06/08/1987', '사장', '관리자니?', '네');
+
+/*기본회원으로 추가-탈퇴한 회원의 글, 댓글관리*/
+insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
+values ('탈퇴한회원', '123', '123', '탈퇴자', '0102223333', 'out@naver.com', '06/08/1987', '사장', '탈퇴회원?', '네');
+/*********************************************************************************/
+
+
+
+
+
 
 insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
 values ('park', '123', '123', '박광욱', '010-', 'p@naver.com', '06/08/1987', '사장', '몇살?', '20살');
@@ -274,14 +294,24 @@ insert into users(user_id, password, password2, user_name, tel, email, birth, gr
 values ('Yoo', '123', '123', '유지연', '010-', 'y@naver.com', '06/08/1987', '직원', '몇살?', '20살');
 
 
+insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
+values ('Jung', '123', '123', '정유은', '010-', 'y@naver.com', '06/08/1987', '직원', '몇살?', '20살');
+insert into users(user_id, password, password2, user_name, tel, email, birth, grade, question, answer) 
+values ('Im', '123', '123', '최서임', '010-', 'y@naver.com', '06/08/1987', '직원', '몇살?', '20살');
+
+
 insert into Company(company_name, company_tel, holiday_comm, night_comm) 
-values ('GS25시', '02-000-0000', 80, 80);
+values ('GS25시', '020000000', 80, 80);
 
 insert into company_person(company_code, user_id, hire_date) 
-values(1, 'park', '2010-01-01');
+values(2, 'park', '2010-01-01');
 insert into company_person(company_code, user_id, salary, hire_date) 
-values (1, 'Kim', 5500, '2015-02-12');
+values (2, 'Kim', 5500, '2015-02-12');
 insert into company_person(company_code, user_id, salary, hire_date) 
-values (1, 'Choi', 5000, '2015-02-12');
+values (2, 'Choi', 5000, '2015-02-12');
 insert into company_person(company_code, user_id, salary, hire_date) 
-values (1, 'Yoo', 6000, '2015-02-12');
+values (2, 'Yoo', 6000, '2015-02-12');
+
+
+
+

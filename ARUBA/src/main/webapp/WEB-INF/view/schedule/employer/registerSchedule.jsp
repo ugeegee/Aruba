@@ -90,97 +90,108 @@
 
 				/* initialize the calendar
 				-----------------------------------------------------------------*/
+				$('#calendar').fullCalendar({
+					header : {
+						left : 'prev,next today',
+						center : 'title',
+						right : 'month,agendaWeek,agendaDay'
+					},
+					timeFormat : {
+						'' : 'HH:mm',
+						agenda : 'HH:mm',
+					//console.log("agenda" , HH:mm)
+					},
+					editable : true,
+					droppable : true, // this allows things to be dropped onto the calendar
+					eventDrop : function(event) {
+						id = event._id;
+						title = event.title;
+						start = event.start.format('YYYY-MM-DD HH:mm:ss');
+						console.log("Drop_id : " + id);
+						console.log('Drop_title : ', title);
+						console.log('Drop_start : ', start);
+						//console.log('end111', event.end.toString());	
 
-				$('#calendar').fullCalendar(
-						{
-							header : {
-								left : 'prev,next today',
-								center : 'title',
-								right : 'month,agendaWeek,agendaDay'
-							},
-							timeFormat : {
-								'' : 'HH:mm',
-								agenda : 'HH:mm',
-							//console.log("agenda" , HH:mm)
-							},
-							editable : true,
-							droppable : true, // this allows things to be dropped onto the calendar
-							eventDrop : function(event) {
-								/* for(items in event) {
-									console.log(items);
-								} */
-								id = event._id;
-								title = event.title;
-								start = event.start
-										.format('YYYY-MM-DD HH:mm:ss');
-								console.log("Drop_id : " + id);
-								console.log('Drop_title : ', title);
-								console.log('Drop_start : ', start);
-								//console.log('end111', event.end.toString());	
-
-								if (event.end == null) {
-									event.end = event.start.clone();
-									event.end.set("hours", event.end
-											.get("hours") + 1);
-									end = event.end
-											.format('YYYY-MM-DD HH:mm:ss');
-									console.log('Drop_end : ', end);
-								} else {
-									end = event.end
-											.format('YYYY-MM-DD HH:mm:ss');
-									console.log('Drop_end : ', end);
+						if (event.end == null) {
+							//alert("뭐지?")
+							event.end = event.start.clone();
+							event.end.set("hours", event.end.get("hours")+2);
+							end = event.end.format('YYYY-MM-DD HH:mm:ss');
+							console.log('Drop_end : ', end);
+						} else {
+							/* event.end.set("hours", event.end.get("hours") + 2); */
+							end = event.end.format('YYYY-MM-DD HH:mm:ss');
+							console.log('Drop_end : ', end);
+						}
+						for ( var i in result) {
+							if (result[i] != null) {
+								if (result[i].id == id) {
+									result.splice(i, 1);
+									console.log(result);
 								}
-								for ( var i in result) {
-									if (result[i] != null) {
-										if (result[i].id == id) {
-											result.splice(i, 1);
-											console.log(result);
-										}
-									}
-								}
-
-								var newTemp = new createTimeTable(id, title,
-										start, end);
-								result.push(newTemp);
-								console.log(result);
-							},
-							eventDragStop : function(event, ui) {
-							},
-							eventResize : function(event, delta, revertFunc) {
-								title = event.title;
-								start = event.start
-										.format('YYYY-MM-DD HH:mm:ss');
-								end = event.end.format('YYYY-MM-DD HH:mm:ss');
-								id = event._id;
-
-								/* ArrayList<timetable> list;
-								if () 
-								list.add(?); */
-								console.log("Resize_id : " + id);
-								console.log("Resize_title : " + title);
-								console.log("Resize_start : " + start);
-								console.log("Resize_End : " + end);
-
-								for ( var i in result) {
-									if (result[i] != null) {
-										if (result[i].id == id) {
-											result.splice(i, 1);
-											console.log(result);
-										}
-									}
-								}
-
-								var newTemp = new createTimeTable(id, title,
-										start, end);
-								result.push(newTemp);
-								console.log(result);
-							},
-							eventResizeStop : function(event) {
-							},
-							drop : function(date, ui, jsEvent) {
-								console.log(date._d);
 							}
-						});
+						}
+						var newTemp = new createTimeTable(id, title,
+								start, end);
+						result.push(newTemp);
+						console.log(result);
+					},
+					/* eventDragStop : function(event, ui) {
+					}, */
+					eventResize : function(event/* , delta, revertFunc */) {
+						title = event.title;
+						start = event.start.format('YYYY-MM-DD HH:mm:ss');
+						
+						end = event.end.format('YYYY-MM-DD HH:mm:ss');
+						id = event._id;
+
+						console.log("Resize_id : " + id);
+						console.log("Resize_title : " + title);
+						console.log("Resize_start : " + start);
+						console.log("Resize_End : " + end);
+						for ( var i in result) {
+							if (result[i] != null) {
+								if (result[i].id == id) {
+									result.splice(i, 1);
+									console.log(result);
+								}
+							}
+						}
+
+						var newTemp = new createTimeTable(id, title,
+								start, end);
+						result.push(newTemp);
+						console.log(result);
+					},
+			        eventDestroy: function(event, element, view)
+			        {
+			            //alert("removing stuff");
+			        },
+					eventClick: function(event) {
+						title = event.title;
+						start = event.start.format('YYYY-MM-DD HH:mm:ss');
+						//end = event.end.format('YYYY-MM-DD HH:mm:ss');
+						id = event._id;
+						$(this).css('background-color', 'yellow');
+						if ($('#drop-remove').is(':checked')) {
+							// if so, remove the element from the "Draggable Events" list
+							//$(this).remove();
+							$('#calendar').fullCalendar('removeEvents', id);
+							//element.remove();
+							for ( var i in result) {
+								if (result[i] != null) {
+									if (result[i].id == id) {
+										result.splice(i, 1);
+										console.log(result);
+									}
+								}
+							}
+						}
+					},
+					drop : function(date, ui, jsEvent) {
+						console.log(date._d);
+					}
+				});
 				console.log("title : " + title + ", start : " + start
 						+ ", End : " + end);
 
@@ -224,6 +235,8 @@
 #external-events .fc-event {
 	margin: 10px 0;
 	cursor: pointer;
+	/* background-color: navy; */
+	/* border: 1px solid white; */
 }
 
 #external-events p {
@@ -240,6 +253,27 @@
 #calendar {
 	float: right;
 	width: 900px;
+}
+
+/* .fc_event0 {
+	background-color:green;
+}
+
+.event_1 {
+	background-color:blue;
+}
+
+.event_2 {
+	background-color:yellow;
+}
+
+.event_3 {
+	background-color:black;
+}
+ */
+.savee{
+	float: right;
+	width: 16.666666666666664%;
 }
 </style>
 </head>
@@ -268,7 +302,7 @@
 
 					<!-- MY PAGE 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 									Account</a></li>
@@ -284,7 +318,7 @@
 
 					<!-- MY STORE 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Store<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/myCompany">Store
 									Control</a></li>
@@ -297,7 +331,7 @@
 
 					<!-- 근무표 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Shift Table<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/registerSchedule">Register
 									Shift</a></li>
@@ -310,7 +344,7 @@
 
 					<!-- 게시판 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/notice">Notice
 									Board</a></li>
@@ -332,13 +366,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Register Schedule</h1>
-					<p>Please input your login information</p>
+					<h1>Register Shift</h1>
+					<p>직원 근무시간표 등록</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Register Schedule</li>
+						<li class="active">Shift Table</li>
+						<li>Register Shift</li>
 					</ul>
 				</div>
 			</div>
@@ -350,19 +384,23 @@
 		<div id='wrap'>
 
 			<div id='external-events'>
-				<h4>Company!</h4>
+				<h4>My Staffs</h4>
 				<!-- <table border = "1"> -->
-				<c:forEach items="${employees}" var="employee">
+				<c:forEach items="${employees}" var="employee" varStatus="cur">
 					<!-- <tr> -->
 					<!-- <td> -->
-					<div class='fc-event'>${employee.userId}</div>
+					<div class = 'fc-event' class='fc-event_${cur.index}'>${employee.userId}</div>
 					<!-- </td> -->
 					<!-- </tr> -->
 				</c:forEach>
+				<p>
+					<label for = 'drop-remove'>* 직원 아이콘을 달력에 드래그해서 근무시간을 설정하세요. </label>
+				</p>
+
 				<!-- </table> -->
 				<p>
 					<input type='checkbox' id='drop-remove' /> <label
-						for='drop-remove'>remove after drop</label>
+						for='drop-remove'>remove after click</label>
 				</p>
 			</div>
 
@@ -371,72 +409,61 @@
 			<div style='clear: both'></div>
 
 		</div>
-		<div id="save1">
-			<button id="save">save</button>
-			</div>
+		
+			<div align="center" style="margin-bottom: 40px; margin-top:20px">
+			<button id="save" class="btn btn-danger btn-lg">Save Shift</button>
+		</div>
 	</section>
 
-	<section id="bottom" class="wet-asphalt">
+	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<h4>About Us</h4>
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-						vitae, ultricies eget, tempor sit amet, ante.</p>
-					<p>Pellentesque habitant morbi tristique senectus.</p>
+					<h4><i class="icon-thumbs-up-alt"></i> About Us</h4>
+					<p>We are team 'MalSikizimarazo' meaning 'dont talk to me while we are eating' in Korean.</p>
+					<p>This team was named under the fact that we have calm and respectful eating etiquette.</p>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Company</h4>
+					<h4><i class="icon-globe"></i> Project Aruba</h4>
 					<div>
-						<ul class="arrow">
-							<li><a href="#">The Company</a></li>
-							<li><a href="#">Our Team</a></li>
-							<li><a href="#">Our Partners</a></li>
-							<li><a href="#">Our Services</a></li>
-							<li><a href="#">Faq</a></li>
-							<li><a href="#">Conatct Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Copyright</a></li>
-						</ul>
+						<p>Aruba is a web-project providing efficient shift tables for part time jobs in the world.</p>
+						<p>It is easily visiable and understandble for employers to manage all different individual employee's shifts. It presents wage graphs and charts on a frequent time basis.</p>
+						<p>Project Aruba would not exist without the support of KoDB.</p>
 					</div>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Latest Blog</h4>
+					<h4><i class="icon-lightbulb"></i> Our Service</h4>
 					<div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb1.jpg" alt="">
+								<i class="icon-calendar icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									17 Aug 2013</small>
+								<span class="media-heading">Shift Table </span>
+								<small class="muted">You can register and modify shift table and see it whenever you want.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb2.jpg" alt="">
+								<i class="icon-money icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									13 Sep 2013</small>
+								<span class="media-heading">Salary Check</span> 
+								<small class="muted">Your salary graph is updated on a daily basis.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb3.jpg" alt="">
+								<i class="icon-edit-sign icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									11 Jul 2013</small>
+								<span class="media-heading">Board</span> 
+								<small class="muted">It provides two boards depending on necessary.
+One is opened to anything to share freely and another is based on qna.</small>
 							</div>
 						</div>
 					</div>
@@ -444,22 +471,13 @@
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Address</h4>
+					<h4><i class="icon-building"></i> Address</h4>
 					<address>
-						<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr>
-						(123) 456-7890
+						<strong>MALSIKIZIMARAZO</strong><br> 
+						Sejoing Univ <br>
+						Gwangjin-gu, Seoul, South Korea<br> 
+						Phone : 010-5096-3002
 					</address>
-					<h4>Newsletter</h4>
-					<form role="form">
-						<div class="input-group">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Enter your email"> <span
-								class="input-group-btn">
-								<button class="btn btn-danger" type="button">Go!</button>
-							</span>
-						</div>
-					</form>
 				</div>
 				<!--/.col-md-3-->
 			</div>
@@ -467,22 +485,16 @@
 	</section>
 	<!--/#bottom-->
 
-	<footer id="footer" class="midnight-blue">
+	<footer id="footer" class="wet-asphalt">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
+					&copy; 2015 MalSikizimarazo. All Rights Reserved.
 				</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Faq</a></li>
-						<li><a href="#">Contact Us</a></li>
 						<li><a id="gototop" class="gototop" href="#"><i
-								class="icon-chevron-up"></i></a></li>
+								class="icon-circle-arrow-up icon-2x"></i></a></li>
 						<!--#gototop-->
 					</ul>
 				</div>

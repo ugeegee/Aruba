@@ -54,6 +54,12 @@ public class TimeTableDaoImpl implements TimeTableDao {
 		String stmt = namespace + "selectStatsBycompanyCode";
 		return sqlSession.selectList(stmt, companyCode);
 	}
+	
+	@Override
+	public List<Stats> selectNightStatsByCompanyCode(int companyCode) {
+		String stmt = namespace + "selectNightStatsByCompanyCode";
+		return sqlSession.selectList(stmt, companyCode);
+	}
 
 	@Override
 	public int selectKeybyTime(TimeTable timetable) {
@@ -65,5 +71,29 @@ public class TimeTableDaoImpl implements TimeTableDao {
 	public int updateTimeTable(TimeTable updateTable) {
 		String stmt = namespace + "updateTimeTable";
 		return sqlSession.update(stmt, updateTable);
+	}
+
+	@Override
+	public int deleteTimeTableByMemberId(int memberId) {
+		String stmt = namespace +"deleteTimeTableByMemberId";
+		return sqlSession.delete(stmt, memberId);
+	}
+
+	@Override
+	public double selectCountByRuntime(TimeTable runtimesalary) {
+		String stmt = namespace + "selectCountByRuntime";
+		return sqlSession.selectOne(stmt, runtimesalary);
+	}
+
+	@Override
+	public int deleteTimeTableByCompanyCode(int companyCode) {
+		String stmt = namespace + "deleteTimeTableByCompanyCode";
+		return sqlSession.delete(stmt, companyCode);
+	}
+
+	@Override
+	public int deleteTimeTableByTimekey(int timekey) {
+		String stmt = namespace + "deleteTimeTableByTimekey";
+		return sqlSession.delete(stmt, timekey);
 	}
 }

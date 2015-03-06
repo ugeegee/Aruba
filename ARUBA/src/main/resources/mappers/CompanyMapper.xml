@@ -30,6 +30,10 @@
 		where company_code= #{companyCode}
 	</update>
 	
+	<delete id="deleteCompanyByCompanyCode" parameterType = "Integer">
+		delete from company where company_code = #{companyCode}
+	</delete>
+	
 	<!-- <mapper namespace="com.andy.mybatis.hr.mapper.RegionMapper"> -->
 	<!-- <insert id = "insertDept" parameterType = "Department">
 		insert into departments(department_id, department_name,manager_id,location_id) 

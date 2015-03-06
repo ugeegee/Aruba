@@ -129,7 +129,7 @@ label.error {
 					<c:if test="${!empty addUser }">
 						<!-- MY PAGE 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 										Account</a></li>
@@ -147,7 +147,7 @@ label.error {
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Store<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myCompany">Store
 											Control</a></li>
@@ -160,7 +160,7 @@ label.error {
 
 							<!-- 근무표 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Shift Table<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="<%=request.getContextPath()%>/registerSchedule">Register
@@ -181,7 +181,7 @@ label.error {
 
 							<!-- MY PAGE 버튼 -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">My Job<i class="icon-angle-down"></i></a>
+								data-toggle="dropdown">My Job <i class="icon-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/myJob">My
 											Job</a></li>
@@ -191,14 +191,19 @@ label.error {
 								</ul></li>
 
 							<!-- 근무표 버튼 -->
-							<c:url value="/mySchedule" var="url" />
-							<li><a href="${url }">My Table</a></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									<c:url value="/mySchedule" var="url" />
+									<li><a href="${url }">My Shift</a></li>
+								</ul>
+							</li>
 
 						</c:if>
 
 						<!-- 게시판 버튼 -->
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+							data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<%=request.getContextPath()%>/notice">Notice
 										Board</a></li>
@@ -227,8 +232,8 @@ label.error {
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li>My Page</li>
-						<li class="active">Delete Account</li>
+						<li class="active">My Page</li>
+						<li>Delete Account</li>
 					</ul>
 				</div>
 			</div>
@@ -237,9 +242,17 @@ label.error {
 	<!--/#title-->
 
 	<section id="DeleteAccount" class="container">
- 		<c:url value="/leaveAruba" var="url" />
+		<c:if test="${addUser.grade=='사장' }">
+ 			<c:url value="/leaveAruba_employer" var="url" />
+ 		</c:if>
+ 		<c:if test="${addUser.grade=='직원' }">
+ 			<c:url value="/leaveAruba_employee" var="url" />
+ 		</c:if>
         <form:form modelAttribute="addUser" class="center" role="form" id="passForm" method="post" action="${url }">
             <fieldset class="registration-form">
+            	<div class="form-group">
+            		* 탈퇴 전, 본인 확인을 위해 비밀번호를 입력해주세요.
+            	</div>
                 <div class="form-group">
                     <form:hidden path="userId" id="userId" name="userId" class="form-control"/>
                 </div>
@@ -258,67 +271,55 @@ label.error {
 
 			
 			
-	<section id="bottom" class="wet-asphalt">
+	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<h4>About Us</h4>
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-						vitae, ultricies eget, tempor sit amet, ante.</p>
-					<p>Pellentesque habitant morbi tristique senectus.</p>
+					<h4><i class="icon-thumbs-up-alt"></i> About Us</h4>
+					<p>We are team 'MalSikizimarazo' meaning 'dont talk to me while we are eating' in Korean.</p>
+					<p>This team was named under the fact that we have calm and respectful eating etiquette.</p>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Company</h4>
+					<h4><i class="icon-globe"></i> Project Aruba</h4>
 					<div>
-						<ul class="arrow">
-							<li><a href="#">The Company</a></li>
-							<li><a href="#">Our Team</a></li>
-							<li><a href="#">Our Partners</a></li>
-							<li><a href="#">Our Services</a></li>
-							<li><a href="#">Faq</a></li>
-							<li><a href="#">Conatct Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Copyright</a></li>
-						</ul>
+						<p>Aruba is a web-project providing efficient shift tables for part time jobs in the world.</p>
+						<p>It is easily visiable and understandble for employers to manage all different individual employee's shifts. It presents wage graphs and charts on a frequent time basis.</p>
+						<p>Project Aruba would not exist without the support of KoDB.</p>
 					</div>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Latest Blog</h4>
+					<h4><i class="icon-lightbulb"></i> Our Service</h4>
 					<div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb1.jpg" alt="">
+								<i class="icon-calendar icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									17 Aug 2013</small>
+								<span class="media-heading">Shift Table </span>
+								<small class="muted">You can register and modify shift table and see it whenever you want.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb2.jpg" alt="">
+								<i class="icon-money icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									13 Sep 2013</small>
+								<span class="media-heading">Salary Check</span> 
+								<small class="muted">Your salary graph is updated on a daily basis.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb3.jpg" alt="">
+								<i class="icon-edit-sign icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									11 Jul 2013</small>
+								<span class="media-heading">Board</span> 
+								<small class="muted">It provides two boards depending on necessary.
+One is opened to anything to share freely and another is based on qna.</small>
 							</div>
 						</div>
 					</div>
@@ -326,22 +327,13 @@ label.error {
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Address</h4>
+					<h4><i class="icon-building"></i> Address</h4>
 					<address>
-						<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr>
-						(123) 456-7890
+						<strong>MALSIKIZIMARAZO</strong><br> 
+						Sejoing Univ <br>
+						Gwangjin-gu, Seoul, South Korea<br> 
+						Phone : 010-5096-3002
 					</address>
-					<h4>Newsletter</h4>
-					<form role="form">
-						<div class="input-group">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Enter your email"> <span
-								class="input-group-btn">
-								<button class="btn btn-danger" type="button">Go!</button>
-							</span>
-						</div>
-					</form>
 				</div>
 				<!--/.col-md-3-->
 			</div>
@@ -349,22 +341,16 @@ label.error {
 	</section>
 	<!--/#bottom-->
 
-	<footer id="footer" class="midnight-blue">
+	<footer id="footer" class="wet-asphalt">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
+					&copy; 2015 MalSikizimarazo. All Rights Reserved.
 				</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Faq</a></li>
-						<li><a href="#">Contact Us</a></li>
 						<li><a id="gototop" class="gototop" href="#"><i
-								class="icon-chevron-up"></i></a></li>
+								class="icon-circle-arrow-up icon-2x"></i></a></li>
 						<!--#gototop-->
 					</ul>
 				</div>

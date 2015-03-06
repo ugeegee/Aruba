@@ -1,6 +1,5 @@
 package com.bmj.dao;
 
-import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -25,12 +24,12 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public int insert(Company company) {
 		logger.trace("수업 : 여기는 DaoImpl......!" + company);
-		if(company.getHolidayComm() == null) {
-			company.setHolidayComm(0.0f);
+		if(company.getHolidayComm() == 0) {
+			company.setHolidayComm(0);
 			
 		} 
-		if (company.getNightComm() == null) {
-			company.setNightComm(0.0f);
+		if (company.getNightComm() == 0) {
+			company.setNightComm(0);
 		}
 		logger.trace("수업 : ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ" + company);
 		String stmt = namespace + "insertCompany";
@@ -59,6 +58,11 @@ public class CompanyDaoImpl implements CompanyDao {
 			throw new RegisterJobException("!!!!회사코드,전화번호로 회사조회 결과 = NULL");
 		}
 		return result;
+	}
+	@Override
+	public int deleteCompanyByCompanyCode(int companyCode) {
+		String stmt = namespace + "deleteCompanyByCompanyCode";
+		return sqlSession.delete(stmt, companyCode);
 	}
 	
 }

@@ -27,8 +27,8 @@ public class MessageDaoImpl implements MessageDao {
 		return sqlSession.insert(stmt, message);
 	}
 	@Override
-	public int updateMesageFlagByMsgNum(int messageNumber) {
-		String stmt = namespace +"updateMesageFlagByMsgNum";
+	public int updateMesageAcceptFlagByMsgNum(int messageNumber) {
+		String stmt = namespace +"updateMesageAcceptFlagByMsgNum";
 		return sqlSession.update(stmt, messageNumber);
 	}
 	@Override
@@ -41,7 +41,31 @@ public class MessageDaoImpl implements MessageDao {
 		String stmt = namespace + "selectMessageByComCode";
 		return sqlSession.selectList(stmt, companyCode);
 	}
-	
+	@Override
+	public int deleteMessageByUserId(String userId) {
+		String stmt = namespace + "deleteMessageByUserId";
+		return sqlSession.delete(stmt, userId);
+	}
+	@Override
+	public int deleteMessageByCompanyCode(int companyCode) {
+		String stmt = namespace + "deleteMessageByCompanyCode";
+		return sqlSession.delete(stmt, companyCode);
+	}
+	@Override
+	public int updateMesageRejectFlagByMsgNum(int messageNumber) {
+		String stmt = namespace + "updateMesageRejectFlagByMsgNum";
+		return sqlSession.update(stmt, messageNumber);
+	}
+	@Override
+	public int countUncheckedFlagByUserId(String userId) {
+		String stmt = namespace + "countUncheckedFlagByUserId";
+		return sqlSession.selectOne(stmt, userId);
+	}
+	@Override
+	public Message selectUncheckedMessageByMessage(Message message) {
+		String stmt = namespace + "selectUncheckedMessageByMessage";
+		return sqlSession.selectOne(stmt, message);
+	}
 	
 
 }

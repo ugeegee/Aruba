@@ -101,30 +101,46 @@ $(document).ready(function() {
                 }
                 
                 console.log("------------중복제거nameArr-------------");
-                for(var q  = 0; q < nameArr.length; q++) {
+                var name = nameArr.reduce(function(a, b){
+                	if(a.indexOf(b) < 0) a.push(b);
+                	return a;
+                }, []);
+                
+                console.log("name : " + name);
+                console.log("nameArr : " + nameArr);
+                
+                //var idx;
+               /*  for(var q  = 0; q < nameArr.length; q++) {
 					var name = nameArr[q];
 					//console.log(q + " , " + name);
-					for(var idx = q; idx < nameArr.length; idx++){
+					for(idx = q+1; idx <= nameArr.length+1; idx++) {
+						if(name == nameArr[idx]) {
+							console.log("idx : " + idx + nameArr.length);
+							nameArr.splice(idx, 1);
+						}
+					}
+					 for(var idx = q; idx < nameArr.length; idx++){
 						//idx = idx + 1;	
 						console.log(idx + ", " + name);
 						if(nameArr[idx]==name&&idx!=q) {
 							//console.log("zzzzzzzzzzzzzzzzz : " + idx);								
 							nameArr.splice(idx, 1);	
 						}
-					}
-                }
-				console.log(nameArr);   
+					} 
+					console.log(q + ", " + nameArr);
+                } */
+				//console.log(nameArr);   
 				
-				for(var k in nameArr) {
+				for(var k in name) {
 					tempArr = new Array();
 					for(var l in outArr) {
-						if(nameArr[k] == outArr[l][2]) {
+						if(name[k] == outArr[l][2]) {
 							tempArr.push(outArr[l][1]);						
 						}
 					}
 					console.log("ssssssssssssssss : " + tempArr);
 					dataArr.push(tempArr);
-            		seriesData.push({name:nameArr[k], data:dataArr[k]});
+            		seriesData.push({name:name[k], data:dataArr[k]});
             		console.log(k + " : " + seriesData);
 				}
 
@@ -187,9 +203,6 @@ $(document).ready(function() {
 	        },
 			title: {
                 text: '직원 급여 관리'
-			},
-			subtitle: {
-				text: 'ARUBA Program.....! By.MALSIKIZIMA'
 			},
 			xAxis: {
 				categories: Xcategorie
@@ -292,7 +305,7 @@ $(document).ready(function() {
 
 					<!-- MY PAGE 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Page<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">My Page <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/myInfo">Modify
 									Account</a></li>
@@ -308,7 +321,7 @@ $(document).ready(function() {
 
 					<!-- MY STORE 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">My Store<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">My Store <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/myCompany">Store
 									Control</a></li>
@@ -321,7 +334,7 @@ $(document).ready(function() {
 
 					<!-- 근무표 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Shift Table<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">Shift Table <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/registerSchedule">Register
 									Shift</a></li>
@@ -334,7 +347,7 @@ $(document).ready(function() {
 
 					<!-- 게시판 버튼 -->
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Board<i class="icon-angle-down"></i></a>
+						data-toggle="dropdown">Board <i class="icon-angle-down"></i></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=request.getContextPath()%>/notice">Notice
 									Board</a></li>
@@ -357,12 +370,12 @@ $(document).ready(function() {
 			<div class="row">
 				<div class="col-sm-6">
 					<h1>Wage Control</h1>
-					<p>Please input your login information</p>
+					<p>급여 관리</p>
 				</div>
 				<div class="col-sm-6">
 					<ul class="breadcrumb pull-right">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">Login</li>
+						<li class="active">My Store</li>
+						<li>Wage Control</li>
 					</ul>
 				</div>
 			</div>
@@ -373,80 +386,90 @@ $(document).ready(function() {
  	<section id="WageControl" class="container">
  		
 			<!-- <button id="chartBtn">직원 월급 조회하기</button> -->
-	<!-- 그래프 -->
-	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
 	
 	<!-- 각도조절 바 -->
+	<c:if test="${!empty Times }">
+		<!-- 그래프 -->
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	<div id="sliders">
 		<table>
 			<tr><td>Alpha Angle</td><td><input id="R0" type="range" min="0" max="45" value="15"/> <span id="R0-value" class="value"></span></td></tr>
 		    <tr><td>Beta Angle</td><td><input id="R1" type="range" min="0" max="45" value="15"/> <span id="R1-value" class="value"></span></td></tr>
 		</table>
 	</div>
+	</c:if>
 	
+	
+	
+	
+	
+	<c:if test="${empty Times }">
+		<div class="pad">
+			<div id="pricing-table">
+	 		<div class="smallbox">
+    	                <ul class="plan featured">
+        	                <li class="plan-name">
+            	                <h5><c:out value="${addUser.userName }" />님, 근무시간표를 먼저 등록해주세요.</h5>
+ 								<br>
+                	        </li>
+                    	</ul>
+           	</div>
+       		</div>
+    		</div>
+	</c:if>
     </section>
 
-	<section id="bottom" class="wet-asphalt">
+	<section id="bottom" class="wet-asp">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
-					<h4>About Us</h4>
-					<p>Pellentesque habitant morbi tristique senectus et netus et
-						malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-						vitae, ultricies eget, tempor sit amet, ante.</p>
-					<p>Pellentesque habitant morbi tristique senectus.</p>
+					<h4><i class="icon-thumbs-up-alt"></i> About Us</h4>
+					<p>We are team 'MalSikizimarazo' meaning 'dont talk to me while we are eating' in Korean.</p>
+					<p>This team was named under the fact that we have calm and respectful eating etiquette.</p>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Company</h4>
+					<h4><i class="icon-globe"></i> Project Aruba</h4>
 					<div>
-						<ul class="arrow">
-							<li><a href="#">The Company</a></li>
-							<li><a href="#">Our Team</a></li>
-							<li><a href="#">Our Partners</a></li>
-							<li><a href="#">Our Services</a></li>
-							<li><a href="#">Faq</a></li>
-							<li><a href="#">Conatct Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Copyright</a></li>
-						</ul>
+						<p>Aruba is a web-project providing efficient shift tables for part time jobs in the world.</p>
+						<p>It is easily visiable and understandble for employers to manage all different individual employee's shifts. It presents wage graphs and charts on a frequent time basis.</p>
+						<p>Project Aruba would not exist without the support of KoDB.</p>
 					</div>
 				</div>
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Latest Blog</h4>
+					<h4><i class="icon-lightbulb"></i> Our Service</h4>
 					<div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb1.jpg" alt="">
+								<i class="icon-calendar icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									17 Aug 2013</small>
+								<span class="media-heading">Shift Table </span>
+								<small class="muted">You can register and modify shift table and see it whenever you want.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb2.jpg" alt="">
+								<i class="icon-money icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									13 Sep 2013</small>
+								<span class="media-heading">Salary Check</span> 
+								<small class="muted">Your salary graph is updated on a daily basis.</small>
 							</div>
 						</div>
 						<div class="media">
 							<div class="pull-left">
-								<img src="images/blog/thumb3.jpg" alt="">
+								<i class="icon-edit-sign icon-md"></i>
 							</div>
 							<div class="media-body">
-								<span class="media-heading"><a href="#">Pellentesque
-										habitant morbi tristique senectus</a></span> <small class="muted">Posted
-									11 Jul 2013</small>
+								<span class="media-heading">Board</span> 
+								<small class="muted">It provides two boards depending on necessary.
+One is opened to anything to share freely and another is based on qna.</small>
 							</div>
 						</div>
 					</div>
@@ -454,22 +477,13 @@ $(document).ready(function() {
 				<!--/.col-md-3-->
 
 				<div class="col-md-3 col-sm-6">
-					<h4>Address</h4>
+					<h4><i class="icon-building"></i> Address</h4>
 					<address>
-						<strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br>
-						San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr>
-						(123) 456-7890
+						<strong>MALSIKIZIMARAZO</strong><br> 
+						Sejoing Univ <br>
+						Gwangjin-gu, Seoul, South Korea<br> 
+						Phone : 010-5096-3002
 					</address>
-					<h4>Newsletter</h4>
-					<form role="form">
-						<div class="input-group">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Enter your email"> <span
-								class="input-group-btn">
-								<button class="btn btn-danger" type="button">Go!</button>
-							</span>
-						</div>
-					</form>
 				</div>
 				<!--/.col-md-3-->
 			</div>
@@ -477,22 +491,16 @@ $(document).ready(function() {
 	</section>
 	<!--/#bottom-->
 
-	<footer id="footer" class="midnight-blue">
+	<footer id="footer" class="wet-asphalt">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					&copy; 2013 <a target="_blank" href="http://shapebootstrap.net/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-					All Rights Reserved.
+					&copy; 2015 MalSikizimarazo. All Rights Reserved.
 				</div>
 				<div class="col-sm-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Faq</a></li>
-						<li><a href="#">Contact Us</a></li>
 						<li><a id="gototop" class="gototop" href="#"><i
-								class="icon-chevron-up"></i></a></li>
+								class="icon-circle-arrow-up icon-2x"></i></a></li>
 						<!--#gototop-->
 					</ul>
 				</div>

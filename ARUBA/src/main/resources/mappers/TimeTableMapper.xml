@@ -15,29 +15,25 @@
 	
 	<select id = "selectByMemberId" resultType="TimeTable" parameterType="Integer">
 		select * from time_table where member_id = #{memberId}
-	</select>
-	
-	<!-- <select id="selectStatsByMemberId" resultType="Stats" parameterType="Integer">
-		select TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", 
-		SUM(TO_NUMBER(SUBSTR(working_end, 12, 2))-TO_NUMBER(SUBSTR(working_start, 12, 2))) as "count" 
-		from time_table where member_id = #{memberId} group by to_char(working_date, 'YYYY/MM'), member_id order by 1
-	</select> -->
+	</select>	
 	
 	<select id="selectStatsByMemberId" resultType="Stats" parameterType="Integer">
 		SELECT TO_CHAR(working_date, 'YYYY/MM') as "month" , member_id as "memberId", SUM(working_end-working_start) as "count"
 		FROM time_table where member_id = #{memberId} GROUP BY TO_CHAR(working_date, 'YYYY/MM'), member_id order by 1
 	</select>
 	
-	<!-- <select id="selectStatsBycompanyCode" resultType="Stats" parameterType="Integer">
-		select TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", 
-		SUM(TO_NUMBER(SUBSTR(working_end, 12, 2))-TO_NUMBER(SUBSTR(working_start, 12, 2))) as "count" 
-		from time_table where company_code = #{companyCode} group by to_char(working_date, 'YYYY/MM'), member_id order by 1
-	</select> -->
-	
 	<select id = "selectStatsBycompanyCode" resultType="Stats" parameterType="Integer">
-		SELECT TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId",
-		SUM(working_end-working_start) as "count" FROM time_table
-		where company_code = #{companyCode} GROUP BY TO_CHAR(working_date, 'YYYY/MM'), member_id order by 1
+		SELECT TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", SUM(working_end-working_start) as "count" 
+		FROM time_table
+		where company_code = #{companyCode} 
+		GROUP BY TO_CHAR(working_date, 'YYYY/MM'), member_id order by 1
+	</select>
+	
+	<select id = "selectNightStatsByCompanyCode" resultType = "Stats" parameterType = "Integer">
+		SELECT TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", SUM(TO_NUMBER(to_char(working_end, 'hh24'))-22) as "count" 
+		FROM time_table 
+		WHERE TO_CHAR(working_end, 'hh24') > '22' and company_code = #{companyCode}
+		GROUP BY TO_CHAR(working_date, 'YYYY/MM'), member_id ORDER BY 1	
 	</select>
 	
 	<select id = "selectKeybyTime" resultType="Integer" parameterType="TimeTable">
@@ -50,6 +46,42 @@
 		where time_key = #{timeKey}
 	</update>
 	
+	<delete id="deleteTimeTableByMemberId" parameterType="Integer">
+		delete from time_table where member_id =#{memberId} 
+	</delete>
+	
+	<delete id="deleteTimeTableByCompanyCode" parameterType="Integer">
+		delete from time_table where company_code =#{companyCode} 
+	</delete>
+	
+	<delete id="deleteTimeTableByTimekey" parameterType="Integer">
+		delete from time_table where time_key =#{timeKey} 
+	</delete>
+	
+	<!-- <select id = "RuntimeSalary" resultType = "Double" parameterType = "RuntimeSalary">
+		select SUM(working_end-working_start) FROM time_table
+		WHERE to_char(working_date, 'YYYY/MM') >= #{Firstday} and working_date <= #{today}
+		and member_id = {#memberId}
+	</select> -->
+	
+	<!-- <select id = "selectCountByRuntime" resultType = "Double" parameterType = "TimeTable">
+		select SUM(working_end-working_start) as "counts" FROM time_table
+		WHERE to_char(working_date, 'YYYY/MM') = #{to_char(workingDate, 'YYYY/MM')}
+		and member_id = {#memberId}
+	</select> -->
+	
+	<!-- <select id="selectStatsByMemberId" resultType="Stats" parameterType="Integer">
+		select TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", 
+		SUM(TO_NUMBER(SUBSTR(working_end, 12, 2))-TO_NUMBER(SUBSTR(working_start, 12, 2))) as "count" 
+		from time_table where member_id = #{memberId} group by to_char(working_date, 'YYYY/MM'), member_id order by 1
+	</select> -->
+	
+	
+	<!-- <select id="selectStatsBycompanyCode" resultType="Stats" parameterType="Integer">
+		select TO_CHAR(working_date, 'YYYY/MM') as "month", member_id as "memberId", 
+		SUM(TO_NUMBER(SUBSTR(working_end, 12, 2))-TO_NUMBER(SUBSTR(working_start, 12, 2))) as "count" 
+		from time_table where company_code = #{companyCode} group by to_char(working_date, 'YYYY/MM'), member_id order by 1
+	</select> -->
 	<!--
 	
 	<select id = "selectCompanyByCompanyCode" resultType="Company" parameterType="Integer">

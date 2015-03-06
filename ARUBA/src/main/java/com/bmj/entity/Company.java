@@ -4,13 +4,13 @@ public class Company {
 	private int companyCode;
 	private String companyName;
 	private String companyTel;
-	private Float holidayComm;
-	private Float nightComm;
+	private int holidayComm;
+	private int nightComm;
 	
 	public Company() {}
 	
 	public Company(int companyCode, String companyName, String companyTel,
-			Float holidayComm, Float nightComm) {
+			int holidayComm, int nightComm) {
 		this.companyCode = companyCode;
 		this.companyName = companyName;
 		this.companyTel = companyTel;
@@ -42,19 +42,19 @@ public class Company {
 		this.companyTel = companyTel;
 	}
 
-	public Float getHolidayComm() {
+	public int getHolidayComm() {
 		return holidayComm;
 	}
 
-	public void setHolidayComm(Float holidayComm) {
+	public void setHolidayComm(int holidayComm) {
 		this.holidayComm = holidayComm;
 	}
 
-	public Float getNightComm() {
+	public int getNightComm() {
 		return nightComm;
 	}
 
-	public void setNightComm(Float nightComm) {
+	public void setNightComm(int nightComm) {
 		this.nightComm = nightComm;
 	}
 
